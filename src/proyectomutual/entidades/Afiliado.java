@@ -14,23 +14,29 @@ public class Afiliado {
     private String nombre;
     private String apellido;
     private int dni;
+    private int telefono;
+    private String domicilio;
     private boolean estado;
 
     public Afiliado() {
     }
 
-    public Afiliado(int idAfiliado, String nombre, String apellido, int dni, boolean estado) {
+    public Afiliado(int idAfiliado, String nombre, String apellido, int dni, int telefono, String domicilio, boolean estado) {
         this.idAfiliado = idAfiliado;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
+        this.telefono = telefono;
+        this.domicilio = domicilio;
         this.estado = estado;
     }
 
-    public Afiliado(String nombre, String apellido, int dni, boolean estado) {
+    public Afiliado(String nombre, String apellido, int dni, int telefono, String domicilio, boolean estado) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
+        this.telefono = telefono;
+        this.domicilio = domicilio;
         this.estado = estado;
     }
 
@@ -66,6 +72,22 @@ public class Afiliado {
         this.dni = dni;
     }
 
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getDomicilio() {
+        return domicilio;
+    }
+
+    public void setDomicilio(String domicilio) {
+        this.domicilio = domicilio;
+    }
+
     public boolean isEstado() {
         return estado;
     }
@@ -73,6 +95,8 @@ public class Afiliado {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
+
+
 
     @Override
     public String toString() {
