@@ -1,14 +1,75 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyectomutual.entidades;
 
-/**
- *
- * @author Alan
- */
+
 public class Prestador {
+    
+    private String nombre;
+    private int DNI;
+    private String domicilio;
+    private int telefono;
+    private String especialidad;
+    private boolean estado;
+
+    public Prestador() {
+    }
+
+    public Prestador(String nombre, int DNI, String domicilio, int telefono, String especialidad, boolean estado) {
+        this.nombre = nombre;
+        this.DNI = DNI;
+        this.domicilio = domicilio;
+        this.telefono = telefono;
+        this.especialidad = especialidad;
+        this.estado = estado;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getDNI() {
+        return DNI;
+    }
+
+    public void setDNI(int DNI) {
+        this.DNI = DNI;
+    }
+
+    public String getDomicilio() {
+        return domicilio;
+    }
+
+    public void setDomicilio(String domicilio) {
+        this.domicilio = domicilio;
+    }
+
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
+    
     
 }
