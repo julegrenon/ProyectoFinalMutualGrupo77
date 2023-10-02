@@ -3,6 +3,7 @@ package proyectomutual.entidades;
 
 public class Prestador {
     
+    private int idPrestador;
     private String nombre;
     private int DNI;
     private String domicilio;
@@ -13,7 +14,8 @@ public class Prestador {
     public Prestador() {
     }
 
-    public Prestador(String nombre, int DNI, String domicilio, int telefono, String especialidad, boolean estado) {
+    public Prestador(int idPrestador, String nombre, int DNI, String domicilio, int telefono, String especialidad, boolean estado) {
+        this.idPrestador = idPrestador;
         this.nombre = nombre;
         this.DNI = DNI;
         this.domicilio = domicilio;
@@ -69,7 +71,13 @@ public class Prestador {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-    
-    
+
+    public int getIdPrestador() {
+        return idPrestador;
+    }
+
+    public void setIdPrestador(int idPrestador) {
+        this.idPrestador = idPrestador;
+    }
     
 }
