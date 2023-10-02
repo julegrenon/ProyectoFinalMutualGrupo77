@@ -10,6 +10,7 @@ package proyectomutual.entidades;
  * @author Alan
  */
 public class Afiliado {
+
     private int idAfiliado;
     private String nombre;
     private String apellido;
@@ -96,13 +97,9 @@ public class Afiliado {
         this.estado = estado;
     }
 
-
-
     @Override
     public String toString() {
         return "ID: " + idAfiliado + " - DNI: " + dni + " - Apellido: " + apellido + " - Nombre:" + nombre;
     }
-    
-    
-    
+
 }
