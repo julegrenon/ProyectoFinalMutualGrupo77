@@ -24,6 +24,17 @@ public class Prestador {
         this.estado = estado;
     }
 
+    public Prestador(String nombre, int DNI, String domicilio, int telefono, String especialidad, boolean estado) {
+        this.nombre = nombre;
+        this.DNI = DNI;
+        this.domicilio = domicilio;
+        this.telefono = telefono;
+        this.especialidad = especialidad;
+        this.estado = estado;
+    }
+    
+    
+
     public String getNombre() {
         return nombre;
     }
