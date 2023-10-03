@@ -17,8 +17,7 @@ import javax.swing.JOptionPane;
 import proyectomutual.entidades.Afiliado;
 
 /**
- *
- * @author sonia
+
  */
 public class AfiliadoData {
 
@@ -76,6 +75,7 @@ public class AfiliadoData {
             ps.setInt(3, afiliado.getDni());
             ps.setInt(4, afiliado.getTelefono());
             ps.setString(5, afiliado.getDomicilio());
+            ps.setInt(6, afiliado.getIdAfiliado());
 
             int exito = ps.executeUpdate();
             if (exito == 1) {
