@@ -23,17 +23,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-       // Connection conex= Conexion.getConexion();
-       
-       Especialidad esp = new Especialidad("Dermatologo");
-      // EspecialidadData espData= new EspecialidadData();     
-        Afiliado afil= new Afiliado("Paola", "Ramirez", 39273491, 154832912, "Las Heras 304", true);
-       AfiliadoData afiData= new AfiliadoData();
-       
-       Prestador presta= new Prestador("Julio", 23427111, "San Martin 545", 4435221, esp, true);
-        
-        Orden orden= new Orden(LocalDate.of(2023,10,02), "debito",35000.0, afil, presta);
-        OrdenData md=new OrdenData();
-        md.guardarOrden(orden);
+    
     }
 }
