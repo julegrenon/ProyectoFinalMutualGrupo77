@@ -30,7 +30,7 @@ public class PrestadorData {
             ps.setInt(2, prestador.getDNI());
             ps.setString(3, prestador.getDomicilio());
             ps.setInt(4, prestador.getTelefono());
-            ps.setString(5, prestador.getEspecialidad());
+            ps.setInt(5, prestador.getEspecialidad().getIdEspecialidad());
             ps.setBoolean(6, prestador.isEstado());
             
             ps.executeUpdate();
@@ -45,6 +45,31 @@ public class PrestadorData {
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla prestadores");
+        }
+    }
+    
+    public void modificarAlumno(Prestador prestador){
+        String sql="UPDATE prestador SET nombre=?, DNI=?, domicilio=?, telefono=?, especialidad=?, estado=?"
+                + "WHERE idPrestador=?";
+        
+        try {
+            PreparedStatement ps=conexion.prepareStatement(sql);
+            
+            ps.setString(1, prestador.getNombre());
+            ps.setInt(2, prestador.getDNI());
+            ps.setString(3, prestador.getDomicilio());
+            ps.setInt(4, prestador.getTelefono());
+            ps.setInt(5, prestador.getEspecialidad().getIdEspecialidad());
+            ps.setBoolean(6, prestador.isEstado());
+            
+            int exito=ps.executeUpdate();
+            if(exito==1){
+                JOptionPane.showMessageDialog(null, "Prestador modificado");
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla prestador");
         }
     }
     
