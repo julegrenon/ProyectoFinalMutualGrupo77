@@ -14,24 +14,35 @@ import java.util.List;
 import proyectomutual.entidades.Especialidad;
 
 public class EspecialidadData {
-    private Connection connection;
+    public Connection conex=null;
+    
+    public EspecialidadData(){   
+        conex=Conexion.getConexion();
+        
+       } 
 
-    public EspecialidadData(Connection connection) {
-        this.connection = connection;
-    }
 
     // Método para agregar una nueva especialidad a la base de datos.
     public void agregarEspecialidad(Especialidad especialidad) {
-        String query = "INSERT INTO Especialidad (codigo, tipo) VALUES (?, ?)";
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, especialidad.getCodigo());
-            statement.setString(2, especialidad.getTipo());
-            statement.executeUpdate(); // Ejecuta la inserción en la base de datos.
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        String query = "INSERT INTO Especialidad (idEspecialidad, especialidad) VALUES (?, ?)";
+        try (PreparedStatement st = conex.prepareStatement(query)) {
+           
+            st.setInt(1,especialidad.getIdEspecialidad());
+            st.setString(2,especialidad.getEspecialidad());
+            st.executeUpdate();
+            
+     ResultSet Rs=  st.getGeneratedKeys();
+     
+     if(Rs.next()){
+     
+         especialidad.setIdEspecialidad(st.getMoreResults(0));
+         
+         
+         
+      }
     }
 
+        
     // Método para obtener todas las especialidades de la base de datos y devolverlas como una lista.
     public List<Especialidad> obtenerEspecialidades() {
         List<Especialidad> especialidades = new ArrayList<>();
