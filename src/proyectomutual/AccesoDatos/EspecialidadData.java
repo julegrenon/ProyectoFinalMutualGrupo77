@@ -49,14 +49,13 @@ public class EspecialidadData {
     public List<Especialidad> obtenerEspecialidades() {
         List<Especialidad> especialidades = new ArrayList<>();
         String query = "SELECT * FROM Especialidad";
-        try (PreparedStatement statement = connection.prepareStatement(query);
-             ResultSet resultSet = statement.executeQuery()) {
-            while (resultSet.next()) {
-                Especialidad especialidad = new Especialidad(
-                    resultSet.getInt("id"),
-                    resultSet.getString("codigo"),
-                    resultSet.getString("tipo")
-                );
+        try (PreparedStatement statement = con.prepareStatement(query);
+             ResultSet rs= statement.executeQuery()) {
+            while (rs.next()){
+                Especialidad especialidad = new Especialidad();
+                    especialidad.setIdEspecialidad(rs.getInt("idEspecialidad"));
+                    especialidad.setEspecialidad(rs.getNString("especialidad"));
+                
                 especialidades.add(especialidad);
             }
         } catch (SQLException e) {
