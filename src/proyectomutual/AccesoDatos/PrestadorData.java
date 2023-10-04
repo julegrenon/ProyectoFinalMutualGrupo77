@@ -93,7 +93,7 @@ public class PrestadorData {
     }
     
     public Prestador buscarPrestador(int id){
-        String sql="SELECT nombre, dni, domicilio, telefono, especialidad FROM alumno WHERE idPrestador=? AND activo=1";
+        String sql="SELECT nombre, dni, domicilio, telefono, idEspecialidad FROM prestador WHERE idPrestador=? AND estado=1";
         Prestador prestador=null;
         try {
             PreparedStatement ps=conexion.prepareStatement(sql);

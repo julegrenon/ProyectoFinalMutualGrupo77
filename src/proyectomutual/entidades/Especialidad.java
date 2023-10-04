@@ -20,6 +20,10 @@ public class Especialidad {
         this.idEspecialidad = idEspecialidad;
     }
 
+    public Especialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
+
     
     public Especialidad(int idEspecialidad, String especialidad) {
         this.idEspecialidad = idEspecialidad;
