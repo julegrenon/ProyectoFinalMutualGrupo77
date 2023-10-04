@@ -5,24 +5,35 @@ public class Prestador {
     
     private int idPrestador;
     private String nombre;
-    private int DNI;
+    private int dni;
     private String domicilio;
     private int telefono;
-    private String especialidad;
-    private boolean estado;
+    private Especialidad especialidad;
+    private boolean activo;
 
     public Prestador() {
     }
 
-    public Prestador(int idPrestador, String nombre, int DNI, String domicilio, int telefono, String especialidad, boolean estado) {
+    public Prestador(int idPrestador, String nombre, int dni, String domicilio, int telefono, Especialidad especialidad, boolean activo) {
         this.idPrestador = idPrestador;
         this.nombre = nombre;
-        this.DNI = DNI;
+        this.dni = dni;
         this.domicilio = domicilio;
         this.telefono = telefono;
         this.especialidad = especialidad;
-        this.estado = estado;
+        this.activo = activo;
     }
+
+    public Prestador(String nombre, int dni, String domicilio, int telefono, Especialidad especialidad, boolean activo) {
+        this.nombre = nombre;
+        this.dni = dni;
+        this.domicilio = domicilio;
+        this.telefono = telefono;
+        this.especialidad = especialidad;
+        this.activo = activo;
+    }
+    
+    
 
     public String getNombre() {
         return nombre;
@@ -32,12 +43,12 @@ public class Prestador {
         this.nombre = nombre;
     }
 
-    public int getDNI() {
-        return DNI;
+    public int getDni() {
+        return dni;
     }
 
-    public void setDNI(int DNI) {
-        this.DNI = DNI;
+    public void setDni(int dni) {
+        this.dni = dni;
     }
 
     public String getDomicilio() {
@@ -56,20 +67,20 @@ public class Prestador {
         this.telefono = telefono;
     }
 
-    public String getEspecialidad() {
+    public Especialidad getEspecialidad() {
         return especialidad;
     }
 
-    public void setEspecialidad(String especialidad) {
+    public void setEspecialidad(Especialidad especialidad) {
         this.especialidad = especialidad;
     }
 
-    public boolean isEstado() {
-        return estado;
+    public boolean isActivo() {
+        return activo;
     }
 
-    public void setEstado(boolean estado) {
-        this.estado = estado;
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
     public int getIdPrestador() {
