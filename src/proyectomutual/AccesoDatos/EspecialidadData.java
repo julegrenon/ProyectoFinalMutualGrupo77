@@ -11,13 +11,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
+import proyectomutual.entidades.Afiliado;
 import proyectomutual.entidades.Especialidad;
 
 public class EspecialidadData {
-    public Connection conex=null;
+    public Connection con=null;
     
     public EspecialidadData(){   
-        conex=Conexion.getConexion();
+        con=Conexion.getConexion();
         
        } 
 
@@ -86,4 +88,56 @@ public class EspecialidadData {
             e.printStackTrace();
         }
     }
+    
+  public Afiliado buscarAfiliado(int id) {
+        String sql = "SELECT nombre, apellido, dni, telefono, domicilio FROM afiliado WHERE idAfiliado=? AND estado=1";
+        Afiliado afiliado = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                afiliado = new Afiliado();
+                afiliado.setIdAfiliado(id);
+                afiliado.setNombre(rs.getString("nombre"));
+                afiliado.setApellido(rs.getString("apellido"));
+                afiliado.setDni(rs.getInt("dni"));
+                afiliado.setTelefono(rs.getInt("telefono"));
+                afiliado.setDomicilio(rs.getString("domicilio"));
+                afiliado.setEstado(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe el afiliado con ese id");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla afiliados");
+        }
+        return afiliado;
+    }
+   public Especialidad buscarEspecialidad(int id) {
+        String sql = "SELECT idEspecialidad, especialidad FROM especialidad WHERE idEspecialidad=?";
+        Especialidad especialidad = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                especialidad = new Especialidad();
+                especialidad.setIdEspecialidad(id);
+                especialidad.setEspecialidad(rs.getString("especialidad"));
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe el especialidad con ese id");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla especialidad");
+        }
+        return especialidad;
+    }
+    
 }
