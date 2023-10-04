@@ -94,26 +94,30 @@ public class PrestadorData {
         }
     }
     
-    public Prestador buscarPrestador(int id){
-        String sql="SELECT nombre, dni, domicilio, telefono, idEspecialidad FROM prestador WHERE idPrestador=? AND estado=1";
-        Prestador prestador=null;
+    public Prestador buscarPrestador(int id) {
+        String sql = "SELECT nombre, apellido, dni, telefono, domicilio, idEspecialidad FROM prestador WHERE idPrestador=? AND estado=1";
+        Prestador prestador = null;
         try {
-            PreparedStatement ps=conexion.prepareStatement(sql);
+            PreparedStatement ps = conexion.prepareStatement(sql);
             ps.setInt(1, id);
-            
-            ResultSet rs=ps.executeQuery();
-            
-            if (rs.next()){
-                prestador=new Prestador();
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                prestador = new Prestador();
                 prestador.setIdPrestador(id);
                 prestador.setNombre(rs.getString("nombre"));
+                prestador.setApellido(rs.getString("apellido"));
                 prestador.setDni(rs.getInt("dni"));
-                prestador.setDomicilio(rs.getString("domicilio"));
                 prestador.setTelefono(rs.getInt("telefono"));
-                
-                int especialidadInt = rs.getInt("especialidad");
-                Especialidad especialidad = new Especialidad(especialidadInt);
+                prestador.setDomicilio(rs.getString("domicilio"));
 
+                //Recupera la especialidad a través del id de la columna idEspecialidad
+                EspecialidadData especialidadData = new EspecialidadData();
+                int idEspecialidad = rs.getInt("idEspecialidad");
+                Especialidad especialidad = especialidadData.buscarEspecialidad(idEspecialidad);
+
+                //Setea especialidad después del método buscarEspecialidad  
                 prestador.setEspecialidad(especialidad);
                 prestador.setActivo(true);
             } else {

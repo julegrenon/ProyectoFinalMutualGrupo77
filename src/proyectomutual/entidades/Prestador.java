@@ -2,38 +2,47 @@ package proyectomutual.entidades;
 
 
 public class Prestador {
-    
+
     private int idPrestador;
     private String nombre;
+    private String apellido;
     private int dni;
-    private String domicilio;
     private int telefono;
+    private String domicilio;
     private Especialidad especialidad;
     private boolean activo;
 
     public Prestador() {
     }
 
-    public Prestador(int idPrestador, String nombre, int dni, String domicilio, int telefono, Especialidad especialidad, boolean activo) {
-        this.idPrestador = idPrestador;
+    public Prestador(String nombre, String apellido, int dni, int telefono, String domicilio, Especialidad especialidad, boolean activo) {
         this.nombre = nombre;
+        this.apellido = apellido;
         this.dni = dni;
-        this.domicilio = domicilio;
         this.telefono = telefono;
+        this.domicilio = domicilio;
         this.especialidad = especialidad;
         this.activo = activo;
     }
 
-    public Prestador(String nombre, int dni, String domicilio, int telefono, Especialidad especialidad, boolean activo) {
+    public Prestador(int idPrestador, String nombre, String apellido, int dni, int telefono, String domicilio, Especialidad especialidad, boolean activo) {
+        this.idPrestador = idPrestador;
         this.nombre = nombre;
+        this.apellido = apellido;
         this.dni = dni;
-        this.domicilio = domicilio;
         this.telefono = telefono;
+        this.domicilio = domicilio;
         this.especialidad = especialidad;
         this.activo = activo;
     }
-    
-    
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
 
     public String getNombre() {
         return nombre;
@@ -90,5 +99,5 @@ public class Prestador {
     public void setIdPrestador(int idPrestador) {
         this.idPrestador = idPrestador;
     }
-    
+
 }
