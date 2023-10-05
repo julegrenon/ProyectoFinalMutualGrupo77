@@ -7,7 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.swing.JOptionPane;
 import proyectomutual.entidades.Afiliado;
@@ -25,7 +27,7 @@ public class OrdenData {
     //===============================================================================
     //AGREGAR ORDENES
     
-     public void guardarOrden(Orden orden){
+ /*    public void guardarOrden(Orden orden){
         
         String sql="INSERT INTO `orden`(`idOrden`, `fecha`, `formaPago`, `importe`, `idAfiliado`, `idPrestador`) "
                 + "VALUES  (?, ?, ?, ?, ?,?)";
@@ -35,16 +37,17 @@ public class OrdenData {
             PreparedStatement ps=conex.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
            ps.setInt(1, orden.getIdOrden());
-           ps.setDate(1, Date.valueOf(orden.getFecha()));
-           ps.setString(2, orden.getFormaPago());
-           ps.setDouble(3, orden.getImporte());
-           ps.setInt(4, orden.getAfiliado().getIdAfiliado());
-          ps.setInt(5, orden.getPrestador().getIdPrestador());
+           ps.setDate(2, Date.valueOf(orden.getFecha()));
+           ps.setString(3, orden.getFormaPago());
+           ps.setDouble(4, orden.getImporte());
+           ps.setInt(5, orden.getAfiliado().getIdAfiliado());
+          ps.setInt(6, orden.getPrestador().getIdPrestador());
            
             ps.executeUpdate();
             
             //Setea id
             ResultSet rs=ps.getGeneratedKeys();
+            
             if (rs.next()){
                 
                 orden.setIdOrden(rs.getInt(1));
@@ -56,7 +59,7 @@ public class OrdenData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla orden");
         }
     }
-   
+   */
      //=============================================================================
      //ELIMINAR ORDENES
    
@@ -141,7 +144,7 @@ public class OrdenData {
         
        }
    //===================================================================
-        //LISTA DE OREDENES POR AFILIADO
+        //LISTA DE OREDENES POR FECHA
        
        public List<Orden> buscaOrdenPorFecha(Date date) {
          String sql="SELECT `idOrden`, `fecha`, `formaPago`, `importe`, `idPrestador` "
@@ -171,6 +174,72 @@ public class OrdenData {
         return listaXFecha;
         
        }
+      
        
+   //    =============================
+       
+           //AGREGAR ORDENES
+    
+     public void guardarOrden(Orden ordenNueva){
+        
+     
+        String sql="INSERT INTO `orden`(`idOrden`, `fecha`, `formaPago`, `importe`, `idAfiliado`, `idPrestador`) "
+                + "VALUES  (?, ?, ?, ?, ?,?)";
+          
+          Date fecha= null;
+          int idAfiliado;
+          int idPrestador;
+        try {
+            PreparedStatement ps=conex.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            
+            Orden orden= new Orden();            
+            OrdenData ordenData= new OrdenData();
+       
+            
+            Afiliado Afiliado= new Afiliado();
+            AfiliadoData afiData= new AfiliadoData();
+            Prestador prestador = new Prestador();
+            PrestadorData presta= new PrestadorData();
+          // ArrayList<Orden> listA= new ArrayList();
+            
+            
+            
+           ps.setInt(1, ordenNueva.getIdOrden());
+           ps.setDate(2, Date.valueOf(ordenNueva.getFecha()));
+           ps.setString(3, ordenNueva.getFormaPago());
+           ps.setDouble(4, ordenNueva.getImporte());
+           ps.setInt(5, ordenNueva.getAfiliado().getIdAfiliado());
+           ps.setInt(6, ordenNueva.getPrestador().getIdPrestador());           
+           ps.executeUpdate();            
+           
+            ResultSet rs=ps.getGeneratedKeys();   
+         
+          
+    /*       
+           if (ordenData!=null){
+               if(((ordenData.buscaOrdenPorFecha(Date(orden.getFecha()))) !=  (ps.setDate(2, Date.valueOf(ordenNueva.getFecha()))) ) ) &&
+           
+             ((orden.getPrestador().getIdPrestador()) !=  ps.setInt(6, ordenNueva.getPrestador().getIdPrestador())) && 
+            
+            
+             (orden.getAfiliado().getIdAfiliado() !=    ps.setInt(5, ordenNueva.getAfiliado().getIdAfiliado())) 
+          
+            }
+   */  
+            if (rs.next()){
+         
+             
+                ordenNueva.setIdOrden(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "Orden cargada");
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla orden");
+        }
+    }
+
+  
      
 }
