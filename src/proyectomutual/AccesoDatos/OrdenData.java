@@ -180,43 +180,58 @@ public class OrdenData {
        
            //AGREGAR ORDENES
     
-     public void guardarOrden(Orden ordenNueva){
-        
-     
-        String sql="INSERT INTO `orden`(`idOrden`, `fecha`, `formaPago`, `importe`, `idAfiliado`, `idPrestador`) "
+    public void guardarOrden(Orden ordenNueva) {
+
+        String sql = "INSERT INTO `orden`(`idOrden`, `fecha`, `formaPago`, `importe`, `idAfiliado`, `idPrestador`) "
                 + "VALUES  (?, ?, ?, ?, ?,?)";
-          
-          Date fecha= null;
-          int idAfiliado;
-          int idPrestador;
+
+        Date fecha = null;
+        //int idAfiliado;
+        //int idPrestador;
+        //variable booleana para validar si existe la orden con misma fecha y idPrestador
+        
         try {
-            PreparedStatement ps=conex.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            boolean ordenEncontrada = false;
+            PreparedStatement ps = conex.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            OrdenData ordenData = new OrdenData();
+            //lista donde guarda las ordenes con el idAfiliado
+            List<Orden> listaOrdenes = ordenData.buscaOrdenPorAfil(ordenNueva.getAfiliado().getIdAfiliado());
+
+            LocalDate fechaBuscada=ordenNueva.getFecha();
+            int idPrestadorOrdenNueva=ordenNueva.getPrestador().getIdPrestador();
             
             
-            Orden orden= new Orden();            
-            OrdenData ordenData= new OrdenData();
-       
-            
-            Afiliado Afiliado= new Afiliado();
-            AfiliadoData afiData= new AfiliadoData();
+            //recorre listaOrdenes
+            for (Orden buscarOrden : listaOrdenes) {
+                //compara idPrestador y fecha de la lista con la variable ordeNueva recibida por parametro en el método
+                LocalDate fechaEncontrada=buscarOrden.getFecha();
+                int idPrestador=buscarOrden.getPrestador().getIdPrestador();
+                if (idPrestadorOrdenNueva == idPrestador && fechaBuscada.equals(fechaEncontrada)) {
+                    ordenEncontrada = true;
+                }
+            }
+
+            //creo que estas variables no hacen falta
+            Afiliado Afiliado = new Afiliado();
+            AfiliadoData afiData = new AfiliadoData();
             Prestador prestador = new Prestador();
-            PrestadorData presta= new PrestadorData();
-          // ArrayList<Orden> listA= new ArrayList();
-            
-            
-            
-           ps.setInt(1, ordenNueva.getIdOrden());
-           ps.setDate(2, Date.valueOf(ordenNueva.getFecha()));
-           ps.setString(3, ordenNueva.getFormaPago());
-           ps.setDouble(4, ordenNueva.getImporte());
-           ps.setInt(5, ordenNueva.getAfiliado().getIdAfiliado());
-           ps.setInt(6, ordenNueva.getPrestador().getIdPrestador());           
-           ps.executeUpdate();            
-           
-            ResultSet rs=ps.getGeneratedKeys();   
-         
-          
-    /*       
+            PrestadorData presta = new PrestadorData();
+            // ArrayList<Orden> listA= new ArrayList();
+
+            //si ordenEncontrada se mantiene en false procede a guardar la orden
+            if (ordenEncontrada = false) {
+                ps.setInt(1, ordenNueva.getIdOrden());
+                ps.setDate(2, Date.valueOf(ordenNueva.getFecha()));
+                ps.setString(3, ordenNueva.getFormaPago());
+                ps.setDouble(4, ordenNueva.getImporte());
+                ps.setInt(5, ordenNueva.getAfiliado().getIdAfiliado());
+                ps.setInt(6, ordenNueva.getPrestador().getIdPrestador());
+                ps.executeUpdate();
+
+                ResultSet rs = ps.getGeneratedKeys();
+
+                /*       
            if (ordenData!=null){
                if(((ordenData.buscaOrdenPorFecha(Date(orden.getFecha()))) !=  (ps.setDate(2, Date.valueOf(ordenNueva.getFecha()))) ) ) &&
            
@@ -226,20 +241,21 @@ public class OrdenData {
              (orden.getAfiliado().getIdAfiliado() !=    ps.setInt(5, ordenNueva.getAfiliado().getIdAfiliado())) 
           
             }
-   */  
-            if (rs.next()){
-         
-             
-                ordenNueva.setIdOrden(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Orden cargada");
+                 */
+                if (rs.next()) {
+
+                    ordenNueva.setIdOrden(rs.getInt(1));
+                    JOptionPane.showMessageDialog(null, "Orden cargada");
+                }
+                //si ordenEncontrada es true arroja el siguiente else   
+            } else {
+                JOptionPane.showMessageDialog(null, "Ya existe una orden de esa fecha con el mismo prestador");
             }
             ps.close();
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla orden");
         }
     }
-
-  
-     
+ 
 }

@@ -23,7 +23,7 @@ public class PrestadorData {
     public void agregarPrestador(Prestador prestador){
         
 
-        String sql="INSERT INTO prestador (nombre, dni, domicilio, telefono, especialidad, activo)"
+        String sql="INSERT INTO prestador (nombre, dni, domicilio, telefono, idEspecialidad, estado)"
                 + "VALUES (?, ?, ?, ?, ?, ?)";
         
         try {
