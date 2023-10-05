@@ -69,7 +69,7 @@ public class EspecialidadData {
             while (rs.next()) {
                 Especialidad especialidad = new Especialidad();
                 especialidad.setIdEspecialidad(rs.getInt("idEspecialidad"));
-                especialidad.setEspecialidad(rs.getNString("especialidad"));
+                especialidad.setEspecialidad(rs.getString("especialidad"));
 
                 especialidadesLista.add(especialidad);
             }
