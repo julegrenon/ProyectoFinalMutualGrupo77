@@ -108,10 +108,4 @@ public class Prestador {
         return "Prestador{" + "idPrestador=" + idPrestador + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono=" + telefono + ", domicilio=" + domicilio + ", especialidad=" + especialidad + ", estado=" + estado + '}';
     }
     
-    
-
-        return "Prestador{" + "idPrestador=" + idPrestador + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono=" + telefono + ", domicilio=" + domicilio + ", especialidad=" + especialidad + ", activo=" + activo + '}';
-    }
-
-
 }
