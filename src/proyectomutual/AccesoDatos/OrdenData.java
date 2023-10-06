@@ -26,46 +26,61 @@ public class OrdenData {
   
     //===============================================================================
     //AGREGAR ORDENES
-    
- /*    public void guardarOrden(Orden orden){
-        
-        String sql="INSERT INTO `orden`(`idOrden`, `fecha`, `formaPago`, `importe`, `idAfiliado`, `idPrestador`) "
+     public void guardarOrden(Orden orden) {
+
+        String nuevosql = "INSERT INTO `orden`(`idOrden`, `fecha`, `formaPago`, `importe`, `idAfiliado`, `idPrestador`) "
                 + "VALUES  (?, ?, ?, ?, ?,?)";
-          
-        
+
+        PreparedStatement ps;
+       // System.out.println("Guardar Orden: " + orden);
         try {
-            PreparedStatement ps=conex.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            
-           ps.setInt(1, orden.getIdOrden());
-           ps.setDate(2, Date.valueOf(orden.getFecha()));
-           ps.setString(3, orden.getFormaPago());
-           ps.setDouble(4, orden.getImporte());
-           ps.setInt(5, orden.getAfiliado().getIdAfiliado());
-          ps.setInt(6, orden.getPrestador().getIdPrestador());
-           
-            ps.executeUpdate();
-            
-            //Setea id
-            ResultSet rs=ps.getGeneratedKeys();
-            
-            if (rs.next()){
-                
-                orden.setIdOrden(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Orden cargada");
+            //CONSULTA PARA VERIFICAR SI EL VALOR EXISTE
+
+            String consulta = "SELECT COUNT(*) FROM orden WHERE fecha = ?, idPrestador=?, idAfiliado=?" + orden.getIdOrden();
+            ps = conex.prepareStatement(consulta);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                int count = rs.getInt(1);
+                if (count == 0) {
+
+                    ps = conex.prepareStatement(nuevosql);
+                    rs = ps.executeQuery();
+                    ps.setInt(1, orden.getIdOrden());
+                    ps.setDate(2, Date.valueOf(orden.getFecha()));
+                    ps.setString(3, orden.getFormaPago());
+                    ps.setDouble(4, orden.getImporte());
+                    ps.setInt(5, orden.getAfiliado().getIdAfiliado());
+                    ps.setInt(6, orden.getPrestador().getIdPrestador());
+
+                    ps.executeUpdate();
+
+                } else {
+                    System.out.println("El valor ya existe");
+                }
             }
+            //Setea id, recupera id
+            rs = ps.getGeneratedKeys();
+            orden.setIdOrden(rs.getInt(1));
+
+            JOptionPane.showMessageDialog(null, "Orden cargada");
+
             ps.close();
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla orden");
+        }catch(NullPointerException ex1){
+              JOptionPane.showMessageDialog(null, "X");
         }
     }
-   */
+
      //=============================================================================
      //ELIMINAR ORDENES
    
        public void eliminarOrden (int id){
         
-        String sql="DELETE orden WHERE idOrden=?";
+        String sql="DELETE FROM `orden` WHERE idOrden=?";
         
         try {
             PreparedStatement ps=conex.prepareStatement(sql);
@@ -175,71 +190,5 @@ public class OrdenData {
         
        }
       
-       
-   //    =============================
-       
-           //AGREGAR ORDENES
-    
-     public void guardarOrden(Orden ordenNueva){
-        
-     
-        String sql="INSERT INTO `orden`(`idOrden`, `fecha`, `formaPago`, `importe`, `idAfiliado`, `idPrestador`) "
-                + "VALUES  (?, ?, ?, ?, ?,?)";
-          
-          Date fecha= null;
-          int idAfiliado;
-          int idPrestador;
-        try {
-            PreparedStatement ps=conex.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            
-            
-            Orden orden= new Orden();            
-            OrdenData ordenData= new OrdenData();
-       
-            
-            Afiliado Afiliado= new Afiliado();
-            AfiliadoData afiData= new AfiliadoData();
-            Prestador prestador = new Prestador();
-            PrestadorData presta= new PrestadorData();
-          // ArrayList<Orden> listA= new ArrayList();
-            
-            
-            
-           ps.setInt(1, ordenNueva.getIdOrden());
-           ps.setDate(2, Date.valueOf(ordenNueva.getFecha()));
-           ps.setString(3, ordenNueva.getFormaPago());
-           ps.setDouble(4, ordenNueva.getImporte());
-           ps.setInt(5, ordenNueva.getAfiliado().getIdAfiliado());
-           ps.setInt(6, ordenNueva.getPrestador().getIdPrestador());           
-           ps.executeUpdate();            
-           
-            ResultSet rs=ps.getGeneratedKeys();   
-         
-          
-    /*       
-           if (ordenData!=null){
-               if(((ordenData.buscaOrdenPorFecha(Date(orden.getFecha()))) !=  (ps.setDate(2, Date.valueOf(ordenNueva.getFecha()))) ) ) &&
-           
-             ((orden.getPrestador().getIdPrestador()) !=  ps.setInt(6, ordenNueva.getPrestador().getIdPrestador())) && 
-            
-            
-             (orden.getAfiliado().getIdAfiliado() !=    ps.setInt(5, ordenNueva.getAfiliado().getIdAfiliado())) 
-          
-            }
-   */  
-            if (rs.next()){
-         
-             
-                ordenNueva.setIdOrden(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Orden cargada");
-            }
-            ps.close();
-            
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla orden");
-        }
-    }
-
-  
-     
+ 
 }

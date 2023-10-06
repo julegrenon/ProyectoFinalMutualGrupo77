@@ -104,9 +104,14 @@ public class Prestador {
 
     @Override
     public String toString() {
+
         return "Prestador{" + "idPrestador=" + idPrestador + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono=" + telefono + ", domicilio=" + domicilio + ", especialidad=" + especialidad + ", estado=" + estado + '}';
     }
     
     
+
+        return "Prestador{" + "idPrestador=" + idPrestador + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono=" + telefono + ", domicilio=" + domicilio + ", especialidad=" + especialidad + ", activo=" + activo + '}';
+    }
+
 
 }
