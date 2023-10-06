@@ -17,7 +17,7 @@ import proyectomutual.entidades.Prestador;
 
 /**
  *
- * @author sonia
+ * @author so6nia
  */
 public class Main {
 

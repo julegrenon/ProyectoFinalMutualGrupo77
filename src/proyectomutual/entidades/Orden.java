@@ -11,7 +11,7 @@ public class Orden {
     private LocalDate fecha;
     private String formaPago;
     private double importe;
-    private Afiliado idAfiliado;
+    private Afiliado afiliado;
     private Prestador prestador;
 
     public Orden() {
@@ -21,16 +21,24 @@ public class Orden {
         this.fecha = fecha;
         this.formaPago = formaPago;
         this.importe = importe;
-        this.idAfiliado = afiliado;
+        this.afiliado = afiliado;
         this.prestador = prestador;
     }
 
+    public Orden(LocalDate fecha, Afiliado afiliado, Prestador prestador) {
+        this.fecha = fecha;
+        this.afiliado = afiliado;
+        this.prestador = prestador;
+    }
+
+    
+    
     public Orden(int idOrden, LocalDate fecha, String formaPago, double importe, Afiliado afiliado, Prestador prestador) {
         this.idOrden = idOrden;
         this.fecha = fecha;
         this.formaPago = formaPago;
         this.importe = importe;
-        this.idAfiliado = afiliado;
+        this.afiliado = afiliado;
         this.prestador = prestador;
     }
 
@@ -67,11 +75,11 @@ public class Orden {
     }
 
     public Afiliado getAfiliado() {
-        return idAfiliado;
+        return afiliado;
     }
 
     public void setAfiliado(Afiliado afiliado) {
-        this.idAfiliado = afiliado;
+        this.afiliado = afiliado;
     }
 
     public Prestador getPrestador() {
@@ -84,7 +92,7 @@ public class Orden {
 
     @Override
     public String toString() {
-        return "Orden{" + "idOrden=" + idOrden + ", fecha=" + fecha + ", formaPago=" + formaPago + ", importe=" + importe + ", afiliado=" + idAfiliado + ", prestador=" + prestador + '}';
+        return "Orden{" + "idOrden=" + idOrden + ", fecha=" + fecha + ", formaPago=" + formaPago + ", importe=" + importe + ", afiliado=" + afiliado + ", prestador=" + prestador + '}';
     }
      
     
