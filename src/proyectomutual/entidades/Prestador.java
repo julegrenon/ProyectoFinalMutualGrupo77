@@ -100,4 +100,9 @@ public class Prestador {
         this.idPrestador = idPrestador;
     }
 
+    @Override
+    public String toString() {
+        return "Prestador{" + "idPrestador=" + idPrestador + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono=" + telefono + ", domicilio=" + domicilio + ", especialidad=" + especialidad + ", activo=" + activo + '}';
+    }
+
 }
