@@ -32,11 +32,11 @@ public class OrdenData {
                 + "VALUES  (?, ?, ?, ?, ?,?)";
 
         PreparedStatement ps;
-        System.out.println("Guardar Orden: " + orden);
+       // System.out.println("Guardar Orden: " + orden);
         try {
             //CONSULTA PARA VERIFICAR SI EL VALOR EXISTE
 
-            String consulta = "SELECT COUNT(*) FROM orden WHERE idOrden = ?" + orden.getIdOrden();
+            String consulta = "SELECT COUNT(*) FROM orden WHERE fecha = ?, idPrestador=?, idAfiliado=?" + orden.getIdOrden();
             ps = conex.prepareStatement(consulta);
             ResultSet rs = ps.executeQuery();
 
@@ -70,6 +70,8 @@ public class OrdenData {
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla orden");
+        }catch(NullPointerException ex1){
+              JOptionPane.showMessageDialog(null, "X");
         }
     }
 
@@ -187,5 +189,6 @@ public class OrdenData {
         return listaXFecha;
         
        }
+      
  
 }
