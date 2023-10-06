@@ -22,7 +22,7 @@ public class Conexion {
     private static final String PASSWORD="";
     private static Connection conex;
     
-    private Conexion(){   
+    public Conexion(){   
     }
     public static Connection getConexion(){
     
