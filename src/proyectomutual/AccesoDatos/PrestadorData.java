@@ -23,11 +23,10 @@ public class PrestadorData {
     }
     
     public void agregarPrestador(Prestador prestador){
-        
 
         String sql="INSERT INTO prestador (nombre, apellido, dni, domicilio, telefono, idEspecialidad, estado)"
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-        
+
         try {
             PreparedStatement ps=conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             

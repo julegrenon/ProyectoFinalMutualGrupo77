@@ -1,6 +1,7 @@
 
 package proyectomutual.AccesoDatos;
 
+import Exceptions.GenericException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -11,6 +12,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import proyectomutual.entidades.Afiliado;
 import proyectomutual.entidades.Orden;
@@ -26,68 +29,68 @@ public class OrdenData {
   
     //===============================================================================
     //AGREGAR ORDENES
+    /*
      public void guardarOrden(Orden orden) {
-
-        String nuevosql = "INSERT INTO `orden`(`idOrden`, `fecha`, `formaPago`, `importe`, `idAfiliado`, `idPrestador`) "
-                + "VALUES  (?, ?, ?, ?, ?,?)";
-
+try {
+      
         PreparedStatement ps;
-       // System.out.println("Guardar Orden: " + orden);
-        try {
+        
             //CONSULTA PARA VERIFICAR SI EL VALOR EXISTE
-
-            String consulta = "SELECT COUNT(*) FROM orden WHERE fecha = ?, idPrestador=?, idAfiliado=?" + orden.getIdOrden();
+            
+  
+            String consulta ="SELECT COUNT(*) AS CANTIDAD  FROM orden WHERE fecha = "+orden.getFecha()+" AND idPrestador = "+orden.getPrestador().getIdPrestador()+" AND idAfiliado = "+orden.getAfiliado().getIdAfiliado();
+           
             ps = conex.prepareStatement(consulta);
-            ResultSet rs = ps.executeQuery();
-
+           ResultSet rs = ps.executeQuery();
+          
             if (rs.next()) {
-
                 int count = rs.getInt(1);
+                 System.out.println("Cantidad: "+count);
                 if (count == 0) {
+                      String nuevosql = "INSERT INTO `orden`( `fecha`, `formaPago`, `importe`, `idAfiliado`, `idPrestador`)  VALUES  ( ?,?, ?, ?, ?)";
+                    ps = conex.prepareStatement(nuevosql, Statement.RETURN_GENERATED_KEYS);
+                    //  rs = ps.executeQuery();
 
-                    ps = conex.prepareStatement(nuevosql);
-                    rs = ps.executeQuery();
-                    ps.setInt(1, orden.getIdOrden());
-                    ps.setDate(2, Date.valueOf(orden.getFecha()));
-                    ps.setString(3, orden.getFormaPago());
-                    ps.setDouble(4, orden.getImporte());
-                    ps.setInt(5, orden.getAfiliado().getIdAfiliado());
-                    ps.setInt(6, orden.getPrestador().getIdPrestador());
+                    // ps.setInt(1, orden.getIdOrden());
+                    ps.setDate(1, Date.valueOf(orden.getFecha()));
+                    ps.setString(2, orden.getFormaPago());
+                    ps.setDouble(3, orden.getImporte());
+                    ps.setInt(4, orden.getAfiliado().getIdAfiliado());
+                    ps.setInt(5, orden.getPrestador().getIdPrestador());
 
                     ps.executeUpdate();
+                    rs = ps.getGeneratedKeys();
+                    orden.setIdOrden(rs.getInt(1));
 
-                } else {
-                    System.out.println("El valor ya existe");
+                    JOptionPane.showMessageDialog(null, "Orden cargada");
+
+              //  } else {
+                 //   System.out.println("Ya sacó una orden en este día");
                 }
             }
-            //Setea id, recupera id
-            rs = ps.getGeneratedKeys();
-            orden.setIdOrden(rs.getInt(1));
-
-            JOptionPane.showMessageDialog(null, "Orden cargada");
-
+            
             ps.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla orden");
-        }catch(NullPointerException ex1){
-              JOptionPane.showMessageDialog(null, "X");
+        } catch (NullPointerException ex1) {
+            JOptionPane.showMessageDialog(null, "Error");
         }
     }
+*/
+    //=============================================================================
+    //ELIMINAR ORDENES
+     
+    public void eliminarOrden(int id) {
 
-     //=============================================================================
-     //ELIMINAR ORDENES
-   
-       public void eliminarOrden (int id){
-        
-        String sql="DELETE FROM `orden` WHERE idOrden=?";
-        
+        String sql = "DELETE FROM `orden` WHERE idOrden=?";
+
         try {
-            PreparedStatement ps=conex.prepareStatement(sql);
+            PreparedStatement ps = conex.prepareStatement(sql);
             ps.setInt(1, id);
-            
-            int exito=ps.executeUpdate();
-            if(exito==1){
+
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Orden eliminada");
             }
             ps.close();
@@ -189,6 +192,59 @@ public class OrdenData {
         return listaXFecha;
         
        }
-      
- 
+ //======================================================0
+       public void guardarOrden(Orden orden) {
+
+        try {
+
+            PreparedStatement preparedStatement = null;
+            if (comprobarPrestadorFecha(orden)) {
+                String insertQuery = "INSERT INTO orden(fecha,formaPago,importe,idAfiliado,idPrestador) VALUES (?,?,?,?,?)";
+
+                preparedStatement = conex.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
+                preparedStatement.setDate(1, java.sql.Date.valueOf(orden.getFecha()));
+                preparedStatement.setString(2, orden.getFormaPago());
+                preparedStatement.setDouble(3, orden.getImporte());
+                preparedStatement.setInt(4, orden.getAfiliado().getIdAfiliado());
+                preparedStatement.setInt(5, orden.getPrestador().getIdPrestador());
+
+                preparedStatement.executeUpdate();
+
+                ResultSet resulSet = preparedStatement.getGeneratedKeys();
+                if (resulSet.next()) {
+                    orden.setIdOrden(resulSet.getInt(1));
+                    JOptionPane.showMessageDialog(null, "Orden añadida con exito.");
+                }
+            }
+            preparedStatement.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(OrdenData.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (GenericException ex) {
+            JOptionPane.showMessageDialog(null, "Error al cargar la Orden: " + ex.getMessage());
+        }
+
+    }
+
+    private boolean comprobarPrestadorFecha(Orden orden) throws GenericException, SQLException {
+
+        PreparedStatement preparedStatement = null;
+        boolean resultado = false;
+        String dateQuery = "SELECT * FROM orden WHERE fecha = ? AND idPrestador = ? AND idAfiliado = ?";
+        preparedStatement = conex.prepareStatement(dateQuery);
+        preparedStatement.setDate(1, java.sql.Date.valueOf(orden.getFecha()));
+        preparedStatement.setInt(2, orden.getPrestador().getIdPrestador());
+        preparedStatement.setInt(3, orden.getAfiliado().getIdAfiliado());
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultado = resultSet.next();
+
+        if (resultado) {
+
+            throw new GenericException("Solo puede sacar una orden por día");
+        } else {
+            resultado = true;
+            return resultado;
+        }
+    }
+
 }
