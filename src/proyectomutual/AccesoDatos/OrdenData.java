@@ -240,7 +240,7 @@ try {
 
         if (resultado) {
 
-            throw new GenericException("No se puede guardar una orden para el mismo dia!");
+            throw new GenericException("Solo puede sacar una orden por día");
         } else {
             resultado = true;
             return resultado;
