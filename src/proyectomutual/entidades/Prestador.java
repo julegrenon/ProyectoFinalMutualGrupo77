@@ -10,22 +10,22 @@ public class Prestador {
     private int telefono;
     private String domicilio;
     private Especialidad especialidad;
-    private boolean activo;
+    private boolean estado;
 
     public Prestador() {
     }
 
-    public Prestador(String nombre, String apellido, int dni, int telefono, String domicilio, Especialidad especialidad, boolean activo) {
+    public Prestador(String nombre, String apellido, int dni, int telefono, String domicilio, Especialidad especialidad, boolean estado) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.telefono = telefono;
         this.domicilio = domicilio;
         this.especialidad = especialidad;
-        this.activo = activo;
+        this.estado = estado;
     }
 
-    public Prestador(int idPrestador, String nombre, String apellido, int dni, int telefono, String domicilio, Especialidad especialidad, boolean activo) {
+    public Prestador(int idPrestador, String nombre, String apellido, int dni, int telefono, String domicilio, Especialidad especialidad, boolean estado) {
         this.idPrestador = idPrestador;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -33,8 +33,10 @@ public class Prestador {
         this.telefono = telefono;
         this.domicilio = domicilio;
         this.especialidad = especialidad;
-        this.activo = activo;
+        this.estado = estado;
     }
+    
+    
 
     public String getApellido() {
         return apellido;
@@ -84,12 +86,12 @@ public class Prestador {
         this.especialidad = especialidad;
     }
 
-    public boolean isActivo() {
-        return activo;
+    public boolean isEstado() {
+        return estado;
     }
 
-    public void setActivo(boolean activo) {
-        this.activo = activo;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 
     public int getIdPrestador() {
@@ -102,7 +104,8 @@ public class Prestador {
 
     @Override
     public String toString() {
-        return "Prestador{" + "idPrestador=" + idPrestador + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono=" + telefono + ", domicilio=" + domicilio + ", especialidad=" + especialidad + ", activo=" + activo + '}';
-    }
 
+        return "Prestador{" + "idPrestador=" + idPrestador + ", nombre=" + nombre + ", apellido=" + apellido + ", dni=" + dni + ", telefono=" + telefono + ", domicilio=" + domicilio + ", especialidad=" + especialidad + ", estado=" + estado + '}';
+    }
+    
 }

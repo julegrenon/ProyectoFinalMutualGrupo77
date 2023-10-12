@@ -7,6 +7,7 @@ package proyectomutual;
 
 import java.time.LocalDate;
 import proyectomutual.AccesoDatos.AfiliadoData;
+import proyectomutual.AccesoDatos.Conexion;
 import proyectomutual.AccesoDatos.EspecialidadData;
 import proyectomutual.AccesoDatos.OrdenData;
 import proyectomutual.AccesoDatos.PrestadorData;
@@ -25,6 +26,20 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
+        
+        Especialidad ES = new Especialidad("Futbolista");
+
+        EspecialidadData ED = new EspecialidadData();
+        
+        ED.agregarEspecialidad(ES);
+        
+        
+        PrestadorData PD = new PrestadorData();
+        Prestador PR = new Prestador("Roman", "Riquelme", 12, 666, "La Boca", ES, true);
+
+
+        PD.agregarPrestador(PR);
 
     }
 }

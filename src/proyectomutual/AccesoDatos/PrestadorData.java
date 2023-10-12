@@ -15,26 +15,28 @@ import proyectomutual.entidades.Prestador;
 public class PrestadorData {
     
     private Connection conexion = null;
+    private EspecialidadData espData;
 
     public PrestadorData() {
         conexion = Conexion.getConexion();
+        espData = new EspecialidadData();
     }
     
     public void agregarPrestador(Prestador prestador){
-        
 
-        String sql="INSERT INTO prestador (nombre, dni, domicilio, telefono, idEspecialidad, estado)"
-                + "VALUES (?, ?, ?, ?, ?, ?)";
-        
+        String sql="INSERT INTO prestador (nombre, apellido, dni, domicilio, telefono, idEspecialidad, estado)"
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
         try {
             PreparedStatement ps=conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
             ps.setString(1, prestador.getNombre());
-            ps.setInt(2, prestador.getDni());
-            ps.setString(3, prestador.getDomicilio());
-            ps.setInt(4, prestador.getTelefono());
-            ps.setInt(5, prestador.getEspecialidad().getIdEspecialidad());
-            ps.setBoolean(6, prestador.isActivo());
+            ps.setString(2, prestador.getApellido());
+            ps.setInt(3, prestador.getDni());
+            ps.setString(4, prestador.getDomicilio());
+            ps.setInt(5, prestador.getTelefono());
+            ps.setInt(6, prestador.getEspecialidad().getIdEspecialidad());
+            ps.setBoolean(7, prestador.isEstado());
             
             ps.executeUpdate();
             
@@ -51,26 +53,32 @@ public class PrestadorData {
         }
     }
     
-    public void modificarPrestador(Prestador prestador){
-        String sql="UPDATE prestador SET nombre=?, dni=?, domicilio=?, telefono=?, especialidad=?, activo=?"
-                + "WHERE idPrestador=?";
-        
+    public void modificarPrestador(Prestador prestador, int ID) {
+        String sql = "UPDATE prestador SET nombre=?, apellido=?, dni=?, domicilio=?, telefono=?, idEspecialidad=?, estado=? WHERE idPrestador=?";
+
         try {
-            PreparedStatement ps=conexion.prepareStatement(sql);
-            
+            PreparedStatement ps = conexion.prepareStatement(sql);
+
             ps.setString(1, prestador.getNombre());
-            ps.setInt(2, prestador.getDni());
-            ps.setString(3, prestador.getDomicilio());
-            ps.setInt(4, prestador.getTelefono());
-            ps.setInt(5, prestador.getEspecialidad().getIdEspecialidad());
-            ps.setBoolean(6, prestador.isActivo());
-            
-            int exito=ps.executeUpdate();
-            if(exito==1){
+            ps.setString(2, prestador.getApellido());
+            ps.setInt(3, prestador.getDni());
+            ps.setString(4, prestador.getDomicilio());
+            ps.setInt(5, prestador.getTelefono());
+            ps.setInt(6, prestador.getEspecialidad().getIdEspecialidad());
+            ps.setBoolean(7, prestador.isEstado());
+
+            // Establece el valor del ID en la cláusula WHERE
+            ps.setInt(8, ID);
+
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
                 JOptionPane.showMessageDialog(null, "Prestador modificado");
+            } else {
+                JOptionPane.showMessageDialog(null, "No se pudo modificar el prestador. El ID no existe.");
             }
+
             ps.close();
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla prestador");
         }
@@ -119,7 +127,9 @@ public class PrestadorData {
 
                 //Setea especialidad después del método buscarEspecialidad  
                 prestador.setEspecialidad(especialidad);
-                prestador.setActivo(true);
+                prestador.setEstado(true);
+                
+                System.out.println("Prestador encontrado: " + prestador.getNombre() + " " + prestador.getApellido());
             } else {
                 JOptionPane.showMessageDialog(null, "No existe prestador con ese id");
             }
@@ -131,7 +141,7 @@ public class PrestadorData {
     }
     
         public Prestador buscarPrestadorPorDni(int dni){
-        String sql="SELECT idPrestador, nombre, domicilio, telefono, especialidad FROM alumno WHERE dni=? AND estado=1";
+        String sql="SELECT idPrestador, nombre, domicilio, telefono, idEspecialidad FROM prestador WHERE dni=? AND estado=1";
         Prestador prestador=null;
         try {
             PreparedStatement ps=conexion.prepareStatement(sql);
@@ -147,11 +157,13 @@ public class PrestadorData {
                 prestador.setDni(dni);
                 prestador.setTelefono(rs.getInt("telefono"));
                 
-                int especialidadInt = rs.getInt("especialidad");
+                int especialidadInt = rs.getInt("idEspecialidad");
                 Especialidad especialidad = new Especialidad(especialidadInt);
 
                 prestador.setEspecialidad(especialidad);
-                prestador.setActivo(true);
+                prestador.setEstado(true);
+                
+                JOptionPane.showMessageDialog(null, "DNI: "+ dni + " ¡Encontrado con éxito!");
             } else {
                 JOptionPane.showMessageDialog(null, "No existe prestador con ese dni");
             }
@@ -162,35 +174,40 @@ public class PrestadorData {
         return prestador;
     }
         
-        public List<Prestador> listarPrestador (){
-        String sql="SELECT idPrestador, nombre, dni, domicilio, telefono, especialidad FROM alumno WHERE estado=1";
-        ArrayList<Prestador> prestadorLista=new ArrayList();
+        public List<Prestador> listarPrestador() {
+        String sql = "SELECT idPrestador, nombre, dni, domicilio, telefono, idEspecialidad FROM prestador WHERE estado=1";
+        ArrayList<Prestador> prestadorLista = new ArrayList<>();
+
         try {
-            PreparedStatement ps=conexion.prepareStatement(sql);
-            
-            
-            ResultSet rs=ps.executeQuery();
-            
-            while (rs.next()){
-                Prestador prestador=new Prestador();
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Prestador prestador = new Prestador();
                 prestador.setIdPrestador(rs.getInt("idPrestador"));
                 prestador.setNombre(rs.getString("nombre"));
                 prestador.setDni(rs.getInt("dni"));
                 prestador.setDomicilio(rs.getString("domicilio"));
                 prestador.setTelefono(rs.getInt("telefono"));
-                
-                int especialidadInt = rs.getInt("especialidad");
+
+                int especialidadInt = rs.getInt("idEspecialidad");
                 Especialidad especialidad = new Especialidad(especialidadInt);
 
                 prestador.setEspecialidad(especialidad);
-                prestador.setActivo(true);
-                
+                prestador.setEstado(true);
+
                 prestadorLista.add(prestador);
-            } 
+            }
             ps.close();
+
+            // Imprimir la lista en la consola
+            for (Prestador p : prestadorLista) {
+                System.out.println("ID: " + p.getIdPrestador() + ", Nombre: " + p.getNombre() + ", DNI: " + p.getDni());
+            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla prestador");
         }
+
         return prestadorLista;
     }
     
