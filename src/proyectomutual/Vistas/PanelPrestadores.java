@@ -40,7 +40,6 @@ public class PanelPrestadores extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
 
@@ -54,7 +53,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("Prestadores activos");
         jLabel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPPrestador.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 310, -1));
+        jPPrestador.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 310, -1));
 
         jLPA.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -63,13 +62,13 @@ public class PanelPrestadores extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jLPA);
 
-        jPPrestador.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 620, 50));
+        jPPrestador.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 620, 50));
 
         jLabel2.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 102, 102));
         jLabel2.setText("Prestadores por especialidad");
         jLabel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPPrestador.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 310, -1));
+        jPPrestador.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 180, 310, -1));
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -79,10 +78,11 @@ public class PanelPrestadores extends javax.swing.JPanel {
         jScrollPane2.setViewportView(jList1);
 
         jPPrestador.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 620, 60));
-        jPPrestador.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 620, 10));
+        jPPrestador.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 620, 10));
 
+        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Especialidades" }));
-        jPPrestador.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 620, -1));
+        jPPrestador.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 310, -1));
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -93,7 +93,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
         jLabel4.setText("Agregar");
         jPanel1.add(jLabel4);
 
-        jPPrestador.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, 130, 70));
+        jPPrestador.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 130, 70));
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 102));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -104,22 +104,17 @@ public class PanelPrestadores extends javax.swing.JPanel {
         jLabel3.setText("Eliminar");
         jPanel2.add(jLabel3);
 
-        jPPrestador.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 330, 120, 70));
-
-        jButton1.setBackground(new java.awt.Color(0, 102, 102));
-        jButton1.setForeground(new java.awt.Color(204, 255, 153));
-        jButton1.setText("Volver");
-        jPPrestador.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 370, 100, -1));
+        jPPrestador.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, 120, 70));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Regresar.jpg"))); // NOI18N
         jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPPrestador.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 340, 60, 60));
+        jPPrestador.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 350, 60, 60));
 
         jLabel6.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 102, 102));
         jLabel6.setText("GESTION PRESTADORES");
-        jPPrestador.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 20, -1, -1));
+        jPPrestador.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, -1));
 
         add(jPPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 683, 415));
         jPPrestador.getAccessibleContext().setAccessibleDescription("");
@@ -127,7 +122,6 @@ public class PanelPrestadores extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JList<String> jLPA;
     private javax.swing.JLabel jLabel1;
