@@ -27,19 +27,6 @@ public class Main {
      */
     public static void main(String[] args) {
         
-        
-        Especialidad ES = new Especialidad("Futbolista");
-
-        EspecialidadData ED = new EspecialidadData();
-        
-        ED.agregarEspecialidad(ES);
-        
-        
-        PrestadorData PD = new PrestadorData();
-        Prestador PR = new Prestador("Roman", "Riquelme", 12, 666, "La Boca", ES, true);
-
-
-        PD.agregarPrestador(PR);
 
     }
 }

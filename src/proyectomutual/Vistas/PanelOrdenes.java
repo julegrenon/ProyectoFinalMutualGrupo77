@@ -27,18 +27,18 @@ public class PanelOrdenes extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabelPruebaPrestadores = new javax.swing.JLabel();
+        jPOrden = new javax.swing.JPanel();
 
+        setPreferredSize(new java.awt.Dimension(670, 410));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabelPruebaPrestadores.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabelPruebaPrestadores.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelPruebaPrestadores.setText("VISTA ORDENES");
-        add(jLabelPruebaPrestadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 150, 210, 70));
+        jPOrden.setBackground(new java.awt.Color(153, 255, 204));
+        add(jPOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 410));
+        jPOrden.getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabelPruebaPrestadores;
+    private javax.swing.JPanel jPOrden;
     // End of variables declaration//GEN-END:variables
 }
