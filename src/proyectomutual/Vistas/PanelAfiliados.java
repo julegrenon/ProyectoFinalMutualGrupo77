@@ -5,6 +5,7 @@
  */
 package proyectomutual.Vistas;
 
+
 import java.awt.BorderLayout;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -13,11 +14,9 @@ import proyectomutual.AccesoDatos.AfiliadoData;
 import static proyectomutual.Vistas.Menu.jPFondo;
 import proyectomutual.entidades.Afiliado;
 
-/**
- *
- * @author sonia
- */
+
 public class PanelAfiliados extends javax.swing.JPanel {
+
 
     //Setea modelo de tabla
     private DefaultTableModel modelo = new DefaultTableModel() {
@@ -33,6 +32,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
     //Variables
     private AfiliadoData afiliadoData=new AfiliadoData();
         
+
     public PanelAfiliados() {
         initComponents();
         cargarColumnas();
@@ -93,6 +93,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
         jLabel1.setText("Buscar por DNI");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(511, 56, -1, -1));
 
+        jTdni.setBackground(new java.awt.Color(255, 255, 255));
         jTdni.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         jTdni.setForeground(new java.awt.Color(204, 204, 204));
         jTdni.setText("Ingrese un DNI");
@@ -141,11 +142,6 @@ public class PanelAfiliados extends javax.swing.JPanel {
         jLAfiliadoNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/AgregarMas chica.jpg"))); // NOI18N
         jLAfiliadoNuevo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLAfiliadoNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLAfiliadoNuevo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLAfiliadoNuevoMouseClicked(evt);
-            }
-        });
         add(jLAfiliadoNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 346, 50, 50));
 
         jLAfiliadoModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Editar chico_1.jpg"))); // NOI18N
@@ -178,6 +174,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 56, 493, 80));
     }// </editor-fold>//GEN-END:initComponents
+
 
     private void jLAfiliadoNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAfiliadoNuevoMouseClicked
             //Istancia clase panel 
@@ -215,6 +212,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
     }//GEN-LAST:event_jLAfiliadoBuscarMouseClicked
 
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAfiliadoOrden;
     private javax.swing.JLabel jLAfiliadoBuscar;
@@ -234,6 +232,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
     private javax.swing.JTable jTAfiliadoConOrden;
     private javax.swing.JTextField jTdni;
     // End of variables declaration//GEN-END:variables
+
 
     //MÉTODOS
     //setea nombre de columnas
@@ -285,5 +284,3 @@ public class PanelAfiliados extends javax.swing.JPanel {
         }
     }
 }
-    
-
