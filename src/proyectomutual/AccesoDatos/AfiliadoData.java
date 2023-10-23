@@ -90,7 +90,7 @@ public class AfiliadoData {
 
     //Listar todos los afiliados activos
     public List<Afiliado> listarAfiliados() {
-        String sql = "SELECT idAfiliado, dni, apellido, nombre, telefono FROM afiliado WHERE estado=1";
+        String sql = "SELECT idAfiliado, dni, apellido, nombre, telefono, domicilio FROM afiliado WHERE estado=1";
         ArrayList<Afiliado> afiliadosLista = new ArrayList();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -104,6 +104,7 @@ public class AfiliadoData {
                 afiliado.setApellido(rs.getString("apellido"));
                 afiliado.setNombre(rs.getString("nombre"));
                 afiliado.setTelefono(rs.getInt("telefono"));
+                afiliado.setDomicilio(rs.getString("domicilio"));
                 afiliado.setEstado(true);
 
                 afiliadosLista.add(afiliado);
