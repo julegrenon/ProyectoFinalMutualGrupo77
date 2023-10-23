@@ -5,6 +5,7 @@
  */
 package proyectomutual.Vistas;
 
+import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -40,7 +41,7 @@ public class Menu extends javax.swing.JFrame {
         jBPrestador = new javax.swing.JButton();
         jBEspecialista = new javax.swing.JButton();
         jBOrden = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jBSalir = new javax.swing.JButton();
         //ImageIcon icono=new ImageIcon(getClass().getResource("/Imagenes/Image800.png"));
         //Image miImagen=icono.getImage();
         jPFondo = new javax.swing.JPanel();
@@ -118,11 +119,16 @@ public class Menu extends javax.swing.JFrame {
         });
         jPBotonera.add(jBOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 258, 220, 80));
 
-        jButton1.setBackground(new java.awt.Color(204, 255, 255));
-        jButton1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(153, 255, 255));
-        jButton1.setText("SALIR");
-        jPBotonera.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, -1, -1));
+        jBSalir.setBackground(new java.awt.Color(204, 255, 255));
+        jBSalir.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
+        jBSalir.setForeground(new java.awt.Color(153, 255, 255));
+        jBSalir.setText("SALIR");
+        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalirActionPerformed(evt);
+            }
+        });
+        jPBotonera.add(jBSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, -1, -1));
 
         jPInicio.add(jPBotonera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 410));
 
@@ -132,16 +138,17 @@ public class Menu extends javax.swing.JFrame {
         jPFondo.setPreferredSize(new java.awt.Dimension(671, 415));
 
         jLFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ImageFondo.jpg"))); // NOI18N
+        jLFondo.setPreferredSize(new java.awt.Dimension(670, 410));
 
         javax.swing.GroupLayout jPFondoLayout = new javax.swing.GroupLayout(jPFondo);
         jPFondo.setLayout(jPFondoLayout);
         jPFondoLayout.setHorizontalGroup(
             jPFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 670, Short.MAX_VALUE)
+            .addComponent(jLFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPFondoLayout.setVerticalGroup(
             jPFondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLFondo, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+            .addComponent(jLFondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         Escritorio.add(jPFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 670, 410));
@@ -156,7 +163,15 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBAfiliadoMouseClicked
 
     private void jBAfiliadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAfiliadoActionPerformed
-        // aca
+        PanelAfiliados afiliadosVista=new PanelAfiliados();
+        afiliadosVista.setSize(670, 410);
+        afiliadosVista.setLocation(0, 0);
+        
+        jPFondo.removeAll();
+        jPFondo.add(afiliadosVista, BorderLayout.CENTER);
+        
+        jPFondo.revalidate();
+        jPFondo.repaint();
 
     }//GEN-LAST:event_jBAfiliadoActionPerformed
 
@@ -167,6 +182,10 @@ public class Menu extends javax.swing.JFrame {
     private void jBOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBOrdenActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBOrdenActionPerformed
+
+    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jBSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,7 +228,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jBEspecialista;
     private javax.swing.JButton jBOrden;
     private javax.swing.JButton jBPrestador;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBSalir;
     private javax.swing.JLabel jLBanner;
     private javax.swing.JLabel jLFondo;
     private javax.swing.JPanel jPBotonera;
