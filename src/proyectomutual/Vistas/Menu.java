@@ -17,7 +17,7 @@ public class Menu extends javax.swing.JFrame {
     
     public Menu() {
         initComponents();
-        PanelAfiliados afiliadosVista=new PanelAfiliados();
+       /* PanelAfiliados afiliadosVista=new PanelAfiliados();
         afiliadosVista.setSize(670, 410);
         afiliadosVista.setLocation(0, 0);
         
@@ -25,7 +25,7 @@ public class Menu extends javax.swing.JFrame {
         jPFondo.add(afiliadosVista, BorderLayout.CENTER);
         
         jPFondo.revalidate();
-        jPFondo.repaint();
+        jPFondo.repaint();*/
     }
 
     /**
@@ -48,14 +48,13 @@ public class Menu extends javax.swing.JFrame {
         jBPrestador = new javax.swing.JButton();
         jBEspecialista = new javax.swing.JButton();
         jBOrden = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jBSalir = new javax.swing.JButton();
         //ImageIcon icono=new ImageIcon(getClass().getResource("/Imagenes/Image800.png"));
         //Image miImagen=icono.getImage();
         jPFondo = new javax.swing.JPanel();
         jLFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setLocation(new java.awt.Point(200, 100));
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -113,6 +112,11 @@ public class Menu extends javax.swing.JFrame {
         jBEspecialista.setForeground(new java.awt.Color(153, 255, 255));
         jBEspecialista.setText("ESPECIALISTAS");
         jBEspecialista.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBEspecialista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEspecialistaActionPerformed(evt);
+            }
+        });
         jPBotonera.add(jBEspecialista, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 172, 220, 80));
 
         jBOrden.setBackground(new java.awt.Color(102, 102, 102));
@@ -127,16 +131,16 @@ public class Menu extends javax.swing.JFrame {
         });
         jPBotonera.add(jBOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 258, 220, 80));
 
-        jButton1.setBackground(new java.awt.Color(102, 102, 102));
-        jButton1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(153, 255, 255));
-        jButton1.setText("SALIR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBSalir.setBackground(new java.awt.Color(102, 102, 102));
+        jBSalir.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
+        jBSalir.setForeground(new java.awt.Color(153, 255, 255));
+        jBSalir.setText("SALIR");
+        jBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBSalirActionPerformed(evt);
             }
         });
-        jPBotonera.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, -1, -1));
+        jPBotonera.add(jBSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, -1, -1));
 
         jPInicio.add(jPBotonera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 410));
 
@@ -171,10 +175,14 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBAfiliadoMouseClicked
 
     private void jBAfiliadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAfiliadoActionPerformed
-       PanelAfiliados afiliadosVista=new PanelAfiliados();
+        //Istancia clase panel 
+        PanelAfiliados afiliadosVista=new PanelAfiliados();
+        
+        //Setea dimensiones y location
         afiliadosVista.setSize(670, 410);
         afiliadosVista.setLocation(0, 0);
         
+        //Remueve y agrega la vista del panel instanciada
         jPFondo.removeAll();
         jPFondo.add(afiliadosVista, BorderLayout.CENTER);
         
@@ -184,16 +192,59 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBAfiliadoActionPerformed
 
     private void jBPrestadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrestadorActionPerformed
-        // TODO add your handling code here:
+            //Istancia clase panel 
+        PanelPrestadores prestadoresVista=new PanelPrestadores();
+        
+        //Setea dimensiones y location
+        prestadoresVista.setSize(670, 410);
+        prestadoresVista.setLocation(0, 0);
+        
+        //Remueve y agrega la vista del panel instanciada
+        jPFondo.removeAll();
+        jPFondo.add(prestadoresVista, BorderLayout.CENTER);
+        
+        jPFondo.revalidate();
+        jPFondo.repaint();
+
     }//GEN-LAST:event_jBPrestadorActionPerformed
 
     private void jBOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBOrdenActionPerformed
-        // TODO add your handling code here:
+            //Istancia clase panel 
+        PanelOrdenes ordenesVista=new PanelOrdenes();
+        
+        //Setea dimensiones y location
+        ordenesVista.setSize(670, 410);
+        ordenesVista.setLocation(0, 0);
+        
+        //Remueve y agrega la vista del panel instanciada
+        jPFondo.removeAll();
+        jPFondo.add(ordenesVista, BorderLayout.CENTER);
+        
+        jPFondo.revalidate();
+        jPFondo.repaint();
+
     }//GEN-LAST:event_jBOrdenActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jBEspecialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEspecialistaActionPerformed
+            //Istancia clase panel 
+        PanelEspecialidad especialidadVista=new PanelEspecialidad();
+        
+        //Setea dimensiones y location
+        especialidadVista.setSize(670, 410);
+        especialidadVista.setLocation(0, 0);
+        
+        //Remueve y agrega la vista del panel instanciada
+        jPFondo.removeAll();
+        jPFondo.add(especialidadVista, BorderLayout.CENTER);
+        
+        jPFondo.revalidate();
+        jPFondo.repaint();
+
+    }//GEN-LAST:event_jBEspecialistaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,11 +287,11 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jBEspecialista;
     private javax.swing.JButton jBOrden;
     private javax.swing.JButton jBPrestador;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jBSalir;
     private javax.swing.JLabel jLBanner;
     private javax.swing.JLabel jLFondo;
     private javax.swing.JPanel jPBotonera;
-    private javax.swing.JPanel jPFondo;
+    public static javax.swing.JPanel jPFondo;
     private javax.swing.JPanel jPInicio;
     private javax.swing.JPanel jPVistas;
     // End of variables declaration//GEN-END:variables
