@@ -6,7 +6,11 @@
 package proyectomutual.Vistas;
 
 import java.awt.BorderLayout;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import proyectomutual.AccesoDatos.AfiliadoData;
 import static proyectomutual.Vistas.Menu.jPFondo;
+import proyectomutual.entidades.Afiliado;
 
 /**
  *
@@ -14,11 +18,24 @@ import static proyectomutual.Vistas.Menu.jPFondo;
  */
 public class PanelAfiliados extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PanelAfiliados
-     */
+    //Setea modelo de tabla
+    private DefaultTableModel modelo = new DefaultTableModel() {
+
+        public boolean isCellEditable(int f, int c) {
+            if (c == 2) {
+                return true;
+            }
+            return false;
+        }
+    };
+    
+    //Variables
+    private AfiliadoData afiliadoData=new AfiliadoData();
+        
     public PanelAfiliados() {
         initComponents();
+        cargarColumnas();
+        cargarTablaAfiliados();
     }
 
     /**
@@ -193,4 +210,35 @@ public class PanelAfiliados extends javax.swing.JPanel {
     private javax.swing.JTable jTAfiliadoConOrden;
     private javax.swing.JTextField jTdni;
     // End of variables declaration//GEN-END:variables
-}
+
+    //MÉTODOS
+    
+    //setea nombre de columnas
+    private void cargarColumnas() {
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("DNI");
+        modelo.addColumn("Teléfono");
+        modelo.addColumn("Domicilio");
+        jTAfiliado.setModel(modelo);
+    }
+    
+    //Cargar tablaAfiliados
+        private void cargarTablaAfiliados() {
+
+        modelo.setRowCount(0);
+        List<Afiliado> listaAfiliados=afiliadoData.listarAfiliados();
+        
+            for (Afiliado afiliados : listaAfiliados) {
+
+                modelo.addRow(new Object[]{
+                    afiliados.getIdAfiliado(), afiliados.getNombre(), afiliados.getApellido(), 
+                    afiliados.getDni(), afiliados.getTelefono(), afiliados.getDomicilio()
+                });
+
+            }
+        }
+    }
+    
+
