@@ -34,9 +34,13 @@ public class Menu extends javax.swing.JFrame {
         Escritorio = new javax.swing.JDesktopPane();
         jLBanner = new javax.swing.JLabel();
         jPInicio = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jBSalir = new javax.swing.JButton();
-        jBIngresar = new javax.swing.JButton();
+        jPVistas = new javax.swing.JPanel();
+        jPBotonera = new javax.swing.JPanel();
+        jBAfiliado = new javax.swing.JButton();
+        jBPrestador = new javax.swing.JButton();
+        jBEspecialista = new javax.swing.JButton();
+        jBOrden = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         //ImageIcon icono=new ImageIcon(getClass().getResource("/Imagenes/Image800.png"));
         //Image miImagen=icono.getImage();
         jPFondo = new javax.swing.JPanel();
@@ -44,7 +48,6 @@ public class Menu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(900, 515));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         Escritorio.setBackground(new java.awt.Color(255, 255, 255));
@@ -52,30 +55,80 @@ public class Menu extends javax.swing.JFrame {
         Escritorio.setPreferredSize(new java.awt.Dimension(900, 515));
         Escritorio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLBanner.setBackground(new java.awt.Color(204, 255, 255));
         jLBanner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Banner 900x100.png"))); // NOI18N
         Escritorio.add(jLBanner, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 906, -1));
 
-        jPInicio.setBackground(new java.awt.Color(153, 255, 153));
+        jPInicio.setBackground(new java.awt.Color(204, 255, 255));
         jPInicio.setPreferredSize(new java.awt.Dimension(229, 800));
         jPInicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Logo Mutual.png"))); // NOI18N
-        jPInicio.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 230, 240));
+        jPVistas.setBackground(new java.awt.Color(255, 255, 255));
+        jPVistas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPInicio.add(jPVistas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 10));
 
-        jBSalir.setBackground(new java.awt.Color(0, 102, 102));
-        jBSalir.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
-        jBSalir.setForeground(new java.awt.Color(204, 255, 204));
-        jBSalir.setText("Salir");
-        jPInicio.add(jBSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 210, 60));
+        jPBotonera.setBackground(new java.awt.Color(153, 255, 204));
+        jPBotonera.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jBIngresar.setBackground(new java.awt.Color(0, 102, 102));
-        jBIngresar.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
-        jBIngresar.setForeground(new java.awt.Color(204, 255, 204));
-        jBIngresar.setText("Ingresar");
-        jPInicio.add(jBIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 210, 60));
+        jBAfiliado.setBackground(new java.awt.Color(204, 255, 255));
+        jBAfiliado.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
+        jBAfiliado.setForeground(new java.awt.Color(153, 255, 255));
+        jBAfiliado.setText("AFILIADOS");
+        jBAfiliado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBAfiliado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBAfiliadoMouseClicked(evt);
+            }
+        });
+        jBAfiliado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBAfiliadoActionPerformed(evt);
+            }
+        });
+        jPBotonera.add(jBAfiliado, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 0, 220, 80));
+
+        jBPrestador.setBackground(new java.awt.Color(204, 255, 255));
+        jBPrestador.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
+        jBPrestador.setForeground(new java.awt.Color(153, 255, 255));
+        jBPrestador.setText("PRESTADORES");
+        jBPrestador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBPrestador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBPrestadorActionPerformed(evt);
+            }
+        });
+        jPBotonera.add(jBPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 86, 220, 80));
+
+        jBEspecialista.setBackground(new java.awt.Color(204, 255, 255));
+        jBEspecialista.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
+        jBEspecialista.setForeground(new java.awt.Color(153, 255, 255));
+        jBEspecialista.setText("ESPECIALISTAS");
+        jBEspecialista.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPBotonera.add(jBEspecialista, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 172, 220, 80));
+
+        jBOrden.setBackground(new java.awt.Color(204, 255, 255));
+        jBOrden.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
+        jBOrden.setForeground(new java.awt.Color(153, 255, 255));
+        jBOrden.setText("CONSULTAS POR ORDEN");
+        jBOrden.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBOrdenActionPerformed(evt);
+            }
+        });
+        jPBotonera.add(jBOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 258, 220, 80));
+
+        jButton1.setBackground(new java.awt.Color(204, 255, 255));
+        jButton1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(153, 255, 255));
+        jButton1.setText("SALIR");
+        jPBotonera.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, -1, -1));
+
+        jPInicio.add(jPBotonera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 410));
 
         Escritorio.add(jPInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 101, -1, 410));
 
+        jPFondo.setBackground(new java.awt.Color(204, 255, 255));
         jPFondo.setPreferredSize(new java.awt.Dimension(671, 415));
 
         jLFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ImageFondo.jpg"))); // NOI18N
@@ -97,6 +150,23 @@ public class Menu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBAfiliadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBAfiliadoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBAfiliadoMouseClicked
+
+    private void jBAfiliadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAfiliadoActionPerformed
+        // aca
+
+    }//GEN-LAST:event_jBAfiliadoActionPerformed
+
+    private void jBPrestadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrestadorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBPrestadorActionPerformed
+
+    private void jBOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBOrdenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBOrdenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -135,12 +205,16 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane Escritorio;
-    private javax.swing.JButton jBIngresar;
-    private javax.swing.JButton jBSalir;
+    private javax.swing.JButton jBAfiliado;
+    private javax.swing.JButton jBEspecialista;
+    private javax.swing.JButton jBOrden;
+    private javax.swing.JButton jBPrestador;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLBanner;
     private javax.swing.JLabel jLFondo;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPBotonera;
     private javax.swing.JPanel jPFondo;
     private javax.swing.JPanel jPInicio;
+    private javax.swing.JPanel jPVistas;
     // End of variables declaration//GEN-END:variables
 }
