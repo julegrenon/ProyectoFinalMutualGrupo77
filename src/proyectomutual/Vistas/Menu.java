@@ -5,10 +5,10 @@
  */
 package proyectomutual.Vistas;
 
+import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
-
  
 
 public class Menu extends javax.swing.JFrame {
@@ -17,7 +17,15 @@ public class Menu extends javax.swing.JFrame {
     
     public Menu() {
         initComponents();
-     
+        PanelAfiliados afiliadosVista=new PanelAfiliados();
+        afiliadosVista.setSize(670, 410);
+        afiliadosVista.setLocation(0, 0);
+        
+        jPFondo.removeAll();
+        jPFondo.add(afiliadosVista, BorderLayout.CENTER);
+        
+        jPFondo.revalidate();
+        jPFondo.repaint();
     }
 
     /**
@@ -47,6 +55,7 @@ public class Menu extends javax.swing.JFrame {
         jLFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(200, 100));
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -122,6 +131,11 @@ public class Menu extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(153, 255, 255));
         jButton1.setText("SALIR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPBotonera.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, -1, -1));
 
         jPInicio.add(jPBotonera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 410));
@@ -157,7 +171,15 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBAfiliadoMouseClicked
 
     private void jBAfiliadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAfiliadoActionPerformed
-        // aca
+       PanelAfiliados afiliadosVista=new PanelAfiliados();
+        afiliadosVista.setSize(670, 410);
+        afiliadosVista.setLocation(0, 0);
+        
+        jPFondo.removeAll();
+        jPFondo.add(afiliadosVista, BorderLayout.CENTER);
+        
+        jPFondo.revalidate();
+        jPFondo.repaint();
 
     }//GEN-LAST:event_jBAfiliadoActionPerformed
 
@@ -168,6 +190,10 @@ public class Menu extends javax.swing.JFrame {
     private void jBOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBOrdenActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBOrdenActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

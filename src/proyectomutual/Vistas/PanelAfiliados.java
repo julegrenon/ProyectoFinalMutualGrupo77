@@ -30,7 +30,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTAfiliadoConOrden = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTdni = new javax.swing.JTextField();
         jLAfiliadoBuscar = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLAfiliadoEliminar = new javax.swing.JLabel();
@@ -41,9 +41,9 @@ public class PanelAfiliados extends javax.swing.JPanel {
         jLAfiliadoNuevo = new javax.swing.JLabel();
         jLAfiliadoModificar = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jLVolver = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTAfiliado1 = new javax.swing.JTable();
+        jTAfiliado = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(153, 255, 204));
         setMinimumSize(new java.awt.Dimension(670, 410));
@@ -65,75 +65,75 @@ public class PanelAfiliados extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTAfiliadoConOrden);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 530, 80));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 176, 493, 80));
 
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("Buscar por DNI");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(511, 56, -1, -1));
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField1.setText("Ingrese un DNI");
-        jTextField1.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, 150, -1));
+        jTdni.setBackground(new java.awt.Color(255, 255, 255));
+        jTdni.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
+        jTdni.setForeground(new java.awt.Color(204, 204, 204));
+        jTdni.setText("Ingrese un DNI");
+        jTdni.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        add(jTdni, new org.netbeans.lib.awtextra.AbsoluteConstraints(511, 76, 150, -1));
 
         jLAfiliadoBuscar.setBackground(new java.awt.Color(255, 255, 255));
         jLAfiliadoBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BuscarChica_1.jpg"))); // NOI18N
         jLAfiliadoBuscar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLAfiliadoBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        add(jLAfiliadoBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 110, 50, 50));
+        add(jLAfiliadoBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(561, 106, 50, 50));
 
         jLabel2.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 102, 102));
         jLabel2.setText("Nuevo afiliado");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 316, -1, -1));
 
         jLAfiliadoEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/EliminarChica.jpg"))); // NOI18N
         jLAfiliadoEliminar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLAfiliadoEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        add(jLAfiliadoEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 350, 50, 50));
+        add(jLAfiliadoEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(416, 346, -1, 50));
 
         jBAfiliadoOrden.setBackground(new java.awt.Color(0, 153, 153));
         jBAfiliadoOrden.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 12)); // NOI18N
         jBAfiliadoOrden.setForeground(new java.awt.Color(255, 255, 255));
         jBAfiliadoOrden.setText("Ver ordenes");
         jBAfiliadoOrden.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        add(jBAfiliadoOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 200, -1, -1));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 640, 10));
+        add(jBAfiliadoOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(531, 196, -1, -1));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 37, 613, 13));
 
         jLabel4.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 102, 102));
         jLabel4.setText("Modificar");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, -1, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(216, 316, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 102, 102));
         jLabel5.setText("Eliminar");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, -1, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 316, -1, -1));
 
         jLAfiliadoNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/AgregarMas chica.jpg"))); // NOI18N
         jLAfiliadoNuevo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLAfiliadoNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        add(jLAfiliadoNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 50, 50));
+        add(jLAfiliadoNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(46, 346, 50, 50));
 
         jLAfiliadoModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Editar chico_1.jpg"))); // NOI18N
         jLAfiliadoModificar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLAfiliadoModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        add(jLAfiliadoModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 350, 50, 50));
+        add(jLAfiliadoModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(236, 346, 50, 50));
 
         jLabel8.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 102, 102));
         jLabel8.setText("GESTIÓN AFILIADO");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 10, -1, -1));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(236, 10, -1, -1));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Regresar.jpg"))); // NOI18N
-        jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 340, 60, 60));
+        jLVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Retroc.png"))); // NOI18N
+        jLVolver.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        add(jLVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(601, 346, -1, 50));
 
-        jTAfiliado1.setModel(new javax.swing.table.DefaultTableModel(
+        jTAfiliado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -144,9 +144,9 @@ public class PanelAfiliados extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTAfiliado1);
+        jScrollPane2.setViewportView(jTAfiliado);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 530, 80));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 56, 493, 80));
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -156,17 +156,17 @@ public class PanelAfiliados extends javax.swing.JPanel {
     private javax.swing.JLabel jLAfiliadoEliminar;
     private javax.swing.JLabel jLAfiliadoModificar;
     private javax.swing.JLabel jLAfiliadoNuevo;
+    private javax.swing.JLabel jLVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTAfiliado1;
+    private javax.swing.JTable jTAfiliado;
     private javax.swing.JTable jTAfiliadoConOrden;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTdni;
     // End of variables declaration//GEN-END:variables
 }
