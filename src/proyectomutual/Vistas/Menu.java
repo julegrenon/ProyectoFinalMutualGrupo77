@@ -70,7 +70,7 @@ public class Menu extends javax.swing.JFrame {
         jPBotonera.setBackground(new java.awt.Color(153, 255, 204));
         jPBotonera.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jBAfiliado.setBackground(new java.awt.Color(204, 255, 255));
+        jBAfiliado.setBackground(new java.awt.Color(102, 102, 102));
         jBAfiliado.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jBAfiliado.setForeground(new java.awt.Color(153, 255, 255));
         jBAfiliado.setText("AFILIADOS");
@@ -87,7 +87,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jPBotonera.add(jBAfiliado, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 0, 220, 80));
 
-        jBPrestador.setBackground(new java.awt.Color(204, 255, 255));
+        jBPrestador.setBackground(new java.awt.Color(102, 102, 102));
         jBPrestador.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jBPrestador.setForeground(new java.awt.Color(153, 255, 255));
         jBPrestador.setText("PRESTADORES");
@@ -99,14 +99,14 @@ public class Menu extends javax.swing.JFrame {
         });
         jPBotonera.add(jBPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 86, 220, 80));
 
-        jBEspecialista.setBackground(new java.awt.Color(204, 255, 255));
+        jBEspecialista.setBackground(new java.awt.Color(102, 102, 102));
         jBEspecialista.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jBEspecialista.setForeground(new java.awt.Color(153, 255, 255));
         jBEspecialista.setText("ESPECIALISTAS");
         jBEspecialista.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPBotonera.add(jBEspecialista, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 172, 220, 80));
 
-        jBOrden.setBackground(new java.awt.Color(204, 255, 255));
+        jBOrden.setBackground(new java.awt.Color(102, 102, 102));
         jBOrden.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jBOrden.setForeground(new java.awt.Color(153, 255, 255));
         jBOrden.setText("CONSULTAS POR ORDEN");
@@ -118,7 +118,7 @@ public class Menu extends javax.swing.JFrame {
         });
         jPBotonera.add(jBOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 258, 220, 80));
 
-        jButton1.setBackground(new java.awt.Color(204, 255, 255));
+        jButton1.setBackground(new java.awt.Color(102, 102, 102));
         jButton1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(153, 255, 255));
         jButton1.setText("SALIR");
