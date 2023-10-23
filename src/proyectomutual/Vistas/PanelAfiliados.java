@@ -7,6 +7,7 @@ package proyectomutual.Vistas;
 
 import java.awt.BorderLayout;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyectomutual.AccesoDatos.AfiliadoData;
 import static proyectomutual.Vistas.Menu.jPFondo;
@@ -22,7 +23,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
     private DefaultTableModel modelo = new DefaultTableModel() {
 
         public boolean isCellEditable(int f, int c) {
-            if (c == 2) {
+            if (c >= 1 && c <= 5) {
                 return true;
             }
             return false;
@@ -102,6 +103,11 @@ public class PanelAfiliados extends javax.swing.JPanel {
         jLAfiliadoBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BuscarChica_1.jpg"))); // NOI18N
         jLAfiliadoBuscar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLAfiliadoBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLAfiliadoBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLAfiliadoBuscarMouseClicked(evt);
+            }
+        });
         add(jLAfiliadoBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(561, 106, 50, 50));
 
         jLabel2.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
@@ -190,6 +196,24 @@ public class PanelAfiliados extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jLAfiliadoNuevoMouseClicked
 
+    private void jLAfiliadoBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAfiliadoBuscarMouseClicked
+        try{
+            cargarTablaVacia();
+            
+            String dni = jTdni.getText();
+            int dniNum = Integer.parseInt(dni);
+            
+            cargarTablaAfiliadosXDNI(dniNum);
+        }catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un DNI para buscar");
+        } catch (NumberFormatException ex2) {
+            JOptionPane.showMessageDialog(null, "DNI sólo admite números");
+        }
+        
+        
+        
+    }//GEN-LAST:event_jLAfiliadoBuscarMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAfiliadoOrden;
@@ -212,7 +236,6 @@ public class PanelAfiliados extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     //MÉTODOS
-    
     //setea nombre de columnas
     private void cargarColumnas() {
         modelo.addColumn("ID");
@@ -223,22 +246,44 @@ public class PanelAfiliados extends javax.swing.JPanel {
         modelo.addColumn("Domicilio");
         jTAfiliado.setModel(modelo);
     }
-    
+
     //Cargar tablaAfiliados
-        private void cargarTablaAfiliados() {
+    private void cargarTablaAfiliados() {
 
         modelo.setRowCount(0);
-        List<Afiliado> listaAfiliados=afiliadoData.listarAfiliados();
-        
-            for (Afiliado afiliados : listaAfiliados) {
+        List<Afiliado> listaAfiliados = afiliadoData.listarAfiliados();
 
-                modelo.addRow(new Object[]{
-                    afiliados.getIdAfiliado(), afiliados.getNombre(), afiliados.getApellido(), 
-                    afiliados.getDni(), afiliados.getTelefono(), afiliados.getDomicilio()
-                });
+        for (Afiliado afiliados : listaAfiliados) {
 
-            }
+            modelo.addRow(new Object[]{
+                afiliados.getIdAfiliado(), afiliados.getNombre(), afiliados.getApellido(),
+                afiliados.getDni(), afiliados.getTelefono(), afiliados.getDomicilio()
+            });
+
         }
     }
+    
+    //Carga tabla de afiliado segun DNI
+    private void cargarTablaAfiliadosXDNI(int DNI) {
+
+        modelo.setRowCount(0);
+        Afiliado afiliadoXDNI = afiliadoData.buscarAfiliadoPorDni(DNI);
+
+        if (afiliadoXDNI != null) {
+
+            modelo.addRow(new Object[]{
+                afiliadoXDNI.getIdAfiliado(), afiliadoXDNI.getNombre(), afiliadoXDNI.getApellido(),
+                afiliadoXDNI.getDni(), afiliadoXDNI.getTelefono(), afiliadoXDNI.getDomicilio()
+            });
+        }
+    }
+    
+    //Limpia datos de la tabla
+    private void cargarTablaVacia() {
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+    }
+}
     
 
