@@ -13,10 +13,15 @@ import java.awt.BorderLayout;
 
 public class Menu extends javax.swing.JFrame {
 
+    //Variables de localización del mouse para mover la ventana
+    int xMouse, yMouse;
  
     
     public Menu() {
         initComponents();
+        
+        //setea la localización de la ventana en el centtro
+        this.setLocationRelativeTo(null);
 
     }
 
@@ -56,6 +61,16 @@ public class Menu extends javax.swing.JFrame {
 
         jLBanner.setBackground(new java.awt.Color(204, 255, 255));
         jLBanner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Banner 900x100.png"))); // NOI18N
+        jLBanner.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jLBannerMouseDragged(evt);
+            }
+        });
+        jLBanner.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jLBannerMousePressed(evt);
+            }
+        });
         Escritorio.add(jLBanner, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 906, -1));
 
         jPInicio.setBackground(new java.awt.Color(204, 255, 255));
@@ -232,6 +247,20 @@ public class Menu extends javax.swing.JFrame {
         jPFondo.repaint();
 
     }//GEN-LAST:event_jBEspecialistaActionPerformed
+
+    //Localización del mouse al hacer clic para mover la ventana
+    private void jLBannerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBannerMousePressed
+        xMouse = evt.getX();
+        yMouse = evt.getY();
+    }//GEN-LAST:event_jLBannerMousePressed
+
+    //Localización del mouse al arrastrar para mover la ventana
+    private void jLBannerMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBannerMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        
+        this.setLocation(x - xMouse, y - yMouse);
+    }//GEN-LAST:event_jLBannerMouseDragged
 
     /**
      * @param args the command line arguments
