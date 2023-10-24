@@ -31,7 +31,9 @@ public class PanelAfiliados extends javax.swing.JPanel {
     //Variables data
     private AfiliadoData afiliadoData = new AfiliadoData();
 
-
+    //Variables para enviar a newOrden
+    public static String afiliadoStringParaOrden = "";
+    public static Afiliado afiliadoParaNewOrden;
 
     //constructor
     public PanelAfiliados() {
@@ -40,9 +42,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
         cargarTablaAfiliados();
     }
     
-        //Variables para enviar a newOrden
-    public static String afiliadoStringParaOrden = "";
-    public static Afiliado afiliadoParaNewOrden;
+
 
     /**
      * This method is called from within the constructor to initialize the form.
