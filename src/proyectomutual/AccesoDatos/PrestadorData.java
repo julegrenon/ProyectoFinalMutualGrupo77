@@ -175,7 +175,7 @@ public class PrestadorData {
     }
         
         public List<Prestador> listarPrestador() {
-        String sql = "SELECT idPrestador, nombre, dni, domicilio, telefono, idEspecialidad FROM prestador WHERE estado=1";
+        String sql = "SELECT idPrestador, nombre, apellido, dni, domicilio, telefono, idEspecialidad FROM prestador WHERE estado=1";
         ArrayList<Prestador> prestadorLista = new ArrayList<>();
 
         try {
@@ -186,13 +186,17 @@ public class PrestadorData {
                 Prestador prestador = new Prestador();
                 prestador.setIdPrestador(rs.getInt("idPrestador"));
                 prestador.setNombre(rs.getString("nombre"));
+                prestador.setApellido(rs.getString("apellido"));
                 prestador.setDni(rs.getInt("dni"));
                 prestador.setDomicilio(rs.getString("domicilio"));
                 prestador.setTelefono(rs.getInt("telefono"));
+                
+                //Recupera la especialidad a través del id de la columna idEspecialidad
+                EspecialidadData especialidadData = new EspecialidadData();
+                int idEspecialidad = rs.getInt("idEspecialidad");
+                Especialidad especialidad = especialidadData.buscarEspecialidad(idEspecialidad);
 
-                int especialidadInt = rs.getInt("idEspecialidad");
-                Especialidad especialidad = new Especialidad(especialidadInt);
-
+                //Setea especialidad después del método buscarEspecialidad  
                 prestador.setEspecialidad(especialidad);
                 prestador.setEstado(true);
 
@@ -201,9 +205,9 @@ public class PrestadorData {
             ps.close();
 
             // Imprimir la lista en la consola
-            for (Prestador p : prestadorLista) {
+          /*  for (Prestador p : prestadorLista) {
                 System.out.println("ID: " + p.getIdPrestador() + ", Nombre: " + p.getNombre() + ", DNI: " + p.getDni());
-            }
+            }*/
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla prestador");
         }

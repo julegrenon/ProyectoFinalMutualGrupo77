@@ -6,7 +6,17 @@
 package proyectomutual.Vistas;
 
 import java.awt.BorderLayout;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
+import proyectomutual.AccesoDatos.OrdenData;
+import proyectomutual.AccesoDatos.PrestadorData;
 import static proyectomutual.Vistas.Menu.jPFondo;
+import proyectomutual.entidades.Afiliado;
+import proyectomutual.entidades.Orden;
+import proyectomutual.entidades.Prestador;
 
 /**
  *
@@ -14,12 +24,14 @@ import static proyectomutual.Vistas.Menu.jPFondo;
  */
 public class PanelNewOrden extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PanelNewOrden
-     */
+//VARIABLES DATA
+    private PrestadorData prestadorData = new PrestadorData();
+    private OrdenData ordenData = new OrdenData();
     
     public PanelNewOrden() {
         initComponents();
+        
+        llenarComboBoxPrestadores();
         
         //Instancia clase para traer objeto a setear en textField
         PanelAfiliados afil = new PanelAfiliados();
@@ -44,7 +56,7 @@ public class PanelNewOrden extends javax.swing.JPanel {
         jCPago = new javax.swing.JComboBox<>();
         jLabelFormaDePago = new javax.swing.JLabel();
         jLabelImporte = new javax.swing.JLabel();
-        jTextPrestador = new javax.swing.JTextField();
+        jTextImporte = new javax.swing.JTextField();
         jLAgregarOrden = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLVolver = new javax.swing.JLabel();
@@ -64,9 +76,13 @@ public class PanelNewOrden extends javax.swing.JPanel {
         jLabelAfiliado.setForeground(new java.awt.Color(0, 102, 102));
         jLabelAfiliado.setText("AFILIADO:");
 
+        jTextAfil.setEditable(false);
+
         jLabelFecha.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 18)); // NOI18N
         jLabelFecha.setForeground(new java.awt.Color(0, 102, 102));
         jLabelFecha.setText("FECHA:");
+
+        jCPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Débito" }));
 
         jLabelFormaDePago.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 18)); // NOI18N
         jLabelFormaDePago.setForeground(new java.awt.Color(0, 102, 102));
@@ -78,6 +94,11 @@ public class PanelNewOrden extends javax.swing.JPanel {
 
         jLAgregarOrden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MasOrden.png"))); // NOI18N
         jLAgregarOrden.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLAgregarOrden.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLAgregarOrdenMouseClicked(evt);
+            }
+        });
 
         jLabel7.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 14)); // NOI18N
         jLabel7.setText("Agregar");
@@ -101,7 +122,7 @@ public class PanelNewOrden extends javax.swing.JPanel {
         jLabelPrestador.setForeground(new java.awt.Color(0, 102, 102));
         jLabelPrestador.setText("PRESTADOR:");
 
-        jComboBoxPrestador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxPrestador.setMaximumSize(new java.awt.Dimension(28, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -136,7 +157,7 @@ public class PanelNewOrden extends javax.swing.JPanel {
                                         .addComponent(jLabelPrestador)
                                         .addGap(57, 57, 57)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextPrestador)
+                                    .addComponent(jTextImporte)
                                     .addComponent(jTextAfil, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
                                     .addComponent(jCPago, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jDFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -181,7 +202,7 @@ public class PanelNewOrden extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelImporte)
-                    .addComponent(jTextPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextImporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -212,10 +233,42 @@ public class PanelNewOrden extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jLVolverMouseClicked
 
+    private void jLAgregarOrdenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAgregarOrdenMouseClicked
+     
+        try {
+            //instancia objeto para traer afiliado
+            PanelAfiliados afilNuevaOrden = new PanelAfiliados();
+            Afiliado afiliado = afilNuevaOrden.afiliadoParaNewOrden;
+            
+            //Guarda en variables los campos
+            LocalDate fecha = fromDateToLocalDate(jDFecha.getDate());
+            String formaPago = (String) jCPago.getSelectedItem();
+            String importeNum = jTextImporte.getText();
+            double importe = Double.parseDouble(importeNum);
+            Prestador prestadorSeleccionado = (Prestador) jComboBoxPrestador.getSelectedItem();
+            
+
+
+            //VERIFICA QUE ESTEN COMPLETOS TODOS LOS DATOS ANTES DE AGREGAR
+            if (jTextImporte.getText().equals("") || jDFecha.getDate() == null) {
+                JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
+            } else {
+                Orden nuevaOrden = new Orden(fecha, formaPago, importe, afiliado, prestadorSeleccionado);
+
+                ordenData.guardarOrden(nuevaOrden);
+                refreshCampos();
+            }
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
+        } catch (NumberFormatException ex2) {
+            JOptionPane.showMessageDialog(null, "Importe sólo admite números");
+        }
+    }//GEN-LAST:event_jLAgregarOrdenMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jCPago;
-    private javax.swing.JComboBox<String> jComboBoxPrestador;
+    private javax.swing.JComboBox<Prestador> jComboBoxPrestador;
     private com.toedter.calendar.JDateChooser jDFecha;
     private javax.swing.JLabel jLAgregarOrden;
     private javax.swing.JLabel jLVolver;
@@ -230,6 +283,29 @@ public class PanelNewOrden extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelPrestador;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextAfil;
-    private javax.swing.JTextField jTextPrestador;
+    private javax.swing.JTextField jTextImporte;
     // End of variables declaration//GEN-END:variables
+
+    //MÉTODOS
+    
+        private void llenarComboBoxPrestadores() {
+        List<Prestador> prestadoresLista = prestadorData.listarPrestador();
+        for (Prestador prestadores : prestadoresLista) {
+
+            jComboBoxPrestador.addItem(prestadores);
+        }
+    }
+        
+    //Casteo de date a local date
+    public LocalDate fromDateToLocalDate(Date date) {
+        return date.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+    }
+
+    private void refreshCampos(){
+        jDFecha.setDateFormatString("");
+        jTextImporte.setText("");
+        jComboBoxPrestador.setSelectedIndex(0);
+    }
 }
