@@ -285,32 +285,37 @@ public class PanelAfiliados extends javax.swing.JPanel {
     }//GEN-LAST:event_jLVolverMouseClicked
 
     private void jBAfiliadoOrdenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBAfiliadoOrdenMouseClicked
-        //Crea variable para guardar la fila seleccionada
-        int filaSeleccionada = jTAfiliado.getSelectedRow();
+        
+        try {
+            //Crea variable para guardar la fila seleccionada
+            int filaSeleccionada = jTAfiliado.getSelectedRow();
 
-        //Setea datos desde la tabla
-        int id = (Integer) jTAfiliado.getValueAt(filaSeleccionada, 0);
+            //Setea datos desde la tabla
+            int id = (Integer) jTAfiliado.getValueAt(filaSeleccionada, 0);
 
-        //Busca afiliado a través de método
-        Afiliado afiliadoSeleccionado = afiliadoData.buscarAfiliado(id);
+            //Busca afiliado a través de método
+            Afiliado afiliadoSeleccionado = afiliadoData.buscarAfiliado(id);
 
-        //Setea para nueva orden
-        afiliadoStringParaOrden = afiliadoSeleccionado.toString();
-        afiliadoParaNewOrden = afiliadoSeleccionado;
+            //Setea para nueva orden
+            afiliadoStringParaOrden = afiliadoSeleccionado.toString();
+            afiliadoParaNewOrden = afiliadoSeleccionado;
 
-        //Istancia clase panel 
-        PanelNewOrden nuevaOrden = new PanelNewOrden();
+            //Istancia clase panel 
+            PanelNewOrden nuevaOrden = new PanelNewOrden();
 
-        //Setea dimensiones y location
-        nuevaOrden.setSize(670, 410);
-        nuevaOrden.setLocation(0, 0);
+            //Setea dimensiones y location
+            nuevaOrden.setSize(670, 410);
+            nuevaOrden.setLocation(0, 0);
 
-        //Remueve y agrega la vista del panel instanciada
-        jPFondo.removeAll();
-        jPFondo.add(nuevaOrden, BorderLayout.CENTER);
+            //Remueve y agrega la vista del panel instanciada
+            jPFondo.removeAll();
+            jPFondo.add(nuevaOrden, BorderLayout.CENTER);
 
-        jPFondo.revalidate();
-        jPFondo.repaint();
+            jPFondo.revalidate();
+            jPFondo.repaint();
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un afiliado para cargar una orden");
+        }
     }//GEN-LAST:event_jBAfiliadoOrdenMouseClicked
 
 
