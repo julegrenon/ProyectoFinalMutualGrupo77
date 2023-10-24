@@ -5,7 +5,11 @@
  */
 package proyectomutual.Vistas;
 import java.awt.BorderLayout;
+import java.time.LocalDate;
+import javax.swing.JOptionPane;
+import proyectomutual.AccesoDatos.AfiliadoData;
 import static proyectomutual.Vistas.Menu.jPFondo;
+import proyectomutual.entidades.Afiliado;
 
 /**
  *
@@ -13,9 +17,8 @@ import static proyectomutual.Vistas.Menu.jPFondo;
  */
 public class PanelNewAfiliado extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PanelNewAfiliado
-     */
+    private AfiliadoData afiliadoData=new AfiliadoData();
+    
     public PanelNewAfiliado() {
         initComponents();
     }
@@ -42,7 +45,7 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
         jTApellidoA = new javax.swing.JTextField();
         jTTelefonoA = new javax.swing.JTextField();
         jLabelSubTitulo = new javax.swing.JLabel();
-        jLAgregarAf = new javax.swing.JLabel();
+        jLBotonAgregarAf = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jCActivo = new javax.swing.JCheckBox();
         jLabel7 = new javax.swing.JLabel();
@@ -50,23 +53,18 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
         setBackground(new java.awt.Color(153, 255, 204));
 
         jLabel2.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Nombre:");
 
         jLabel3.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Apellido:");
 
         jLabel4.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("D.N.I:");
 
         jLabel5.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Télefono:");
 
         jLabel6.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Dirección:");
 
         jLabel1.setBackground(new java.awt.Color(153, 255, 204));
@@ -74,32 +72,32 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("NUEVO AFILIADO");
 
-        jTDNIA.setBackground(new java.awt.Color(255, 255, 255));
-
-        jTNombreA.setBackground(new java.awt.Color(255, 255, 255));
-
-        jTDomicilioA.setBackground(new java.awt.Color(255, 255, 255));
-
-        jTApellidoA.setBackground(new java.awt.Color(255, 255, 255));
-
-        jTTelefonoA.setBackground(new java.awt.Color(255, 255, 255));
-
         jLabelSubTitulo.setText("      (Llene todos los campos)");
 
-        jLAgregarAf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Agregar.png"))); // NOI18N
-        jLAgregarAf.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jLAgregarAf.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLBotonAgregarAf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Agregar.png"))); // NOI18N
+        jLBotonAgregarAf.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLBotonAgregarAf.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLBotonAgregarAf.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLBotonAgregarAfMouseClicked(evt);
+            }
+        });
 
         jLabel11.setForeground(new java.awt.Color(51, 51, 51));
         jLabel11.setText("Agregar");
 
         jCActivo.setBackground(new java.awt.Color(255, 255, 255));
-        jCActivo.setForeground(new java.awt.Color(0, 0, 0));
         jCActivo.setText("ACTIVO");
         jCActivo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Retroc.png"))); // NOI18N
         jLabel7.setText("jLabel7");
+        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -138,7 +136,7 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
                                 .addComponent(jLabel11))
-                            .addComponent(jLAgregarAf))
+                            .addComponent(jLBotonAgregarAf))
                         .addGap(190, 190, 190))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -193,17 +191,68 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
                         .addComponent(jCActivo))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLAgregarAf)))
+                        .addComponent(jLBotonAgregarAf)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
                 .addGap(14, 14, 14))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        //Istancia clase panel 
+        PanelAfiliados afiliadosVista=new PanelAfiliados();
+        
+        //Setea dimensiones y location
+        afiliadosVista.setSize(670, 410);
+        afiliadosVista.setLocation(0, 0);
+        
+        //Remueve y agrega la vista del panel instanciada
+        jPFondo.removeAll();
+        jPFondo.add(afiliadosVista, BorderLayout.CENTER);
+        
+        jPFondo.revalidate();
+        jPFondo.repaint();
+    }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void jLBotonAgregarAfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBotonAgregarAfMouseClicked
+        
+        try {
+            //guarda en variables los campos del form
+            String nombre = jTNombreA.getText();
+            String apellido = jTApellidoA.getText();
+            String dniNum = jTDNIA.getText();
+            int dni = Integer.parseInt(dniNum);
+            String telefonoNum = jTTelefonoA.getText();
+            int telefono = Integer.parseInt(telefonoNum);
+            String domicilio = jTDomicilioA.getText();
+            boolean estado = jCActivo.isSelected();
+
+            //VERIFICA QUE ESTEN COMPLETOS TODOS LOS DATOS ANTES DE AGREGAR
+            if (jTDNIA.getText().equals("") || jTApellidoA.getText().equals("")
+                    || jTNombreA.getText().equals("") || jTTelefonoA.getText().equals("")
+                    || jTDomicilioA.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
+            } else {
+                //Crea objeto
+                Afiliado afiliado = new Afiliado(nombre, apellido, dni, telefono, domicilio, estado);
+                
+                //Llamada a método agregar
+                afiliadoData.agregarAfiliado(afiliado);
+                
+                //limpia todos los campos
+                limpiarCampos();
+            }
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
+        } catch (NumberFormatException ex2) {
+            JOptionPane.showMessageDialog(null, "DNI y teléfono sólo admiten números");
+        }
+    }//GEN-LAST:event_jLBotonAgregarAfMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox jCActivo;
-    private javax.swing.JLabel jLAgregarAf;
+    private javax.swing.JLabel jLBotonAgregarAf;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -220,4 +269,14 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
     private javax.swing.JTextField jTNombreA;
     private javax.swing.JTextField jTTelefonoA;
     // End of variables declaration//GEN-END:variables
+
+    public void limpiarCampos (){
+        jTNombreA.setText("");
+        jTApellidoA.setText("");
+        jTDNIA.setText("");
+        jTTelefonoA.setText("");
+        jTDomicilioA.setText("");
+
+    }
+
 }
