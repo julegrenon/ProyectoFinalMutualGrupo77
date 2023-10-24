@@ -17,15 +17,7 @@ public class Menu extends javax.swing.JFrame {
     
     public Menu() {
         initComponents();
-       /* PanelAfiliados afiliadosVista=new PanelAfiliados();
-        afiliadosVista.setSize(670, 410);
-        afiliadosVista.setLocation(0, 0);
-        
-        jPFondo.removeAll();
-        jPFondo.add(afiliadosVista, BorderLayout.CENTER);
-        
-        jPFondo.revalidate();
-        jPFondo.repaint();*/
+
     }
 
     /**

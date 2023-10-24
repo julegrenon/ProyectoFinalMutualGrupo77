@@ -17,7 +17,6 @@ import proyectomutual.entidades.Afiliado;
 
 public class PanelAfiliados extends javax.swing.JPanel {
 
-
     //Setea modelo de tabla
     private DefaultTableModel modelo = new DefaultTableModel() {
 
@@ -28,11 +27,15 @@ public class PanelAfiliados extends javax.swing.JPanel {
             return false;
         }
     };
-    
-    //Variables
-    private AfiliadoData afiliadoData=new AfiliadoData();
-        
 
+    //Variables data
+    private AfiliadoData afiliadoData = new AfiliadoData();
+
+    //Variables para enviar a newOrden
+    public static String afiliadoStringParaOrden = "";
+    public static Afiliado afiliadoParaNewOrden;
+
+    //constructor
     public PanelAfiliados() {
         initComponents();
         cargarColumnas();
@@ -111,6 +114,11 @@ public class PanelAfiliados extends javax.swing.JPanel {
         jBAfiliadoOrden.setForeground(new java.awt.Color(255, 255, 255));
         jBAfiliadoOrden.setText("SACAR ORDEN");
         jBAfiliadoOrden.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBAfiliadoOrden.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBAfiliadoOrdenMouseClicked(evt);
+            }
+        });
         add(jBAfiliadoOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, -1, -1));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 613, 13));
 
@@ -152,6 +160,11 @@ public class PanelAfiliados extends javax.swing.JPanel {
         jLVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Retroc.png"))); // NOI18N
         jLVolver.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLVolver.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLVolverMouseClicked(evt);
+            }
+        });
         add(jLVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 0, -1, 50));
 
         jTAfiliado.setModel(new javax.swing.table.DefaultTableModel(
@@ -172,46 +185,43 @@ public class PanelAfiliados extends javax.swing.JPanel {
 
 
     private void jLAfiliadoNuevoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAfiliadoNuevoMouseClicked
-            //Istancia clase panel 
-        PanelNewAfiliado nuevoAfiliadoVista=new PanelNewAfiliado();
-        
+        //Istancia clase panel 
+        PanelNewAfiliado nuevoAfiliadoVista = new PanelNewAfiliado();
+
         //Setea dimensiones y location
         nuevoAfiliadoVista.setSize(670, 410);
         nuevoAfiliadoVista.setLocation(0, 0);
-        
+
         //Remueve y agrega la vista del panel instanciada
         jPFondo.removeAll();
         jPFondo.add(nuevoAfiliadoVista, BorderLayout.CENTER);
-        
+
         jPFondo.revalidate();
         jPFondo.repaint();
 
     }//GEN-LAST:event_jLAfiliadoNuevoMouseClicked
 
     private void jLAfiliadoBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAfiliadoBuscarMouseClicked
-        try{
+        try {
             cargarTablaVacia();
-            
+
             String dni = jTdni.getText();
             int dniNum = Integer.parseInt(dni);
-            
+
             cargarTablaAfiliadosXDNI(dniNum);
-        }catch (NullPointerException ex) {
+        } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(null, "Debe ingresar un DNI para buscar");
         } catch (NumberFormatException ex2) {
             JOptionPane.showMessageDialog(null, "DNI sólo admite números");
         }
-        
-        
-        
     }//GEN-LAST:event_jLAfiliadoBuscarMouseClicked
 
     private void jLAfiliadoModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAfiliadoModificarMouseClicked
-        
+
         try {
             //Crea variable para guardar la fila seleccionada
             int filaSeleccionada = jTAfiliado.getSelectedRow();
-            
+
             //Setea datos desde la tabla
             int id = (Integer) jTAfiliado.getValueAt(filaSeleccionada, 0);
             String nombre = (String) jTAfiliado.getValueAt(filaSeleccionada, 1);
@@ -219,19 +229,19 @@ public class PanelAfiliados extends javax.swing.JPanel {
             int dni = (Integer) jTAfiliado.getValueAt(filaSeleccionada, 3);
             int telefono = (Integer) jTAfiliado.getValueAt(filaSeleccionada, 4);
             String domicilio = (String) jTAfiliado.getValueAt(filaSeleccionada, 5);
-            
+
             //Busca afiliado a través de método
             Afiliado afiliadoSeleccionado = afiliadoData.buscarAfiliado(id);
-            
+
             //Setea estado
-            boolean estado=afiliadoSeleccionado.isEstado();
-            
+            boolean estado = afiliadoSeleccionado.isEstado();
+
             //Instancia objeto final de alumno a modificar
-            Afiliado afiliadoModif=new Afiliado(id, nombre, apellido, dni, telefono, domicilio, estado);
-            
+            Afiliado afiliadoModif = new Afiliado(id, nombre, apellido, dni, telefono, domicilio, estado);
+
             //Llamada a método modificar
             afiliadoData.modificarAfiliado(afiliadoModif);
-            
+
             //Refresh de tabla
             cargarTablaVacia();
             cargarTablaAfiliados();
@@ -246,13 +256,13 @@ public class PanelAfiliados extends javax.swing.JPanel {
         try {
             //Crea variable para guardar la fila seleccionada
             int filaSeleccionada = jTAfiliado.getSelectedRow();
-            
+
             //Setea datos desde la tabla
             int id = (Integer) jTAfiliado.getValueAt(filaSeleccionada, 0);
-            
+
             //Llamada a método modificar
             afiliadoData.eliminarAfiliado(id);
-            
+
             //Refresh de tablas
             cargarTablaVacia();
             cargarTablaAfiliados();
@@ -263,6 +273,43 @@ public class PanelAfiliados extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jLAfiliadoEliminarMouseClicked
 
+    private void jLVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVolverMouseClicked
+        // PanelAfiliados afiliadosVista=new PanelAfiliados();
+        jPFondo.removeAll();
+        // jPFondo.remove(afiliadosVista);
+
+        jPFondo.revalidate();
+        jPFondo.repaint();
+    }//GEN-LAST:event_jLVolverMouseClicked
+
+    private void jBAfiliadoOrdenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBAfiliadoOrdenMouseClicked
+        //Crea variable para guardar la fila seleccionada
+        int filaSeleccionada = jTAfiliado.getSelectedRow();
+
+        //Setea datos desde la tabla
+        int id = (Integer) jTAfiliado.getValueAt(filaSeleccionada, 0);
+
+        //Busca afiliado a través de método
+        Afiliado afiliadoSeleccionado = afiliadoData.buscarAfiliado(id);
+
+        //Setea para nueva orden
+        afiliadoStringParaOrden = afiliadoSeleccionado.toString();
+        afiliadoParaNewOrden = afiliadoSeleccionado;
+
+        //Istancia clase panel 
+        PanelNewOrden nuevaOrden = new PanelNewOrden();
+
+        //Setea dimensiones y location
+        nuevaOrden.setSize(670, 410);
+        nuevaOrden.setLocation(0, 0);
+
+        //Remueve y agrega la vista del panel instanciada
+        jPFondo.removeAll();
+        jPFondo.add(nuevaOrden, BorderLayout.CENTER);
+
+        jPFondo.revalidate();
+        jPFondo.repaint();
+    }//GEN-LAST:event_jBAfiliadoOrdenMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -283,9 +330,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
     private javax.swing.JTextField jTdni;
     // End of variables declaration//GEN-END:variables
 
-
     //MÉTODOS
-    
     //setea nombre de columnas
     private void cargarColumnas() {
         modelo.addColumn("ID");
@@ -312,7 +357,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
 
         }
     }
-    
+
     //Carga tabla de afiliado segun DNI
     private void cargarTablaAfiliadosXDNI(int DNI) {
 
@@ -327,7 +372,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
             });
         }
     }
-    
+
     //Limpia datos de la tabla
     private void cargarTablaVacia() {
         while (modelo.getRowCount() > 0) {

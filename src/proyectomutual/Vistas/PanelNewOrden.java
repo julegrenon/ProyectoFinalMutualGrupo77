@@ -5,6 +5,9 @@
  */
 package proyectomutual.Vistas;
 
+import java.awt.BorderLayout;
+import static proyectomutual.Vistas.Menu.jPFondo;
+
 /**
  *
  * @author m
@@ -17,6 +20,11 @@ public class PanelNewOrden extends javax.swing.JPanel {
     
     public PanelNewOrden() {
         initComponents();
+        
+        //Instancia clase para traer objeto a setear en textField
+        PanelAfiliados afil = new PanelAfiliados();
+        //Setea textField
+        jTextAfil.setText(afil.afiliadoStringParaOrden);
     }
 
     /**
@@ -30,18 +38,21 @@ public class PanelNewOrden extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelAfiliado = new javax.swing.JLabel();
         jTextAfil = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jDFecha = new com.toedter.calendar.JDateChooser();
+        jLabelFecha = new javax.swing.JLabel();
         jCPago = new javax.swing.JComboBox<>();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jTextPrest = new javax.swing.JTextField();
+        jLabelFormaDePago = new javax.swing.JLabel();
+        jLabelImporte = new javax.swing.JLabel();
+        jTextPrestador = new javax.swing.JTextField();
         jLAgregarOrden = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLVolver = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jDFecha = new com.toedter.calendar.JDateChooser();
+        jLabel2 = new javax.swing.JLabel();
+        jLabelPrestador = new javax.swing.JLabel();
+        jComboBoxPrestador = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(153, 255, 255));
 
@@ -49,40 +60,48 @@ public class PanelNewOrden extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("NUEVA ORDEN");
 
-        jLabel2.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel2.setText("AFILIADO:");
+        jLabelAfiliado.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 18)); // NOI18N
+        jLabelAfiliado.setForeground(new java.awt.Color(0, 102, 102));
+        jLabelAfiliado.setText("AFILIADO:");
 
-        jTextAfil.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelFecha.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 18)); // NOI18N
+        jLabelFecha.setForeground(new java.awt.Color(0, 102, 102));
+        jLabelFecha.setText("FECHA:");
 
-        jLabel3.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel3.setText("FECHA:");
+        jLabelFormaDePago.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 18)); // NOI18N
+        jLabelFormaDePago.setForeground(new java.awt.Color(0, 102, 102));
+        jLabelFormaDePago.setText("FORMA DE PAGO:");
 
-        jDFecha.setBackground(new java.awt.Color(255, 255, 255));
-
-        jCPago.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel4.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel4.setText("FORMA DE PAGO:");
-
-        jLabel5.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel5.setText("PRESTADOR:");
-
-        jTextPrest.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelImporte.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 18)); // NOI18N
+        jLabelImporte.setForeground(new java.awt.Color(0, 102, 102));
+        jLabelImporte.setText("IMPORTE:");
 
         jLAgregarOrden.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MasOrden.png"))); // NOI18N
+        jLAgregarOrden.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel7.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Agregar");
 
         jLVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Retroc.png"))); // NOI18N
         jLVolver.setText(" ");
+        jLVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLVolver.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLVolverMouseClicked(evt);
+            }
+        });
 
         jLabel8.setText("( Llene todos los campos )");
+
+        jLabel2.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel2.setText("$");
+
+        jLabelPrestador.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 18)); // NOI18N
+        jLabelPrestador.setForeground(new java.awt.Color(0, 102, 102));
+        jLabelPrestador.setText("PRESTADOR:");
+
+        jComboBoxPrestador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -101,24 +120,34 @@ public class PanelNewOrden extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5))
-                                .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabelAfiliado)
+                                                .addComponent(jLabelFecha)
+                                                .addComponent(jLabelFormaDePago))
+                                            .addGap(18, 18, 18))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(jLabelImporte)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel2)
+                                            .addGap(1, 1, 1)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabelPrestador)
+                                        .addGap(57, 57, 57)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextPrest)
-                                    .addComponent(jTextAfil, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jCPago, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jDFecha, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(jTextPrestador)
+                                    .addComponent(jTextAfil, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+                                    .addComponent(jCPago, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jDFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBoxPrestador, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(24, 24, 24))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(257, 257, 257))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(308, 308, 308)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
                     .addComponent(jLAgregarOrden))
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -139,43 +168,68 @@ public class PanelNewOrden extends javax.swing.JPanel {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(jLabelAfiliado)
                     .addComponent(jTextAfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jDFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabelFecha)
+                    .addComponent(jDFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabelFormaDePago))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextPrest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                    .addComponent(jLabelImporte)
+                    .addComponent(jTextPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelPrestador)
+                    .addComponent(jComboBoxPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addComponent(jLAgregarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7)
-                .addGap(38, 38, 38))
+                .addGap(26, 26, 26))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVolverMouseClicked
+         //Istancia clase panel 
+        PanelAfiliados afiliadosVista=new PanelAfiliados();
+        
+        //Setea dimensiones y location
+        afiliadosVista.setSize(670, 410);
+        afiliadosVista.setLocation(0, 0);
+        
+        //Remueve y agrega la vista del panel instanciada
+        jPFondo.removeAll();
+        jPFondo.add(afiliadosVista, BorderLayout.CENTER);
+        
+        jPFondo.revalidate();
+        jPFondo.repaint();
+
+    }//GEN-LAST:event_jLVolverMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jCPago;
+    private javax.swing.JComboBox<String> jComboBoxPrestador;
     private com.toedter.calendar.JDateChooser jDFecha;
     private javax.swing.JLabel jLAgregarOrden;
     private javax.swing.JLabel jLVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelAfiliado;
+    private javax.swing.JLabel jLabelFecha;
+    private javax.swing.JLabel jLabelFormaDePago;
+    private javax.swing.JLabel jLabelImporte;
+    private javax.swing.JLabel jLabelPrestador;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextAfil;
-    private javax.swing.JTextField jTextPrest;
+    private javax.swing.JTextField jTextPrestador;
     // End of variables declaration//GEN-END:variables
 }
