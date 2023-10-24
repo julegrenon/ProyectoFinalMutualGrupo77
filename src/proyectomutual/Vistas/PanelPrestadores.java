@@ -9,6 +9,7 @@ package proyectomutual.Vistas;
  *
  * @author sonia
  */
+import java.awt.BorderLayout;
 public class PanelPrestadores extends javax.swing.JPanel {
 
     /**
@@ -35,13 +36,14 @@ public class PanelPrestadores extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         jSeparator1 = new javax.swing.JSeparator();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jCBEspecialidad = new javax.swing.JComboBox<>();
+        jLVolver = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLEliminar = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLAgregar = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(670, 410));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -78,43 +80,40 @@ public class PanelPrestadores extends javax.swing.JPanel {
         jScrollPane2.setViewportView(jList1);
 
         jPPrestador.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 620, 60));
-        jPPrestador.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 620, 10));
+        jPPrestador.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 58, 620, -1));
 
-        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Especialidades" }));
-        jPPrestador.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 310, -1));
+        jCBEspecialidad.setBackground(new java.awt.Color(255, 255, 255));
+        jCBEspecialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Especialidades" }));
+        jPPrestador.add(jCBEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 310, -1));
 
-        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.setForeground(new java.awt.Color(204, 255, 204));
-        jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Retroc.png"))); // NOI18N
+        jLVolver.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPPrestador.add(jLVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 0, -1, 50));
 
-        jLabel4.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
-        jLabel4.setText("Agregar");
-        jPanel1.add(jLabel4);
-
-        jPPrestador.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 130, 70));
-
-        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel2.setForeground(new java.awt.Color(204, 255, 204));
-        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        jLabel3.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
-        jLabel3.setText("Eliminar");
-        jPanel2.add(jLabel3);
-
-        jPPrestador.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, 120, 70));
-
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Regresar.jpg"))); // NOI18N
-        jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPPrestador.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 350, 60, 60));
-
-        jLabel6.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 102, 102));
         jLabel6.setText("GESTION PRESTADORES");
-        jPPrestador.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, -1));
+        jPPrestador.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel4.setText("Agregar");
+        jPPrestador.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, -1, -1));
+
+        jLEliminar.setBackground(new java.awt.Color(0, 0, 0));
+        jLEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/EliminarChica.jpg"))); // NOI18N
+        jLEliminar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPPrestador.add(jLEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 350, 50, 50));
+
+        jLabel3.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel3.setText("Eliminar");
+        jPPrestador.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, -1, -1));
+        jPPrestador.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, -1, -1));
+
+        jLAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MasOrden.png"))); // NOI18N
+        jPPrestador.add(jLAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, 50, 50));
 
         add(jPPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 683, 415));
         jPPrestador.getAccessibleContext().setAccessibleDescription("");
@@ -122,18 +121,19 @@ public class PanelPrestadores extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jCBEspecialidad;
+    private javax.swing.JLabel jLAgregar;
+    private javax.swing.JLabel jLEliminar;
     private javax.swing.JList<String> jLPA;
+    private javax.swing.JLabel jLVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPPrestador;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;

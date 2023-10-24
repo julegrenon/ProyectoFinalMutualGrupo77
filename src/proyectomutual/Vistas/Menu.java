@@ -9,7 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
- 
+import java.awt.BorderLayout;
 
 public class Menu extends javax.swing.JFrame {
 
@@ -42,13 +42,12 @@ public class Menu extends javax.swing.JFrame {
         Escritorio = new javax.swing.JDesktopPane();
         jLBanner = new javax.swing.JLabel();
         jPInicio = new javax.swing.JPanel();
-        jPVistas = new javax.swing.JPanel();
         jPBotonera = new javax.swing.JPanel();
         jBAfiliado = new javax.swing.JButton();
         jBPrestador = new javax.swing.JButton();
         jBEspecialista = new javax.swing.JButton();
         jBOrden = new javax.swing.JButton();
-        jBSalir = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         //ImageIcon icono=new ImageIcon(getClass().getResource("/Imagenes/Image800.png"));
         //Image miImagen=icono.getImage();
         jPFondo = new javax.swing.JPanel();
@@ -70,10 +69,6 @@ public class Menu extends javax.swing.JFrame {
         jPInicio.setBackground(new java.awt.Color(204, 255, 255));
         jPInicio.setPreferredSize(new java.awt.Dimension(229, 800));
         jPInicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPVistas.setBackground(new java.awt.Color(255, 255, 255));
-        jPVistas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPInicio.add(jPVistas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 10, 10));
 
         jPBotonera.setBackground(new java.awt.Color(153, 255, 204));
         jPBotonera.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -131,16 +126,16 @@ public class Menu extends javax.swing.JFrame {
         });
         jPBotonera.add(jBOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 258, 220, 80));
 
-        jBSalir.setBackground(new java.awt.Color(102, 102, 102));
-        jBSalir.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
-        jBSalir.setForeground(new java.awt.Color(153, 255, 255));
-        jBSalir.setText("SALIR");
-        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setBackground(new java.awt.Color(102, 102, 102));
+        jButton1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(153, 255, 204));
+        jButton1.setText("SALIR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBSalirActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        jPBotonera.add(jBSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, -1, -1));
+        jPBotonera.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, -1, -1));
 
         jPInicio.add(jPBotonera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 410));
 
@@ -287,12 +282,11 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jBEspecialista;
     private javax.swing.JButton jBOrden;
     private javax.swing.JButton jBPrestador;
-    private javax.swing.JButton jBSalir;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLBanner;
     private javax.swing.JLabel jLFondo;
     private javax.swing.JPanel jPBotonera;
     public static javax.swing.JPanel jPFondo;
     private javax.swing.JPanel jPInicio;
-    private javax.swing.JPanel jPVistas;
     // End of variables declaration//GEN-END:variables
 }
