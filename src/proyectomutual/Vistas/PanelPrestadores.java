@@ -18,7 +18,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
    ArrayList<Especialidad> especialidadesLista = new ArrayList();
    ArrayList<Prestador> prestadorLista = new ArrayList<>();
    DefaultListModel modelo = new DefaultListModel();
-    DefaultListModel modelo2 = new DefaultListModel();
+   DefaultListModel modelo2 = new DefaultListModel();
    
    
     private PrestadorData prestaData= new PrestadorData();
@@ -245,27 +245,47 @@ public class PanelPrestadores extends javax.swing.JPanel {
     
    //==================================================================================
 //CARGA LISTA PRESTADORES x ESP
+   
     public void cargarListaPxE() {
-
+        //limpio
         modelo2.removeAllElements();
-        String opcion = (String) jCBEspecialidad.getSelectedItem();
 
-              Prestador prestadorSelec= new Prestador();
-             prestadorSelec.setEspecialidad(especialidadNueva);
-     
-        ArrayList<Prestador> prestadorLista = (ArrayList<Prestador>) prestaData.listarPrestador();
+        //guardo captura combobox
+        Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
 
-        for (Prestador prestadorNuevo2 : prestadorLista) {
+        //cheque que no sea null
+        if (especialidadSelec != null) {
 
-            if (prestadorNuevo.getEspecialidad().getEspecialidad() != null) {
+            //creo lista de especialidades
+            ArrayList<Especialidad> especialidadesLista = new ArrayList();
 
-                modelo2.addElement(prestadorLista);
+            //guardo en lista lo que se selecciona
+            especialidadesLista.add(especialidadSelec);
 
-            } else {
-                JOptionPane.showMessageDialog(null, " Seleccione un valor de la Lista ");
-            }
+            //creo lista prestadores
+            ArrayList<Prestador> prestadorListaPxE = new ArrayList();
+
+            //cheque que no este vacia
+            if (prestadorListaPxE != null) {
+
+                //Agrego prestadores
+                prestadorListaPxE.add(prestadorNuevo);
+
+                //traigo la especialidad del prestador
+                prestadorNuevo.getEspecialidad();
+                
+                //Agrego especialidad a la lista
+                prestadorListaPxE.add(prestadorNuevo);
+
+                //cargo a la vista la lista de prestadores
+                modelo2.addElement(prestadorNuevo.toString());
+            }   else {
+                JOptionPane.showMessageDialog(null, " No hay prestadores con esa especialidad ");
         }
-
+        }else {
+                JOptionPane.showMessageDialog(null, " Seleccione un valor de la Lista ");
+        }
     }
 }
+   
 
