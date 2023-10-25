@@ -1,6 +1,5 @@
 /*
-Se debe revisar método cargarTablaOrdenes
-arroja NullPointerException al intentar cargar la tabla
+
  */
 package proyectomutual.Vistas;
 
@@ -11,6 +10,7 @@ package proyectomutual.Vistas;
 import java.awt.BorderLayout;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import proyectomutual.AccesoDatos.AfiliadoData;
 import proyectomutual.AccesoDatos.OrdenData;
 import proyectomutual.entidades.Afiliado;
 import proyectomutual.entidades.Orden;
@@ -26,12 +26,13 @@ public class PanelOrdenes extends javax.swing.JPanel {
     };
     
     //VARIABLES DATA
-    private OrdenData ordenData;
+    private OrdenData ordenData = new OrdenData();
+    private AfiliadoData afiliadoData = new AfiliadoData();
     
     public PanelOrdenes() {
         initComponents();
         cargarColumnas();
-        //cargarTablaOrdenes();
+        cargarTablaOrdenes();
     }
 
     /**
@@ -103,6 +104,15 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(0, 102, 102));
         jLabel4.setText("Buscar por..");
         jPOrden.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, -1, -1));
+
+        jTDNIConsulta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTDNIConsultaKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTDNIConsultaKeyReleased(evt);
+            }
+        });
         jPOrden.add(jTDNIConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 100, -1));
         jPOrden.add(jTIdPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 120, -1));
         jPOrden.add(jDFechaConsultaO, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, -1, -1));
@@ -127,8 +137,16 @@ public class PanelOrdenes extends javax.swing.JPanel {
 
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
         cargarTablaVacia();
-       // cargarTablaOrdenes();
+        cargarTablaOrdenes();
     }//GEN-LAST:event_jBLimpiarActionPerformed
+
+    private void jTDNIConsultaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTDNIConsultaKeyReleased
+        
+    }//GEN-LAST:event_jTDNIConsultaKeyReleased
+
+    private void jTDNIConsultaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTDNIConsultaKeyPressed
+        
+    }//GEN-LAST:event_jTDNIConsultaKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -170,6 +188,29 @@ public class PanelOrdenes extends javax.swing.JPanel {
                 ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
                 ordenes.getPrestador().toString(), ordenes.getFecha()});
 
+        }
+    }
+    
+    private void cargarTablaOrdenesXDNI(){
+        
+        //Guarda dni en variable
+        String dniNum=jTDNIConsulta.getText();
+        int dni = Integer.parseInt(dniNum);
+        
+        //Llamada a método para buscar el afiliado y obtener el id
+        Afiliado afiliadoEncontrado = afiliadoData.buscarAfiliadoPorDni(dni);
+        
+        //Guarda id en variable idAFiliado
+        int idAfiliado = afiliadoEncontrado.getIdAfiliado();
+        
+        modelo.setRowCount(0);
+        List<Orden> listaOrdenesXDNI = ordenData.buscaOrdenPorAfil(idAfiliado);
+        
+        for (Orden ordenes : listaOrdenesXDNI) {
+            modelo.addRow(new Object[]{
+           ordenes.getIdOrden(), ordenes.getAfiliado().toString(), 
+           ordenes.getPrestador().toString(), ordenes.getFecha()
+        });
         }
     }
     

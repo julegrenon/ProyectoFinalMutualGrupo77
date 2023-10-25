@@ -163,16 +163,31 @@ public class OrdenData {
         ArrayList<Orden> listaXAfil= new ArrayList();
         try {
             PreparedStatement ps = conex.prepareStatement(sql);
+            ps.setInt(1, idAfiliado);
 
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Orden orden= new Orden();
+                Orden orden = new Orden();
                 orden.setIdOrden(rs.getInt("idOrden"));
                 orden.setFecha(rs.getDate("fecha").toLocalDate());
                 orden.setFormaPago(rs.getString("formaPago"));
-                orden.setIdOrden(rs.getInt("idAfiliado"));
-                orden.setIdOrden(rs.getInt("idPrestador"));
+                orden.setImporte(rs.getDouble("importe"));
+                
+                //Recupera la idAfiliado y idPrestador a través del id de las columnas de base
+                int idPrestador = rs.getInt("idPrestador");
+                
+                //Variables data
+                PrestadorData prestadorData = new PrestadorData();
+                AfiliadoData afiliadoData = new AfiliadoData();
+                
+                //Llamada a métodos para instanciar objeto necesario del constructor de orden
+                Afiliado afiliado = afiliadoData.buscarAfiliado(idAfiliado);
+                Prestador prestador = prestadorData.buscarPrestador(idPrestador);
+
+                //Setea afiliado y prestador después de los métodos buscar  
+                orden.setAfiliado(afiliado);
+                orden.setPrestador(prestador);
                 
                 listaXAfil.add(orden);
              
