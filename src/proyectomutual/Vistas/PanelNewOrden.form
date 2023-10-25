@@ -60,8 +60,8 @@
                                   <Component id="jTextImporte" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextAfil" alignment="0" pref="328" max="32767" attributes="0"/>
                                   <Component id="jCPago" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jDFecha" min="-2" max="-2" attributes="0"/>
                                   <Component id="jComboBoxPrestador" max="32767" attributes="0"/>
+                                  <Component id="jDFecha" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -105,10 +105,10 @@
                   <Component id="jLabelAfiliado" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jTextAfil" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="jLabelFecha" min="-2" max="-2" attributes="0"/>
                   <Component id="jDFecha" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelFecha" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -253,8 +253,6 @@
         <Property name="text" type="java.lang.String" value="( Llene todos los campos )"/>
       </Properties>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="jDFecha">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -289,6 +287,8 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Prestador&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="jDFecha">
     </Component>
   </SubComponents>
 </Form>

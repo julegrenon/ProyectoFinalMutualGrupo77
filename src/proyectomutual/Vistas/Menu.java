@@ -71,7 +71,7 @@ public class Menu extends javax.swing.JFrame {
                 jLBannerMousePressed(evt);
             }
         });
-        Escritorio.add(jLBanner, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 906, -1));
+        Escritorio.add(jLBanner, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, -1));
 
         jPInicio.setBackground(new java.awt.Color(204, 255, 255));
         jPInicio.setPreferredSize(new java.awt.Dimension(229, 800));
@@ -143,7 +143,7 @@ public class Menu extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPBotonera.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 360, -1, -1));
+        jPBotonera.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, -1, -1));
 
         jPInicio.add(jPBotonera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 410));
 

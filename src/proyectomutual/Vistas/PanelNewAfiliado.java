@@ -53,24 +53,41 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
         setBackground(new java.awt.Color(153, 255, 204));
 
         jLabel2.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
         jLabel2.setText("Nombre:");
 
         jLabel3.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
         jLabel3.setText("Apellido:");
 
         jLabel4.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("D.N.I:");
 
         jLabel5.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Télefono:");
 
         jLabel6.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(102, 102, 102));
         jLabel6.setText("Dirección:");
 
         jLabel1.setBackground(new java.awt.Color(153, 255, 204));
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("NUEVO AFILIADO");
+
+        jSeparator1.setForeground(new java.awt.Color(102, 102, 102));
+
+        jTDNIA.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTNombreA.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTDomicilioA.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTApellidoA.setBackground(new java.awt.Color(255, 255, 255));
+
+        jTTelefonoA.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabelSubTitulo.setText("      (Llene todos los campos)");
 

@@ -38,7 +38,6 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jTDNIConsulta = new javax.swing.JTextField();
         jTIdPrestador = new javax.swing.JTextField();
-        jDFechaConsultaO = new com.toedter.calendar.JDateChooser();
         jLVolver = new javax.swing.JLabel();
         jBLimpiar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
@@ -48,8 +47,6 @@ public class PanelOrdenes extends javax.swing.JPanel {
 
         jPOrden.setBackground(new java.awt.Color(153, 255, 204));
         jPOrden.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jScrollPane1.setBackground(null);
 
         jTConsultaOrden.setBackground(new java.awt.Color(255, 255, 255));
         jTConsultaOrden.setModel(new javax.swing.table.DefaultTableModel(
@@ -72,19 +69,16 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jLabel3.setText("CONSULTA ORDEN");
         jPOrden.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, -1));
 
-        jCheckBox1.setBackground(null);
         jCheckBox1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jCheckBox1.setForeground(new java.awt.Color(0, 102, 102));
         jCheckBox1.setText("DNI");
         jPOrden.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, -1, -1));
 
-        jCheckBox2.setBackground(null);
         jCheckBox2.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jCheckBox2.setForeground(new java.awt.Color(0, 102, 102));
         jCheckBox2.setText("ID PRESTADOR");
         jPOrden.add(jCheckBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, -1, -1));
 
-        jCheckBox3.setBackground(null);
         jCheckBox3.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jCheckBox3.setForeground(new java.awt.Color(0, 102, 102));
         jCheckBox3.setText("Fecha");
@@ -94,15 +88,8 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(0, 102, 102));
         jLabel4.setText("Buscar por..");
         jPOrden.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, -1, -1));
-
-        jTDNIConsulta.setBackground(null);
         jPOrden.add(jTDNIConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 100, -1));
-
-        jTIdPrestador.setBackground(null);
         jPOrden.add(jTIdPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 120, -1));
-
-        jDFechaConsultaO.setBackground(null);
-        jPOrden.add(jDFechaConsultaO, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, -1, -1));
 
         jLVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Retroc.png"))); // NOI18N
         jLVolver.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -123,7 +110,6 @@ public class PanelOrdenes extends javax.swing.JPanel {
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
-    private com.toedter.calendar.JDateChooser jDFechaConsultaO;
     private javax.swing.JLabel jLVolver;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

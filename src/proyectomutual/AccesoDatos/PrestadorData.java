@@ -214,5 +214,9 @@ public class PrestadorData {
 
         return prestadorLista;
     }
+
+    public void eliminarPrestador(String especialidadSelec) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
