@@ -293,7 +293,7 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
         jTDNIA.setText("");
         jTTelefonoA.setText("");
         jTDomicilioA.setText("");
-
+        jCActivo.setSelected(false);
     }
 
 }
