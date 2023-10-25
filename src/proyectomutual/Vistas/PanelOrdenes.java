@@ -10,13 +10,31 @@ package proyectomutual.Vistas;
  * @author sonia
  */
 import java.awt.BorderLayout;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import proyectomutual.AccesoDatos.AfiliadoData;
+import proyectomutual.AccesoDatos.OrdenData;
+import proyectomutual.entidades.Afiliado;
+import proyectomutual.entidades.Orden;
 public class PanelOrdenes extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PanelOrdenes
-     */
+        //Setea modelo de tabla
+    private DefaultTableModel modelo = new DefaultTableModel() {
+
+        public boolean isCellEditable(int f, int c) {
+          
+            return false;
+        }
+    };
+    
+    //VARIABLES DATA
+    private OrdenData ordenData = new OrdenData();
+    private AfiliadoData afiliadoData = new AfiliadoData();
+    
     public PanelOrdenes() {
         initComponents();
+        cargarColumnas();
+        cargarTablaOrdenes();
     }
 
     /**
@@ -48,7 +66,6 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jPOrden.setBackground(new java.awt.Color(153, 255, 204));
         jPOrden.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTConsultaOrden.setBackground(new java.awt.Color(255, 255, 255));
         jTConsultaOrden.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -97,12 +114,22 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jPOrden.add(jLVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 0, -1, 50));
 
         jBLimpiar.setText("NUEVA BÚSQUEDA");
+        jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimpiarActionPerformed(evt);
+            }
+        });
         jPOrden.add(jBLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, -1, -1));
         jPOrden.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 610, 10));
 
         add(jPOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 410));
         jPOrden.getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+        cargarTablaVacia();
+        cargarTablaOrdenes();
+    }//GEN-LAST:event_jBLimpiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -120,4 +147,62 @@ public class PanelOrdenes extends javax.swing.JPanel {
     private javax.swing.JTextField jTDNIConsulta;
     private javax.swing.JTextField jTIdPrestador;
     // End of variables declaration//GEN-END:variables
+
+    
+        //MÉTODOS
+    //setea nombre de columnas
+    private void cargarColumnas() {
+        modelo.addColumn("Nro de orden");
+        modelo.addColumn("Afiliado");
+        modelo.addColumn("Prestador");
+        modelo.addColumn("Fecha");
+        jTConsultaOrden.setModel(modelo);
+    }
+
+    //Cargar tablaOrdenes total
+    private void cargarTablaOrdenes() {
+
+        modelo.setRowCount(0);
+        List<Orden> listaOrdenes = ordenData.listarOrdenes();
+
+        for (Orden ordenes : listaOrdenes) {
+
+            modelo.addRow(new Object[]{
+                ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
+                ordenes.getPrestador().toString(), ordenes.getFecha()});
+
+        }
+    }
+    
+    private void cargarTablaOrdenesXDNI(){
+        
+        //Guarda dni en variable
+        String dniNum=jTDNIConsulta.getText();
+        int dni = Integer.parseInt(dniNum);
+        
+        //Llamada a método para buscar el afiliado y obtener el id
+        Afiliado afiliadoEncontrado = afiliadoData.buscarAfiliadoPorDni(dni);
+        
+        //Guarda id en variable idAFiliado
+        int idAfiliado = afiliadoEncontrado.getIdAfiliado();
+        
+        modelo.setRowCount(0);
+        List<Orden> listaOrdenesXDNI = ordenData.buscaOrdenPorAfil(idAfiliado);
+        
+        for (Orden ordenes : listaOrdenesXDNI) {
+            modelo.addRow(new Object[]{
+           ordenes.getIdOrden(), ordenes.getAfiliado().toString(), 
+           ordenes.getPrestador().toString(), ordenes.getFecha()
+        });
+        }
+    }
+    
+        //Limpia datos de la tabla
+    private void cargarTablaVacia() {
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+    }
+
+
 }

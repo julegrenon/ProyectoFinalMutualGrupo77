@@ -92,7 +92,7 @@ public class Orden {
 
     @Override
     public String toString() {
-        return "Orden{" + "idOrden=" + idOrden + ", fecha=" + fecha + ", formaPago=" + formaPago + ", importe=" + importe + ", afiliado=" + afiliado + ", prestador=" + prestador + '}';
+        return "ID orden: " + idOrden + " - Afiliado: " + afiliado.toString() + " - Prestador: " + prestador.toString() + " - fecha:" + fecha;
     }
      
     

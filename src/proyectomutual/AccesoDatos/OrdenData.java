@@ -106,10 +106,8 @@ public class OrdenData {
       //============================================================================ 
         //LISTAR  OREDENES
        
-       public List<Orden> listarOrdenes() {
-        String sql ="SELECT `idOrden`, `fecha`, `formaPago`, `importe`, `idAfiliado`, `idPrestador` "
-                + "FROM `orden`";
-                
+    public List<Orden> listarOrdenes() {
+        String sql = "SELECT idOrden, fecha, formaPago, importe, idAfiliado, idPrestador FROM orden";
         ArrayList<Orden> ordenLista = new ArrayList();
         try {
             PreparedStatement ps = conex.prepareStatement(sql);
@@ -117,23 +115,38 @@ public class OrdenData {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Orden orden= new Orden();
+                Orden orden = new Orden();
                 orden.setIdOrden(rs.getInt("idOrden"));
                 orden.setFecha(rs.getDate("fecha").toLocalDate());
                 orden.setFormaPago(rs.getString("formaPago"));
-                orden.setIdOrden(rs.getInt("idAfiliado"));
-                orden.setIdOrden(rs.getInt("idPrestador"));
+                orden.setImporte(rs.getDouble("importe"));
+
+                //Recupera la idAfiliado y idPrestador a través del id de las columnas de base
+                int idAfiliado = rs.getInt("idAfiliado");
+                int idPrestador = rs.getInt("idPrestador");
                 
+                //Variables data
+                PrestadorData prestadorData = new PrestadorData();
+                AfiliadoData afiliadoData = new AfiliadoData();
+                
+                //Llamada a métodos para instanciar objeto necesario del constructor de orden
+                Afiliado afiliado = afiliadoData.buscarAfiliado(idAfiliado);
+                Prestador prestador = prestadorData.buscarPrestador(idPrestador);
+
+                //Setea afiliado y prestador después de los métodos buscar  
+                orden.setAfiliado(afiliado);
+                orden.setPrestador(prestador);
+
                 ordenLista.add(orden);
-             
+
             }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Orden");
         }
         return ordenLista;
-        
-       }
+
+    }
        
   //====================================================================================  
   //LISTA DE OREDENES POR AFILIADO
@@ -145,16 +158,31 @@ public class OrdenData {
         ArrayList<Orden> listaXAfil= new ArrayList();
         try {
             PreparedStatement ps = conex.prepareStatement(sql);
+            ps.setInt(1, idAfiliado);
 
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Orden orden= new Orden();
+                Orden orden = new Orden();
                 orden.setIdOrden(rs.getInt("idOrden"));
                 orden.setFecha(rs.getDate("fecha").toLocalDate());
                 orden.setFormaPago(rs.getString("formaPago"));
-                orden.setIdOrden(rs.getInt("idAfiliado"));
-                orden.setIdOrden(rs.getInt("idPrestador"));
+                orden.setImporte(rs.getDouble("importe"));
+                
+                //Recupera la idAfiliado y idPrestador a través del id de las columnas de base
+                int idPrestador = rs.getInt("idPrestador");
+                
+                //Variables data
+                PrestadorData prestadorData = new PrestadorData();
+                AfiliadoData afiliadoData = new AfiliadoData();
+                
+                //Llamada a métodos para instanciar objeto necesario del constructor de orden
+                Afiliado afiliado = afiliadoData.buscarAfiliado(idAfiliado);
+                Prestador prestador = prestadorData.buscarPrestador(idPrestador);
+
+                //Setea afiliado y prestador después de los métodos buscar  
+                orden.setAfiliado(afiliado);
+                orden.setPrestador(prestador);
                 
                 listaXAfil.add(orden);
              
@@ -197,59 +225,4 @@ public class OrdenData {
         return listaXFecha;
         
        }
- //======================================================0
-  /*     public void guardarOrden(Orden orden) {
-
-        try {
-
-            PreparedStatement preparedStatement = null;
-            if (comprobarPrestadorFecha(orden)) {
-                String insertQuery = "INSERT INTO orden(fecha,formaPago,importe,idAfiliado,idPrestador) VALUES (?,?,?,?,?)";
-
-                preparedStatement = conex.prepareStatement(insertQuery, Statement.RETURN_GENERATED_KEYS);
-                preparedStatement.setDate(1, java.sql.Date.valueOf(orden.getFecha()));
-                preparedStatement.setString(2, orden.getFormaPago());
-                preparedStatement.setDouble(3, orden.getImporte());
-                preparedStatement.setInt(4, orden.getAfiliado().getIdAfiliado());
-                preparedStatement.setInt(5, orden.getPrestador().getIdPrestador());
-
-                preparedStatement.executeUpdate();
-
-                ResultSet resulSet = preparedStatement.getGeneratedKeys();
-                if (resulSet.next()) {
-                    orden.setIdOrden(resulSet.getInt(1));
-                    JOptionPane.showMessageDialog(null, "Orden añadida con exito.");
-                }
-            }
-            preparedStatement.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(OrdenData.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (GenericException ex) {
-            JOptionPane.showMessageDialog(null, "Error al cargar la Orden: " + ex.getMessage());
-        }
-
-    }
-
-    private boolean comprobarPrestadorFecha(Orden orden) throws GenericException, SQLException {
-
-        PreparedStatement preparedStatement = null;
-        boolean resultado = false;
-        String dateQuery = "SELECT * FROM orden WHERE fecha = ? AND idPrestador = ? AND idAfiliado = ?";
-        preparedStatement = conex.prepareStatement(dateQuery);
-        preparedStatement.setDate(1, java.sql.Date.valueOf(orden.getFecha()));
-        preparedStatement.setInt(2, orden.getPrestador().getIdPrestador());
-        preparedStatement.setInt(3, orden.getAfiliado().getIdAfiliado());
-
-        ResultSet resultSet = preparedStatement.executeQuery();
-        resultado = resultSet.next();
-
-        if (resultado) {
-            System.out.println(resultado);
-            throw new GenericException("Solo puede sacar una orden por día");
-        } else {
-            resultado = true;
-            return resultado;
-        }
-    }
-*/
 }
