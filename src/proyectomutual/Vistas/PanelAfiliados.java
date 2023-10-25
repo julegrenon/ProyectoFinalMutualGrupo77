@@ -7,6 +7,7 @@ package proyectomutual.Vistas;
 
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -40,6 +41,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
         initComponents();
         cargarColumnas();
         cargarTablaAfiliados();
+        escribirTextFieldDNI();
     }
     
 
@@ -72,6 +74,11 @@ public class PanelAfiliados extends javax.swing.JPanel {
         setBackground(new java.awt.Color(153, 255, 204));
         setMinimumSize(new java.awt.Dimension(670, 410));
         setPreferredSize(new java.awt.Dimension(670, 410));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
@@ -81,8 +88,15 @@ public class PanelAfiliados extends javax.swing.JPanel {
 
         jTdni.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         jTdni.setForeground(new java.awt.Color(204, 204, 204));
-        jTdni.setText("Ingrese un DNI");
         jTdni.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        jTdni.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTdniMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTdniMouseReleased(evt);
+            }
+        });
         add(jTdni, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, 150, -1));
 
         jLAfiliadoBuscar.setBackground(new java.awt.Color(255, 255, 255));
@@ -180,6 +194,11 @@ public class PanelAfiliados extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTAfiliado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTAfiliadoMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTAfiliado);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 493, 120));
@@ -251,6 +270,8 @@ public class PanelAfiliados extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "No puede haber campos vacíos");
         } catch (NumberFormatException ex2) {
             JOptionPane.showMessageDialog(null, "Formato incorrecto. Complete los campos con los caracteres correctos");
+        } catch (ArrayIndexOutOfBoundsException ex3) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un afiliado para editar");
         }
     }//GEN-LAST:event_jLAfiliadoModificarMouseClicked
 
@@ -272,6 +293,8 @@ public class PanelAfiliados extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "No hay ninguna selección para eliminar");
         } catch (NumberFormatException ex2) {
             JOptionPane.showMessageDialog(null, "ERROR");
+        } catch (ArrayIndexOutOfBoundsException ex3) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un afiliado para eliminar");
         }
     }//GEN-LAST:event_jLAfiliadoEliminarMouseClicked
 
@@ -317,6 +340,26 @@ public class PanelAfiliados extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un afiliado para cargar una orden");
         }
     }//GEN-LAST:event_jBAfiliadoOrdenMouseClicked
+
+    private void jTdniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTdniMouseClicked
+        seleccionarTextoTextFieldDNI();
+    }//GEN-LAST:event_jTdniMouseClicked
+
+    private void jTdniMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTdniMouseReleased
+        
+    }//GEN-LAST:event_jTdniMouseReleased
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        if(jTdni.getText().equals("")){
+            cargarTablaVacia();
+            cargarTablaAfiliados();
+            escribirTextFieldDNI();
+        }   
+    }//GEN-LAST:event_formMouseClicked
+
+    private void jTAfiliadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTAfiliadoMouseClicked
+        escribirTextFieldDNI();
+    }//GEN-LAST:event_jTAfiliadoMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -385,5 +428,20 @@ public class PanelAfiliados extends javax.swing.JPanel {
         while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
         }
+    }
+    
+    //Completa textField de buscarXDNI cuando está vacío
+    private void escribirTextFieldDNI() {
+        if (jTdni.getText().equals("")) {
+            jTdni.setText("Ingrese un DNI");
+            jTdni.setForeground(Color.gray);
+        }
+    }
+    
+    private void seleccionarTextoTextFieldDNI() {
+        jTdni.setSelectionStart(0);
+        jTdni.setSelectionEnd(100);
+
+       jTdni.setForeground(Color.black);
     }
 }

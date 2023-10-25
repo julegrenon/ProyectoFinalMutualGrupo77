@@ -20,7 +20,7 @@ public class Menu extends javax.swing.JFrame {
     public Menu() {
         initComponents();
         
-        //setea la localización de la ventana en el centtro
+        //Setea la localización de la ventana en el centtro
         this.setLocationRelativeTo(null);
 
     }
@@ -195,7 +195,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBAfiliadoActionPerformed
 
     private void jBPrestadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrestadorActionPerformed
-            //Istancia clase panel 
+        //Istancia clase panel 
         PanelPrestadores prestadoresVista=new PanelPrestadores();
         
         //Setea dimensiones y location
@@ -212,7 +212,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jBPrestadorActionPerformed
 
     private void jBOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBOrdenActionPerformed
-            //Istancia clase panel 
+        //Istancia clase panel 
         PanelOrdenes ordenesVista=new PanelOrdenes();
         
         //Setea dimensiones y location

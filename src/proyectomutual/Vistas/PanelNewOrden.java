@@ -6,6 +6,7 @@
 package proyectomutual.Vistas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -33,10 +34,7 @@ public class PanelNewOrden extends javax.swing.JPanel {
         
         llenarComboBoxPrestadores();
         
-        //Instancia clase para traer objeto a setear en textField
-        PanelAfiliados afil = new PanelAfiliados();
-        //Setea textField
-        jTextAfil.setText(afil.afiliadoStringParaOrden);
+        completarTextFieldAfiliadoNuevaOrden();
     }
 
     /**
@@ -307,5 +305,13 @@ public class PanelNewOrden extends javax.swing.JPanel {
         jDFecha.setDateFormatString("");
         jTextImporte.setText("");
         jComboBoxPrestador.setSelectedIndex(0);
+    }
+    
+    private void completarTextFieldAfiliadoNuevaOrden(){
+        //Instancia clase para traer objeto a setear en textField
+        PanelAfiliados afil = new PanelAfiliados();
+        //Setea textField
+        jTextAfil.setText(afil.afiliadoStringParaOrden);
+        jTextAfil.setBackground(Color.gray);
     }
 }

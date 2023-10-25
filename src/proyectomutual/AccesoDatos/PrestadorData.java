@@ -129,7 +129,6 @@ public class PrestadorData {
                 prestador.setEspecialidad(especialidad);
                 prestador.setEstado(true);
                 
-                System.out.println("Prestador encontrado: " + prestador.getNombre() + " " + prestador.getApellido());
             } else {
                 JOptionPane.showMessageDialog(null, "No existe prestador con ese id");
             }
