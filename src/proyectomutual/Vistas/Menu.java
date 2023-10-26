@@ -42,7 +42,6 @@ public class Menu extends javax.swing.JFrame {
         jPBotonera = new javax.swing.JPanel();
         jBAfiliado = new javax.swing.JButton();
         jBPrestador = new javax.swing.JButton();
-        jBEspecialista = new javax.swing.JButton();
         jBOrden = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         //ImageIcon icono=new ImageIcon(getClass().getResource("/Imagenes/Image800.png"));
@@ -108,18 +107,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jPBotonera.add(jBPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 86, 220, 80));
-
-        jBEspecialista.setBackground(new java.awt.Color(102, 102, 102));
-        jBEspecialista.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
-        jBEspecialista.setForeground(new java.awt.Color(153, 255, 255));
-        jBEspecialista.setText("ESPECIALISTAS");
-        jBEspecialista.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jBEspecialista.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBEspecialistaActionPerformed(evt);
-            }
-        });
-        jPBotonera.add(jBEspecialista, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 172, 220, 80));
 
         jBOrden.setBackground(new java.awt.Color(102, 102, 102));
         jBOrden.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
@@ -196,7 +183,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jBPrestadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrestadorActionPerformed
             //Istancia clase panel 
-        PanelPrestadores prestadoresVista=new PanelPrestadores();
+        PanelPrestadoresPropuesta prestadoresVista=new PanelPrestadoresPropuesta();
         
         //Setea dimensiones y location
         prestadoresVista.setSize(670, 410);
@@ -231,23 +218,6 @@ public class Menu extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       System.exit(0);
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jBEspecialistaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEspecialistaActionPerformed
-            //Istancia clase panel 
-        PanelEspecialidad especialidadVista=new PanelEspecialidad();
-        
-        //Setea dimensiones y location
-        especialidadVista.setSize(670, 410);
-        especialidadVista.setLocation(0, 0);
-        
-        //Remueve y agrega la vista del panel instanciada
-        jPFondo.removeAll();
-        jPFondo.add(especialidadVista, BorderLayout.CENTER);
-        
-        jPFondo.revalidate();
-        jPFondo.repaint();
-
-    }//GEN-LAST:event_jBEspecialistaActionPerformed
 
     //Localización del mouse al hacer clic para mover la ventana
     private void jLBannerMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBannerMousePressed
@@ -301,7 +271,6 @@ public class Menu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane Escritorio;
     private javax.swing.JButton jBAfiliado;
-    private javax.swing.JButton jBEspecialista;
     private javax.swing.JButton jBOrden;
     private javax.swing.JButton jBPrestador;
     private javax.swing.JButton jButton1;

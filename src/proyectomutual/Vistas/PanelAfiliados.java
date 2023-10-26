@@ -67,7 +67,6 @@ public class PanelAfiliados extends javax.swing.JPanel {
         jLAfiliadoNuevo = new javax.swing.JLabel();
         jLAfiliadoModificar = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLVolver = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTAfiliado = new javax.swing.JTable();
 
@@ -170,16 +169,6 @@ public class PanelAfiliados extends javax.swing.JPanel {
         jLabel8.setForeground(new java.awt.Color(0, 102, 102));
         jLabel8.setText("GESTIÓN AFILIADO");
         add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, -1, -1));
-
-        jLVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Retroc.png"))); // NOI18N
-        jLVolver.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jLVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLVolver.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLVolverMouseClicked(evt);
-            }
-        });
-        add(jLVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 0, -1, 50));
 
         jTAfiliado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -296,16 +285,6 @@ public class PanelAfiliados extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jLAfiliadoEliminarMouseClicked
 
-    private void jLVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVolverMouseClicked
-        //PanelAfiliados afiliadosVista=new PanelAfiliados();
-       jPFondo.removeAll();
-        // jPFondo.remove(afiliadosVista);
-
-        jPFondo.revalidate();
-        jPFondo.repaint();
-        
-    }//GEN-LAST:event_jLVolverMouseClicked
-
     private void jBAfiliadoOrdenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBAfiliadoOrdenMouseClicked
         
         try {
@@ -363,7 +342,6 @@ public class PanelAfiliados extends javax.swing.JPanel {
     private javax.swing.JLabel jLAfiliadoEliminar;
     private javax.swing.JLabel jLAfiliadoModificar;
     private javax.swing.JLabel jLAfiliadoNuevo;
-    private javax.swing.JLabel jLVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

@@ -64,7 +64,6 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jTDNIConsulta = new javax.swing.JTextField();
         jTIdPrestador = new javax.swing.JTextField();
-        jLVolver = new javax.swing.JLabel();
         jBLimpiar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jButtonBuscarXFiltro = new javax.swing.JButton();
@@ -132,11 +131,6 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jPOrden.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, -1, -1));
         jPOrden.add(jTDNIConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 100, -1));
         jPOrden.add(jTIdPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 120, -1));
-
-        jLVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Retroc.png"))); // NOI18N
-        jLVolver.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jLVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPOrden.add(jLVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 0, -1, 50));
 
         jBLimpiar.setText("NUEVA BÚSQUEDA");
         jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -255,7 +249,6 @@ public class PanelOrdenes extends javax.swing.JPanel {
     private javax.swing.JCheckBox jCheckFecha;
     private javax.swing.JCheckBox jCheckPrestador;
     private com.toedter.calendar.JDateChooser jDFecha;
-    private javax.swing.JLabel jLVolver;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPOrden;

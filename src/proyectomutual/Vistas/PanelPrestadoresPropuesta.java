@@ -40,6 +40,7 @@ public class PanelPrestadoresPropuesta extends javax.swing.JPanel {
    
     public PanelPrestadoresPropuesta() {
         initComponents();
+        cargarColumnas();
         cargarComboBox();
         cargarTablaPrestadores();
         jTextFieldNuevaEspecialidad.setVisible(false);
@@ -54,7 +55,6 @@ public class PanelPrestadoresPropuesta extends javax.swing.JPanel {
         jPPrestador = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jCBEspecialidad = new javax.swing.JComboBox<>();
-        jLVolver = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLEliminar = new javax.swing.JLabel();
@@ -88,16 +88,6 @@ public class PanelPrestadoresPropuesta extends javax.swing.JPanel {
             }
         });
         jPPrestador.add(jCBEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 180, -1));
-
-        jLVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Retroc.png"))); // NOI18N
-        jLVolver.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jLVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLVolver.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLVolverMouseClicked(evt);
-            }
-        });
-        jPPrestador.add(jLVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 0, -1, 50));
 
         jLabel6.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 102, 102));
@@ -190,13 +180,7 @@ public class PanelPrestadoresPropuesta extends javax.swing.JPanel {
     
     }//GEN-LAST:event_jBMostrarTodosLosPrestadoresActionPerformed
 
-    //===================================================================================
-    //VOLVER
-    private void jLVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVolverMouseClicked
-     
 
-    }//GEN-LAST:event_jLVolverMouseClicked
- 
     //=====================================================================================
     private void jCBEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBEspecialidadActionPerformed
        cargarTablaVacia();
@@ -265,7 +249,6 @@ public class PanelPrestadoresPropuesta extends javax.swing.JPanel {
     private javax.swing.JComboBox<Especialidad> jCBEspecialidad;
     private javax.swing.JLabel jLAgregar;
     private javax.swing.JLabel jLEliminar;
-    private javax.swing.JLabel jLVolver;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
