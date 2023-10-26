@@ -105,4 +105,29 @@ public class EspecialidadData {
         return especialidad;
     }
     
+    //BuscarEspecialidad x Nombre
+        public Especialidad buscarEspecialidadXNombre(String nombreEspecialidad) {
+        String sql = "SELECT idEspecialidad, especialidad FROM especialidad WHERE especialidad=?";
+        Especialidad especialidad = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, nombreEspecialidad);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                especialidad = new Especialidad();
+                especialidad.setIdEspecialidad(rs.getInt("idEspecialidad"));
+                especialidad.setEspecialidad(nombreEspecialidad);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe el especialidad con ese nombre");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla especialidad");
+        }
+        return especialidad;
+    }
+    
 }

@@ -69,39 +69,26 @@ public class PanelNewPrestador extends javax.swing.JPanel {
         jLabel1.setText("NUEVO PRESTADOR");
 
         jLabel2.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Nombre:");
 
         jLabel3.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Apellido:");
 
-        jTDireP.setBackground(new java.awt.Color(255, 255, 255));
-
         jLabel4.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("D.N.I:");
 
-        jTApellidoP.setBackground(new java.awt.Color(255, 255, 255));
-
         jLabel5.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Télefono:");
 
         jLabel6.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Dirección:");
 
-        jTTelP.setBackground(new java.awt.Color(255, 255, 255));
-
         jLabel7.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Especialidad:");
-
-        jTDNIP.setBackground(new java.awt.Color(255, 255, 255));
 
         jLAgregarP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Agregar.png"))); // NOI18N
         jLAgregarP.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLAgregarP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLAgregarP.setMinimumSize(null);
         jLAgregarP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -109,16 +96,12 @@ public class PanelNewPrestador extends javax.swing.JPanel {
             }
         });
 
-        jTNombreP.setBackground(new java.awt.Color(255, 255, 255));
-
         jLabel8.setText("( Llene todos los campos)");
 
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Agregar");
 
-        jCBEspecialidades.setBackground(new java.awt.Color(255, 255, 255));
-
         jLVolverP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Retroc.png"))); // NOI18N
+        jLVolverP.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLVolverP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLVolverPMouseClicked(evt);
@@ -232,16 +215,12 @@ public class PanelNewPrestador extends javax.swing.JPanel {
 //=======================================================================================
     private void jLVolverPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVolverPMouseClicked
         
-         PanelPrestadores prestadorVista=new PanelPrestadores();
+        PanelPrestadoresPropuesta prestadorVista=new PanelPrestadoresPropuesta();
         prestadorVista.setSize(670, 410);
         prestadorVista.setLocation(0, 0);
         jPFondo.removeAll();
         jPFondo.add(prestadorVista, BorderLayout.CENTER);
         
-        jPFondo.revalidate();
-        jPFondo.repaint();
-        
-        jPFondo.removeAll();
         jPFondo.revalidate();
         jPFondo.repaint();
     }//GEN-LAST:event_jLVolverPMouseClicked

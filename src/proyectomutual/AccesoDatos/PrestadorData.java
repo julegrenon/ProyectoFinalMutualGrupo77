@@ -53,7 +53,7 @@ public class PrestadorData {
         }
     }
     
-    public void modificarPrestador(Prestador prestador, int ID) {
+    public void modificarPrestador(Prestador prestador) {
         String sql = "UPDATE prestador SET nombre=?, apellido=?, dni=?, domicilio=?, telefono=?, idEspecialidad=?, estado=? WHERE idPrestador=?";
 
         try {
@@ -68,7 +68,7 @@ public class PrestadorData {
             ps.setBoolean(7, prestador.isEstado());
 
             // Establece el valor del ID en la cláusula WHERE
-            ps.setInt(8, ID);
+            ps.setInt(8, prestador.getIdPrestador());
 
             int exito = ps.executeUpdate();
             if (exito == 1) {
