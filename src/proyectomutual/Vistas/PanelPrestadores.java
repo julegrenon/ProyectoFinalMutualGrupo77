@@ -32,7 +32,8 @@ public class PanelPrestadores extends javax.swing.JPanel {
         jLPA.setModel(modelo);
         jLPXE.setModel(modelo2);
         cargarComboBox();
-        cargarListaPxE();
+      // limpiarList();
+      // limpiarList2();
     }
 
     
@@ -154,7 +155,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMostrarActionPerformed
-      cargarLista();
+    cargarLista();
     
     }//GEN-LAST:event_jBMostrarActionPerformed
 
@@ -174,7 +175,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
     //=====================================================================================
     private void jCBEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBEspecialidadActionPerformed
   
-       cargarComboBox();
+    cargarLista2();
     }//GEN-LAST:event_jCBEspecialidadActionPerformed
 
     //==================================================================================
@@ -187,20 +188,22 @@ public class PanelPrestadores extends javax.swing.JPanel {
     //==================================================================================
     //ELIMINAR
     private void jLEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLEliminarMouseClicked
-        try {
-            String especialidadSelec = jLPA.getSelectedValue();
-            prestaData.eliminarPrestador(especialidadSelec);
+     
+        
+      //   prestadorListaPxE.remove( jCBEspecialidad.getSelectedIndex()) ;
+        
+        
+        
+               Prestador prestadorSelec= new Prestador();
+               prestadorSelec=  (Prestador) jLPA.getSelectedValuesList();
+               prestaData.eliminarPrestador( prestadorSelec.getEspecialidad().getIdEspecialidad());
 
-        } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar para eliminar");
-        } catch (NumberFormatException ex2) {
-            JOptionPane.showMessageDialog(null, "ERROR");
-        }
+
     }//GEN-LAST:event_jLEliminarMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBMostrar;
-    private javax.swing.JComboBox<String> jCBEspecialidad;
+    private javax.swing.JComboBox<Especialidad> jCBEspecialidad;
     private javax.swing.JLabel jLAgregar;
     private javax.swing.JLabel jLEliminar;
     private javax.swing.JList<String> jLPA;
@@ -219,7 +222,35 @@ public class PanelPrestadores extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
  
 //==================================================================================
+//Limpiar lista1
+    public DefaultListModel limpiarList(){
+    
+        DefaultListModel modeloVacio=new DefaultListModel();
+        jLPA.setModel(modeloVacio);
+       return modeloVacio;
+    }
+    
+   //==================================================================================
+//Limpiar lista2
+    public DefaultListModel limpiarList2(){
+    
+        DefaultListModel modeloVacio2=new DefaultListModel();
+        jLPXE.setModel(modeloVacio2);
+       return modeloVacio2;
+    }
+
+//===================================================================================
 //CARGA LISTA PRESTADORES
+    
+    //opcion
+//    public DefaultListModel cargarLista(){
+//     ArrayList<Prestador> prestadorLista = new ArrayList();
+//      DefaultListModel modelo= (DefaultListModel) jLPA.getModel();
+//      for(Prestador prestaSelec:prestadorLista ){
+//           modelo.addElement(prestaSelec.getEspecialidad());
+//    return modelo;
+//      }
+    
     public void cargarLista() {
 
         modelo.removeAllElements();
@@ -233,59 +264,63 @@ public class PanelPrestadores extends javax.swing.JPanel {
 
 //==================================================================================
 //CARGA COMBOBOX DE ESPECIALIDADES
-    private void cargarComboBox(){
-         jCBEspecialidad.removeAll();
-          ArrayList<Especialidad> especialidadesLista = (ArrayList<Especialidad>) espData.listarEspecialidades();
-     
-          for(int i=0; i<especialidadesLista.size();i++){
+         public void cargarComboBox(){
+         jCBEspecialidad.removeAllItems();
+         
+          List<Especialidad> especialidadesLista =espData.listarEspecialidades();
+       
+          for(Especialidad especial: especialidadesLista)
+ 
+               jCBEspecialidad.addItem(especial);
           
-              jCBEspecialidad.addItem(especialidadesLista.get(i).getEspecialidad());
-          }
+           //otra opcion para recorrer
+          // for(int i=0; i<especialidadesLista.size();i++){
+          // jCBEspecialidad.addItem((Especialidad) espData.listarEspecialidades());         
     }
-    
+
    //==================================================================================
 //CARGA LISTA PRESTADORES x ESP
    
-    public void cargarListaPxE() {
-        //limpio
-        modelo2.removeAllElements();
+  public DefaultListModel cargarLista2(){
+  
+  
+      ArrayList<Prestador> prestadorListaPxE = new ArrayList( prestaData.listarPrestador());
+      Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
+      DefaultListModel modelo= (DefaultListModel) jLPXE.getModel();
+      
+  
+       if (especialidadSelec != null) {
+           modelo.addElement(especialidadSelec.getEspecialidad());
+      }
+     return modelo;  
+  }
+ //===============================================================
+ //       Metodo queno funciona 
+ 
+ //         public void cargarListaPxE() {
+//        try{
+//        modelo2.removeAllElements();
+//        Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
+//        
+//        if (especialidadSelec != null) {
+//            ArrayList<Especialidad> especialidadesLista = new ArrayList();
+//            especialidadesLista.add(especialidadSelec);
+//            ArrayList<Prestador> prestadorListaPxE = new ArrayList();
+//            if (prestadorListaPxE != null) {
+//                prestadorListaPxE.add(prestadorNuevo);
+//                prestadorNuevo.getEspecialidad();
+//                prestadorListaPxE.add(prestadorNuevo);
+//                modelo2.addElement(prestadorNuevo.toString());
+//            } else {
+//                JOptionPane.showMessageDialog(null, " No hay prestadores con esa especialidad ");
+//            }
+//        } else {
+//            JOptionPane.showMessageDialog(null, " Seleccione un valor de la Lista ");
+//        }
+//    }   catch (NullPointerException ex) {
+//            JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
+//       }
+  }
 
-        //guardo captura combobox
-        Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
 
-        //cheque que no sea null
-        if (especialidadSelec != null) {
-
-            //creo lista de especialidades
-            ArrayList<Especialidad> especialidadesLista = new ArrayList();
-
-            //guardo en lista lo que se selecciona
-            especialidadesLista.add(especialidadSelec);
-
-            //creo lista prestadores
-            ArrayList<Prestador> prestadorListaPxE = new ArrayList();
-
-            //cheque que no este vacia
-            if (prestadorListaPxE != null) {
-
-                //Agrego prestadores
-                prestadorListaPxE.add(prestadorNuevo);
-
-                //traigo la especialidad del prestador
-                prestadorNuevo.getEspecialidad();
-                
-                //Agrego especialidad a la lista
-                prestadorListaPxE.add(prestadorNuevo);
-
-                //cargo a la vista la lista de prestadores
-                modelo2.addElement(prestadorNuevo.toString());
-            }   else {
-                JOptionPane.showMessageDialog(null, " No hay prestadores con esa especialidad ");
-        }
-        }else {
-                JOptionPane.showMessageDialog(null, " Seleccione un valor de la Lista ");
-        }
-    }
-}
-   
 
