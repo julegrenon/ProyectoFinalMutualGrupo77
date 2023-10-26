@@ -283,4 +283,192 @@ public class OrdenData {
         return listaOrdenesXPrestador;
 
     }
+
+    //Buscar orden por afiliado, prestador y fecha
+    public List<Orden> buscaOrdenPorAfiliadoPrestadorYFecha(int idAfiliado, int idPrestador, LocalDate fecha) {
+        String sql = "SELECT idOrden, fecha, formaPago, importe, idAfiliado, idPrestador "
+                + "FROM orden WHERE idAfiliado=? AND idPrestador=? AND fecha=?";
+
+        ArrayList<Orden> listaOrdenXAfiliadoPrestadorYFecha = new ArrayList();
+        try {
+            PreparedStatement ps = conex.prepareStatement(sql);
+            ps.setInt(1, idAfiliado);
+            ps.setInt(2, idPrestador);
+            ps.setDate(3, Date.valueOf(fecha));
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Orden orden = new Orden();
+                orden.setIdOrden(rs.getInt("idOrden"));
+                orden.setFecha(fecha);
+                orden.setFormaPago(rs.getString("formaPago"));
+                orden.setImporte(rs.getDouble("importe"));
+
+                //Recupera la idAfiliado y idPrestador a través del id de las columnas de base
+                //int idAfiliado = rs.getInt("idAfiliado");
+                //int idPrestador = rs.getInt("idPrestador");
+                //Variables data
+                PrestadorData prestadorData = new PrestadorData();
+                AfiliadoData afiliadoData = new AfiliadoData();
+
+                //Llamada a métodos para instanciar objeto necesario del constructor de orden
+                Afiliado afiliado = afiliadoData.buscarAfiliado(idAfiliado);
+                Prestador prestador = prestadorData.buscarPrestador(idPrestador);
+
+                //Setea afiliado y prestador después de los métodos buscar  
+                orden.setAfiliado(afiliado);
+                orden.setPrestador(prestador);
+
+                listaOrdenXAfiliadoPrestadorYFecha.add(orden);
+
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Orden");
+        }
+        return listaOrdenXAfiliadoPrestadorYFecha;
+
+    }
+    
+    //Buscar orden por afiliado y prestador
+    public List<Orden> buscaOrdenPorAfiliadoYPrestador(int idAfiliado, int idPrestador) {
+        String sql = "SELECT idOrden, fecha, formaPago, importe, idAfiliado, idPrestador "
+                + "FROM orden WHERE idAfiliado=? AND idPrestador=?";
+
+        ArrayList<Orden> listaOrdenAfiliadoYPrestador = new ArrayList();
+        try {
+            PreparedStatement ps = conex.prepareStatement(sql);
+            ps.setInt(1, idAfiliado);
+            ps.setInt(2, idPrestador);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Orden orden = new Orden();
+                orden.setIdOrden(rs.getInt("idOrden"));
+                orden.setFecha(rs.getDate("fecha").toLocalDate());
+                orden.setFormaPago(rs.getString("formaPago"));
+                orden.setImporte(rs.getDouble("importe"));
+
+                //Recupera la idAfiliado y idPrestador a través del id de las columnas de base
+                //int idAfiliado = rs.getInt("idAfiliado");
+                //int idPrestador = rs.getInt("idPrestador");
+                //Variables data
+                PrestadorData prestadorData = new PrestadorData();
+                AfiliadoData afiliadoData = new AfiliadoData();
+
+                //Llamada a métodos para instanciar objeto necesario del constructor de orden
+                Afiliado afiliado = afiliadoData.buscarAfiliado(idAfiliado);
+                Prestador prestador = prestadorData.buscarPrestador(idPrestador);
+
+                //Setea afiliado y prestador después de los métodos buscar  
+                orden.setAfiliado(afiliado);
+                orden.setPrestador(prestador);
+
+                listaOrdenAfiliadoYPrestador.add(orden);
+
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Orden");
+        }
+        return listaOrdenAfiliadoYPrestador;
+
+    }
+
+    //Buscar orden por afiliado y fecha
+    public List<Orden> buscaOrdenPorAfiliadoYFecha(int idAfiliado, LocalDate fecha) {
+        String sql = "SELECT idOrden, fecha, formaPago, importe, idAfiliado, idPrestador "
+                + "FROM orden WHERE idAfiliado=? AND fecha=?";
+
+        ArrayList<Orden> listaOrdenAfiliadoYFecha = new ArrayList();
+        try {
+            PreparedStatement ps = conex.prepareStatement(sql);
+            ps.setInt(1, idAfiliado);
+            ps.setDate(2, Date.valueOf(fecha));
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Orden orden = new Orden();
+                orden.setIdOrden(rs.getInt("idOrden"));
+                orden.setFecha(fecha);
+                orden.setFormaPago(rs.getString("formaPago"));
+                orden.setImporte(rs.getDouble("importe"));
+
+                //Recupera la idAfiliado y idPrestador a través del id de las columnas de base
+                //int idAfiliado = rs.getInt("idAfiliado");
+                int idPrestador = rs.getInt("idPrestador");
+
+                //Variables data
+                PrestadorData prestadorData = new PrestadorData();
+                AfiliadoData afiliadoData = new AfiliadoData();
+
+                //Llamada a métodos para instanciar objeto necesario del constructor de orden
+                Afiliado afiliado = afiliadoData.buscarAfiliado(idAfiliado);
+                Prestador prestador = prestadorData.buscarPrestador(idPrestador);
+
+                //Setea afiliado y prestador después de los métodos buscar  
+                orden.setAfiliado(afiliado);
+                orden.setPrestador(prestador);
+
+                listaOrdenAfiliadoYFecha.add(orden);
+
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Orden");
+        }
+        return listaOrdenAfiliadoYFecha;
+
+    }
+
+    //Lista ordenes por prestador y fecha
+    public List<Orden> buscaOrdenPorPrestadorYFecha(int idPrestador, LocalDate fecha) {
+        String sql = "SELECT idOrden, fecha, formaPago, importe, idAfiliado, idPrestador "
+                + "FROM orden WHERE idPrestador=? AND fecha=?";
+
+        ArrayList<Orden> listaOrdenPrestadorYFecha = new ArrayList();
+        try {
+            PreparedStatement ps = conex.prepareStatement(sql);
+            ps.setInt(1, idPrestador);
+            ps.setDate(2, Date.valueOf(fecha));
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Orden orden = new Orden();
+                orden.setIdOrden(rs.getInt("idOrden"));
+                orden.setFecha(fecha);
+                orden.setFormaPago(rs.getString("formaPago"));
+                orden.setImporte(rs.getDouble("importe"));
+
+                //Recupera la idAfiliado y idPrestador a través del id de las columnas de base
+                int idAfiliado = rs.getInt("idAfiliado");
+                //int idPrestador = rs.getInt("idPrestador");
+
+                //Variables data
+                PrestadorData prestadorData = new PrestadorData();
+                AfiliadoData afiliadoData = new AfiliadoData();
+
+                //Llamada a métodos para instanciar objeto necesario del constructor de orden
+                Afiliado afiliado = afiliadoData.buscarAfiliado(idAfiliado);
+                Prestador prestador = prestadorData.buscarPrestador(idPrestador);
+
+                //Setea afiliado y prestador después de los métodos buscar  
+                orden.setAfiliado(afiliado);
+                orden.setPrestador(prestador);
+
+                listaOrdenPrestadorYFecha.add(orden);
+
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Orden");
+        }
+        return listaOrdenPrestadorYFecha;
+
+    }
+
 }

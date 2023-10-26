@@ -98,7 +98,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
 
         jCheckDNI.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jCheckDNI.setForeground(new java.awt.Color(0, 102, 102));
-        jCheckDNI.setText("DNI");
+        jCheckDNI.setText("DNI AFILIADO");
         jCheckDNI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckDNIActionPerformed(evt);
@@ -168,20 +168,20 @@ public class PanelOrdenes extends javax.swing.JPanel {
     private void jCheckDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckDNIActionPerformed
         if (jCheckDNI.isSelected()) {
             jTDNIConsulta.setVisible(true);
-            jTIdPrestador.setVisible(false);
+           /* jTIdPrestador.setVisible(false);
             jDFecha.setVisible(false);
             jCheckFecha.setSelected(false);
-            jCheckPrestador.setSelected(false);
+            jCheckPrestador.setSelected(false);*/
 
             limpiarCamposAlDestildar();
         }
 
         if (jCheckDNI.isSelected() == false) {
             jTDNIConsulta.setVisible(false);
-            jTIdPrestador.setVisible(false);
+            /*jTIdPrestador.setVisible(false);
             jDFecha.setVisible(false);
             jCheckFecha.setSelected(false);
-            jCheckPrestador.setSelected(false);
+            jCheckPrestador.setSelected(false);*/
 
         }
         botonBuscarXFiltroVisible();
@@ -189,21 +189,21 @@ public class PanelOrdenes extends javax.swing.JPanel {
 
     private void jCheckPrestadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckPrestadorActionPerformed
         if (jCheckPrestador.isSelected()) {
-            jTDNIConsulta.setVisible(false);
+           // jTDNIConsulta.setVisible(false);
             jTIdPrestador.setVisible(true);
-            jDFecha.setVisible(false);
+            /*jDFecha.setVisible(false);
             jCheckFecha.setSelected(false);
-            jCheckDNI.setSelected(false);
+            jCheckDNI.setSelected(false);*/
 
             limpiarCamposAlDestildar();
         }
 
         if (jCheckPrestador.isSelected() == false) {
-            jTDNIConsulta.setVisible(false);
+           // jTDNIConsulta.setVisible(false);
             jTIdPrestador.setVisible(false);
-            jDFecha.setVisible(false);
+           /* jDFecha.setVisible(false);
             jCheckFecha.setSelected(false);
-            jCheckDNI.setSelected(false);
+            jCheckDNI.setSelected(false);*/
 
         }
         botonBuscarXFiltroVisible();
@@ -211,21 +211,21 @@ public class PanelOrdenes extends javax.swing.JPanel {
 
     private void jCheckFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckFechaActionPerformed
         if (jCheckFecha.isSelected()) {
-            jTDNIConsulta.setVisible(false);
-            jTIdPrestador.setVisible(false);
+           // jTDNIConsulta.setVisible(false);
+            //jTIdPrestador.setVisible(false);
             jDFecha.setVisible(true);
-            jCheckDNI.setSelected(false);
-            jCheckPrestador.setSelected(false);
+           /* jCheckDNI.setSelected(false);
+            jCheckPrestador.setSelected(false);*/
 
             limpiarCamposAlDestildar();
         }
 
         if (jCheckFecha.isSelected() == false) {
-            jTDNIConsulta.setVisible(false);
-            jTIdPrestador.setVisible(false);
+           // jTDNIConsulta.setVisible(false);
+           // jTIdPrestador.setVisible(false);
             jDFecha.setVisible(false);
-            jCheckDNI.setSelected(false);
-            jCheckPrestador.setSelected(false);
+           /* jCheckDNI.setSelected(false);
+            jCheckPrestador.setSelected(false);*/
 
         }
         botonBuscarXFiltroVisible();
@@ -391,52 +391,153 @@ public class PanelOrdenes extends javax.swing.JPanel {
 
             //Guarda id en variable idAFiliado
             int idAfiliado = afiliadoEncontrado.getIdAfiliado();
-
+            
             modelo.setRowCount(0);
             List<Orden> listaOrdenesXDNI = ordenData.buscaOrdenPorAfil(idAfiliado);
-
+            
             for (Orden ordenes : listaOrdenesXDNI) {
                 modelo.addRow(new Object[]{
                     ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
                     ordenes.getPrestador().toString(), ordenes.getFecha()
                 });
             }
-        }  
-        
+        }
+
         //Por idPrestador
         if (jCheckPrestador.isSelected()) {
-
+            
             String idNum = jTIdPrestador.getText();
             int idPrestador = Integer.parseInt(idNum);
-
+            
             modelo.setRowCount(0);
             List<Orden> listaOrdenesXPrestador = ordenData.buscaOrdenPorPrestador(idPrestador);
-
+            
             for (Orden ordenes : listaOrdenesXPrestador) {
                 modelo.addRow(new Object[]{
                     ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
                     ordenes.getPrestador().toString(), ordenes.getFecha()
                 });
             }
-        } 
-        
+        }
+
         //Por fecha
         if (jCheckFecha.isSelected()) {
             LocalDate fecha = fromDateToLocalDate(jDFecha.getDate());
-                       
-
+            
             modelo.setRowCount(0);
             List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorFecha(fecha);
-
+            
             for (Orden ordenes : listaOrdenesXFecha) {
                 modelo.addRow(new Object[]{
                     ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
                     ordenes.getPrestador().toString(), ordenes.getFecha()
                 });
             }
-
+            
         }
 
+        //Se prueba búsquedas combinadas
+        //Combina las 3
+        if (jCheckDNI.isSelected() && jCheckPrestador.isSelected() && jCheckFecha.isSelected()) {
+
+            //Guarda variables
+            String dniNum = jTDNIConsulta.getText();
+            int dni = Integer.parseInt(dniNum);
+            String idNum = jTIdPrestador.getText();
+            int idPrestador = Integer.parseInt(idNum);
+            LocalDate fecha = fromDateToLocalDate(jDFecha.getDate());
+
+            //Llamada a método para buscar el afiliado y obtener el id
+            Afiliado afiliadoEncontrado = afiliadoData.buscarAfiliadoPorDni(dni);
+
+            //Guarda id en variable idAFiliado
+            int idAfiliado = afiliadoEncontrado.getIdAfiliado();
+            
+            modelo.setRowCount(0);
+            List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorAfiliadoPrestadorYFecha(idAfiliado, idPrestador, fecha);
+            
+            for (Orden ordenes : listaOrdenesXFecha) {
+                modelo.addRow(new Object[]{
+                    ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
+                    ordenes.getPrestador().toString(), ordenes.getFecha()
+                });
+            }
+            
+        }
+
+        //Combina Afiliado y prestador
+        if (jCheckDNI.isSelected() && jCheckPrestador.isSelected()) {
+
+            //Guarda variables
+            String dniNum = jTDNIConsulta.getText();
+            int dni = Integer.parseInt(dniNum);
+            String idNum = jTIdPrestador.getText();
+            int idPrestador = Integer.parseInt(idNum);
+
+            //Llamada a método para buscar el afiliado y obtener el id
+            Afiliado afiliadoEncontrado = afiliadoData.buscarAfiliadoPorDni(dni);
+
+            //Guarda id en variable idAFiliado
+            int idAfiliado = afiliadoEncontrado.getIdAfiliado();
+            
+            modelo.setRowCount(0);
+            List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorAfiliadoYPrestador(idAfiliado, idPrestador);
+            
+            for (Orden ordenes : listaOrdenesXFecha) {
+                modelo.addRow(new Object[]{
+                    ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
+                    ordenes.getPrestador().toString(), ordenes.getFecha()
+                });
+            }
+            
+        }
+
+        //Busca x afiliado y fecha
+        if (jCheckDNI.isSelected() && jCheckFecha.isSelected()) {
+
+            //Guarda variables
+            String dniNum = jTDNIConsulta.getText();
+            int dni = Integer.parseInt(dniNum);
+            LocalDate fecha = fromDateToLocalDate(jDFecha.getDate());
+
+            //Llamada a método para buscar el afiliado y obtener el id
+            Afiliado afiliadoEncontrado = afiliadoData.buscarAfiliadoPorDni(dni);
+
+            //Guarda id en variable idAFiliado
+            int idAfiliado = afiliadoEncontrado.getIdAfiliado();
+            
+            modelo.setRowCount(0);
+            List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorAfiliadoYFecha(idAfiliado, fecha);
+            
+            for (Orden ordenes : listaOrdenesXFecha) {
+                modelo.addRow(new Object[]{
+                    ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
+                    ordenes.getPrestador().toString(), ordenes.getFecha()
+                });
+            }
+            
+        }
+
+        //busca x prestador y fecha
+        if (jCheckPrestador.isSelected() && jCheckFecha.isSelected()) {
+
+            //Guarda variables
+            String idNum = jTIdPrestador.getText();
+            int idPrestador = Integer.parseInt(idNum);
+            LocalDate fecha = fromDateToLocalDate(jDFecha.getDate());
+            
+            modelo.setRowCount(0);
+            List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorPrestadorYFecha(idPrestador, fecha);
+            
+            for (Orden ordenes : listaOrdenesXFecha) {
+                modelo.addRow(new Object[]{
+                    ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
+                    ordenes.getPrestador().toString(), ordenes.getFecha()
+                });
+            }
+            
+        }
+        
     }
     
     //casteo localDate a date
