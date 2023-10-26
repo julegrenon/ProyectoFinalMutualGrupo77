@@ -60,6 +60,7 @@ public class Menu extends javax.swing.JFrame {
 
         jLBanner.setBackground(new java.awt.Color(204, 255, 255));
         jLBanner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Banner 900x100.png"))); // NOI18N
+        jLBanner.setBorder(new javax.swing.border.MatteBorder(null));
         jLBanner.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jLBannerMouseDragged(evt);
@@ -76,13 +77,14 @@ public class Menu extends javax.swing.JFrame {
         jPInicio.setPreferredSize(new java.awt.Dimension(229, 800));
         jPInicio.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPBotonera.setBackground(new java.awt.Color(153, 255, 204));
+        jPBotonera.setBackground(new java.awt.Color(204, 204, 204));
         jPBotonera.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jBAfiliado.setBackground(new java.awt.Color(102, 102, 102));
+        jBAfiliado.setBackground(new java.awt.Color(51, 51, 51));
         jBAfiliado.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jBAfiliado.setForeground(new java.awt.Color(153, 255, 255));
         jBAfiliado.setText("AFILIADOS");
+        jBAfiliado.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jBAfiliado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBAfiliado.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -94,35 +96,37 @@ public class Menu extends javax.swing.JFrame {
                 jBAfiliadoActionPerformed(evt);
             }
         });
-        jPBotonera.add(jBAfiliado, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 0, 220, 80));
+        jPBotonera.add(jBAfiliado, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 230, 110));
 
-        jBPrestador.setBackground(new java.awt.Color(102, 102, 102));
+        jBPrestador.setBackground(new java.awt.Color(51, 51, 51));
         jBPrestador.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jBPrestador.setForeground(new java.awt.Color(153, 255, 255));
         jBPrestador.setText("PRESTADORES");
+        jBPrestador.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jBPrestador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBPrestador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBPrestadorActionPerformed(evt);
             }
         });
-        jPBotonera.add(jBPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 86, 220, 80));
+        jPBotonera.add(jBPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 230, 110));
 
-        jBOrden.setBackground(new java.awt.Color(102, 102, 102));
+        jBOrden.setBackground(new java.awt.Color(51, 51, 51));
         jBOrden.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jBOrden.setForeground(new java.awt.Color(153, 255, 255));
         jBOrden.setText("CONSULTAS POR ORDEN");
+        jBOrden.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jBOrden.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBOrdenActionPerformed(evt);
             }
         });
-        jPBotonera.add(jBOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, 258, 220, 80));
+        jPBotonera.add(jBOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 230, 120));
 
         jButton1.setBackground(new java.awt.Color(102, 102, 102));
         jButton1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(153, 255, 204));
+        jButton1.setForeground(new java.awt.Color(153, 255, 255));
         jButton1.setText("SALIR");
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -130,7 +134,7 @@ public class Menu extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPBotonera.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 360, -1, -1));
+        jPBotonera.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 100, -1));
 
         jPInicio.add(jPBotonera, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 410));
 

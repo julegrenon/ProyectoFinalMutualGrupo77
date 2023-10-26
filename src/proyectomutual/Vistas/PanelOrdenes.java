@@ -72,7 +72,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(670, 410));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPOrden.setBackground(new java.awt.Color(153, 255, 204));
+        jPOrden.setBackground(new java.awt.Color(204, 255, 255));
         jPOrden.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTConsultaOrden.setModel(new javax.swing.table.DefaultTableModel(

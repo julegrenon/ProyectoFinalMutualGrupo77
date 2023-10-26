@@ -50,7 +50,7 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
         jCActivo = new javax.swing.JCheckBox();
         jLabelBotonVolver = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(153, 255, 204));
+        setBackground(new java.awt.Color(204, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));

@@ -64,7 +64,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(670, 410));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPPrestador.setBackground(new java.awt.Color(153, 255, 204));
+        jPPrestador.setBackground(new java.awt.Color(204, 255, 255));
         jPPrestador.setPreferredSize(new java.awt.Dimension(670, 410));
         jPPrestador.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -333,9 +333,6 @@ public class PanelPrestadores extends javax.swing.JPanel {
 //
 //        return modelo;
 //    }
-    
-    
-    
     
  //====================================================
  // METODO CARGAR CON DIALOGO

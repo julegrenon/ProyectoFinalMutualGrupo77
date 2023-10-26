@@ -76,7 +76,7 @@ public class PanelPrestadoresPropuesta extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(670, 410));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPPrestador.setBackground(new java.awt.Color(153, 255, 204));
+        jPPrestador.setBackground(new java.awt.Color(204, 255, 255));
         jPPrestador.setPreferredSize(new java.awt.Dimension(670, 410));
         jPPrestador.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
