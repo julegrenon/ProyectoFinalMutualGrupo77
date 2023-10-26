@@ -154,7 +154,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
             }
         });
         jPOrden.add(jButtonBuscarXFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, -1, -1));
-        jPOrden.add(jDFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, -1, -1));
+        jPOrden.add(jDFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 100, 20));
 
         add(jPOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 410));
         jPOrden.getAccessibleContext().setAccessibleDescription("");
