@@ -60,7 +60,7 @@ public class PanelNewPrestador extends javax.swing.JPanel {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        setBackground(new java.awt.Color(153, 255, 204));
+        setBackground(new java.awt.Color(204, 255, 255));
         setMaximumSize(new java.awt.Dimension(670, 410));
         setPreferredSize(new java.awt.Dimension(670, 410));
 

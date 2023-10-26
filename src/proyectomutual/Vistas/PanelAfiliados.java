@@ -70,7 +70,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTAfiliado = new javax.swing.JTable();
 
-        setBackground(new java.awt.Color(153, 255, 204));
+        setBackground(new java.awt.Color(204, 255, 255));
         setMinimumSize(new java.awt.Dimension(670, 410));
         setPreferredSize(new java.awt.Dimension(670, 410));
         addMouseListener(new java.awt.event.MouseAdapter() {

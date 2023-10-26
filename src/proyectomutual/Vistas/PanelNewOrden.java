@@ -64,7 +64,7 @@ public class PanelNewOrden extends javax.swing.JPanel {
         jComboBoxPrestador = new javax.swing.JComboBox<>();
         jDFecha = new com.toedter.calendar.JDateChooser();
 
-        setBackground(new java.awt.Color(153, 255, 255));
+        setBackground(new java.awt.Color(204, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
