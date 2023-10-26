@@ -23,7 +23,9 @@ public class PanelPrestadoresPropuesta extends javax.swing.JPanel {
     private DefaultTableModel modelo = new DefaultTableModel() {
 
         public boolean isCellEditable(int f, int c) {
-          
+             if (c >= 2 && c <= 6) {
+                return true;
+            }
             return false;
         }
     };
@@ -68,6 +70,8 @@ public class PanelPrestadoresPropuesta extends javax.swing.JPanel {
         jButtonNuevaEspecialidad = new javax.swing.JButton();
         jTextFieldNuevaEspecialidad = new javax.swing.JTextField();
         jButtonAgregarEspecialidad = new javax.swing.JButton();
+        jLAfiliadoModificar = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(670, 410));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -96,6 +100,7 @@ public class PanelPrestadoresPropuesta extends javax.swing.JPanel {
 
         jLabel4.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Agregar");
         jPPrestador.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
 
@@ -112,8 +117,9 @@ public class PanelPrestadoresPropuesta extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Eliminar");
-        jPPrestador.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, -1, -1));
+        jPPrestador.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, 70, -1));
         jPPrestador.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, -1, -1));
 
         jLAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MasOrden.png"))); // NOI18N
@@ -169,6 +175,23 @@ public class PanelPrestadoresPropuesta extends javax.swing.JPanel {
             }
         });
         jPPrestador.add(jButtonAgregarEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 180, -1, -1));
+
+        jLAfiliadoModificar.setBackground(new java.awt.Color(153, 255, 204));
+        jLAfiliadoModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Editar chico_1.jpg"))); // NOI18N
+        jLAfiliadoModificar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLAfiliadoModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLAfiliadoModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLAfiliadoModificarMouseClicked(evt);
+            }
+        });
+        jPPrestador.add(jLAfiliadoModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, 50, 50));
+
+        jLabel1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Modificar");
+        jPPrestador.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 70, -1));
 
         add(jPPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 683, 415));
         jPPrestador.getAccessibleContext().setAccessibleDescription("");
@@ -242,13 +265,55 @@ public class PanelPrestadoresPropuesta extends javax.swing.JPanel {
         herramientasAgregarEspecialidadInvisible();
     }//GEN-LAST:event_jPPrestadorMouseClicked
 
+    private void jLAfiliadoModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAfiliadoModificarMouseClicked
+
+        try {
+            //Crea variable para guardar la fila seleccionada
+            int filaSeleccionada = jTablePrestadores.getSelectedRow();
+
+            //Setea datos desde la tabla
+            int id = (Integer) jTablePrestadores.getValueAt(filaSeleccionada, 0);
+            String especialidadTxt = (String) jTablePrestadores.getValueAt(filaSeleccionada, 1);
+            String nombre = (String) jTablePrestadores.getValueAt(filaSeleccionada, 2);
+            String apellido = (String) jTablePrestadores.getValueAt(filaSeleccionada, 3);
+            int dni = (Integer) jTablePrestadores.getValueAt(filaSeleccionada, 4);
+            int telefono = (Integer) jTablePrestadores.getValueAt(filaSeleccionada, 5);
+            String domicilio = (String) jTablePrestadores.getValueAt(filaSeleccionada, 6);
+
+            //Busca afiliado a través de método
+            Prestador prestadorSeleccionado = prestadorData.buscarPrestador(id);
+            Especialidad especialidad = especialidadData.buscarEspecialidadXNombre(especialidadTxt);
+
+            //Setea estado
+            boolean estado = prestadorSeleccionado.isEstado();
+
+            //Instancia objeto final de alumno a modificar
+            Prestador prestadorModif = new Prestador(id, nombre, apellido, dni, telefono, domicilio, especialidad, estado);
+
+            //Llamada a método modificar
+            prestadorData.modificarPrestador(prestadorModif);
+
+            //Refresh de tabla
+            cargarTablaVacia();
+            cargarTablaPrestadores();
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "No puede haber campos vacíos");
+        } catch (NumberFormatException ex2) {
+            JOptionPane.showMessageDialog(null, "Formato incorrecto. Complete los campos con los caracteres correctos");
+        } catch (ArrayIndexOutOfBoundsException ex3) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un prestador para editar");
+        }
+    }//GEN-LAST:event_jLAfiliadoModificarMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBMostrarTodosLosPrestadores;
     private javax.swing.JButton jButtonAgregarEspecialidad;
     private javax.swing.JButton jButtonNuevaEspecialidad;
     private javax.swing.JComboBox<Especialidad> jCBEspecialidad;
+    private javax.swing.JLabel jLAfiliadoModificar;
     private javax.swing.JLabel jLAgregar;
     private javax.swing.JLabel jLEliminar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
