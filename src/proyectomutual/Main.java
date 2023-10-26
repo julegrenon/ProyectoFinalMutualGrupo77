@@ -6,6 +6,7 @@
 package proyectomutual;
 
 import java.time.LocalDate;
+import java.util.List;
 import proyectomutual.AccesoDatos.AfiliadoData;
 import proyectomutual.AccesoDatos.Conexion;
 import proyectomutual.AccesoDatos.EspecialidadData;
@@ -26,7 +27,5 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-
     }
 }

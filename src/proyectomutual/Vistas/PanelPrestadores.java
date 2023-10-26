@@ -174,26 +174,30 @@ public class PanelPrestadores extends javax.swing.JPanel {
  
     //=====================================================================================
     private void jCBEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBEspecialidadActionPerformed
-  
-    cargarLista2();
+   
+  //  limpiarList2();
+    cargarListaPxE();
     }//GEN-LAST:event_jCBEspecialidadActionPerformed
 
     //==================================================================================
     //AGREGAR
     
     private void jLAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAgregarMouseClicked
-       
+     
+        PanelPrestadores prestadorVista = new PanelPrestadores();
+        prestadorVista.setSize(670, 410);
+        prestadorVista.setLocation(0, 0);
+        jPFondo.removeAll();
+        jPFondo.add(prestadorVista, BorderLayout.CENTER);
+        jPFondo.revalidate();
+        jPFondo.repaint();
     }//GEN-LAST:event_jLAgregarMouseClicked
 
     //==================================================================================
     //ELIMINAR
     private void jLEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLEliminarMouseClicked
      
-        
-      //   prestadorListaPxE.remove( jCBEspecialidad.getSelectedIndex()) ;
-        
-        
-        
+         //prestaData.eliminarPrestador();
                Prestador prestadorSelec= new Prestador();
                prestadorSelec=  (Prestador) jLPA.getSelectedValuesList();
                prestaData.eliminarPrestador( prestadorSelec.getEspecialidad().getIdEspecialidad());
@@ -280,47 +284,54 @@ public class PanelPrestadores extends javax.swing.JPanel {
 
    //==================================================================================
 //CARGA LISTA PRESTADORES x ESP
-   
-  public DefaultListModel cargarLista2(){
-  
-  
-      ArrayList<Prestador> prestadorListaPxE = new ArrayList( prestaData.listarPrestador());
-      Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
-      DefaultListModel modelo= (DefaultListModel) jLPXE.getModel();
-      
-  
-       if (especialidadSelec != null) {
-           modelo.addElement(especialidadSelec.getEspecialidad());
-      }
-     return modelo;  
-  }
+//   
+//  public DefaultListModel cargarLista2(){
+//  
+//  
+//      ArrayList<Prestador> prestadorListaPxE = new ArrayList( prestaData.listarPrestador());
+//      Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
+//      DefaultListModel modelo= (DefaultListModel) jLPXE.getModel();
+//      String  captura=  (String) jCBEspecialidad.getSelectedItem(); 
+//  
+//       if (modelo != null ) {
+//           
+//           modelo.addElement(jCBEspecialidad.getSelectedItem().equals(prestaData.listarPrestador()));
+//           
+         
+         
+          //  modelo.addElement(prestaData.obtenerPrestadores(especialidadSelec.getIdEspecialidad()));
+         //  System.out.println(modelo);
+           
+         //  modelo.addElement(prestaData.obtenerPrestadores(especialidadSelec.getIdEspecialidad()));
+           
+          // modelo.addElement(especialidadSelec.getEspecialidad());
+//
+//      }
+//     return modelo;  
+//  }
  //===============================================================
  //       Metodo queno funciona 
  
- //         public void cargarListaPxE() {
-//        try{
-//        modelo2.removeAllElements();
-//        Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
-//        
-//        if (especialidadSelec != null) {
-//            ArrayList<Especialidad> especialidadesLista = new ArrayList();
-//            especialidadesLista.add(especialidadSelec);
-//            ArrayList<Prestador> prestadorListaPxE = new ArrayList();
-//            if (prestadorListaPxE != null) {
-//                prestadorListaPxE.add(prestadorNuevo);
-//                prestadorNuevo.getEspecialidad();
-//                prestadorListaPxE.add(prestadorNuevo);
-//                modelo2.addElement(prestadorNuevo.toString());
-//            } else {
-//                JOptionPane.showMessageDialog(null, " No hay prestadores con esa especialidad ");
-//            }
-//        } else {
-//            JOptionPane.showMessageDialog(null, " Seleccione un valor de la Lista ");
-//        }
-//    }   catch (NullPointerException ex) {
-//            JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
-//       }
-  }
+          public void cargarListaPxE() {
+       
+              try{
+                  
+       modelo2.removeAllElements();
+               
+           Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
+           ArrayList<Prestador> prestadorLista = (ArrayList<Prestador>) prestaData.listaPrestadorEspecialidad(especialidadSelec.getIdEspecialidad());
+
+        for (Prestador prestadorNuevo: prestadorLista) {
+         
+            modelo2.addElement(prestadorNuevo.getEspecialidad().getEspecialidad()+" // "+prestadorNuevo.getNombre()+", "+prestadorNuevo.getApellido());
+        }
+    }   catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una especialidad");
+       }
+     }
+}
+  
+          
 
 
 

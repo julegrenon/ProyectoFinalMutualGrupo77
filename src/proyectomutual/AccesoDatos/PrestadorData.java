@@ -210,6 +210,46 @@ public class PrestadorData {
 
         return prestadorLista;
     }
+        
+        
+        public List <Prestador> listaPrestadorEspecialidad(int idEspecialidad){
+        
+            String sql="SELECT `idPrestador`, `nombre`, `apellido`, `dni`, `telefono`, `domicilio`, `idEspecialidad`, `estado` "
+                    + "FROM `prestador` WHERE  idEspecialidad=?";
+             ArrayList<Prestador> prestadorLista = new ArrayList<>();
+            
+          Prestador prestador= null;
+        try {
+            PreparedStatement ps=conexion.prepareStatement(sql);
+            ps.setInt(1, idEspecialidad);
+            
+            ResultSet rs=ps.executeQuery();
+            
+            while (rs.next()){
+                prestador=new Prestador();
+                prestador.setIdPrestador(rs.getInt("idPrestador"));
+                prestador.setNombre(rs.getString("nombre"));
+                prestador.setApellido(rs.getString("apellido"));
+                prestador.setDomicilio(rs.getString("domicilio"));
+                prestador.setDni(rs.getInt("dni"));
+                prestador.setTelefono(rs.getInt("telefono"));
+                
+                int especialidadInt = rs.getInt("idEspecialidad");
+                Especialidad especialidad = especialidadData.buscarEspecialidad(especialidadInt);
+                
+                prestador.setEspecialidad(especialidad);
+                prestador.setEstado(true);
+                
+                prestadorLista.add(prestador);
+                
+            } 
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla prestador");
+        }
+        return prestadorLista;
+    }
+        
 }
     
 

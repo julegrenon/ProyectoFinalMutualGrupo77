@@ -44,12 +44,12 @@ public class PanelNewPrestador extends javax.swing.JPanel {
         jTTelP = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTDNIP = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
+        jLAgregarP = new javax.swing.JLabel();
         jTNombreP = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jCBEspecialidades = new javax.swing.JComboBox<>();
-        jLabel11 = new javax.swing.JLabel();
+        jLVolverP = new javax.swing.JLabel();
 
         jInternalFrame1.setVisible(true);
 
@@ -104,14 +104,9 @@ public class PanelNewPrestador extends javax.swing.JPanel {
 
         jTDNIP.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Agregar.png"))); // NOI18N
-        jLabel10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jLabel10.setMinimumSize(null);
-        jLabel10.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel10MouseClicked(evt);
-            }
-        });
+        jLAgregarP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Agregar.png"))); // NOI18N
+        jLAgregarP.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLAgregarP.setMinimumSize(null);
 
         jTNombreP.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -122,10 +117,10 @@ public class PanelNewPrestador extends javax.swing.JPanel {
 
         jCBEspecialidades.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Retroc.png"))); // NOI18N
-        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLVolverP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Retroc.png"))); // NOI18N
+        jLVolverP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel11MouseClicked(evt);
+                jLVolverPMouseClicked(evt);
             }
         });
 
@@ -141,7 +136,7 @@ public class PanelNewPrestador extends javax.swing.JPanel {
                         .addGap(0, 223, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(246, 620, Short.MAX_VALUE)
-                        .addComponent(jLabel11)))
+                        .addComponent(jLVolverP)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
@@ -180,7 +175,7 @@ public class PanelNewPrestador extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLAgregarP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(199, 199, 199))
         );
         layout.setVerticalGroup(
@@ -191,7 +186,7 @@ public class PanelNewPrestador extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel1))
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLVolverP, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addGap(8, 8, 8)
@@ -226,76 +221,29 @@ public class PanelNewPrestador extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLAgregarP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(35, 35, 35)
                                 .addComponent(jLabel9)))
                         .addContainerGap())))
         );
     }// </editor-fold>//GEN-END:initComponents
-     //===============================================================================
-    //CARGA CAMPOS
-    private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
 
-        try {
-
-            String nombreP = jTNombreP.getText();
-            String apellidoP = jTApellidoP.getText();
-            String dniNumero = jTDNIP.getText();
-            int dni = Integer.parseInt(dniNumero);
-            String telefonoNum = jTTelP.getText();
-            int telefono = Integer.parseInt(telefonoNum);
-            String domicilio = jTDireP.getText();
-
-            Especialidad especialidadSelec = (Especialidad) jCBEspecialidades.getSelectedItem();
-
-            if (jTDNIP.getText().equals("") || jTApellidoP.getText().equals("")
-                    || jTNombreP.getText().equals("") || jTTelP.getText().equals("")
-                    || jTDireP.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "Completar todos los campos");
-            } else {
-                //Crea objeto
-                Prestador prestador = new Prestador(nombreP, apellidoP, dni, telefono, domicilio, especialidadSelec, true);
-
-                //Llamada a método agregar
-                prestaData.agregarPrestador(prestador);
-
-                //limpia todos los campos
-                limpiarCampos();
-            }
-        } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
-        } catch (NumberFormatException ex2) {
-            JOptionPane.showMessageDialog(null, "DNI y teléfono sólo admiten números");
-        }
-
-    }//GEN-LAST:event_jLabel10MouseClicked
- 
-    //VOLVER
-    //===================================================
-    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
-        //Istancia clase panel 
-        PanelPrestadores prestadorVista = new PanelPrestadores();
-
-        //Setea dimensiones y location
-        prestadorVista.setSize(670, 410);
-        prestadorVista.setLocation(0, 0);
-
-        //Remueve y agrega la vista del panel instanciada
+    private void jLVolverPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVolverPMouseClicked
+        
         jPFondo.removeAll();
-        jPFondo.add(prestadorVista, BorderLayout.CENTER);
-
         jPFondo.revalidate();
         jPFondo.repaint();
-    }//GEN-LAST:event_jLabel11MouseClicked
+    }//GEN-LAST:event_jLVolverPMouseClicked
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Especialidad> jCBEspecialidades;
     private javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JLabel jLAgregarP;
+    private javax.swing.JLabel jLVolverP;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
