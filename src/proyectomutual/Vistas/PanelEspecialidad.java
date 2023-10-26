@@ -6,9 +6,11 @@
 package proyectomutual.Vistas;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyectomutual.AccesoDatos.EspecialidadData;
 import proyectomutual.AccesoDatos.PrestadorData;
+import proyectomutual.entidades.Especialidad;
 import proyectomutual.entidades.Prestador;
 
 /**
@@ -36,7 +38,7 @@ public class PanelEspecialidad extends javax.swing.JPanel {
         initComponents();
         cargarColumnas();
         cargarTabla();
-        llenarComboBox();
+        textFieldNuevaEspecialidadInvisible();
     }
 
     /**
@@ -50,26 +52,18 @@ public class PanelEspecialidad extends javax.swing.JPanel {
 
         jPEspecialidad = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextFieldEspecialidad = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jComboBoxPrestador = new javax.swing.JComboBox<>();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel4 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableEspecialidades = new javax.swing.JTable();
-        jPanel3 = new javax.swing.JPanel();
+        jTextFieldNuevaEspecialidad = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        jLabelNuevaEspecialidad = new javax.swing.JLabel();
+        jButtonAgregarNuevaEspecialidad = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(670, 410));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -81,20 +75,24 @@ public class PanelEspecialidad extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("GESTION ESPECIALIDADES");
 
-        jLabel2.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel2.setText("Especialidad:");
-
-        jTextFieldEspecialidad.setForeground(new java.awt.Color(204, 204, 204));
-        jTextFieldEspecialidad.setText("Ingrese su nombre");
-
-        jLabel3.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel3.setText("ESPECIALIDADES");
-
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MasOrden.png"))); // NOI18N
+        jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel6.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                jLabel6AncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -121,39 +119,13 @@ public class PanelEspecialidad extends javax.swing.JPanel {
         jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Lupa chica.png"))); // NOI18N
-
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Editar chico.jpg"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel7)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel7)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
         jLabel8.setFont(new java.awt.Font("Lucida Sans", 3, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel8.setText("INSERTAR ESPECIALIDAD");
+        jLabel8.setText("AGREGAR");
 
         jLabel9.setFont(new java.awt.Font("Lucida Sans", 3, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(0, 102, 102));
         jLabel9.setText("ELIMINAR");
-
-        jLabel10.setFont(new java.awt.Font("Lucida Sans", 3, 12)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel10.setText("VOLVER");
 
         jTableEspecialidades.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -168,164 +140,140 @@ public class PanelEspecialidad extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTableEspecialidades);
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/EliminarChica.jpg"))); // NOI18N
+        jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 60, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel11)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
-            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel3Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel11)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        jLabelNuevaEspecialidad.setText("Ingrese una nueva especialidad");
 
-        jLabel12.setFont(new java.awt.Font("Lucida Sans", 3, 12)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel12.setText("MODIFICAR");
-
-        jLabel13.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel13.setText("Prestador:");
+        jButtonAgregarNuevaEspecialidad.setText("AGREGAR");
+        jButtonAgregarNuevaEspecialidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgregarNuevaEspecialidadActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPEspecialidadLayout = new javax.swing.GroupLayout(jPEspecialidad);
         jPEspecialidad.setLayout(jPEspecialidadLayout);
         jPEspecialidadLayout.setHorizontalGroup(
             jPEspecialidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPEspecialidadLayout.createSequentialGroup()
-                .addGroup(jPEspecialidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPEspecialidadLayout.createSequentialGroup()
-                        .addGroup(jPEspecialidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPEspecialidadLayout.createSequentialGroup()
-                                .addGroup(jPEspecialidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPEspecialidadLayout.createSequentialGroup()
-                                        .addGap(73, 73, 73)
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPEspecialidadLayout.createSequentialGroup()
-                                        .addContainerGap()
-                                        .addComponent(jLabel13)
-                                        .addGap(4, 4, 4)))
-                                .addGroup(jPEspecialidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFieldEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBoxPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPEspecialidadLayout.createSequentialGroup()
-                                .addGap(239, 239, 239)
-                                .addComponent(jLabel1))
-                            .addGroup(jPEspecialidadLayout.createSequentialGroup()
-                                .addGap(109, 109, 109)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(112, 112, 112)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(98, 98, 98)
-                                .addGroup(jPEspecialidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPEspecialidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPEspecialidadLayout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(jPEspecialidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPEspecialidadLayout.createSequentialGroup()
-                                .addGap(29, 29, 29)
-                                .addComponent(jLabel8)
-                                .addGap(53, 53, 53)
-                                .addComponent(jLabel12)
-                                .addGap(257, 257, 257)
-                                .addComponent(jLabel10)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(239, 239, 239)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel5))
+            .addGroup(jPEspecialidadLayout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 601, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(33, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPEspecialidadLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(jPEspecialidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPEspecialidadLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(83, 83, 83))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPEspecialidadLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(249, 249, 249))))
+                .addGroup(jPEspecialidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPEspecialidadLayout.createSequentialGroup()
+                        .addGroup(jPEspecialidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPEspecialidadLayout.createSequentialGroup()
+                                .addGap(128, 128, 128)
+                                .addComponent(jTextFieldNuevaEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPEspecialidadLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButtonAgregarNuevaEspecialidad)
+                                .addGap(149, 149, 149)))
+                        .addComponent(jLabel11)))
+                .addGap(104, 104, 104))
+            .addGroup(jPEspecialidadLayout.createSequentialGroup()
+                .addGap(105, 105, 105)
+                .addGroup(jPEspecialidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addGap(73, 73, 73)
+                .addComponent(jLabelNuevaEspecialidad)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel9)
+                .addGap(96, 96, 96))
         );
         jPEspecialidadLayout.setVerticalGroup(
             jPEspecialidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPEspecialidadLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(jPEspecialidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPEspecialidadLayout.createSequentialGroup()
-                        .addGroup(jPEspecialidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextFieldEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(23, 23, 23)
-                        .addGroup(jPEspecialidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBoxPrestador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13)))
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPEspecialidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPEspecialidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel1))
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addGroup(jPEspecialidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel9)
+                    .addGroup(jPEspecialidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8)
-                        .addComponent(jLabel12)
-                        .addComponent(jLabel9))
-                    .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabelNuevaEspecialidad)))
                 .addGroup(jPEspecialidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPEspecialidadLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel11))
+                    .addGroup(jPEspecialidadLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(jPEspecialidadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPEspecialidadLayout.createSequentialGroup()
+                                .addComponent(jTextFieldNuevaEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonAgregarNuevaEspecialidad))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
 
         add(jPEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jLabel6AncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jLabel6AncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel6AncestorAdded
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        textFieldNuevaEspecialidadVisible();
+    }//GEN-LAST:event_jLabel6MouseClicked
+
+    private void jButtonAgregarNuevaEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarNuevaEspecialidadActionPerformed
+        try {
+            if (jTextFieldNuevaEspecialidad.getText() != null){
+            String especialidadTexto = jTextFieldNuevaEspecialidad.getText();
+            
+            Especialidad nuevaEspecialidad = new Especialidad (especialidadTexto);
+            
+            especialidadData.agregarEspecialidad(nuevaEspecialidad);
+            
+            textFieldNuevaEspecialidadInvisible();
+            cargarTablaVacia();
+            cargarTabla();
+            } else {
+                JOptionPane.showMessageDialog(null, "Debe ingresar el nombre de una especialidad para agregar");
+                cargarTablaVacia();
+            cargarTabla();
+            }
+        } catch (NumberFormatException ex){
+            JOptionPane.showMessageDialog(null, "ERRROR");
+        }
+    }//GEN-LAST:event_jButtonAgregarNuevaEspecialidadActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<Prestador> jComboBoxPrestador;
+    private javax.swing.JButton jButtonAgregarNuevaEspecialidad;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelNuevaEspecialidad;
     private javax.swing.JPanel jPEspecialidad;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTableEspecialidades;
-    private javax.swing.JTextField jTextFieldEspecialidad;
+    private javax.swing.JTextField jTextFieldNuevaEspecialidad;
     // End of variables declaration//GEN-END:variables
 
 
@@ -337,38 +285,33 @@ public class PanelEspecialidad extends javax.swing.JPanel {
     
 
     private void cargarTabla() {
-    modelo.setRowCount(0);
-    Prestador prestadorSeleccionado = obtenerPrestadorSeleccionado();
+        modelo.setRowCount(0);
 
-    if (prestadorSeleccionado != null) {
-        List<Prestador> prestadores = prestadorData.obtenerPrestadores(prestadorSeleccionado.getIdPrestador());
-        
-        for (Prestador prestador : prestadores) {
-            if (prestador != null) {
-                modelo.addRow(new Object[]{
-                    prestador.getIdPrestador(), prestador.getNombre(), prestador.getApellido(), prestador.getDni(), prestador.getEspecialidad().getEspecialidad()
-                });
-            }
-        }
-    }
-}
-    
-    private void llenarComboBox(){
-        List<Prestador> prestadores = prestadorData.listarPrestador();
-        for (Prestador prestador : prestadores) {
-            
-            jComboBoxPrestador.addItem(prestador);
-            
+        List<Especialidad> especialidadLista = especialidadData.listarEspecialidades();
+
+        for (Especialidad especialidades : especialidadLista) {
+            modelo.addRow(new Object[]{
+                especialidades.getIdEspecialidad(), especialidades.getEspecialidad()});
         }
     }
     
-    private Prestador obtenerPrestadorSeleccionado() {
-        int indiceSeleccionado = jComboBoxPrestador.getSelectedIndex();
-        if (indiceSeleccionado != -1) {
-            return prestadorData.listarPrestador().get(indiceSeleccionado); 
-        }
-        return null;
+    private void textFieldNuevaEspecialidadInvisible() {
+        jTextFieldNuevaEspecialidad.setVisible(false);
+        jLabelNuevaEspecialidad.setVisible(false);
+        jButtonAgregarNuevaEspecialidad.setVisible(false);
+    }
+
+    private void textFieldNuevaEspecialidadVisible() {
+        jTextFieldNuevaEspecialidad.setVisible(true);
+        jLabelNuevaEspecialidad.setVisible(true);
+        jButtonAgregarNuevaEspecialidad.setVisible(true);
     }
     
-    
-}
+        //Limpia datos de la tabla
+    private void cargarTablaVacia() {
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+    }
+}    
+

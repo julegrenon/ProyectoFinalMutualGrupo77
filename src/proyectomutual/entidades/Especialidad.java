@@ -10,23 +10,19 @@ package proyectomutual.entidades;
  * @author Alan
  */
 public class Especialidad {
+
     private int idEspecialidad;
     private String especialidad;
 
     public Especialidad() {
     }
 
-    public Especialidad(int idEspecialidad) {
+    public Especialidad(int idEspecialidad, String especialidad) {
         this.idEspecialidad = idEspecialidad;
-    }
-
-    public Especialidad(String especialidad) {
         this.especialidad = especialidad;
     }
 
-    
-    public Especialidad(int idEspecialidad, String especialidad) {
-        this.idEspecialidad = idEspecialidad;
+    public Especialidad(String especialidad) {
         this.especialidad = especialidad;
     }
 

@@ -15,11 +15,11 @@ import proyectomutual.entidades.Prestador;
 public class PrestadorData {
     
     private Connection conexion = null;
-    private EspecialidadData espData;
+    private EspecialidadData especialidadData = new EspecialidadData();
 
     public PrestadorData() {
         conexion = Conexion.getConexion();
-        espData = new EspecialidadData();
+      
     }
     
     public void agregarPrestador(Prestador prestador){
@@ -158,7 +158,7 @@ public class PrestadorData {
                 prestador.setTelefono(rs.getInt("telefono"));
                 
                 int especialidadInt = rs.getInt("idEspecialidad");
-                Especialidad especialidad = new Especialidad(especialidadInt);
+                Especialidad especialidad = especialidadData.buscarEspecialidad(especialidadInt);
 
                 prestador.setEspecialidad(especialidad);
                 prestador.setEstado(true);
@@ -209,65 +209,6 @@ public class PrestadorData {
         }
 
         return prestadorLista;
-    }
-        
-         public List<Prestador> obtenerPrestadores(int id) {
-        String sql = "SELECT idPrestador, nombre, dni, domicilio, telefono, idEspecialidad FROM prestador WHERE estado=1";
-        ArrayList<Prestador> prestadorLista = new ArrayList<>();
-
-        try {
-            PreparedStatement ps = conexion.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                Prestador prestador = new Prestador();
-                prestador.setIdPrestador(rs.getInt("idPrestador"));
-                prestador.setNombre(rs.getString("nombre"));
-                prestador.setDni(rs.getInt("dni"));
-                prestador.setDomicilio(rs.getString("domicilio"));
-                prestador.setTelefono(rs.getInt("telefono"));
-
-                int especialidadInt = rs.getInt("idEspecialidad");
-                Especialidad especialidad = new Especialidad(especialidadInt);
-
-                prestador.setEspecialidad(especialidad);
-                prestador.setEstado(true);
-
-                prestadorLista.add(prestador);
-            }
-            ps.close();
-
-            // Imprimir la lista en la consola
-            for (Prestador p : prestadorLista) {
-                System.out.println("ID: " + p.getIdPrestador() + ", Nombre: " + p.getNombre() + ", DNI: " + p.getDni());
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla prestador");
-        }
-
-        return prestadorLista;
-
-         }
-    public void eliminarPrestador(Prestador prestador) {
-   
-        String sql = "UPDATE `prestador` "
-                + "SET `idPrestador`,`nombre`,`apellido`',`dni`,`telefono`,`domicilio`,`idEspecialidad`,`estado`"
-                + "' WHERE =?";
-
-        
-        try {
-            PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setInt(1, 0);
-
-            int exito = ps.executeUpdate();
-            if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Afiliado eliminado");
-            }
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla afiliados");
-        }
-
     }
 }
     
