@@ -9,11 +9,13 @@ package proyectomutual.Vistas;
  *
  * @author sonia
  */
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
 import java.awt.BorderLayout;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyectomutual.AccesoDatos.AfiliadoData;
 import proyectomutual.AccesoDatos.OrdenData;
@@ -66,8 +68,8 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jLVolver = new javax.swing.JLabel();
         jBLimpiar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        jDFecha = new com.toedter.calendar.JDateChooser();
         jButtonBuscarXFiltro = new javax.swing.JButton();
+        jDFecha = new com.toedter.calendar.JDateChooser();
 
         setPreferredSize(new java.awt.Dimension(670, 410));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -150,7 +152,6 @@ public class PanelOrdenes extends javax.swing.JPanel {
         });
         jPOrden.add(jBLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, -1, -1));
         jPOrden.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 610, 10));
-        jPOrden.add(jDFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, -1, -1));
 
         jButtonBuscarXFiltro.setText("Buscar");
         jButtonBuscarXFiltro.addActionListener(new java.awt.event.ActionListener() {
@@ -159,6 +160,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
             }
         });
         jPOrden.add(jButtonBuscarXFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, -1, -1));
+        jPOrden.add(jDFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 110, 30));
 
         add(jPOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 410));
         jPOrden.getAccessibleContext().setAccessibleDescription("");
@@ -243,8 +245,20 @@ public class PanelOrdenes extends javax.swing.JPanel {
     }//GEN-LAST:event_jTConsultaOrdenMouseClicked
 
     private void jButtonBuscarXFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarXFiltroActionPerformed
+        
+        try {
         cargarTablaVacia();
         cargarTablaSegunFiltro();
+        
+        } catch (NumberFormatException ex){
+            JOptionPane.showMessageDialog(null, "Debe ingresar un valor númerico en campo DNI o ID Prestador para realizar la búesqueda");
+            cargarTablaVacia();
+            cargarTablaOrdenes();
+        } catch (NullPointerException ex2){
+        JOptionPane.showMessageDialog(null, "Debe seleccionar una fecha para buscar");
+            cargarTablaVacia();
+            cargarTablaOrdenes();
+    }
     }//GEN-LAST:event_jButtonBuscarXFiltroActionPerformed
 
 
@@ -366,7 +380,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
     private void limpiarCamposAlDestildar(){
         jTDNIConsulta.setText("");
         jTIdPrestador.setText("");
-        jDFecha.setDateFormatString("");
+        //jDFecha.setDateFormatString("");
     }
     
     private void botonBuscarXFiltroVisible(){
@@ -380,6 +394,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
     
     //Carga tabla según filtro seleccionado
     private void cargarTablaSegunFiltro() {
+        //Por DNI Afiliado
         if (jCheckDNI.isSelected()) {
 
             //Guarda dni en variable
@@ -401,7 +416,10 @@ public class PanelOrdenes extends javax.swing.JPanel {
                     ordenes.getPrestador().toString(), ordenes.getFecha()
                 });
             }
-        } else if (jCheckPrestador.isSelected()) {
+        }  
+        
+        //Por idPrestador
+        if (jCheckPrestador.isSelected()) {
 
             String idNum = jTIdPrestador.getText();
             int idPrestador = Integer.parseInt(idNum);
@@ -415,11 +433,15 @@ public class PanelOrdenes extends javax.swing.JPanel {
                     ordenes.getPrestador().toString(), ordenes.getFecha()
                 });
             }
-        } else if (jCheckFecha.isSelected()) {
-            Date fecha = jDFecha.getDate();
+        } 
+        
+        //Por fecha
+        if (jCheckFecha.isSelected()) {
+            LocalDate fecha = fromDateToLocalDate(jDFecha.getDate());
+                       
 
             modelo.setRowCount(0);
-            List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorFecha((java.sql.Date) fecha);
+            List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorFecha(fecha);
 
             for (Orden ordenes : listaOrdenesXFecha) {
                 modelo.addRow(new Object[]{
@@ -429,6 +451,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
             }
 
         }
+
     }
     
     //casteo localDate a date

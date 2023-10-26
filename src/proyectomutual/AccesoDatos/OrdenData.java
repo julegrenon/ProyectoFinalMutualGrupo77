@@ -195,21 +195,21 @@ public class OrdenData {
     //===================================================================
     //LISTA DE OREDENES POR FECHA
 
-    public List<Orden> buscaOrdenPorFecha(Date date) {
+    public List<Orden> buscaOrdenPorFecha(LocalDate date) {
         String sql = "SELECT idOrden, fecha, formaPago, importe, idAfiliado, idPrestador "
                 + "FROM orden WHERE fecha=?";
 
         ArrayList<Orden> listaXFecha = new ArrayList();
         try {
             PreparedStatement ps = conex.prepareStatement(sql);
-            ps.setDate(1, date);
+            ps.setDate(1, Date.valueOf(date));
 
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 Orden orden = new Orden();
                 orden.setIdOrden(rs.getInt("idOrden"));
-                orden.setFecha(date.toLocalDate());
+                orden.setFecha(date);
                 orden.setFormaPago(rs.getString("formaPago"));
                 orden.setImporte(rs.getDouble("importe"));
                 
