@@ -297,12 +297,13 @@ public class PanelAfiliados extends javax.swing.JPanel {
     }//GEN-LAST:event_jLAfiliadoEliminarMouseClicked
 
     private void jLVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVolverMouseClicked
-        // PanelAfiliados afiliadosVista=new PanelAfiliados();
-        jPFondo.removeAll();
+        //PanelAfiliados afiliadosVista=new PanelAfiliados();
+       jPFondo.removeAll();
         // jPFondo.remove(afiliadosVista);
 
         jPFondo.revalidate();
         jPFondo.repaint();
+        
     }//GEN-LAST:event_jLVolverMouseClicked
 
     private void jBAfiliadoOrdenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBAfiliadoOrdenMouseClicked
