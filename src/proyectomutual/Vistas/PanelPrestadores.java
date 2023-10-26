@@ -58,6 +58,8 @@ public class PanelPrestadores extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLAgregar = new javax.swing.JLabel();
         jBMostrar = new javax.swing.JButton();
+        jLModificarP = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(670, 410));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -115,7 +117,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 102, 102));
         jLabel4.setText("Agregar");
-        jPPrestador.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 340, -1, -1));
+        jPPrestador.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, -1, -1));
 
         jLEliminar.setBackground(new java.awt.Color(0, 0, 0));
         jLEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/EliminarChica.jpg"))); // NOI18N
@@ -125,12 +127,12 @@ public class PanelPrestadores extends javax.swing.JPanel {
                 jLEliminarMouseClicked(evt);
             }
         });
-        jPPrestador.add(jLEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 360, 50, 50));
+        jPPrestador.add(jLEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 360, 50, 50));
 
         jLabel3.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 102, 102));
         jLabel3.setText("Eliminar");
-        jPPrestador.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, -1, -1));
+        jPPrestador.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, -1, 20));
         jPPrestador.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, -1, -1));
 
         jLAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MasOrden.png"))); // NOI18N
@@ -139,7 +141,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
                 jLAgregarMouseClicked(evt);
             }
         });
-        jPPrestador.add(jLAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, 50, 50));
+        jPPrestador.add(jLAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 360, 50, 50));
 
         jBMostrar.setForeground(new java.awt.Color(0, 0, 0));
         jBMostrar.setText("Mostrar");
@@ -149,6 +151,20 @@ public class PanelPrestadores extends javax.swing.JPanel {
             }
         });
         jPPrestador.add(jBMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, -1, -1));
+
+        jLModificarP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Editar chico_1.jpg"))); // NOI18N
+        jLModificarP.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jLModificarP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLModificarPMouseClicked(evt);
+            }
+        });
+        jPPrestador.add(jLModificarP, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 360, 50, 50));
+
+        jLabel5.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 102, 102));
+        jLabel5.setText("Modificar");
+        jPPrestador.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 340, -1, -1));
 
         add(jPPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 683, 415));
         jPPrestador.getAccessibleContext().setAccessibleDescription("");
@@ -162,26 +178,17 @@ public class PanelPrestadores extends javax.swing.JPanel {
     //===================================================================================
     //VOLVER
     private void jLVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVolverMouseClicked
-     
-        PanelPrestadores prestadorVista = new PanelPrestadores();
-        prestadorVista.setSize(670, 410);
-        prestadorVista.setLocation(0, 0);
         jPFondo.removeAll();
-        jPFondo.add(prestadorVista, BorderLayout.CENTER);
         jPFondo.revalidate();
         jPFondo.repaint();
     }//GEN-LAST:event_jLVolverMouseClicked
- 
     //=====================================================================================
     private void jCBEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBEspecialidadActionPerformed
-   
   //  limpiarList2();
     cargarListaPxE();
     }//GEN-LAST:event_jCBEspecialidadActionPerformed
-
     //==================================================================================
     //AGREGAR
-    
     private void jLAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAgregarMouseClicked
      
         PanelPrestadores prestadorVista = new PanelPrestadores();
@@ -196,20 +203,32 @@ public class PanelPrestadores extends javax.swing.JPanel {
     //==================================================================================
     //ELIMINAR
     private void jLEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLEliminarMouseClicked
-     
-         //prestaData.eliminarPrestador();
-               Prestador prestadorSelec= new Prestador();
-               prestadorSelec=  (Prestador) jLPA.getSelectedValuesList();
-               prestaData.eliminarPrestador( prestadorSelec.getEspecialidad().getIdEspecialidad());
 
-
+        eliminaDatoSelec();
+       
     }//GEN-LAST:event_jLEliminarMouseClicked
+
+    private void jLModificarPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLModificarPMouseClicked
+       
+       
+        
+//    private DefaultListModel eliminaDatoSelec() {
+//
+//        DefaultListModel modelo = (DefaultListModel) jLPA.getModel();
+//
+//        modelo.remove(jLPA.getSelectedIndex());
+//
+//        return modelo;
+//    }
+        
+    }//GEN-LAST:event_jLModificarPMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBMostrar;
     private javax.swing.JComboBox<Especialidad> jCBEspecialidad;
     private javax.swing.JLabel jLAgregar;
     private javax.swing.JLabel jLEliminar;
+    private javax.swing.JLabel jLModificarP;
     private javax.swing.JList<String> jLPA;
     private javax.swing.JList<String> jLPXE;
     private javax.swing.JLabel jLVolver;
@@ -217,6 +236,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPPrestador;
@@ -242,96 +262,100 @@ public class PanelPrestadores extends javax.swing.JPanel {
         jLPXE.setModel(modeloVacio2);
        return modeloVacio2;
     }
-
 //===================================================================================
 //CARGA LISTA PRESTADORES
-    
-    //opcion
-//    public DefaultListModel cargarLista(){
-//     ArrayList<Prestador> prestadorLista = new ArrayList();
-//      DefaultListModel modelo= (DefaultListModel) jLPA.getModel();
-//      for(Prestador prestaSelec:prestadorLista ){
-//           modelo.addElement(prestaSelec.getEspecialidad());
-//    return modelo;
-//      }
-    
+
     public void cargarLista() {
 
         modelo.removeAllElements();
         ArrayList<Prestador> prestadorLista = (ArrayList<Prestador>) prestaData.listarPrestador();
         for (Prestador prestadorNuevo: prestadorLista) {
-
             modelo.addElement(prestadorNuevo.getEspecialidad().getEspecialidad()+" // "+prestadorNuevo.getNombre()+", "+prestadorNuevo.getApellido());
         }
-
     }
-
 //==================================================================================
 //CARGA COMBOBOX DE ESPECIALIDADES
-         public void cargarComboBox(){
-         jCBEspecialidad.removeAllItems();
-         
-          List<Especialidad> especialidadesLista =espData.listarEspecialidades();
-       
-          for(Especialidad especial: especialidadesLista)
- 
-               jCBEspecialidad.addItem(especial);
-          
+     public void cargarComboBox() {
+        jCBEspecialidad.removeAllItems();
+
+        List<Especialidad> especialidadesLista = espData.listarEspecialidades();
+
+        for (Especialidad especial : especialidadesLista) {
+            jCBEspecialidad.addItem(especial);
+        }
+             
            //otra opcion para recorrer
           // for(int i=0; i<especialidadesLista.size();i++){
           // jCBEspecialidad.addItem((Especialidad) espData.listarEspecialidades());         
     }
 
-   //==================================================================================
-//CARGA LISTA PRESTADORES x ESP
-//   
-//  public DefaultListModel cargarLista2(){
-//  
-//  
-//      ArrayList<Prestador> prestadorListaPxE = new ArrayList( prestaData.listarPrestador());
-//      Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
-//      DefaultListModel modelo= (DefaultListModel) jLPXE.getModel();
-//      String  captura=  (String) jCBEspecialidad.getSelectedItem(); 
-//  
-//       if (modelo != null ) {
-//           
-//           modelo.addElement(jCBEspecialidad.getSelectedItem().equals(prestaData.listarPrestador()));
-//           
-         
-         
-          //  modelo.addElement(prestaData.obtenerPrestadores(especialidadSelec.getIdEspecialidad()));
-         //  System.out.println(modelo);
-           
-         //  modelo.addElement(prestaData.obtenerPrestadores(especialidadSelec.getIdEspecialidad()));
-           
-          // modelo.addElement(especialidadSelec.getEspecialidad());
-//
-//      }
-//     return modelo;  
-//  }
  //===============================================================
- //       Metodo queno funciona 
- 
-          public void cargarListaPxE() {
-       
-              try{
-                  
-       modelo2.removeAllElements();
-               
-           Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
-           ArrayList<Prestador> prestadorLista = (ArrayList<Prestador>) prestaData.listaPrestadorEspecialidad(especialidadSelec.getIdEspecialidad());
+ //CARGA LISTA PRESTADORES x ESP
+       public void cargarListaPxE() {
 
-        for (Prestador prestadorNuevo: prestadorLista) {
-         
-            modelo2.addElement(prestadorNuevo.getEspecialidad().getEspecialidad()+" // "+prestadorNuevo.getNombre()+", "+prestadorNuevo.getApellido());
-        }
-    }   catch (NullPointerException ex) {
+        try {
+            modelo2.removeAllElements();
+            Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
+            ArrayList<Prestador> prestadorLista = (ArrayList<Prestador>) prestaData.listaPrestadorEspecialidad(especialidadSelec.getIdEspecialidad());
+
+            for (Prestador prestadorNuevo : prestadorLista) {
+                    modelo2.addElement(prestadorNuevo.getEspecialidad().getEspecialidad() + " ------------  Dr/a " + prestadorNuevo.getNombre() + ", " + prestadorNuevo.getApellido());
+            }
+        } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar una especialidad");
+        }
        }
-     }
+   //=================================================
+   //ELIMINAR
+   
+    private DefaultListModel eliminaDatoSelec() {
+
+        DefaultListModel modelo = (DefaultListModel) jLPA.getModel();
+
+        modelo.remove(jLPA.getSelectedIndex());
+
+        return modelo;
+    }
+
+ //====================================================
+ // MODIFICAR
+    public void modificarPrestador(){
+    
+    Prestador prestadorSeleccionado= new Prestador();
+    
+ 
+//    private DefaultListModel modificarDatoSelec() {
+//
+//        DefaultListModel modelo = (DefaultListModel) jLPA.getModel();
+//
+//        
+//        modelo.remove(jLPA.getSelectedIndex());
+//
+//        return modelo;
+//    }
+    
+    
+    
+    
+ //====================================================
+ // METODO CARGAR CON DIALOGO
+//    public void cargarListaPxE() {
+//
+//        modelo2.removeAllElements();
+//        Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
+//        ArrayList<Prestador> prestadorLista = (ArrayList<Prestador>) prestaData.listaPrestadorEspecialidad(especialidadSelec.getIdEspecialidad());
+//        for (Prestador prestadorNuevo : prestadorLista) {
+//            if (especialidadSelec != null) {
+//                if (especialidadSelec.equals(prestadorLista)) {
+//
+//                    modelo2.addElement(prestadorNuevo.getEspecialidad().getEspecialidad() + " ------------  Dr/a " + prestadorNuevo.getNombre() + ", " + prestadorNuevo.getApellido());
+//                } else {
+//                    JOptionPane.showMessageDialog(jPPrestador, "No hay prestadores con esa especialidad");
+//                }
+//                JOptionPane.showMessageDialog(null, "Debe seleccionar una especialidad");
+//            }
+//======================================================                        
+       }
+
 }
-  
-          
-
-
-
+       
