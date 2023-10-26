@@ -150,6 +150,11 @@ public class PanelPrestadoresPropuesta extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTablePrestadores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTablePrestadoresMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTablePrestadores);
 
         jPPrestador.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 240));
@@ -200,7 +205,7 @@ public class PanelPrestadoresPropuesta extends javax.swing.JPanel {
     private void jBMostrarTodosLosPrestadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMostrarTodosLosPrestadoresActionPerformed
         cargarTablaVacia();
         cargarTablaPrestadores();
-    
+    herramientasAgregarEspecialidadInvisible();
     }//GEN-LAST:event_jBMostrarTodosLosPrestadoresActionPerformed
 
 
@@ -259,6 +264,7 @@ public class PanelPrestadoresPropuesta extends javax.swing.JPanel {
     private void jButtonAgregarEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarEspecialidadActionPerformed
                 
        botonAgregarEspecialidad();
+       herramientasAgregarEspecialidadInvisible();
     }//GEN-LAST:event_jButtonAgregarEspecialidadActionPerformed
 
     private void jPPrestadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPPrestadorMouseClicked
@@ -304,6 +310,10 @@ public class PanelPrestadoresPropuesta extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un prestador para editar");
         }
     }//GEN-LAST:event_jLAfiliadoModificarMouseClicked
+
+    private void jTablePrestadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePrestadoresMouseClicked
+        herramientasAgregarEspecialidadInvisible();
+    }//GEN-LAST:event_jTablePrestadoresMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBMostrarTodosLosPrestadores;
@@ -379,6 +389,7 @@ public class PanelPrestadoresPropuesta extends javax.swing.JPanel {
 //CARGA COMBOBOX DE ESPECIALIDADES
     private void cargarComboBox() {
         jCBEspecialidad.removeAll();
+        jCBEspecialidad.addItem(null);
         List<Especialidad> especialidadesLista = especialidadData.listarEspecialidades();
 
         for (Especialidad especialidades : especialidadesLista) {

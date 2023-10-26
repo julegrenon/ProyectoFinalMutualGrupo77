@@ -19,7 +19,7 @@ public class PanelNewPrestador extends javax.swing.JPanel {
    
     public PanelNewPrestador() {
         initComponents();
-        cargarComboBoxPrestadores();
+        cargarComboBoxEspecialidades();
     }
 
 
@@ -293,7 +293,8 @@ public class PanelNewPrestador extends javax.swing.JPanel {
     //===========================================
     // CARGA COMBOBOX
     
-       private void cargarComboBoxPrestadores() {
+       private void cargarComboBoxEspecialidades() {
+           jCBEspecialidades.addItem(null);
         List<Especialidad> especialidadLista = especData.listarEspecialidades();
         for (Especialidad especialidad : especialidadLista) {
 

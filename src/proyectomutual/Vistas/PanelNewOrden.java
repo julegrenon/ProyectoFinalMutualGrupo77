@@ -32,6 +32,7 @@ public class PanelNewOrden extends javax.swing.JPanel {
     public PanelNewOrden() {
         initComponents();
         
+        llenarComboBoxFormaPago();
         llenarComboBoxPrestadores();
         
         completarTextFieldAfiliadoNuevaOrden();
@@ -79,8 +80,6 @@ public class PanelNewOrden extends javax.swing.JPanel {
         jLabelFecha.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 18)); // NOI18N
         jLabelFecha.setForeground(new java.awt.Color(0, 102, 102));
         jLabelFecha.setText("FECHA:");
-
-        jCPago.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Débito" }));
 
         jLabelFormaDePago.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 18)); // NOI18N
         jLabelFormaDePago.setForeground(new java.awt.Color(0, 102, 102));
@@ -255,6 +254,7 @@ public class PanelNewOrden extends javax.swing.JPanel {
 
                 ordenData.guardarOrden(nuevaOrden);
                 refreshCampos();
+                
             }
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
@@ -286,11 +286,18 @@ public class PanelNewOrden extends javax.swing.JPanel {
 
     //MÉTODOS
     private void llenarComboBoxPrestadores() {
+        jComboBoxPrestador.addItem(null);
         List<Prestador> prestadoresLista = prestadorData.listarPrestador();
         for (Prestador prestadores : prestadoresLista) {
 
             jComboBoxPrestador.addItem(prestadores);
         }
+    }
+    
+    private void llenarComboBoxFormaPago(){
+        jCPago.addItem(null);
+        jCPago.addItem("Efectivo");
+        jCPago.addItem("Débito");
     }
 
     //Casteo de date a local date
@@ -304,6 +311,8 @@ public class PanelNewOrden extends javax.swing.JPanel {
         jDFecha.setDateFormatString("");
         jTextImporte.setText("");
         jComboBoxPrestador.setSelectedIndex(0);
+        llenarComboBoxPrestadores();
+        llenarComboBoxFormaPago();
     }
 
     private void completarTextFieldAfiliadoNuevaOrden() {
