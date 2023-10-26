@@ -10,10 +10,15 @@ package proyectomutual.Vistas;
  * @author sonia
  */
 import java.awt.BorderLayout;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyectomutual.AccesoDatos.AfiliadoData;
 import proyectomutual.AccesoDatos.OrdenData;
+import proyectomutual.AccesoDatos.PrestadorData;
 import proyectomutual.entidades.Afiliado;
 import proyectomutual.entidades.Orden;
 public class PanelOrdenes extends javax.swing.JPanel {
@@ -22,19 +27,22 @@ public class PanelOrdenes extends javax.swing.JPanel {
     private DefaultTableModel modelo = new DefaultTableModel() {
 
         public boolean isCellEditable(int f, int c) {
-          
+
             return false;
         }
     };
-    
+
     //VARIABLES DATA
     private OrdenData ordenData = new OrdenData();
     private AfiliadoData afiliadoData = new AfiliadoData();
-    
+    private PrestadorData prestadorData = new PrestadorData();
+
     public PanelOrdenes() {
         initComponents();
         cargarColumnas();
         cargarTablaOrdenes();
+        textFieldsInvisibles();
+        botonBuscarXFiltroVisible();
     }
 
     /**
@@ -50,15 +58,17 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTConsultaOrden = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
+        jCheckDNI = new javax.swing.JCheckBox();
+        jCheckPrestador = new javax.swing.JCheckBox();
+        jCheckFecha = new javax.swing.JCheckBox();
         jLabel4 = new javax.swing.JLabel();
         jTDNIConsulta = new javax.swing.JTextField();
         jTIdPrestador = new javax.swing.JTextField();
         jLVolver = new javax.swing.JLabel();
         jBLimpiar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
+        jDFecha = new com.toedter.calendar.JDateChooser();
+        jButtonBuscarXFiltro = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(670, 410));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -86,20 +96,35 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jLabel3.setText("CONSULTA ORDEN");
         jPOrden.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 20, -1, -1));
 
-        jCheckBox1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
-        jCheckBox1.setForeground(new java.awt.Color(0, 102, 102));
-        jCheckBox1.setText("DNI");
-        jPOrden.add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, -1, -1));
+        jCheckDNI.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
+        jCheckDNI.setForeground(new java.awt.Color(0, 102, 102));
+        jCheckDNI.setText("DNI");
+        jCheckDNI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckDNIActionPerformed(evt);
+            }
+        });
+        jPOrden.add(jCheckDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, -1, -1));
 
-        jCheckBox2.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
-        jCheckBox2.setForeground(new java.awt.Color(0, 102, 102));
-        jCheckBox2.setText("ID PRESTADOR");
-        jPOrden.add(jCheckBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, -1, -1));
+        jCheckPrestador.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
+        jCheckPrestador.setForeground(new java.awt.Color(0, 102, 102));
+        jCheckPrestador.setText("ID PRESTADOR");
+        jCheckPrestador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckPrestadorActionPerformed(evt);
+            }
+        });
+        jPOrden.add(jCheckPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, -1, -1));
 
-        jCheckBox3.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
-        jCheckBox3.setForeground(new java.awt.Color(0, 102, 102));
-        jCheckBox3.setText("Fecha");
-        jPOrden.add(jCheckBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, -1, -1));
+        jCheckFecha.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
+        jCheckFecha.setForeground(new java.awt.Color(0, 102, 102));
+        jCheckFecha.setText("Fecha");
+        jCheckFecha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckFechaActionPerformed(evt);
+            }
+        });
+        jPOrden.add(jCheckFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 102, 102));
@@ -121,6 +146,15 @@ public class PanelOrdenes extends javax.swing.JPanel {
         });
         jPOrden.add(jBLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, -1, -1));
         jPOrden.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 610, 10));
+        jPOrden.add(jDFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 100, 30));
+
+        jButtonBuscarXFiltro.setText("Buscar");
+        jButtonBuscarXFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarXFiltroActionPerformed(evt);
+            }
+        });
+        jPOrden.add(jButtonBuscarXFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, -1, -1));
 
         add(jPOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 410));
         jPOrden.getAccessibleContext().setAccessibleDescription("");
@@ -131,12 +165,96 @@ public class PanelOrdenes extends javax.swing.JPanel {
         cargarTablaOrdenes();
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
+    private void jCheckDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckDNIActionPerformed
+        if (jCheckDNI.isSelected()) {
+            jTDNIConsulta.setVisible(true);
+            jTIdPrestador.setVisible(false);
+            jDFecha.setVisible(false);
+            jCheckFecha.setSelected(false);
+            jCheckPrestador.setSelected(false);
+
+            limpiarCamposAlDestildar();
+        }
+
+        if (jCheckDNI.isSelected() == false) {
+            jTDNIConsulta.setVisible(false);
+            jTIdPrestador.setVisible(false);
+            jDFecha.setVisible(false);
+            jCheckFecha.setSelected(false);
+            jCheckPrestador.setSelected(false);
+
+        }
+        botonBuscarXFiltroVisible();
+    }//GEN-LAST:event_jCheckDNIActionPerformed
+
+    private void jCheckPrestadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckPrestadorActionPerformed
+        if (jCheckPrestador.isSelected()) {
+            jTDNIConsulta.setVisible(false);
+            jTIdPrestador.setVisible(true);
+            jDFecha.setVisible(false);
+            jCheckFecha.setSelected(false);
+            jCheckDNI.setSelected(false);
+
+            limpiarCamposAlDestildar();
+        }
+
+        if (jCheckPrestador.isSelected() == false) {
+            jTDNIConsulta.setVisible(false);
+            jTIdPrestador.setVisible(false);
+            jDFecha.setVisible(false);
+            jCheckFecha.setSelected(false);
+            jCheckDNI.setSelected(false);
+
+        }
+        botonBuscarXFiltroVisible();
+    }//GEN-LAST:event_jCheckPrestadorActionPerformed
+
+    private void jCheckFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckFechaActionPerformed
+        if (jCheckFecha.isSelected()) {
+            jTDNIConsulta.setVisible(false);
+            jTIdPrestador.setVisible(false);
+            jDFecha.setVisible(true);
+            jCheckDNI.setSelected(false);
+            jCheckPrestador.setSelected(false);
+
+            limpiarCamposAlDestildar();
+        }
+
+        if (jCheckFecha.isSelected() == false) {
+            jTDNIConsulta.setVisible(false);
+            jTIdPrestador.setVisible(false);
+            jDFecha.setVisible(false);
+            jCheckDNI.setSelected(false);
+            jCheckPrestador.setSelected(false);
+
+        }
+        botonBuscarXFiltroVisible();
+    }//GEN-LAST:event_jCheckFechaActionPerformed
+
+    private void jButtonBuscarXFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarXFiltroActionPerformed
+        try {
+            cargarTablaVacia();
+            cargarTablaSegunFiltro();
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un valor númerico en campo DNI o ID Prestador para realizar la búesqueda");
+            cargarTablaVacia();
+            cargarTablaOrdenes();
+        } catch (NullPointerException ex2) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una fecha para buscar");
+            cargarTablaVacia();
+            cargarTablaOrdenes();
+        }
+    }//GEN-LAST:event_jButtonBuscarXFiltroActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBLimpiar;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JButton jButtonBuscarXFiltro;
+    private javax.swing.JCheckBox jCheckDNI;
+    private javax.swing.JCheckBox jCheckFecha;
+    private javax.swing.JCheckBox jCheckPrestador;
+    private com.toedter.calendar.JDateChooser jDFecha;
     private javax.swing.JLabel jLVolver;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -148,8 +266,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
     private javax.swing.JTextField jTIdPrestador;
     // End of variables declaration//GEN-END:variables
 
-    
-        //MÉTODOS
+    //MÉTODOS
     //setea nombre de columnas
     private void cargarColumnas() {
         modelo.addColumn("Nro de orden");
@@ -173,36 +290,159 @@ public class PanelOrdenes extends javax.swing.JPanel {
 
         }
     }
-    
-    private void cargarTablaOrdenesXDNI(){
-        
+
+    private void cargarTablaOrdenesXDNI() {
+
         //Guarda dni en variable
-        String dniNum=jTDNIConsulta.getText();
+        String dniNum = jTDNIConsulta.getText();
         int dni = Integer.parseInt(dniNum);
-        
+
         //Llamada a método para buscar el afiliado y obtener el id
         Afiliado afiliadoEncontrado = afiliadoData.buscarAfiliadoPorDni(dni);
-        
+
         //Guarda id en variable idAFiliado
         int idAfiliado = afiliadoEncontrado.getIdAfiliado();
-        
+
         modelo.setRowCount(0);
         List<Orden> listaOrdenesXDNI = ordenData.buscaOrdenPorAfil(idAfiliado);
-        
+
         for (Orden ordenes : listaOrdenesXDNI) {
             modelo.addRow(new Object[]{
-           ordenes.getIdOrden(), ordenes.getAfiliado().toString(), 
-           ordenes.getPrestador().toString(), ordenes.getFecha()
-        });
+                ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
+                ordenes.getPrestador().toString(), ordenes.getFecha()
+            });
         }
     }
-    
-        //Limpia datos de la tabla
+
+    //Limpia datos de la tabla
     private void cargarTablaVacia() {
         while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
         }
     }
 
+    private void textFieldsInvisibles() {
+        jTDNIConsulta.setVisible(false);
+        jTIdPrestador.setVisible(false);
+        jDFecha.setVisible(false);
+    }
+
+    //Revisar NO funciona
+    private void checks() {
+        if (jCheckDNI.isSelected()) {
+            jTDNIConsulta.setVisible(true);
+            jTIdPrestador.setVisible(false);
+            jDFecha.setVisible(false);
+            jCheckDNI.setSelected(false);
+            jCheckPrestador.setSelected(false);
+        } else if (jCheckPrestador.isSelected()) {
+            jTDNIConsulta.setVisible(false);
+            jTIdPrestador.setVisible(true);
+            jDFecha.setVisible(false);
+            jCheckDNI.setSelected(false);
+            jCheckDNI.setSelected(false);
+        } else if (jCheckDNI.isSelected()) {
+            jTDNIConsulta.setVisible(false);
+            jTIdPrestador.setVisible(false);
+            jDFecha.setVisible(true);
+            jCheckDNI.setSelected(false);
+            jCheckPrestador.setSelected(false);
+        }
+
+        if (jCheckDNI.isSelected() == false && jCheckPrestador.isSelected() == false
+                && jCheckDNI.isSelected() == false) {
+            textFieldsInvisibles();
+        } else if (jCheckDNI.isSelected() == false) {
+            jTDNIConsulta.setVisible(false);
+        } else if (jCheckPrestador.isSelected() == false) {
+            jTIdPrestador.setVisible(false);
+        } else if (jCheckDNI.isSelected() == false) {
+            jDFecha.setVisible(false);
+        }
+    }
+
+    //Limpiar campos
+    private void limpiarCamposAlDestildar() {
+        jTDNIConsulta.setText("");
+        jTIdPrestador.setText("");
+        //jDFecha.setDateFormatString("");
+    }
+
+    private void botonBuscarXFiltroVisible() {
+
+        if (jCheckDNI.isSelected() || jCheckPrestador.isSelected() || jCheckDNI.isSelected()) {
+            jButtonBuscarXFiltro.setVisible(true);
+        } else {
+            jButtonBuscarXFiltro.setVisible(false);
+        }
+    }
+
+    //Carga tabla según filtro seleccionado
+    private void cargarTablaSegunFiltro() {
+        //Por DNI Afiliado
+        if (jCheckDNI.isSelected()) {
+
+            //Guarda dni en variable
+            String dniNum = jTDNIConsulta.getText();
+            int dni = Integer.parseInt(dniNum);
+
+            //Llamada a método para buscar el afiliado y obtener el id
+            Afiliado afiliadoEncontrado = afiliadoData.buscarAfiliadoPorDni(dni);
+
+            //Guarda id en variable idAFiliado
+            int idAfiliado = afiliadoEncontrado.getIdAfiliado();
+
+            modelo.setRowCount(0);
+            List<Orden> listaOrdenesXDNI = ordenData.buscaOrdenPorAfil(idAfiliado);
+
+            for (Orden ordenes : listaOrdenesXDNI) {
+                modelo.addRow(new Object[]{
+                    ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
+                    ordenes.getPrestador().toString(), ordenes.getFecha()
+                });
+            }
+        }
+
+        //Por idPrestador
+        if (jCheckPrestador.isSelected()) {
+
+            String idNum = jTIdPrestador.getText();
+            int idPrestador = Integer.parseInt(idNum);
+
+            modelo.setRowCount(0);
+            List<Orden> listaOrdenesXPrestador = ordenData.buscaOrdenPorPrestador(idPrestador);
+
+            for (Orden ordenes : listaOrdenesXPrestador) {
+                modelo.addRow(new Object[]{
+                    ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
+                    ordenes.getPrestador().toString(), ordenes.getFecha()
+                });
+            }
+        }
+
+        //Por fecha
+        if (jCheckDNI.isSelected()) {
+            LocalDate fecha = fromDateToLocalDate(jDFecha.getDate());
+
+            modelo.setRowCount(0);
+            List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorFecha(fecha);
+
+            for (Orden ordenes : listaOrdenesXFecha) {
+                modelo.addRow(new Object[]{
+                    ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
+                    ordenes.getPrestador().toString(), ordenes.getFecha()
+                });
+            }
+
+        }
+
+    }
+
+    //casteo localDate a date
+    public LocalDate fromDateToLocalDate(Date date) {
+        return date.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+    }
 
 }

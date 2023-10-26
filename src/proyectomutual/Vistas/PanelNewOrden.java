@@ -285,15 +285,14 @@ public class PanelNewOrden extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     //MÉTODOS
-    
-        private void llenarComboBoxPrestadores() {
+    private void llenarComboBoxPrestadores() {
         List<Prestador> prestadoresLista = prestadorData.listarPrestador();
         for (Prestador prestadores : prestadoresLista) {
 
             jComboBoxPrestador.addItem(prestadores);
         }
     }
-        
+
     //Casteo de date a local date
     public LocalDate fromDateToLocalDate(Date date) {
         return date.toInstant()
@@ -301,13 +300,13 @@ public class PanelNewOrden extends javax.swing.JPanel {
                 .toLocalDate();
     }
 
-    private void refreshCampos(){
+    private void refreshCampos() {
         jDFecha.setDateFormatString("");
         jTextImporte.setText("");
         jComboBoxPrestador.setSelectedIndex(0);
     }
-    
-    private void completarTextFieldAfiliadoNuevaOrden(){
+
+    private void completarTextFieldAfiliadoNuevaOrden() {
         //Instancia clase para traer objeto a setear en textField
         PanelAfiliados afil = new PanelAfiliados();
         //Setea textField

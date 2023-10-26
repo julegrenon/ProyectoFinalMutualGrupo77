@@ -374,7 +374,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
     private javax.swing.JTextField jTdni;
     // End of variables declaration//GEN-END:variables
 
-    //MÉTODOS
+//MÉTODOS
     //setea nombre de columnas
     private void cargarColumnas() {
         modelo.addColumn("ID");

@@ -48,7 +48,7 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
         jLBotonAgregarAf = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jCActivo = new javax.swing.JCheckBox();
-        jLabel7 = new javax.swing.JLabel();
+        jLabelBotonVolver = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(153, 255, 204));
 
@@ -79,16 +79,6 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
 
         jSeparator1.setForeground(new java.awt.Color(102, 102, 102));
 
-        jTDNIA.setBackground(new java.awt.Color(255, 255, 255));
-
-        jTNombreA.setBackground(new java.awt.Color(255, 255, 255));
-
-        jTDomicilioA.setBackground(new java.awt.Color(255, 255, 255));
-
-        jTApellidoA.setBackground(new java.awt.Color(255, 255, 255));
-
-        jTTelefonoA.setBackground(new java.awt.Color(255, 255, 255));
-
         jLabelSubTitulo.setText("      (Llene todos los campos)");
 
         jLBotonAgregarAf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Agregar.png"))); // NOI18N
@@ -107,12 +97,12 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
         jCActivo.setText("ACTIVO");
         jCActivo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Retroc.png"))); // NOI18N
-        jLabel7.setText("jLabel7");
-        jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLabelBotonVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Retroc.png"))); // NOI18N
+        jLabelBotonVolver.setText("jLabel7");
+        jLabelBotonVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabelBotonVolver.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel7MouseClicked(evt);
+                jLabelBotonVolverMouseClicked(evt);
             }
         });
 
@@ -164,13 +154,13 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(177, 177, 177)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabelBotonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelBotonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelSubTitulo)
@@ -215,7 +205,7 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+    private void jLabelBotonVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBotonVolverMouseClicked
         //Istancia clase panel 
         PanelAfiliados afiliadosVista=new PanelAfiliados();
         
@@ -229,7 +219,7 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
         
         jPFondo.revalidate();
         jPFondo.repaint();
-    }//GEN-LAST:event_jLabel7MouseClicked
+    }//GEN-LAST:event_jLabelBotonVolverMouseClicked
 
     private void jLBotonAgregarAfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBotonAgregarAfMouseClicked
         
@@ -277,7 +267,7 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabelBotonVolver;
     private javax.swing.JLabel jLabelSubTitulo;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTApellidoA;

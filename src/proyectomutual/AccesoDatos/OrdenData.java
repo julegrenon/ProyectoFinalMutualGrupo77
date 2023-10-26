@@ -20,17 +20,16 @@ import proyectomutual.entidades.Orden;
 import proyectomutual.entidades.Prestador;
 
 public class OrdenData {
-    
-    public Connection conex=null;
 
-    public OrdenData(){   
-        conex=Conexion.getConexion();
+    public Connection conex = null;
+
+    public OrdenData() {
+        conex = Conexion.getConexion();
     }
- 
+
 //METODO AGREGAR ORDEN
 //==============================================================================
-    
-        public void guardarOrden(Orden orden) {
+    public void guardarOrden(Orden orden) {
 
         try {
 
@@ -85,7 +84,7 @@ public class OrdenData {
     }
     //=============================================================================
     //ELIMINAR ORDENES
-     
+
     public void eliminarOrden(int id) {
 
         String sql = "DELETE FROM `orden` WHERE idOrden=?";
@@ -103,9 +102,9 @@ public class OrdenData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de ordenes");
         }
     }
-      //============================================================================ 
-        //LISTAR  OREDENES
-       
+    //============================================================================ 
+    //LISTAR  OREDENES
+
     public List<Orden> listarOrdenes() {
         String sql = "SELECT idOrden, fecha, formaPago, importe, idAfiliado, idPrestador FROM orden";
         ArrayList<Orden> ordenLista = new ArrayList();
@@ -124,11 +123,11 @@ public class OrdenData {
                 //Recupera la idAfiliado y idPrestador a través del id de las columnas de base
                 int idAfiliado = rs.getInt("idAfiliado");
                 int idPrestador = rs.getInt("idPrestador");
-                
+
                 //Variables data
                 PrestadorData prestadorData = new PrestadorData();
                 AfiliadoData afiliadoData = new AfiliadoData();
-                
+
                 //Llamada a métodos para instanciar objeto necesario del constructor de orden
                 Afiliado afiliado = afiliadoData.buscarAfiliado(idAfiliado);
                 Prestador prestador = prestadorData.buscarPrestador(idPrestador);
@@ -147,15 +146,14 @@ public class OrdenData {
         return ordenLista;
 
     }
-       
-  //====================================================================================  
-  //LISTA DE OREDENES POR AFILIADO
-       
-       public List<Orden> buscaOrdenPorAfil(int idAfiliado) {
-         String sql="SELECT `idOrden`, `fecha`, `formaPago`, `importe`, `idPrestador` "
-                   + "FROM `orden` WHERE idAfiliado=?";
-                
-        ArrayList<Orden> listaXAfil= new ArrayList();
+
+    //====================================================================================  
+    //LISTA DE OREDENES POR AFILIADO
+    public List<Orden> buscaOrdenPorAfil(int idAfiliado) {
+        String sql = "SELECT `idOrden`, `fecha`, `formaPago`, `importe`, `idPrestador` "
+                + "FROM `orden` WHERE idAfiliado=?";
+
+        ArrayList<Orden> listaXAfil = new ArrayList();
         try {
             PreparedStatement ps = conex.prepareStatement(sql);
             ps.setInt(1, idAfiliado);
@@ -168,14 +166,14 @@ public class OrdenData {
                 orden.setFecha(rs.getDate("fecha").toLocalDate());
                 orden.setFormaPago(rs.getString("formaPago"));
                 orden.setImporte(rs.getDouble("importe"));
-                
+
                 //Recupera la idAfiliado y idPrestador a través del id de las columnas de base
                 int idPrestador = rs.getInt("idPrestador");
-                
+
                 //Variables data
                 PrestadorData prestadorData = new PrestadorData();
                 AfiliadoData afiliadoData = new AfiliadoData();
-                
+
                 //Llamada a métodos para instanciar objeto necesario del constructor de orden
                 Afiliado afiliado = afiliadoData.buscarAfiliado(idAfiliado);
                 Prestador prestador = prestadorData.buscarPrestador(idPrestador);
@@ -183,46 +181,106 @@ public class OrdenData {
                 //Setea afiliado y prestador después de los métodos buscar  
                 orden.setAfiliado(afiliado);
                 orden.setPrestador(prestador);
-                
+
                 listaXAfil.add(orden);
-             
+
             }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Orden");
         }
         return listaXAfil;
-        
-       }
-   //===================================================================
-        //LISTA DE OREDENES POR FECHA
-       
-       public List<Orden> buscaOrdenPorFecha(Date date) {
-         String sql="SELECT `idOrden`, `fecha`, `formaPago`, `importe`, `idPrestador` "
-                   + "FROM `orden` WHERE fecha=?";
-                
-        ArrayList<Orden> listaXFecha= new ArrayList();
+
+    }
+    //===================================================================
+    //LISTA DE OREDENES POR FECHA
+
+    public List<Orden> buscaOrdenPorFecha(LocalDate date) {
+        String sql = "SELECT idOrden, fecha, formaPago, importe, idAfiliado, idPrestador "
+                + "FROM orden WHERE fecha=?";
+
+        ArrayList<Orden> listaXFecha = new ArrayList();
         try {
             PreparedStatement ps = conex.prepareStatement(sql);
+            ps.setDate(1, Date.valueOf(date));
 
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Orden orden= new Orden();
+                Orden orden = new Orden();
                 orden.setIdOrden(rs.getInt("idOrden"));
-                orden.setFecha(rs.getDate("fecha").toLocalDate());
+                orden.setFecha(date);
                 orden.setFormaPago(rs.getString("formaPago"));
-                orden.setIdOrden(rs.getInt("idAfiliado"));
-                orden.setIdOrden(rs.getInt("idPrestador"));
-                
+                orden.setImporte(rs.getDouble("importe"));
+
+                //Recupera la idAfiliado y idPrestador a través del id de las columnas de base
+                int idAfiliado = rs.getInt("idAfiliado");
+                int idPrestador = rs.getInt("idPrestador");
+
+                //Variables data
+                PrestadorData prestadorData = new PrestadorData();
+                AfiliadoData afiliadoData = new AfiliadoData();
+
+                //Llamada a métodos para instanciar objeto necesario del constructor de orden
+                Afiliado afiliado = afiliadoData.buscarAfiliado(idAfiliado);
+                Prestador prestador = prestadorData.buscarPrestador(idPrestador);
+
+                //Setea afiliado y prestador después de los métodos buscar  
+                orden.setAfiliado(afiliado);
+                orden.setPrestador(prestador);
+
                 listaXFecha.add(orden);
-             
+
             }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Orden");
         }
         return listaXFecha;
-        
-       }
+
+    }
+
+    public List<Orden> buscaOrdenPorPrestador(int idPrestador) {
+        String sql = "SELECT idOrden, fecha, formaPago, importe, idAfiliado "
+                + "FROM orden WHERE idPrestador=?";
+
+        ArrayList<Orden> listaOrdenesXPrestador = new ArrayList();
+        try {
+            PreparedStatement ps = conex.prepareStatement(sql);
+            ps.setInt(1, idPrestador);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Orden orden = new Orden();
+                orden.setIdOrden(rs.getInt("idOrden"));
+                orden.setFecha(rs.getDate("fecha").toLocalDate());
+                orden.setFormaPago(rs.getString("formaPago"));
+                orden.setImporte(rs.getDouble("importe"));
+
+                //Recupera la idAfiliado a través del id de las columnas de base
+                int idAfiliado = rs.getInt("idAfiliado");
+
+                //Variables data
+                PrestadorData prestadorData = new PrestadorData();
+                AfiliadoData afiliadoData = new AfiliadoData();
+
+                //Llamada a métodos para instanciar objeto necesario del constructor de orden
+                Afiliado afiliado = afiliadoData.buscarAfiliado(idAfiliado);
+                Prestador prestador = prestadorData.buscarPrestador(idPrestador);
+
+                //Setea afiliado y prestador después de los métodos buscar  
+                orden.setAfiliado(afiliado);
+                orden.setPrestador(prestador);
+
+                listaOrdenesXPrestador.add(orden);
+
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Orden");
+        }
+        return listaOrdenesXPrestador;
+
+    }
 }
