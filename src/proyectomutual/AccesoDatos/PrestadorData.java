@@ -215,8 +215,26 @@ public class PrestadorData {
         return prestadorLista;
     }
 
-    public void eliminarPrestador(String especialidadSelec) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void eliminarPrestador(Prestador prestador) {
+   
+        String sql = "UPDATE `prestador` "
+                + "SET `idPrestador`,`nombre`,`apellido`',`dni`,`telefono`,`domicilio`,`idEspecialidad`,`estado`"
+                + "' WHERE =?";
+
+        
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ps.setInt(1, 0);
+
+            int exito = ps.executeUpdate();
+            if (exito == 1) {
+                JOptionPane.showMessageDialog(null, "Afiliado eliminado");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla afiliados");
+        }
     }
-    
 }
+    
+
