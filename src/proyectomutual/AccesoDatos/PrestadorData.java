@@ -129,7 +129,7 @@ public class PrestadorData {
                 prestador.setEspecialidad(especialidad);
                 prestador.setEstado(true);
                 
-                System.out.println("Prestador encontrado: " + prestador.getNombre() + " " + prestador.getApellido());
+                
             } else {
                 JOptionPane.showMessageDialog(null, "No existe prestador con ese id");
             }
@@ -204,17 +204,50 @@ public class PrestadorData {
             }
             ps.close();
 
-            // Imprimir la lista en la consola
-          /*  for (Prestador p : prestadorLista) {
-                System.out.println("ID: " + p.getIdPrestador() + ", Nombre: " + p.getNombre() + ", DNI: " + p.getDni());
-            }*/
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla prestador");
         }
 
         return prestadorLista;
     }
+        
+         public List<Prestador> obtenerPrestadores(int id) {
+        String sql = "SELECT idPrestador, nombre, dni, domicilio, telefono, idEspecialidad FROM prestador WHERE estado=1";
+        ArrayList<Prestador> prestadorLista = new ArrayList<>();
 
+        try {
+            PreparedStatement ps = conexion.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Prestador prestador = new Prestador();
+                prestador.setIdPrestador(rs.getInt("idPrestador"));
+                prestador.setNombre(rs.getString("nombre"));
+                prestador.setDni(rs.getInt("dni"));
+                prestador.setDomicilio(rs.getString("domicilio"));
+                prestador.setTelefono(rs.getInt("telefono"));
+
+                int especialidadInt = rs.getInt("idEspecialidad");
+                Especialidad especialidad = new Especialidad(especialidadInt);
+
+                prestador.setEspecialidad(especialidad);
+                prestador.setEstado(true);
+
+                prestadorLista.add(prestador);
+            }
+            ps.close();
+
+            // Imprimir la lista en la consola
+            for (Prestador p : prestadorLista) {
+                System.out.println("ID: " + p.getIdPrestador() + ", Nombre: " + p.getNombre() + ", DNI: " + p.getDni());
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla prestador");
+        }
+
+        return prestadorLista;
+
+         }
     public void eliminarPrestador(Prestador prestador) {
    
         String sql = "UPDATE `prestador` "
@@ -234,6 +267,7 @@ public class PrestadorData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla afiliados");
         }
+
     }
 }
     
