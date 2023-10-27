@@ -77,6 +77,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPPrestador.setBackground(new java.awt.Color(204, 255, 255));
+        jPPrestador.setMinimumSize(new java.awt.Dimension(670, 410));
         jPPrestador.setPreferredSize(new java.awt.Dimension(670, 410));
         jPPrestador.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -102,7 +103,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
         jLabel4.setForeground(new java.awt.Color(0, 102, 102));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Agregar");
-        jPPrestador.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
+        jPPrestador.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, -1));
 
         jLEliminar.setBackground(new java.awt.Color(0, 0, 0));
         jLEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/EliminarChica.jpg"))); // NOI18N
@@ -113,13 +114,13 @@ public class PanelPrestadores extends javax.swing.JPanel {
                 jLEliminarMouseClicked(evt);
             }
         });
-        jPPrestador.add(jLEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 360, 50, 50));
+        jPPrestador.add(jLEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, 50, 50));
 
         jLabel3.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 102, 102));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Eliminar");
-        jPPrestador.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, 70, -1));
+        jPPrestador.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 330, 70, -1));
         jPPrestador.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, -1, -1));
 
         jLAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MasOrden.png"))); // NOI18N
@@ -129,7 +130,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
                 jLAgregarMouseClicked(evt);
             }
         });
-        jPPrestador.add(jLAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 50, 50));
+        jPPrestador.add(jLAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 50, 50));
 
         jBMostrarTodosLosPrestadores.setBackground(new java.awt.Color(0, 153, 153));
         jBMostrarTodosLosPrestadores.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -202,15 +203,15 @@ public class PanelPrestadores extends javax.swing.JPanel {
                 jLAfiliadoModificarMouseClicked(evt);
             }
         });
-        jPPrestador.add(jLAfiliadoModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, 50, 50));
+        jPPrestador.add(jLAfiliadoModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, -1, 50));
 
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Modificar");
-        jPPrestador.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 70, -1));
+        jPPrestador.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 70, -1));
 
-        add(jPPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 683, 415));
+        add(jPPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 410));
         jPPrestador.getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
 
