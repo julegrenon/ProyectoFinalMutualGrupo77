@@ -67,6 +67,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTAfiliado = new javax.swing.JTable();
+        jBMostrarTodosAfiliados = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(204, 255, 255));
         setMinimumSize(new java.awt.Dimension(670, 410));
@@ -81,7 +82,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("Buscar por DNI");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 90, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, -1, -1));
 
         jTdni.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         jTdni.setForeground(new java.awt.Color(204, 204, 204));
@@ -92,7 +93,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
                 jTdniMouseClicked(evt);
             }
         });
-        add(jTdni, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, 150, -1));
+        add(jTdni, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 100, 150, -1));
 
         jLAfiliadoBuscar.setBackground(new java.awt.Color(255, 255, 255));
         jLAfiliadoBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/BuscarChica_1.jpg"))); // NOI18N
@@ -103,12 +104,12 @@ public class PanelAfiliados extends javax.swing.JPanel {
                 jLAfiliadoBuscarMouseClicked(evt);
             }
         });
-        add(jLAfiliadoBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 140, 50, 50));
+        add(jLAfiliadoBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 130, 50, 50));
 
         jLabel2.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 102, 102));
         jLabel2.setText("Nuevo afiliado");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, -1, -1));
 
         jLAfiliadoEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/EliminarChica.jpg"))); // NOI18N
         jLAfiliadoEliminar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -118,7 +119,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
                 jLAfiliadoEliminarMouseClicked(evt);
             }
         });
-        add(jLAfiliadoEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 350, -1, 50));
+        add(jLAfiliadoEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 340, 50, 50));
 
         jBAfiliadoOrden.setBackground(new java.awt.Color(0, 153, 153));
         jBAfiliadoOrden.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 12)); // NOI18N
@@ -130,18 +131,18 @@ public class PanelAfiliados extends javax.swing.JPanel {
                 jBAfiliadoOrdenMouseClicked(evt);
             }
         });
-        add(jBAfiliadoOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 160, 40));
-        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 613, 13));
+        add(jBAfiliadoOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, 160, 40));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 613, 13));
 
         jLabel4.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 102, 102));
         jLabel4.setText("Modificar");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, -1, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 102, 102));
         jLabel5.setText("Eliminar");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 330, -1, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, -1, -1));
 
         jLAfiliadoNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/AgregarMas chica.jpg"))); // NOI18N
         jLAfiliadoNuevo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -151,7 +152,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
                 jLAfiliadoNuevoMouseClicked(evt);
             }
         });
-        add(jLAfiliadoNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 50, 50));
+        add(jLAfiliadoNuevo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 340, 50, 50));
 
         jLAfiliadoModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Editar chico_1.jpg"))); // NOI18N
         jLAfiliadoModificar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -161,7 +162,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
                 jLAfiliadoModificarMouseClicked(evt);
             }
         });
-        add(jLAfiliadoModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 350, 50, 50));
+        add(jLAfiliadoModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, -1, 50));
 
         jLabel8.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(0, 102, 102));
@@ -186,7 +187,19 @@ public class PanelAfiliados extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(jTAfiliado);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 493, 120));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 493, 150));
+
+        jBMostrarTodosAfiliados.setBackground(new java.awt.Color(0, 153, 153));
+        jBMostrarTodosAfiliados.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBMostrarTodosAfiliados.setForeground(new java.awt.Color(255, 255, 255));
+        jBMostrarTodosAfiliados.setText("VER TODOS");
+        jBMostrarTodosAfiliados.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBMostrarTodosAfiliados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBMostrarTodosAfiliadosActionPerformed(evt);
+            }
+        });
+        add(jBMostrarTodosAfiliados, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 190, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -239,9 +252,16 @@ public class PanelAfiliados extends javax.swing.JPanel {
         escribirTextFieldDNI();
     }//GEN-LAST:event_jTAfiliadoMouseClicked
 
+    private void jBMostrarTodosAfiliadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMostrarTodosAfiliadosActionPerformed
+        cargarTablaVacia();
+        cargarTablaAfiliados();
+       
+    }//GEN-LAST:event_jBMostrarTodosAfiliadosActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBAfiliadoOrden;
+    private javax.swing.JButton jBMostrarTodosAfiliados;
     private javax.swing.JLabel jLAfiliadoBuscar;
     private javax.swing.JLabel jLAfiliadoEliminar;
     private javax.swing.JLabel jLAfiliadoModificar;

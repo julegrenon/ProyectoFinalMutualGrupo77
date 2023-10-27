@@ -144,6 +144,8 @@ public class Menu extends javax.swing.JFrame {
         jPFondo.setPreferredSize(new java.awt.Dimension(671, 415));
 
         jLFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ImageFondo.jpg"))); // NOI18N
+        jLFondo.setMaximumSize(new java.awt.Dimension(670, 410));
+        jLFondo.setMinimumSize(new java.awt.Dimension(670, 410));
         jLFondo.setPreferredSize(new java.awt.Dimension(670, 410));
 
         javax.swing.GroupLayout jPFondoLayout = new javax.swing.GroupLayout(jPFondo);
