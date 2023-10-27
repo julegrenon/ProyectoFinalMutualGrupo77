@@ -205,19 +205,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
     }//GEN-LAST:event_jCheckFechaActionPerformed
 
     private void jButtonBuscarXFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarXFiltroActionPerformed
-        try {
-            cargarTablaVacia();
-            cargarTablaSegunFiltro();
-
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Debe ingresar un valor númerico en campo DNI o ID Prestador para realizar la búesqueda");
-            cargarTablaVacia();
-            cargarTablaOrdenes();
-        } catch (NullPointerException ex2) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una fecha para buscar");
-            cargarTablaVacia();
-            cargarTablaOrdenes();
-        }
+        botonBuscarXFiltro();
     }//GEN-LAST:event_jButtonBuscarXFiltroActionPerformed
 
 
@@ -299,40 +287,6 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jDFecha.setVisible(false);
     }
 
-    //Revisar NO funciona
-    private void checks() {
-        if (jCheckDNI.isSelected()) {
-            jTDNIConsulta.setVisible(true);
-            jTIdPrestador.setVisible(false);
-            jDFecha.setVisible(false);
-            jCheckFecha.setSelected(false);
-            jCheckPrestador.setSelected(false);
-        } else if (jCheckPrestador.isSelected()) {
-            jTDNIConsulta.setVisible(false);
-            jTIdPrestador.setVisible(true);
-            jDFecha.setVisible(false);
-            jCheckDNI.setSelected(false);
-            jCheckFecha.setSelected(false);
-        } else if (jCheckFecha.isSelected()) {
-            jTDNIConsulta.setVisible(false);
-            jTIdPrestador.setVisible(false);
-            jDFecha.setVisible(true);
-            jCheckDNI.setSelected(false);
-            jCheckPrestador.setSelected(false);
-        }
-
-        if (jCheckDNI.isSelected() == false && jCheckPrestador.isSelected() == false
-                && jCheckFecha.isSelected() == false) {
-            textFieldsInvisibles();
-        } else if (jCheckDNI.isSelected() == false) {
-            jTDNIConsulta.setVisible(false);
-        } else if (jCheckPrestador.isSelected() == false) {
-            jTIdPrestador.setVisible(false);
-        } else if (jCheckFecha.isSelected() == false) {
-            jDFecha.setVisible(false);
-        }
-    }
-
     //Limpiar campos
     private void limpiarCamposYChecks() {
         jTDNIConsulta.setText("");
@@ -346,15 +300,6 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jTDNIConsulta.setVisible(false);
         jTIdPrestador.setVisible(false);
         jDFecha.setVisible(false);
-    }
-
-    private void botonBuscarXFiltroVisible() {
-
-        if (jCheckDNI.isSelected() || jCheckPrestador.isSelected() || jCheckFecha.isSelected()) {
-            jButtonBuscarXFiltro.setVisible(true);
-        } else {
-            jButtonBuscarXFiltro.setVisible(false);
-        }
     }
 
     //Carga tabla según filtro seleccionado
@@ -527,4 +472,29 @@ public class PanelOrdenes extends javax.swing.JPanel {
                 .toLocalDate();
     }
 
+    private void botonBuscarXFiltroVisible() {
+
+        if (jCheckDNI.isSelected() || jCheckPrestador.isSelected() || jCheckFecha.isSelected()) {
+            jButtonBuscarXFiltro.setVisible(true);
+        } else {
+            jButtonBuscarXFiltro.setVisible(false);
+        }
+    }
+
+    //MÉTODOS BOTONES
+    private void botonBuscarXFiltro() {
+        try {
+            cargarTablaVacia();
+            cargarTablaSegunFiltro();
+
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un valor númerico en campo DNI o ID Prestador para realizar la búesqueda");
+            cargarTablaVacia();
+            cargarTablaOrdenes();
+        } catch (NullPointerException ex2) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una fecha para buscar");
+            cargarTablaVacia();
+            cargarTablaOrdenes();
+        }
+    }
 }

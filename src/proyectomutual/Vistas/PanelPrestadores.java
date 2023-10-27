@@ -18,28 +18,27 @@ import proyectomutual.entidades.Especialidad;
 import proyectomutual.entidades.Prestador;
 
 public class PanelPrestadores extends javax.swing.JPanel {
-    
-        //Setea modelo de tabla
+
+    //Setea modelo de tabla
     private DefaultTableModel modelo = new DefaultTableModel() {
 
         public boolean isCellEditable(int f, int c) {
-             if (c >= 2 && c <= 6) {
+            if (c >= 2 && c <= 6) {
                 return true;
             }
             return false;
         }
     };
 
-   ArrayList<Especialidad> especialidadesLista = new ArrayList();
-   ArrayList<Prestador> prestadorLista = new ArrayList<>();
-   
-   
-    private PrestadorData prestadorData= new PrestadorData();
-    private Prestador prestadorNuevo= null;
-    
-    private EspecialidadData especialidadData= new EspecialidadData();
-    private Especialidad especialidadNueva= null;
-   
+    ArrayList<Especialidad> especialidadesLista = new ArrayList();
+    ArrayList<Prestador> prestadorLista = new ArrayList<>();
+
+    private PrestadorData prestadorData = new PrestadorData();
+    private Prestador prestadorNuevo = null;
+
+    private EspecialidadData especialidadData = new EspecialidadData();
+    private Especialidad especialidadNueva = null;
+
     public PanelPrestadores() {
         initComponents();
         cargarColumnas();
@@ -49,7 +48,6 @@ public class PanelPrestadores extends javax.swing.JPanel {
         jButtonAgregarEspecialidad.setVisible(false);
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -70,7 +68,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
         jButtonNuevaEspecialidad = new javax.swing.JButton();
         jTextFieldNuevaEspecialidad = new javax.swing.JTextField();
         jButtonAgregarEspecialidad = new javax.swing.JButton();
-        jLAfiliadoModificar = new javax.swing.JLabel();
+        jLPrestadorModificar = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(670, 410));
@@ -193,16 +191,16 @@ public class PanelPrestadores extends javax.swing.JPanel {
         });
         jPPrestador.add(jButtonAgregarEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 180, -1, -1));
 
-        jLAfiliadoModificar.setBackground(new java.awt.Color(153, 255, 204));
-        jLAfiliadoModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Editar chico_1.jpg"))); // NOI18N
-        jLAfiliadoModificar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jLAfiliadoModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLAfiliadoModificar.addMouseListener(new java.awt.event.MouseAdapter() {
+        jLPrestadorModificar.setBackground(new java.awt.Color(153, 255, 204));
+        jLPrestadorModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Editar chico_1.jpg"))); // NOI18N
+        jLPrestadorModificar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLPrestadorModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLPrestadorModificar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLAfiliadoModificarMouseClicked(evt);
+                jLPrestadorModificarMouseClicked(evt);
             }
         });
-        jPPrestador.add(jLAfiliadoModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, 50, 50));
+        jPPrestador.add(jLPrestadorModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, 50, 50));
 
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
@@ -217,19 +215,18 @@ public class PanelPrestadores extends javax.swing.JPanel {
     private void jBMostrarTodosLosPrestadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMostrarTodosLosPrestadoresActionPerformed
         cargarTablaVacia();
         cargarTablaPrestadores();
-    herramientasAgregarEspecialidadInvisible();
+        herramientasAgregarEspecialidadInvisible();
     }//GEN-LAST:event_jBMostrarTodosLosPrestadoresActionPerformed
-
 
     //=====================================================================================
     private void jCBEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBEspecialidadActionPerformed
-       cargarTablaVacia();
-       cargarTablaPrestadoresXEspecialidad();
+        cargarTablaVacia();
+        cargarTablaPrestadoresXEspecialidad();
     }//GEN-LAST:event_jCBEspecialidadActionPerformed
 
     //==================================================================================
     //AGREGAR
-    
+
     private void jLAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAgregarMouseClicked
         PanelNewPrestador nuevoPrestadorVista = new PanelNewPrestador();
         nuevoPrestadorVista.setSize(670, 410);
@@ -243,26 +240,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
     //==================================================================================
     //ELIMINAR
     private void jLEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLEliminarMouseClicked
-         try {
-            //Crea variable para guardar la fila seleccionada
-            int filaSeleccionada = jTablePrestadores.getSelectedRow();
-
-            //Setea datos desde la tabla
-            int id = (Integer) jTablePrestadores.getValueAt(filaSeleccionada, 0);
-
-            //Llamada a método modificar
-            prestadorData.eliminarPrestador(id);
-
-            //Refresh de tablas
-            cargarTablaVacia();
-            cargarTablaPrestadores();
-        } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(null, "No hay ninguna selección para eliminar");
-        } catch (NumberFormatException ex2) {
-            JOptionPane.showMessageDialog(null, "ERROR");
-        } catch (ArrayIndexOutOfBoundsException ex3) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un prestador para eliminar");
-        }
+        botonEliminarPrestador();
     }//GEN-LAST:event_jLEliminarMouseClicked
 
     private void jButtonNuevaEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevaEspecialidadActionPerformed
@@ -272,56 +250,20 @@ public class PanelPrestadores extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonNuevaEspecialidadActionPerformed
 
     private void jButtonAgregarEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarEspecialidadActionPerformed
-       botonAgregarEspecialidad();
-       herramientasAgregarEspecialidadInvisible();
-       cargarTablaVacia();
-       cargarTablaPrestadores();
-       cargarComboBox();
+        botonAgregarEspecialidad();
+        herramientasAgregarEspecialidadInvisible();
+        cargarTablaVacia();
+        cargarTablaPrestadores();
+        cargarComboBox();
     }//GEN-LAST:event_jButtonAgregarEspecialidadActionPerformed
 
     private void jPPrestadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPPrestadorMouseClicked
         herramientasAgregarEspecialidadInvisible();
     }//GEN-LAST:event_jPPrestadorMouseClicked
 
-    private void jLAfiliadoModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAfiliadoModificarMouseClicked
-
-        try {
-            //Crea variable para guardar la fila seleccionada
-            int filaSeleccionada = jTablePrestadores.getSelectedRow();
-
-            //Setea datos desde la tabla
-            int id = (Integer) jTablePrestadores.getValueAt(filaSeleccionada, 0);
-            String especialidadTxt = (String) jTablePrestadores.getValueAt(filaSeleccionada, 1);
-            String nombre = (String) jTablePrestadores.getValueAt(filaSeleccionada, 2);
-            String apellido = (String) jTablePrestadores.getValueAt(filaSeleccionada, 3);
-            int dni = (Integer) jTablePrestadores.getValueAt(filaSeleccionada, 4);
-            int telefono = (Integer) jTablePrestadores.getValueAt(filaSeleccionada, 5);
-            String domicilio = (String) jTablePrestadores.getValueAt(filaSeleccionada, 6);
-
-            //Busca afiliado a través de método
-            Prestador prestadorSeleccionado = prestadorData.buscarPrestador(id);
-            Especialidad especialidad = especialidadData.buscarEspecialidadXNombre(especialidadTxt);
-
-            //Setea estado
-            boolean estado = prestadorSeleccionado.isEstado();
-
-            //Instancia objeto final de alumno a modificar
-            Prestador prestadorModif = new Prestador(id, nombre, apellido, dni, telefono, domicilio, especialidad, estado);
-
-            //Llamada a método modificar
-            prestadorData.modificarPrestador(prestadorModif);
-
-            //Refresh de tabla
-            cargarTablaVacia();
-            cargarTablaPrestadores();
-        } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(null, "No puede haber campos vacíos");
-        } catch (NumberFormatException ex2) {
-            JOptionPane.showMessageDialog(null, "Formato incorrecto. Complete los campos con los caracteres correctos");
-        } catch (ArrayIndexOutOfBoundsException ex3) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un prestador para editar");
-        }
-    }//GEN-LAST:event_jLAfiliadoModificarMouseClicked
+    private void jLPrestadorModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLPrestadorModificarMouseClicked
+        botonModificarPrestador();
+    }//GEN-LAST:event_jLPrestadorModificarMouseClicked
 
     private void jTablePrestadoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablePrestadoresMouseClicked
         herramientasAgregarEspecialidadInvisible();
@@ -332,9 +274,9 @@ public class PanelPrestadores extends javax.swing.JPanel {
     private javax.swing.JButton jButtonAgregarEspecialidad;
     private javax.swing.JButton jButtonNuevaEspecialidad;
     private javax.swing.JComboBox<Especialidad> jCBEspecialidad;
-    private javax.swing.JLabel jLAfiliadoModificar;
     private javax.swing.JLabel jLAgregar;
     private javax.swing.JLabel jLEliminar;
+    private javax.swing.JLabel jLPrestadorModificar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -347,10 +289,9 @@ public class PanelPrestadores extends javax.swing.JPanel {
     private javax.swing.JTable jTablePrestadores;
     private javax.swing.JTextField jTextFieldNuevaEspecialidad;
     // End of variables declaration//GEN-END:variables
- 
+
 //==================================================================================
-  
-    //setea nombre de columnas
+    //Setea nombre de columnas
     private void cargarColumnas() {
         modelo.addColumn("ID");
         modelo.addColumn("Especialidad");
@@ -409,9 +350,9 @@ public class PanelPrestadores extends javax.swing.JPanel {
             jCBEspecialidad.addItem(especialidades);
         }
     }
-    
-        private void limpiarComboBox(){
-        while (jCBEspecialidad.getItemCount() > 0){
+
+    private void limpiarComboBox() {
+        while (jCBEspecialidad.getItemCount() > 0) {
             jCBEspecialidad.removeAllItems();
         }
     }
@@ -420,6 +361,77 @@ public class PanelPrestadores extends javax.swing.JPanel {
     private void cargarTablaVacia() {
         while (modelo.getRowCount() > 0) {
             modelo.removeRow(0);
+        }
+    }
+
+    private void herramientasAgregarEspecialidadInvisible() {
+        jTextFieldNuevaEspecialidad.setText("");
+        jTextFieldNuevaEspecialidad.setVisible(false);
+        jButtonAgregarEspecialidad.setVisible(false);
+        jButtonNuevaEspecialidad.setVisible(true);
+    }
+
+    //METODOS BOTONES
+    private void botonModificarPrestador() {
+
+        try {
+            //Crea variable para guardar la fila seleccionada
+            int filaSeleccionada = jTablePrestadores.getSelectedRow();
+
+            //Setea datos desde la tabla
+            int id = (Integer) jTablePrestadores.getValueAt(filaSeleccionada, 0);
+            String especialidadTxt = (String) jTablePrestadores.getValueAt(filaSeleccionada, 1);
+            String nombre = (String) jTablePrestadores.getValueAt(filaSeleccionada, 2);
+            String apellido = (String) jTablePrestadores.getValueAt(filaSeleccionada, 3);
+            int dni = (Integer) jTablePrestadores.getValueAt(filaSeleccionada, 4);
+            int telefono = (Integer) jTablePrestadores.getValueAt(filaSeleccionada, 5);
+            String domicilio = (String) jTablePrestadores.getValueAt(filaSeleccionada, 6);
+
+            //Busca afiliado a través de método
+            Prestador prestadorSeleccionado = prestadorData.buscarPrestador(id);
+            Especialidad especialidad = especialidadData.buscarEspecialidadXNombre(especialidadTxt);
+
+            //Setea estado
+            boolean estado = prestadorSeleccionado.isEstado();
+
+            //Instancia objeto final de alumno a modificar
+            Prestador prestadorModif = new Prestador(id, nombre, apellido, dni, telefono, domicilio, especialidad, estado);
+
+            //Llamada a método modificar
+            prestadorData.modificarPrestador(prestadorModif);
+
+            //Refresh de tabla
+            cargarTablaVacia();
+            cargarTablaPrestadores();
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "No puede haber campos vacíos");
+        } catch (NumberFormatException ex2) {
+            JOptionPane.showMessageDialog(null, "Formato incorrecto. Complete los campos con los caracteres correctos");
+        } catch (ArrayIndexOutOfBoundsException ex3) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un prestador para editar");
+        }
+    }
+
+    private void botonEliminarPrestador() {
+        try {
+            //Crea variable para guardar la fila seleccionada
+            int filaSeleccionada = jTablePrestadores.getSelectedRow();
+
+            //Setea datos desde la tabla
+            int id = (Integer) jTablePrestadores.getValueAt(filaSeleccionada, 0);
+
+            //Llamada a método modificar
+            prestadorData.eliminarPrestador(id);
+
+            //Refresh de tablas
+            cargarTablaVacia();
+            cargarTablaPrestadores();
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "No hay ninguna selección para eliminar");
+        } catch (NumberFormatException ex2) {
+            JOptionPane.showMessageDialog(null, "ERROR");
+        } catch (ArrayIndexOutOfBoundsException ex3) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un prestador para eliminar");
         }
     }
 
@@ -440,14 +452,6 @@ public class PanelPrestadores extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Debe ingresar una especialidad para agregar");
         }
     }
-
-    private void herramientasAgregarEspecialidadInvisible() {
-        jTextFieldNuevaEspecialidad.setText("");
-        jTextFieldNuevaEspecialidad.setVisible(false);
-        jButtonAgregarEspecialidad.setVisible(false);
-        jButtonNuevaEspecialidad.setVisible(true);
-    }
-    
 }
    
 

@@ -17,8 +17,8 @@ import proyectomutual.entidades.Afiliado;
  */
 public class PanelNewAfiliado extends javax.swing.JPanel {
 
-    private AfiliadoData afiliadoData=new AfiliadoData();
-    
+    private AfiliadoData afiliadoData = new AfiliadoData();
+
     public PanelNewAfiliado() {
         initComponents();
     }
@@ -199,53 +199,22 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
 
     private void jLabelBotonVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelBotonVolverMouseClicked
         //Istancia clase panel 
-        PanelAfiliados afiliadosVista=new PanelAfiliados();
-        
+        PanelAfiliados afiliadosVista = new PanelAfiliados();
+
         //Setea dimensiones y location
         afiliadosVista.setSize(670, 410);
         afiliadosVista.setLocation(0, 0);
-        
+
         //Remueve y agrega la vista del panel instanciada
         jPFondo.removeAll();
         jPFondo.add(afiliadosVista, BorderLayout.CENTER);
-        
+
         jPFondo.revalidate();
         jPFondo.repaint();
     }//GEN-LAST:event_jLabelBotonVolverMouseClicked
 
     private void jLBotonAgregarAfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLBotonAgregarAfMouseClicked
-        
-        try {
-            //guarda en variables los campos del form
-            String nombre = jTNombreA.getText();
-            String apellido = jTApellidoA.getText();
-            String dniNum = jTDNIA.getText();
-            int dni = Integer.parseInt(dniNum);
-            String telefonoNum = jTTelefonoA.getText();
-            int telefono = Integer.parseInt(telefonoNum);
-            String domicilio = jTDomicilioA.getText();
-            boolean estado = true;
-
-            //VERIFICA QUE ESTEN COMPLETOS TODOS LOS DATOS ANTES DE AGREGAR
-            if (jTDNIA.getText().equals("") || jTApellidoA.getText().equals("")
-                    || jTNombreA.getText().equals("") || jTTelefonoA.getText().equals("")
-                    || jTDomicilioA.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
-            } else {
-                //Crea objeto
-                Afiliado afiliado = new Afiliado(nombre, apellido, dni, telefono, domicilio, estado);
-                
-                //Llamada a método agregar
-                afiliadoData.agregarAfiliado(afiliado);
-                
-                //limpia todos los campos
-                limpiarCampos();
-            }
-        } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
-        } catch (NumberFormatException ex2) {
-            JOptionPane.showMessageDialog(null, "DNI y teléfono sólo admiten números");
-        }
+        botonAgregarAfiliado();
     }//GEN-LAST:event_jLBotonAgregarAfMouseClicked
 
 
@@ -268,7 +237,7 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
     private javax.swing.JTextField jTTelefonoA;
     // End of variables declaration//GEN-END:variables
 
-    public void limpiarCampos (){
+    public void limpiarCampos() {
         jTNombreA.setText("");
         jTApellidoA.setText("");
         jTDNIA.setText("");
@@ -277,4 +246,38 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
 
     }
 
+    //Método boton agregar
+    private void botonAgregarAfiliado() {
+        try {
+            //guarda en variables los campos del form
+            String nombre = jTNombreA.getText();
+            String apellido = jTApellidoA.getText();
+            String dniNum = jTDNIA.getText();
+            int dni = Integer.parseInt(dniNum);
+            String telefonoNum = jTTelefonoA.getText();
+            int telefono = Integer.parseInt(telefonoNum);
+            String domicilio = jTDomicilioA.getText();
+            boolean estado = true;
+
+            //VERIFICA QUE ESTEN COMPLETOS TODOS LOS DATOS ANTES DE AGREGAR
+            if (jTDNIA.getText().equals("") || jTApellidoA.getText().equals("")
+                    || jTNombreA.getText().equals("") || jTTelefonoA.getText().equals("")
+                    || jTDomicilioA.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
+            } else {
+                //Crea objeto
+                Afiliado afiliado = new Afiliado(nombre, apellido, dni, telefono, domicilio, estado);
+
+                //Llamada a método agregar
+                afiliadoData.agregarAfiliado(afiliado);
+
+                //limpia todos los campos
+                limpiarCampos();
+            }
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
+        } catch (NumberFormatException ex2) {
+            JOptionPane.showMessageDialog(null, "DNI y teléfono sólo admiten números");
+        }
+    }
 }

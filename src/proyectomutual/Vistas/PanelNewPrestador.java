@@ -14,14 +14,13 @@ import proyectomutual.entidades.Prestador;
 
 public class PanelNewPrestador extends javax.swing.JPanel {
 
-    private PrestadorData prestaData=new PrestadorData();
-    private EspecialidadData especData= new EspecialidadData();
-   
+    private PrestadorData prestaData = new PrestadorData();
+    private EspecialidadData especData = new EspecialidadData();
+
     public PanelNewPrestador() {
         initComponents();
         cargarComboBoxEspecialidades();
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -214,49 +213,20 @@ public class PanelNewPrestador extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 //=======================================================================================
     private void jLVolverPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVolverPMouseClicked
-        
-        PanelPrestadores prestadorVista=new PanelPrestadores();
+        PanelPrestadores prestadorVista = new PanelPrestadores();
         prestadorVista.setSize(670, 410);
         prestadorVista.setLocation(0, 0);
         jPFondo.removeAll();
         jPFondo.add(prestadorVista, BorderLayout.CENTER);
-        
+
         jPFondo.revalidate();
         jPFondo.repaint();
     }//GEN-LAST:event_jLVolverPMouseClicked
 //=======================================================================================
     private void jLAgregarPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAgregarPMouseClicked
-                               
-            try {
-
-            String nombre = jTNombreP.getText();
-            String apellido = jTApellidoP.getText();
-            String dniNum = jTDNIP.getText();
-            int dni = Integer.parseInt(dniNum);
-            String telefonoNum = jTTelP.getText();
-            int telefono = Integer.parseInt(telefonoNum);
-            String domicilio = jTDireP.getText();
-
-            if (jTDNIP.getText().equals("") || jTApellidoP.getText().equals("")
-                    || jTNombreP.getText().equals("") || jTTelP.getText().equals("")
-                    || jTDireP.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
-            } else {
-               
-                Especialidad especialidadSeleccionada = (Especialidad) jCBEspecialidades.getSelectedItem();
-                Prestador prestadorNuevo = new Prestador(nombre, apellido, dni, telefono, domicilio, especialidadSeleccionada, true);
-
-                prestaData.agregarPrestador(prestadorNuevo);
-                limpiarCampos();
-            }
-        } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
-        } catch (NumberFormatException ex2) {
-            JOptionPane.showMessageDialog(null, "DNI y teléfono sólo admiten números");
-        }
-                               
+        botonAgregarNuevoPrestador();
     }//GEN-LAST:event_jLAgregarPMouseClicked
-     //=====================================================================================
+    //=====================================================================================
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Especialidad> jCBEspecialidades;
     private javax.swing.JInternalFrame jInternalFrame1;
@@ -279,10 +249,9 @@ public class PanelNewPrestador extends javax.swing.JPanel {
     private javax.swing.JTextField jTTelP;
     // End of variables declaration//GEN-END:variables
 
-  //============================================
- //LIMPIA CAMPOS
-    
-    public void limpiarCampos (){
+    //============================================
+    //LIMPIA CAMPOS
+    public void limpiarCampos() {
         jTNombreP.setText("");
         jTApellidoP.setText("");
         jTDNIP.setText("");
@@ -290,16 +259,45 @@ public class PanelNewPrestador extends javax.swing.JPanel {
         jTDireP.setText("");
         jCBEspecialidades.setSelectedIndex(0);
     }
-    
+
     //===========================================
     // CARGA COMBOBOX
-    
-       private void cargarComboBoxEspecialidades() {
-           jCBEspecialidades.addItem(null);
+    private void cargarComboBoxEspecialidades() {
+        jCBEspecialidades.addItem(null);
         List<Especialidad> especialidadLista = especData.listarEspecialidades();
         for (Especialidad especialidad : especialidadLista) {
 
             jCBEspecialidades.addItem(especialidad);
+        }
+    }
+
+    //MÉTODOS BOTONES
+    private void botonAgregarNuevoPrestador() {
+        try {
+            String nombre = jTNombreP.getText();
+            String apellido = jTApellidoP.getText();
+            String dniNum = jTDNIP.getText();
+            int dni = Integer.parseInt(dniNum);
+            String telefonoNum = jTTelP.getText();
+            int telefono = Integer.parseInt(telefonoNum);
+            String domicilio = jTDireP.getText();
+
+            if (jTDNIP.getText().equals("") || jTApellidoP.getText().equals("")
+                    || jTNombreP.getText().equals("") || jTTelP.getText().equals("")
+                    || jTDireP.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
+            } else {
+
+                Especialidad especialidadSeleccionada = (Especialidad) jCBEspecialidades.getSelectedItem();
+                Prestador prestadorNuevo = new Prestador(nombre, apellido, dni, telefono, domicilio, especialidadSeleccionada, true);
+
+                prestaData.agregarPrestador(prestadorNuevo);
+                limpiarCampos();
+            }
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
+        } catch (NumberFormatException ex2) {
+            JOptionPane.showMessageDialog(null, "DNI y teléfono sólo admiten números");
         }
     }
 }

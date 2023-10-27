@@ -43,8 +43,6 @@ public class PanelAfiliados extends javax.swing.JPanel {
         cargarTablaAfiliados();
         escribirTextFieldDNI();
     }
-    
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -210,113 +208,19 @@ public class PanelAfiliados extends javax.swing.JPanel {
     }//GEN-LAST:event_jLAfiliadoNuevoMouseClicked
 
     private void jLAfiliadoBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAfiliadoBuscarMouseClicked
-        try {
-            cargarTablaVacia();
-
-            String dni = jTdni.getText();
-            int dniNum = Integer.parseInt(dni);
-
-            cargarTablaAfiliadosXDNI(dniNum);
-        } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(null, "Debe ingresar un DNI para buscar");
-        } catch (NumberFormatException ex2) {
-            JOptionPane.showMessageDialog(null, "DNI sólo admite números");
-        }
+        botonBuscarAfiliadoXDNI();
     }//GEN-LAST:event_jLAfiliadoBuscarMouseClicked
 
     private void jLAfiliadoModificarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAfiliadoModificarMouseClicked
-
-        try {
-            //Crea variable para guardar la fila seleccionada
-            int filaSeleccionada = jTAfiliado.getSelectedRow();
-
-            //Setea datos desde la tabla
-            int id = (Integer) jTAfiliado.getValueAt(filaSeleccionada, 0);
-            String nombre = (String) jTAfiliado.getValueAt(filaSeleccionada, 1);
-            String apellido = (String) jTAfiliado.getValueAt(filaSeleccionada, 2);
-            int dni = (Integer) jTAfiliado.getValueAt(filaSeleccionada, 3);
-            int telefono = (Integer) jTAfiliado.getValueAt(filaSeleccionada, 4);
-            String domicilio = (String) jTAfiliado.getValueAt(filaSeleccionada, 5);
-
-            //Busca afiliado a través de método
-            Afiliado afiliadoSeleccionado = afiliadoData.buscarAfiliado(id);
-
-            //Setea estado
-            boolean estado = afiliadoSeleccionado.isEstado();
-
-            //Instancia objeto final de alumno a modificar
-            Afiliado afiliadoModif = new Afiliado(id, nombre, apellido, dni, telefono, domicilio, estado);
-
-            //Llamada a método modificar
-            afiliadoData.modificarAfiliado(afiliadoModif);
-
-            //Refresh de tabla
-            cargarTablaVacia();
-            cargarTablaAfiliados();
-        } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(null, "No puede haber campos vacíos");
-        } catch (NumberFormatException ex2) {
-            JOptionPane.showMessageDialog(null, "Formato incorrecto. Complete los campos con los caracteres correctos");
-        } catch (ArrayIndexOutOfBoundsException ex3) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un afiliado para editar");
-        }
+        botonModificarAfiliado();
     }//GEN-LAST:event_jLAfiliadoModificarMouseClicked
 
     private void jLAfiliadoEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAfiliadoEliminarMouseClicked
-        try {
-            //Crea variable para guardar la fila seleccionada
-            int filaSeleccionada = jTAfiliado.getSelectedRow();
-
-            //Setea datos desde la tabla
-            int id = (Integer) jTAfiliado.getValueAt(filaSeleccionada, 0);
-
-            //Llamada a método modificar
-            afiliadoData.eliminarAfiliado(id);
-
-            //Refresh de tablas
-            cargarTablaVacia();
-            cargarTablaAfiliados();
-        } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(null, "No hay ninguna selección para eliminar");
-        } catch (NumberFormatException ex2) {
-            JOptionPane.showMessageDialog(null, "ERROR");
-        } catch (ArrayIndexOutOfBoundsException ex3) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un afiliado para eliminar");
-        }
+        botonEliminarAfiliado();
     }//GEN-LAST:event_jLAfiliadoEliminarMouseClicked
 
     private void jBAfiliadoOrdenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBAfiliadoOrdenMouseClicked
-        
-        try {
-            //Crea variable para guardar la fila seleccionada
-            int filaSeleccionada = jTAfiliado.getSelectedRow();
-
-            //Setea datos desde la tabla
-            int id = (Integer) jTAfiliado.getValueAt(filaSeleccionada, 0);
-
-            //Busca afiliado a través de método
-            Afiliado afiliadoSeleccionado = afiliadoData.buscarAfiliado(id);
-
-            //Setea para nueva orden
-            afiliadoStringParaOrden = afiliadoSeleccionado.toString();
-            afiliadoParaNewOrden = afiliadoSeleccionado;
-
-            //Istancia clase panel 
-            PanelNewOrden nuevaOrden = new PanelNewOrden();
-
-            //Setea dimensiones y location
-            nuevaOrden.setSize(670, 410);
-            nuevaOrden.setLocation(0, 0);
-
-            //Remueve y agrega la vista del panel instanciada
-            jPFondo.removeAll();
-            jPFondo.add(nuevaOrden, BorderLayout.CENTER);
-
-            jPFondo.revalidate();
-            jPFondo.repaint();
-        } catch (ArrayIndexOutOfBoundsException ex) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un afiliado para cargar una orden");
-        }
+        botonNuevaOrdenAfiliado();
     }//GEN-LAST:event_jBAfiliadoOrdenMouseClicked
 
     private void jTdniMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTdniMouseClicked
@@ -328,7 +232,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
             cargarTablaVacia();
             cargarTablaAfiliados();
             escribirTextFieldDNI();
-        } 
+        }
     }//GEN-LAST:event_formMouseClicked
 
     private void jTAfiliadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTAfiliadoMouseClicked
@@ -402,7 +306,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
             modelo.removeRow(0);
         }
     }
-    
+
     //Completa textField de buscarXDNI cuando está vacío
     private void escribirTextFieldDNI() {
         if (jTdni.getText().equals("")) {
@@ -410,11 +314,120 @@ public class PanelAfiliados extends javax.swing.JPanel {
             jTdni.setForeground(Color.gray);
         }
     }
-    
+
     private void seleccionarTextoTextFieldDNI() {
         jTdni.setSelectionStart(0);
         jTdni.setSelectionEnd(100);
 
-       jTdni.setForeground(Color.black);
+        jTdni.setForeground(Color.black);
+    }
+
+    //MÉTODOS BOTONES
+    private void botonBuscarAfiliadoXDNI() {
+        try {
+            cargarTablaVacia();
+
+            String dni = jTdni.getText();
+            int dniNum = Integer.parseInt(dni);
+
+            cargarTablaAfiliadosXDNI(dniNum);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un DNI para buscar");
+        } catch (NumberFormatException ex2) {
+            JOptionPane.showMessageDialog(null, "DNI sólo admite números");
+        }
+    }
+
+    private void botonModificarAfiliado() {
+        try {
+            //Crea variable para guardar la fila seleccionada
+            int filaSeleccionada = jTAfiliado.getSelectedRow();
+
+            //Setea datos desde la tabla
+            int id = (Integer) jTAfiliado.getValueAt(filaSeleccionada, 0);
+            String nombre = (String) jTAfiliado.getValueAt(filaSeleccionada, 1);
+            String apellido = (String) jTAfiliado.getValueAt(filaSeleccionada, 2);
+            int dni = (Integer) jTAfiliado.getValueAt(filaSeleccionada, 3);
+            int telefono = (Integer) jTAfiliado.getValueAt(filaSeleccionada, 4);
+            String domicilio = (String) jTAfiliado.getValueAt(filaSeleccionada, 5);
+
+            //Busca afiliado a través de método
+            Afiliado afiliadoSeleccionado = afiliadoData.buscarAfiliado(id);
+
+            //Setea estado
+            boolean estado = afiliadoSeleccionado.isEstado();
+
+            //Instancia objeto final de alumno a modificar
+            Afiliado afiliadoModif = new Afiliado(id, nombre, apellido, dni, telefono, domicilio, estado);
+
+            //Llamada a método modificar
+            afiliadoData.modificarAfiliado(afiliadoModif);
+
+            //Refresh de tabla
+            cargarTablaVacia();
+            cargarTablaAfiliados();
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "No puede haber campos vacíos");
+        } catch (NumberFormatException ex2) {
+            JOptionPane.showMessageDialog(null, "Formato incorrecto. Complete los campos con los caracteres correctos");
+        } catch (ArrayIndexOutOfBoundsException ex3) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un afiliado para editar");
+        }
+    }
+
+    private void botonEliminarAfiliado() {
+        try {
+            //Crea variable para guardar la fila seleccionada
+            int filaSeleccionada = jTAfiliado.getSelectedRow();
+
+            //Setea datos desde la tabla
+            int id = (Integer) jTAfiliado.getValueAt(filaSeleccionada, 0);
+
+            //Llamada a método modificar
+            afiliadoData.eliminarAfiliado(id);
+
+            //Refresh de tablas
+            cargarTablaVacia();
+            cargarTablaAfiliados();
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "No hay ninguna selección para eliminar");
+        } catch (NumberFormatException ex2) {
+            JOptionPane.showMessageDialog(null, "ERROR");
+        } catch (ArrayIndexOutOfBoundsException ex3) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un afiliado para eliminar");
+        }
+    }
+
+    private void botonNuevaOrdenAfiliado() {
+        try {
+            //Crea variable para guardar la fila seleccionada
+            int filaSeleccionada = jTAfiliado.getSelectedRow();
+
+            //Setea datos desde la tabla
+            int id = (Integer) jTAfiliado.getValueAt(filaSeleccionada, 0);
+
+            //Busca afiliado a través de método
+            Afiliado afiliadoSeleccionado = afiliadoData.buscarAfiliado(id);
+
+            //Setea para nueva orden
+            afiliadoStringParaOrden = afiliadoSeleccionado.toString();
+            afiliadoParaNewOrden = afiliadoSeleccionado;
+
+            //Istancia clase panel 
+            PanelNewOrden nuevaOrden = new PanelNewOrden();
+
+            //Setea dimensiones y location
+            nuevaOrden.setSize(670, 410);
+            nuevaOrden.setLocation(0, 0);
+
+            //Remueve y agrega la vista del panel instanciada
+            jPFondo.removeAll();
+            jPFondo.add(nuevaOrden, BorderLayout.CENTER);
+
+            jPFondo.revalidate();
+            jPFondo.repaint();
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un afiliado para cargar una orden");
+        }
     }
 }

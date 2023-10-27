@@ -305,9 +305,6 @@ public class OrdenData {
                 orden.setFormaPago(rs.getString("formaPago"));
                 orden.setImporte(rs.getDouble("importe"));
 
-                //Recupera la idAfiliado y idPrestador a través del id de las columnas de base
-                //int idAfiliado = rs.getInt("idAfiliado");
-                //int idPrestador = rs.getInt("idPrestador");
                 //Variables data
                 PrestadorData prestadorData = new PrestadorData();
                 AfiliadoData afiliadoData = new AfiliadoData();
@@ -351,9 +348,6 @@ public class OrdenData {
                 orden.setFormaPago(rs.getString("formaPago"));
                 orden.setImporte(rs.getDouble("importe"));
 
-                //Recupera la idAfiliado y idPrestador a través del id de las columnas de base
-                //int idAfiliado = rs.getInt("idAfiliado");
-                //int idPrestador = rs.getInt("idPrestador");
                 //Variables data
                 PrestadorData prestadorData = new PrestadorData();
                 AfiliadoData afiliadoData = new AfiliadoData();
@@ -397,8 +391,7 @@ public class OrdenData {
                 orden.setFormaPago(rs.getString("formaPago"));
                 orden.setImporte(rs.getDouble("importe"));
 
-                //Recupera la idAfiliado y idPrestador a través del id de las columnas de base
-                //int idAfiliado = rs.getInt("idAfiliado");
+                //Recupera la idAfiliado a través del id de las columnas de base
                 int idPrestador = rs.getInt("idPrestador");
 
                 //Variables data
@@ -444,9 +437,8 @@ public class OrdenData {
                 orden.setFormaPago(rs.getString("formaPago"));
                 orden.setImporte(rs.getDouble("importe"));
 
-                //Recupera la idAfiliado y idPrestador a través del id de las columnas de base
+                //Recupera la idAfiliado a través del id de las columnas de base
                 int idAfiliado = rs.getInt("idAfiliado");
-                //int idPrestador = rs.getInt("idPrestador");
 
                 //Variables data
                 PrestadorData prestadorData = new PrestadorData();

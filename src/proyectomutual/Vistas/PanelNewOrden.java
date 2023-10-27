@@ -28,13 +28,13 @@ public class PanelNewOrden extends javax.swing.JPanel {
 //VARIABLES DATA
     private PrestadorData prestadorData = new PrestadorData();
     private OrdenData ordenData = new OrdenData();
-    
+
     public PanelNewOrden() {
         initComponents();
-        
+
         llenarComboBoxFormaPago();
         llenarComboBoxPrestadores();
-        
+
         completarTextFieldAfiliadoNuevaOrden();
     }
 
@@ -214,53 +214,24 @@ public class PanelNewOrden extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVolverMouseClicked
-         //Istancia clase panel 
-        PanelAfiliados afiliadosVista=new PanelAfiliados();
-        
+        //Istancia clase panel 
+        PanelAfiliados afiliadosVista = new PanelAfiliados();
+
         //Setea dimensiones y location
         afiliadosVista.setSize(670, 410);
         afiliadosVista.setLocation(0, 0);
-        
+
         //Remueve y agrega la vista del panel instanciada
         jPFondo.removeAll();
         jPFondo.add(afiliadosVista, BorderLayout.CENTER);
-        
+
         jPFondo.revalidate();
         jPFondo.repaint();
 
     }//GEN-LAST:event_jLVolverMouseClicked
 
     private void jLAgregarOrdenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLAgregarOrdenMouseClicked
-     
-        try {
-            //instancia objeto para traer afiliado
-            PanelAfiliados afilNuevaOrden = new PanelAfiliados();
-            Afiliado afiliado = afilNuevaOrden.afiliadoParaNewOrden;
-            
-            //Guarda en variables los campos
-            LocalDate fecha = fromDateToLocalDate(jDFecha.getDate());
-            String formaPago = (String) jCPago.getSelectedItem();
-            String importeNum = jTextImporte.getText();
-            double importe = Double.parseDouble(importeNum);
-            Prestador prestadorSeleccionado = (Prestador) jComboBoxPrestador.getSelectedItem();
-            
-
-
-            //VERIFICA QUE ESTEN COMPLETOS TODOS LOS DATOS ANTES DE AGREGAR
-            if (jTextImporte.getText().equals("") || jDFecha.getDate() == null) {
-                JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
-            } else {
-                Orden nuevaOrden = new Orden(fecha, formaPago, importe, afiliado, prestadorSeleccionado);
-
-                ordenData.guardarOrden(nuevaOrden);
-                refreshCampos();
-                
-            }
-        } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
-        } catch (NumberFormatException ex2) {
-            JOptionPane.showMessageDialog(null, "Importe sólo admite números");
-        }
+        botonAgregarNuevaOrden();
     }//GEN-LAST:event_jLAgregarOrdenMouseClicked
 
 
@@ -293,8 +264,8 @@ public class PanelNewOrden extends javax.swing.JPanel {
             jComboBoxPrestador.addItem(prestadores);
         }
     }
-    
-    private void llenarComboBoxFormaPago(){
+
+    private void llenarComboBoxFormaPago() {
         jCPago.addItem(null);
         jCPago.addItem("Efectivo");
         jCPago.addItem("Débito");
@@ -320,5 +291,36 @@ public class PanelNewOrden extends javax.swing.JPanel {
         //Setea textField
         jTextAfil.setText(afil.afiliadoStringParaOrden);
         jTextAfil.setBackground(Color.gray);
+    }
+
+    //MÉTODO BOTON
+    private void botonAgregarNuevaOrden() {
+        try {
+            //instancia objeto para traer afiliado
+            PanelAfiliados afilNuevaOrden = new PanelAfiliados();
+            Afiliado afiliado = afilNuevaOrden.afiliadoParaNewOrden;
+
+            //Guarda en variables los campos
+            LocalDate fecha = fromDateToLocalDate(jDFecha.getDate());
+            String formaPago = (String) jCPago.getSelectedItem();
+            String importeNum = jTextImporte.getText();
+            double importe = Double.parseDouble(importeNum);
+            Prestador prestadorSeleccionado = (Prestador) jComboBoxPrestador.getSelectedItem();
+
+            //VERIFICA QUE ESTEN COMPLETOS TODOS LOS DATOS ANTES DE AGREGAR
+            if (jTextImporte.getText().equals("") || jDFecha.getDate() == null) {
+                JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
+            } else {
+                Orden nuevaOrden = new Orden(fecha, formaPago, importe, afiliado, prestadorSeleccionado);
+
+                ordenData.guardarOrden(nuevaOrden);
+                refreshCampos();
+
+            }
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos");
+        } catch (NumberFormatException ex2) {
+            JOptionPane.showMessageDialog(null, "Importe sólo admite números");
+        }
     }
 }
