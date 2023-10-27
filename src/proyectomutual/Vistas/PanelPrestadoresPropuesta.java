@@ -131,7 +131,11 @@ public class PanelPrestadoresPropuesta extends javax.swing.JPanel {
         });
         jPPrestador.add(jLAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 50, 50));
 
+        jBMostrarTodosLosPrestadores.setBackground(new java.awt.Color(0, 153, 153));
+        jBMostrarTodosLosPrestadores.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jBMostrarTodosLosPrestadores.setForeground(new java.awt.Color(255, 255, 255));
         jBMostrarTodosLosPrestadores.setText("VER TODOS");
+        jBMostrarTodosLosPrestadores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBMostrarTodosLosPrestadores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBMostrarTodosLosPrestadoresActionPerformed(evt);
@@ -164,7 +168,11 @@ public class PanelPrestadoresPropuesta extends javax.swing.JPanel {
         jLabel5.setText("FILTRAR POR ESPECIALIDAD:");
         jPPrestador.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, -1, -1));
 
+        jButtonNuevaEspecialidad.setBackground(new java.awt.Color(0, 153, 153));
+        jButtonNuevaEspecialidad.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonNuevaEspecialidad.setForeground(new java.awt.Color(255, 255, 255));
         jButtonNuevaEspecialidad.setText("NUEVA ESPECIALIDAD");
+        jButtonNuevaEspecialidad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonNuevaEspecialidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonNuevaEspecialidadActionPerformed(evt);
@@ -173,7 +181,11 @@ public class PanelPrestadoresPropuesta extends javax.swing.JPanel {
         jPPrestador.add(jButtonNuevaEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, -1, -1));
         jPPrestador.add(jTextFieldNuevaEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 150, 140, -1));
 
+        jButtonAgregarEspecialidad.setBackground(new java.awt.Color(0, 153, 153));
+        jButtonAgregarEspecialidad.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButtonAgregarEspecialidad.setForeground(new java.awt.Color(255, 255, 255));
         jButtonAgregarEspecialidad.setText("AGREGAR");
+        jButtonAgregarEspecialidad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonAgregarEspecialidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAgregarEspecialidadActionPerformed(evt);
@@ -415,7 +427,7 @@ public class PanelPrestadoresPropuesta extends javax.swing.JPanel {
 
             herramientasAgregarEspecialidadInvisible();
 
-            cargarComboBox();
+            jCBEspecialidad.setSelectedIndex(0);
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(null, "Debe ingresar una especialidad para agregar");
         }
@@ -427,6 +439,7 @@ public class PanelPrestadoresPropuesta extends javax.swing.JPanel {
         jButtonAgregarEspecialidad.setVisible(false);
         jButtonNuevaEspecialidad.setVisible(true);
     }
+    
 }
    
 

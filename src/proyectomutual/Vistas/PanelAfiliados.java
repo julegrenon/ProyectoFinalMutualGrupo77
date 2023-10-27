@@ -132,7 +132,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
                 jBAfiliadoOrdenMouseClicked(evt);
             }
         });
-        add(jBAfiliadoOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 260, -1, -1));
+        add(jBAfiliadoOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 240, 160, 40));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 70, 613, 13));
 
         jLabel4.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N

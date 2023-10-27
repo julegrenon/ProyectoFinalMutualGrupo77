@@ -288,6 +288,7 @@ public class PanelNewPrestador extends javax.swing.JPanel {
         jTDNIP.setText("");
         jTTelP.setText("");
         jTDireP.setText("");
+        jCBEspecialidades.setSelectedIndex(0);
     }
     
     //===========================================

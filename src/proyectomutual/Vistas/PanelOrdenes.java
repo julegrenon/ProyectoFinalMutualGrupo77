@@ -23,7 +23,7 @@ import proyectomutual.entidades.Afiliado;
 import proyectomutual.entidades.Orden;
 public class PanelOrdenes extends javax.swing.JPanel {
 
-        //Setea modelo de tabla
+    //Setea modelo de tabla
     private DefaultTableModel modelo = new DefaultTableModel() {
 
         public boolean isCellEditable(int f, int c) {
@@ -88,7 +88,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTConsultaOrden);
 
-        jPOrden.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 520, 120));
+        jPOrden.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 520, 120));
 
         jLabel3.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 102, 102));
@@ -103,7 +103,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
                 jCheckDNIActionPerformed(evt);
             }
         });
-        jPOrden.add(jCheckDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, -1, -1));
+        jPOrden.add(jCheckDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, -1));
 
         jCheckPrestador.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jCheckPrestador.setForeground(new java.awt.Color(0, 102, 102));
@@ -113,7 +113,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
                 jCheckPrestadorActionPerformed(evt);
             }
         });
-        jPOrden.add(jCheckPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, -1, -1));
+        jPOrden.add(jCheckPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, -1, -1));
 
         jCheckFecha.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jCheckFecha.setForeground(new java.awt.Color(0, 102, 102));
@@ -123,16 +123,20 @@ public class PanelOrdenes extends javax.swing.JPanel {
                 jCheckFechaActionPerformed(evt);
             }
         });
-        jPOrden.add(jCheckFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 110, -1, -1));
+        jPOrden.add(jCheckFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 102, 102));
         jLabel4.setText("Buscar por..");
-        jPOrden.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, -1, -1));
-        jPOrden.add(jTDNIConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 140, 100, -1));
-        jPOrden.add(jTIdPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 140, 120, -1));
+        jPOrden.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
+        jPOrden.add(jTDNIConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 120, -1));
+        jPOrden.add(jTIdPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, 120, -1));
 
+        jBLimpiar.setBackground(new java.awt.Color(0, 153, 153));
+        jBLimpiar.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 12)); // NOI18N
+        jBLimpiar.setForeground(new java.awt.Color(255, 255, 255));
         jBLimpiar.setText("NUEVA BÚSQUEDA");
+        jBLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBLimpiarActionPerformed(evt);
@@ -141,14 +145,18 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jPOrden.add(jBLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, -1, -1));
         jPOrden.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 610, 10));
 
+        jButtonBuscarXFiltro.setBackground(new java.awt.Color(0, 153, 153));
+        jButtonBuscarXFiltro.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 11)); // NOI18N
+        jButtonBuscarXFiltro.setForeground(new java.awt.Color(255, 255, 255));
         jButtonBuscarXFiltro.setText("Buscar");
+        jButtonBuscarXFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonBuscarXFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonBuscarXFiltroActionPerformed(evt);
             }
         });
-        jPOrden.add(jButtonBuscarXFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, -1, -1));
-        jPOrden.add(jDFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 100, 20));
+        jPOrden.add(jButtonBuscarXFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, 120, 30));
+        jPOrden.add(jDFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, 110, 30));
 
         add(jPOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 410));
         jPOrden.getAccessibleContext().setAccessibleDescription("");
@@ -157,70 +165,41 @@ public class PanelOrdenes extends javax.swing.JPanel {
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
         cargarTablaVacia();
         cargarTablaOrdenes();
+        limpiarCamposYChecks();
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jCheckDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckDNIActionPerformed
         if (jCheckDNI.isSelected()) {
             jTDNIConsulta.setVisible(true);
-           /* jTIdPrestador.setVisible(false);
-            jDFecha.setVisible(false);
-            jCheckFecha.setSelected(false);
-            jCheckPrestador.setSelected(false);*/
-
-            limpiarCamposAlDestildar();
+            jTDNIConsulta.setText("");
         }
 
         if (jCheckDNI.isSelected() == false) {
             jTDNIConsulta.setVisible(false);
-            /*jTIdPrestador.setVisible(false);
-            jDFecha.setVisible(false);
-            jCheckFecha.setSelected(false);
-            jCheckPrestador.setSelected(false);*/
-
         }
         botonBuscarXFiltroVisible();
     }//GEN-LAST:event_jCheckDNIActionPerformed
 
     private void jCheckPrestadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckPrestadorActionPerformed
         if (jCheckPrestador.isSelected()) {
-           // jTDNIConsulta.setVisible(false);
             jTIdPrestador.setVisible(true);
-            /*jDFecha.setVisible(false);
-            jCheckFecha.setSelected(false);
-            jCheckDNI.setSelected(false);*/
-
-            limpiarCamposAlDestildar();
+            jTIdPrestador.setText("");
         }
 
         if (jCheckPrestador.isSelected() == false) {
-           // jTDNIConsulta.setVisible(false);
             jTIdPrestador.setVisible(false);
-           /* jDFecha.setVisible(false);
-            jCheckFecha.setSelected(false);
-            jCheckDNI.setSelected(false);*/
-
         }
         botonBuscarXFiltroVisible();
     }//GEN-LAST:event_jCheckPrestadorActionPerformed
 
     private void jCheckFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckFechaActionPerformed
         if (jCheckFecha.isSelected()) {
-           // jTDNIConsulta.setVisible(false);
-            //jTIdPrestador.setVisible(false);
             jDFecha.setVisible(true);
-           /* jCheckDNI.setSelected(false);
-            jCheckPrestador.setSelected(false);*/
-
-            limpiarCamposAlDestildar();
+            jDFecha.setDate(null);
         }
 
         if (jCheckFecha.isSelected() == false) {
-           // jTDNIConsulta.setVisible(false);
-           // jTIdPrestador.setVisible(false);
             jDFecha.setVisible(false);
-           /* jCheckDNI.setSelected(false);
-            jCheckPrestador.setSelected(false);*/
-
         }
         botonBuscarXFiltroVisible();
     }//GEN-LAST:event_jCheckFechaActionPerformed
@@ -319,7 +298,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jTIdPrestador.setVisible(false);
         jDFecha.setVisible(false);
     }
-    
+
     //Revisar NO funciona
     private void checks() {
         if (jCheckDNI.isSelected()) {
@@ -334,42 +313,50 @@ public class PanelOrdenes extends javax.swing.JPanel {
             jDFecha.setVisible(false);
             jCheckDNI.setSelected(false);
             jCheckFecha.setSelected(false);
-        } else if (jCheckFecha.isSelected()){
+        } else if (jCheckFecha.isSelected()) {
             jTDNIConsulta.setVisible(false);
             jTIdPrestador.setVisible(false);
             jDFecha.setVisible(true);
             jCheckDNI.setSelected(false);
             jCheckPrestador.setSelected(false);
         }
-        
-        if (jCheckDNI.isSelected() == false && jCheckPrestador.isSelected() == false 
-                && jCheckFecha.isSelected() == false){
+
+        if (jCheckDNI.isSelected() == false && jCheckPrestador.isSelected() == false
+                && jCheckFecha.isSelected() == false) {
             textFieldsInvisibles();
-        } else if (jCheckDNI.isSelected() == false){
+        } else if (jCheckDNI.isSelected() == false) {
             jTDNIConsulta.setVisible(false);
-        } else if (jCheckPrestador.isSelected() == false){
+        } else if (jCheckPrestador.isSelected() == false) {
             jTIdPrestador.setVisible(false);
-        } else if (jCheckFecha.isSelected() == false){
+        } else if (jCheckFecha.isSelected() == false) {
             jDFecha.setVisible(false);
         }
     }
-    
-  //Limpiar campos
-    private void limpiarCamposAlDestildar(){
+
+    //Limpiar campos
+    private void limpiarCamposYChecks() {
         jTDNIConsulta.setText("");
         jTIdPrestador.setText("");
-        //jDFecha.setDateFormatString("");
+        jDFecha.setDate(null);
+
+        jCheckDNI.setSelected(false);
+        jCheckPrestador.setSelected(false);
+        jCheckFecha.setSelected(false);
+
+        jTDNIConsulta.setVisible(false);
+        jTIdPrestador.setVisible(false);
+        jDFecha.setVisible(false);
     }
-    
-    private void botonBuscarXFiltroVisible(){
-        
-        if( jCheckDNI.isSelected() || jCheckPrestador.isSelected() || jCheckFecha.isSelected()){
+
+    private void botonBuscarXFiltroVisible() {
+
+        if (jCheckDNI.isSelected() || jCheckPrestador.isSelected() || jCheckFecha.isSelected()) {
             jButtonBuscarXFiltro.setVisible(true);
         } else {
             jButtonBuscarXFiltro.setVisible(false);
         }
     }
-    
+
     //Carga tabla según filtro seleccionado
     private void cargarTablaSegunFiltro() {
         //Por DNI Afiliado
@@ -384,10 +371,10 @@ public class PanelOrdenes extends javax.swing.JPanel {
 
             //Guarda id en variable idAFiliado
             int idAfiliado = afiliadoEncontrado.getIdAfiliado();
-            
+
             modelo.setRowCount(0);
             List<Orden> listaOrdenesXDNI = ordenData.buscaOrdenPorAfil(idAfiliado);
-            
+
             for (Orden ordenes : listaOrdenesXDNI) {
                 modelo.addRow(new Object[]{
                     ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
@@ -398,13 +385,13 @@ public class PanelOrdenes extends javax.swing.JPanel {
 
         //Por idPrestador
         if (jCheckPrestador.isSelected()) {
-            
+
             String idNum = jTIdPrestador.getText();
             int idPrestador = Integer.parseInt(idNum);
-            
+
             modelo.setRowCount(0);
             List<Orden> listaOrdenesXPrestador = ordenData.buscaOrdenPorPrestador(idPrestador);
-            
+
             for (Orden ordenes : listaOrdenesXPrestador) {
                 modelo.addRow(new Object[]{
                     ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
@@ -416,17 +403,17 @@ public class PanelOrdenes extends javax.swing.JPanel {
         //Por fecha
         if (jCheckFecha.isSelected()) {
             LocalDate fecha = fromDateToLocalDate(jDFecha.getDate());
-            
+
             modelo.setRowCount(0);
             List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorFecha(fecha);
-            
+
             for (Orden ordenes : listaOrdenesXFecha) {
                 modelo.addRow(new Object[]{
                     ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
                     ordenes.getPrestador().toString(), ordenes.getFecha()
                 });
             }
-            
+
         }
 
         //Se prueba búsquedas combinadas
@@ -445,17 +432,17 @@ public class PanelOrdenes extends javax.swing.JPanel {
 
             //Guarda id en variable idAFiliado
             int idAfiliado = afiliadoEncontrado.getIdAfiliado();
-            
+
             modelo.setRowCount(0);
             List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorAfiliadoPrestadorYFecha(idAfiliado, idPrestador, fecha);
-            
+
             for (Orden ordenes : listaOrdenesXFecha) {
                 modelo.addRow(new Object[]{
                     ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
                     ordenes.getPrestador().toString(), ordenes.getFecha()
                 });
             }
-            
+
         }
 
         //Combina Afiliado y prestador
@@ -472,17 +459,17 @@ public class PanelOrdenes extends javax.swing.JPanel {
 
             //Guarda id en variable idAFiliado
             int idAfiliado = afiliadoEncontrado.getIdAfiliado();
-            
+
             modelo.setRowCount(0);
             List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorAfiliadoYPrestador(idAfiliado, idPrestador);
-            
+
             for (Orden ordenes : listaOrdenesXFecha) {
                 modelo.addRow(new Object[]{
                     ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
                     ordenes.getPrestador().toString(), ordenes.getFecha()
                 });
             }
-            
+
         }
 
         //Busca x afiliado y fecha
@@ -498,17 +485,17 @@ public class PanelOrdenes extends javax.swing.JPanel {
 
             //Guarda id en variable idAFiliado
             int idAfiliado = afiliadoEncontrado.getIdAfiliado();
-            
+
             modelo.setRowCount(0);
             List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorAfiliadoYFecha(idAfiliado, fecha);
-            
+
             for (Orden ordenes : listaOrdenesXFecha) {
                 modelo.addRow(new Object[]{
                     ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
                     ordenes.getPrestador().toString(), ordenes.getFecha()
                 });
             }
-            
+
         }
 
         //busca x prestador y fecha
@@ -518,21 +505,21 @@ public class PanelOrdenes extends javax.swing.JPanel {
             String idNum = jTIdPrestador.getText();
             int idPrestador = Integer.parseInt(idNum);
             LocalDate fecha = fromDateToLocalDate(jDFecha.getDate());
-            
+
             modelo.setRowCount(0);
             List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorPrestadorYFecha(idPrestador, fecha);
-            
+
             for (Orden ordenes : listaOrdenesXFecha) {
                 modelo.addRow(new Object[]{
                     ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
                     ordenes.getPrestador().toString(), ordenes.getFecha()
                 });
             }
-            
+
         }
-        
+
     }
-    
+
     //casteo localDate a date
     public LocalDate fromDateToLocalDate(Date date) {
         return date.toInstant()
