@@ -187,7 +187,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void jBPrestadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPrestadorActionPerformed
             //Istancia clase panel 
-        PanelPrestadoresPropuesta prestadoresVista=new PanelPrestadoresPropuesta();
+        PanelPrestadores prestadoresVista=new PanelPrestadores();
         
         //Setea dimensiones y location
         prestadoresVista.setSize(670, 410);

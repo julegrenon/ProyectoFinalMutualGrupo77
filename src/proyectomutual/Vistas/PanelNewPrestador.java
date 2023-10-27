@@ -215,7 +215,7 @@ public class PanelNewPrestador extends javax.swing.JPanel {
 //=======================================================================================
     private void jLVolverPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVolverPMouseClicked
         
-        PanelPrestadoresPropuesta prestadorVista=new PanelPrestadoresPropuesta();
+        PanelPrestadores prestadorVista=new PanelPrestadores();
         prestadorVista.setSize(670, 410);
         prestadorVista.setLocation(0, 0);
         jPFondo.removeAll();

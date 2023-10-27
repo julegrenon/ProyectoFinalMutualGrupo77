@@ -47,7 +47,6 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
         jLabelSubTitulo = new javax.swing.JLabel();
         jLBotonAgregarAf = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jCActivo = new javax.swing.JCheckBox();
         jLabelBotonVolver = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(204, 255, 255));
@@ -93,10 +92,6 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
         jLabel11.setForeground(new java.awt.Color(51, 51, 51));
         jLabel11.setText("Agregar");
 
-        jCActivo.setBackground(new java.awt.Color(255, 255, 255));
-        jCActivo.setText("ACTIVO");
-        jCActivo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
         jLabelBotonVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Retroc.png"))); // NOI18N
         jLabelBotonVolver.setText("jLabel7");
         jLabelBotonVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -137,8 +132,6 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
                             .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(23, 23, 23))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jCActivo)
-                        .addGap(69, 69, 69)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(6, 6, 6)
@@ -194,8 +187,7 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
                                         .addComponent(jTDNIA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jTTelefonoA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(52, 52, 52)
-                        .addComponent(jCActivo))
+                        .addGap(71, 71, 71))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLBotonAgregarAf)))
@@ -232,7 +224,7 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
             String telefonoNum = jTTelefonoA.getText();
             int telefono = Integer.parseInt(telefonoNum);
             String domicilio = jTDomicilioA.getText();
-            boolean estado = jCActivo.isSelected();
+            boolean estado = true;
 
             //VERIFICA QUE ESTEN COMPLETOS TODOS LOS DATOS ANTES DE AGREGAR
             if (jTDNIA.getText().equals("") || jTApellidoA.getText().equals("")
@@ -258,7 +250,6 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCActivo;
     private javax.swing.JLabel jLBotonAgregarAf;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;

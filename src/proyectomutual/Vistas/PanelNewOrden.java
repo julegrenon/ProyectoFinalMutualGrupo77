@@ -308,13 +308,10 @@ public class PanelNewOrden extends javax.swing.JPanel {
     }
 
     private void refreshCampos() {
-        jDFecha.setDateFormatString("");
         jTextImporte.setText("");
         jDFecha.setDate(null);
         jComboBoxPrestador.setSelectedIndex(0);
         jCPago.setSelectedIndex(0);
-        //llenarComboBoxPrestadores();
-        //llenarComboBoxFormaPago();
     }
 
     private void completarTextFieldAfiliadoNuevaOrden() {
