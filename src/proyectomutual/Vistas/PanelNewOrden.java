@@ -66,6 +66,8 @@ public class PanelNewOrden extends javax.swing.JPanel {
         jDFecha = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(204, 255, 255));
+        setMinimumSize(new java.awt.Dimension(670, 410));
+        setPreferredSize(new java.awt.Dimension(670, 410));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 24)); // NOI18N
@@ -121,10 +123,10 @@ public class PanelNewOrden extends javax.swing.JPanel {
                 jLVolverMouseClicked(evt);
             }
         });
-        add(jLVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(622, 6, 48, 39));
+        add(jLVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 10, 48, 39));
 
         jLabel8.setText("( Llene todos los campos )");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(264, 61, -1, -1));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 102, 102));
@@ -138,7 +140,9 @@ public class PanelNewOrden extends javax.swing.JPanel {
 
         jComboBoxPrestador.setMaximumSize(new java.awt.Dimension(28, 20));
         add(jComboBoxPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 288, 328, -1));
-        add(jDFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 155, -1, -1));
+        add(jDFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(211, 155, 130, -1));
+
+        getAccessibleContext().setAccessibleName("");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jLVolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLVolverMouseClicked

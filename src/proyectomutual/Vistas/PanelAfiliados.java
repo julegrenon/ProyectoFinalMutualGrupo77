@@ -351,7 +351,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
     private void jBMostrarTodosAfiliadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMostrarTodosAfiliadosActionPerformed
         cargarTablaVacia();
         cargarTablaAfiliados();
-        //herramientasAgregarEspecialidadInvisible();
+       
     }//GEN-LAST:event_jBMostrarTodosAfiliadosActionPerformed
 
 
