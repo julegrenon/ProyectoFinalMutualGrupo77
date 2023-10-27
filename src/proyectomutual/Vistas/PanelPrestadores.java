@@ -303,7 +303,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
         jTablePrestadores.setModel(modelo);
     }
 
-//CARGA LISTA PRESTADORES
+//MÉTODOS TABLAS
     public void cargarTablaPrestadores() {
 
         modelo.setRowCount(0);
@@ -338,8 +338,15 @@ public class PanelPrestadores extends javax.swing.JPanel {
 
     }
 
+    //Limpia datos de la tabla
+    private void cargarTablaVacia() {
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
+    }
+
 //==================================================================================
-//CARGA COMBOBOX DE ESPECIALIDADES
+//MÉTODOS COMBOBOX
     private void cargarComboBox() {
         jCBEspecialidad.removeAll();
         jCBEspecialidad.addItem(null);
@@ -354,13 +361,6 @@ public class PanelPrestadores extends javax.swing.JPanel {
     private void limpiarComboBox() {
         while (jCBEspecialidad.getItemCount() > 0) {
             jCBEspecialidad.removeAllItems();
-        }
-    }
-
-    //Limpia datos de la tabla
-    private void cargarTablaVacia() {
-        while (modelo.getRowCount() > 0) {
-            modelo.removeRow(0);
         }
     }
 

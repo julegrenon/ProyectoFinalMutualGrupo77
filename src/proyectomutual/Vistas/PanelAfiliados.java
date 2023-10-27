@@ -42,6 +42,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
         cargarColumnas();
         cargarTablaAfiliados();
         escribirTextFieldDNI();
+        jBMostrarTodosAfiliados.setVisible(false);
     }
 
     /**
@@ -253,9 +254,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
     }//GEN-LAST:event_jTAfiliadoMouseClicked
 
     private void jBMostrarTodosAfiliadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMostrarTodosAfiliadosActionPerformed
-        cargarTablaVacia();
-        cargarTablaAfiliados();
-       
+       botonMostrarTodosAfiliados();
     }//GEN-LAST:event_jBMostrarTodosAfiliadosActionPerformed
 
 
@@ -351,6 +350,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
             int dniNum = Integer.parseInt(dni);
 
             cargarTablaAfiliadosXDNI(dniNum);
+            jBMostrarTodosAfiliados.setVisible(true);
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(null, "Debe ingresar un DNI para buscar");
         } catch (NumberFormatException ex2) {
@@ -449,5 +449,13 @@ public class PanelAfiliados extends javax.swing.JPanel {
         } catch (ArrayIndexOutOfBoundsException ex) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un afiliado para cargar una orden");
         }
+    }
+    
+    private void botonMostrarTodosAfiliados(){
+        cargarTablaVacia();
+        cargarTablaAfiliados();
+        jTdni.setText("Ingrese un DNI");
+        jTdni.setForeground(Color.gray);
+        jBMostrarTodosAfiliados.setVisible(false);
     }
 }
