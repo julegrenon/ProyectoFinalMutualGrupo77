@@ -148,7 +148,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jButtonBuscarXFiltro.setBackground(new java.awt.Color(0, 153, 153));
         jButtonBuscarXFiltro.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 11)); // NOI18N
         jButtonBuscarXFiltro.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonBuscarXFiltro.setText("Buscar");
+        jButtonBuscarXFiltro.setText("BUSCAR");
         jButtonBuscarXFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButtonBuscarXFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -166,6 +166,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
         cargarTablaVacia();
         cargarTablaOrdenes();
         limpiarCamposYChecks();
+        botonBuscarXFiltroVisible();
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jCheckDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckDNIActionPerformed
@@ -492,7 +493,9 @@ public class PanelOrdenes extends javax.swing.JPanel {
             cargarTablaVacia();
             cargarTablaOrdenes();
         } catch (NullPointerException ex2) {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una fecha para buscar");
+            if (jCheckFecha.isSelected() && jDFecha.getDate() == null) {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar una fecha para buscar");
+            }
             cargarTablaVacia();
             cargarTablaOrdenes();
         }

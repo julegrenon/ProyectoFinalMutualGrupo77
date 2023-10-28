@@ -54,18 +54,18 @@ public class PanelAfiliados extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jLabelFiltro = new javax.swing.JLabel();
         jTdni = new javax.swing.JTextField();
         jLAfiliadoBuscar = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabelNuevoAfiliado = new javax.swing.JLabel();
         jLAfiliadoEliminar = new javax.swing.JLabel();
         jBAfiliadoOrden = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabelModificar = new javax.swing.JLabel();
+        jLabelEliminar = new javax.swing.JLabel();
         jLAfiliadoNuevo = new javax.swing.JLabel();
         jLAfiliadoModificar = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        jLabelTitulo = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTAfiliado = new javax.swing.JTable();
         jBMostrarTodosAfiliados = new javax.swing.JButton();
@@ -80,10 +80,10 @@ public class PanelAfiliados extends javax.swing.JPanel {
         });
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel1.setText("Buscar por DNI");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 80, -1, -1));
+        jLabelFiltro.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 11)); // NOI18N
+        jLabelFiltro.setForeground(new java.awt.Color(0, 102, 102));
+        jLabelFiltro.setText("BUSCAR POR DNI:");
+        add(jLabelFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, -1, -1));
 
         jTdni.setFont(new java.awt.Font("Dialog", 0, 10)); // NOI18N
         jTdni.setForeground(new java.awt.Color(204, 204, 204));
@@ -107,10 +107,10 @@ public class PanelAfiliados extends javax.swing.JPanel {
         });
         add(jLAfiliadoBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 130, 50, 50));
 
-        jLabel2.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel2.setText("Nuevo afiliado");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, -1, -1));
+        jLabelNuevoAfiliado.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
+        jLabelNuevoAfiliado.setForeground(new java.awt.Color(0, 102, 102));
+        jLabelNuevoAfiliado.setText("Nuevo afiliado");
+        add(jLabelNuevoAfiliado, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 320, -1, -1));
 
         jLAfiliadoEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/EliminarChica.jpg"))); // NOI18N
         jLAfiliadoEliminar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -135,15 +135,15 @@ public class PanelAfiliados extends javax.swing.JPanel {
         add(jBAfiliadoOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, 160, 40));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 613, 13));
 
-        jLabel4.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel4.setText("Modificar");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, -1, -1));
+        jLabelModificar.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
+        jLabelModificar.setForeground(new java.awt.Color(0, 102, 102));
+        jLabelModificar.setText("Modificar");
+        add(jLabelModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel5.setText("Eliminar");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, -1, -1));
+        jLabelEliminar.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
+        jLabelEliminar.setForeground(new java.awt.Color(0, 102, 102));
+        jLabelEliminar.setText("Eliminar");
+        add(jLabelEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 320, -1, -1));
 
         jLAfiliadoNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/AgregarMas chica.jpg"))); // NOI18N
         jLAfiliadoNuevo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -165,10 +165,10 @@ public class PanelAfiliados extends javax.swing.JPanel {
         });
         add(jLAfiliadoModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, -1, 50));
 
-        jLabel8.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 24)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel8.setText("GESTIÓN AFILIADO");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, -1, -1));
+        jLabelTitulo.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 24)); // NOI18N
+        jLabelTitulo.setForeground(new java.awt.Color(0, 102, 102));
+        jLabelTitulo.setText("GESTIÓN AFILIADO");
+        add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, -1, -1));
 
         jTAfiliado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -265,11 +265,11 @@ public class PanelAfiliados extends javax.swing.JPanel {
     private javax.swing.JLabel jLAfiliadoEliminar;
     private javax.swing.JLabel jLAfiliadoModificar;
     private javax.swing.JLabel jLAfiliadoNuevo;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelEliminar;
+    private javax.swing.JLabel jLabelFiltro;
+    private javax.swing.JLabel jLabelModificar;
+    private javax.swing.JLabel jLabelNuevoAfiliado;
+    private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTAfiliado;
@@ -316,7 +316,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
                 afiliadoXDNI.getIdAfiliado(), afiliadoXDNI.getNombre(), afiliadoXDNI.getApellido(),
                 afiliadoXDNI.getDni(), afiliadoXDNI.getTelefono(), afiliadoXDNI.getDomicilio()
             });
-        }
+        } 
     }
 
     //Limpia datos de la tabla
@@ -353,8 +353,15 @@ public class PanelAfiliados extends javax.swing.JPanel {
             jBMostrarTodosAfiliados.setVisible(true);
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(null, "Debe ingresar un DNI para buscar");
+            botonMostrarTodosAfiliados();
         } catch (NumberFormatException ex2) {
-            JOptionPane.showMessageDialog(null, "DNI sólo admite números");
+            if (jTdni.getText().equalsIgnoreCase("")) {
+                JOptionPane.showMessageDialog(null, "Debe ingresar un DNI para buscar");
+                botonMostrarTodosAfiliados();
+            } else {
+                JOptionPane.showMessageDialog(null, "DNI sólo admite números");
+                botonMostrarTodosAfiliados();
+            }
         }
     }
 

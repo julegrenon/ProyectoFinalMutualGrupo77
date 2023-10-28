@@ -44,7 +44,7 @@ public class Especialidad {
 
     @Override
     public String toString() {
-        return "ID: " + idEspecialidad + " - Especialidad: " + especialidad;
+        return "ID: " + idEspecialidad + " - " + especialidad;
     }
     
     

@@ -47,7 +47,7 @@ public class PanelNewOrden extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jLabelTitulo = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabelAfiliado = new javax.swing.JLabel();
         jTextAfil = new javax.swing.JTextField();
@@ -70,10 +70,10 @@ public class PanelNewOrden extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(670, 410));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel1.setText("NUEVA ORDEN");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(251, 27, -1, -1));
+        jLabelTitulo.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 24)); // NOI18N
+        jLabelTitulo.setForeground(new java.awt.Color(0, 102, 102));
+        jLabelTitulo.setText("NUEVA ORDEN");
+        add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(251, 27, -1, -1));
         add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 89, 618, 10));
 
         jLabelAfiliado.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 18)); // NOI18N
@@ -173,7 +173,6 @@ public class PanelNewOrden extends javax.swing.JPanel {
     private com.toedter.calendar.JDateChooser jDFecha;
     private javax.swing.JLabel jLAgregarOrden;
     private javax.swing.JLabel jLVolver;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -182,6 +181,7 @@ public class PanelNewOrden extends javax.swing.JPanel {
     private javax.swing.JLabel jLabelFormaDePago;
     private javax.swing.JLabel jLabelImporte;
     private javax.swing.JLabel jLabelPrestador;
+    private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextAfil;
     private javax.swing.JTextField jTextImporte;
