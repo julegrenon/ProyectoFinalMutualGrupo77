@@ -10,6 +10,7 @@ package proyectomutual.Vistas;
  * @author sonia
  */
 import java.awt.BorderLayout;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -17,6 +18,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyectomutual.AccesoDatos.AfiliadoData;
+import proyectomutual.AccesoDatos.Exportar;
 import proyectomutual.AccesoDatos.OrdenData;
 import proyectomutual.AccesoDatos.PrestadorData;
 import proyectomutual.entidades.Afiliado;
@@ -36,6 +38,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
     private OrdenData ordenData = new OrdenData();
     private AfiliadoData afiliadoData = new AfiliadoData();
     private PrestadorData prestadorData = new PrestadorData();
+    private Exportar exp = new Exportar();
 
     public PanelOrdenes() {
         initComponents();
@@ -43,6 +46,8 @@ public class PanelOrdenes extends javax.swing.JPanel {
         cargarTablaOrdenes();
         textFieldsInvisibles();
         botonBuscarXFiltroVisible();
+        tipsTextBotones();
+        jBLimpiar.setVisible(false);
     }
 
     /**
@@ -68,6 +73,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jSeparator1 = new javax.swing.JSeparator();
         jButtonBuscarXFiltro = new javax.swing.JButton();
         jDFecha = new com.toedter.calendar.JDateChooser();
+        jButtonExportar = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(670, 410));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -88,7 +94,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTConsultaOrden);
 
-        jPOrden.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 520, 120));
+        jPOrden.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 430, 260));
 
         jLabel3.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 102, 102));
@@ -103,7 +109,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
                 jCheckDNIActionPerformed(evt);
             }
         });
-        jPOrden.add(jCheckDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, -1));
+        jPOrden.add(jCheckDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, -1, -1));
 
         jCheckPrestador.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jCheckPrestador.setForeground(new java.awt.Color(0, 102, 102));
@@ -113,36 +119,36 @@ public class PanelOrdenes extends javax.swing.JPanel {
                 jCheckPrestadorActionPerformed(evt);
             }
         });
-        jPOrden.add(jCheckPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, -1, -1));
+        jPOrden.add(jCheckPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, -1, -1));
 
         jCheckFecha.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jCheckFecha.setForeground(new java.awt.Color(0, 102, 102));
-        jCheckFecha.setText("Fecha");
+        jCheckFecha.setText("FECHA");
         jCheckFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckFechaActionPerformed(evt);
             }
         });
-        jPOrden.add(jCheckFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 100, -1, -1));
+        jPOrden.add(jCheckFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 102, 102));
         jLabel4.setText("Buscar por..");
-        jPOrden.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 70, -1, -1));
-        jPOrden.add(jTDNIConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 130, 120, -1));
-        jPOrden.add(jTIdPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, 120, -1));
+        jPOrden.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, -1, -1));
+        jPOrden.add(jTDNIConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 140, 130, -1));
+        jPOrden.add(jTIdPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 200, 130, -1));
 
         jBLimpiar.setBackground(new java.awt.Color(0, 153, 153));
         jBLimpiar.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 12)); // NOI18N
         jBLimpiar.setForeground(new java.awt.Color(255, 255, 255));
-        jBLimpiar.setText("NUEVA BÚSQUEDA");
+        jBLimpiar.setText("VER TODOS");
         jBLimpiar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBLimpiarActionPerformed(evt);
             }
         });
-        jPOrden.add(jBLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, -1, -1));
+        jPOrden.add(jBLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, -1, -1));
         jPOrden.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 610, 10));
 
         jButtonBuscarXFiltro.setBackground(new java.awt.Color(0, 153, 153));
@@ -155,8 +161,20 @@ public class PanelOrdenes extends javax.swing.JPanel {
                 jButtonBuscarXFiltroActionPerformed(evt);
             }
         });
-        jPOrden.add(jButtonBuscarXFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 170, 120, 30));
-        jPOrden.add(jDFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 130, 110, 30));
+        jPOrden.add(jButtonBuscarXFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 310, 120, 30));
+        jPOrden.add(jDFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, 110, 30));
+
+        jButtonExportar.setBackground(new java.awt.Color(0, 0, 255));
+        jButtonExportar.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 11)); // NOI18N
+        jButtonExportar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonExportar.setText("EXPORTAR DATOS");
+        jButtonExportar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonExportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExportarActionPerformed(evt);
+            }
+        });
+        jPOrden.add(jButtonExportar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, -1, -1));
 
         add(jPOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 410));
         jPOrden.getAccessibleContext().setAccessibleDescription("");
@@ -167,6 +185,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
         cargarTablaOrdenes();
         limpiarCamposYChecks();
         botonBuscarXFiltroVisible();
+        jBLimpiar.setVisible(false);
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jCheckDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckDNIActionPerformed
@@ -209,10 +228,15 @@ public class PanelOrdenes extends javax.swing.JPanel {
         botonBuscarXFiltro();
     }//GEN-LAST:event_jButtonBuscarXFiltroActionPerformed
 
+    private void jButtonExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportarActionPerformed
+       botonExportar();
+    }//GEN-LAST:event_jButtonExportarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBLimpiar;
     private javax.swing.JButton jButtonBuscarXFiltro;
+    private javax.swing.JButton jButtonExportar;
     private javax.swing.JCheckBox jCheckDNI;
     private javax.swing.JCheckBox jCheckFecha;
     private javax.swing.JCheckBox jCheckPrestador;
@@ -487,17 +511,33 @@ public class PanelOrdenes extends javax.swing.JPanel {
         try {
             cargarTablaVacia();
             cargarTablaSegunFiltro();
-
+            jBLimpiar.setVisible(true);
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Debe ingresar un valor númerico en campo DNI o ID Prestador para realizar la búesqueda");
             cargarTablaVacia();
             cargarTablaOrdenes();
+            jBLimpiar.setVisible(false);
         } catch (NullPointerException ex2) {
             if (jCheckFecha.isSelected() && jDFecha.getDate() == null) {
                 JOptionPane.showMessageDialog(null, "Debe seleccionar una fecha para buscar");
             }
             cargarTablaVacia();
             cargarTablaOrdenes();
+            jBLimpiar.setVisible(false);
         }
+    }
+    
+        private void botonExportar() {
+        try {
+            exp.exportarExcel(jTConsultaOrden);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Error al exportar los datos");
+        }
+    }
+        
+    private void tipsTextBotones(){
+        jButtonBuscarXFiltro.setToolTipText("Realizar búsqueda");
+        jBLimpiar.setToolTipText("Ver todas las ordenes");
+        jButtonExportar.setToolTipText("Exportar datos a excel");
     }
 }

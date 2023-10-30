@@ -5,12 +5,14 @@ package proyectomutual.Vistas;
 
 
 import java.awt.BorderLayout;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyectomutual.AccesoDatos.EspecialidadData;
+import proyectomutual.AccesoDatos.Exportar;
 import proyectomutual.AccesoDatos.PrestadorData;
 import static proyectomutual.Vistas.Menu.jPFondo;
 import proyectomutual.entidades.Afiliado;
@@ -33,6 +35,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
     ArrayList<Especialidad> especialidadesLista = new ArrayList();
     ArrayList<Prestador> prestadorLista = new ArrayList<>();
 
+    private Exportar exp = new Exportar();
     private PrestadorData prestadorData = new PrestadorData();
     private Prestador prestadorNuevo = null;
 
@@ -45,6 +48,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
         cargarComboBox();
         cargarTablaPrestadores();
         herramientasAgregarEspecialidadInvisible();
+        tipsTextBotones();
         jBMostrarTodosLosPrestadores.setVisible(false);
     }
 
@@ -72,6 +76,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
         jLabelModificar = new javax.swing.JLabel();
         jBCancelarNuevaEspecialidad = new javax.swing.JButton();
         jLabelIngreseEspecialidad = new javax.swing.JLabel();
+        jButtonExportar = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(670, 410));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -102,7 +107,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
         jLabelAgregar.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jLabelAgregar.setForeground(new java.awt.Color(0, 102, 102));
         jLabelAgregar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelAgregar.setText("Agregar");
+        jLabelAgregar.setText("CREAR");
         jPPrestador.add(jLabelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, -1));
 
         jLEliminar.setBackground(new java.awt.Color(0, 0, 0));
@@ -114,13 +119,13 @@ public class PanelPrestadores extends javax.swing.JPanel {
                 jLEliminarMouseClicked(evt);
             }
         });
-        jPPrestador.add(jLEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, 50, 50));
+        jPPrestador.add(jLEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 350, 50, 50));
 
         jLabelEliminar.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jLabelEliminar.setForeground(new java.awt.Color(0, 102, 102));
         jLabelEliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelEliminar.setText("Eliminar");
-        jPPrestador.add(jLabelEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 330, 70, -1));
+        jLabelEliminar.setText("ELIMINAR");
+        jPPrestador.add(jLabelEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 330, 80, -1));
         jPPrestador.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, -1, -1));
 
         jLAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MasOrden.png"))); // NOI18N
@@ -142,7 +147,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
                 jBMostrarTodosLosPrestadoresActionPerformed(evt);
             }
         });
-        jPPrestador.add(jBMostrarTodosLosPrestadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 270, -1, -1));
+        jPPrestador.add(jBMostrarTodosLosPrestadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, -1, -1));
 
         jTablePrestadores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -162,7 +167,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(jTablePrestadores);
 
-        jPPrestador.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 240));
+        jPPrestador.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 450, 240));
 
         jLabelFiltrar.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 11)); // NOI18N
         jLabelFiltrar.setForeground(new java.awt.Color(0, 102, 102));
@@ -203,13 +208,13 @@ public class PanelPrestadores extends javax.swing.JPanel {
                 jLPrestadorModificarMouseClicked(evt);
             }
         });
-        jPPrestador.add(jLPrestadorModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, -1, 50));
+        jPPrestador.add(jLPrestadorModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, -1, 50));
 
         jLabelModificar.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jLabelModificar.setForeground(new java.awt.Color(0, 102, 102));
         jLabelModificar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelModificar.setText("Modificar");
-        jPPrestador.add(jLabelModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 70, -1));
+        jLabelModificar.setText("MODIFICAR");
+        jPPrestador.add(jLabelModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 90, -1));
 
         jBCancelarNuevaEspecialidad.setBackground(new java.awt.Color(0, 153, 153));
         jBCancelarNuevaEspecialidad.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 11)); // NOI18N
@@ -227,6 +232,18 @@ public class PanelPrestadores extends javax.swing.JPanel {
         jLabelIngreseEspecialidad.setForeground(new java.awt.Color(0, 102, 102));
         jLabelIngreseEspecialidad.setText("INGRESE UNA ESPECIALIDAD:");
         jPPrestador.add(jLabelIngreseEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, 160, -1));
+
+        jButtonExportar.setBackground(new java.awt.Color(0, 0, 255));
+        jButtonExportar.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 11)); // NOI18N
+        jButtonExportar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonExportar.setText("EXPORTAR DATOS");
+        jButtonExportar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonExportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExportarActionPerformed(evt);
+            }
+        });
+        jPPrestador.add(jButtonExportar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 370, 140, -1));
 
         add(jPPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 410));
         jPPrestador.getAccessibleContext().setAccessibleDescription("");
@@ -289,10 +306,15 @@ public class PanelPrestadores extends javax.swing.JPanel {
         herramientasAgregarEspecialidadInvisible();
     }//GEN-LAST:event_jBCancelarNuevaEspecialidadActionPerformed
 
+    private void jButtonExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportarActionPerformed
+        botonExportar();
+    }//GEN-LAST:event_jButtonExportarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBCancelarNuevaEspecialidad;
     private javax.swing.JButton jBMostrarTodosLosPrestadores;
     private javax.swing.JButton jButtonAgregarEspecialidad;
+    private javax.swing.JButton jButtonExportar;
     private javax.swing.JButton jButtonNuevaEspecialidad;
     private javax.swing.JComboBox<Especialidad> jCBEspecialidad;
     private javax.swing.JLabel jLAgregar;
@@ -496,6 +518,23 @@ public class PanelPrestadores extends javax.swing.JPanel {
         //herramientasAgregarEspecialidadInvisible();
         jBMostrarTodosLosPrestadores.setVisible(false);
         jCBEspecialidad.setSelectedIndex(0);
+    }
+    
+    private void botonExportar() {
+        try {
+            exp.exportarExcel(jTablePrestadores);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Error al exportar los datos");
+        }
+    }
+    
+    private void tipsTextBotones() {
+        jButtonNuevaEspecialidad.setToolTipText("Ingresar una nueva especialidad");
+        jBMostrarTodosLosPrestadores.setToolTipText("Ver todos los prestadores");
+        jButtonExportar.setToolTipText("Exportar datos a excel");
+        jLAgregar.setToolTipText("Crear un nuevo prestador");
+        jLPrestadorModificar.setToolTipText("Modificar datos del prestador seleccionado");
+        jLEliminar.setToolTipText("Eliminar el prestador seleccionado");
     }
 }
    
