@@ -338,7 +338,7 @@ public class PanelAfiliados extends javax.swing.JPanel {
                 afiliadoXDNI.getIdAfiliado(), afiliadoXDNI.getNombre(), afiliadoXDNI.getApellido(),
                 afiliadoXDNI.getDni(), afiliadoXDNI.getTelefono(), afiliadoXDNI.getDomicilio()
             });
-        } 
+        }
     }
 
     //Limpia datos de la tabla
@@ -410,8 +410,10 @@ public class PanelAfiliados extends javax.swing.JPanel {
             Afiliado afiliadoModif = new Afiliado(id, nombre, apellido, dni, telefono, domicilio, estado);
 
             //Llamada a método modificar
-            afiliadoData.modificarAfiliado(afiliadoModif);
-
+            int confirmar = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea modificar los datos del afiliado seleccionado?");
+            if (JOptionPane.OK_OPTION == confirmar) {
+                afiliadoData.modificarAfiliado(afiliadoModif);
+            }
             //Refresh de tabla
             cargarTablaVacia();
             cargarTablaAfiliados();
@@ -433,8 +435,10 @@ public class PanelAfiliados extends javax.swing.JPanel {
             int id = (Integer) jTAfiliado.getValueAt(filaSeleccionada, 0);
 
             //Llamada a método modificar
-            afiliadoData.eliminarAfiliado(id);
-
+            int confirmar = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar el afiliado seleccionado?");
+            if (JOptionPane.OK_OPTION == confirmar) {
+                afiliadoData.eliminarAfiliado(id);
+            }
             //Refresh de tablas
             cargarTablaVacia();
             cargarTablaAfiliados();
@@ -479,15 +483,15 @@ public class PanelAfiliados extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un afiliado para cargar una orden");
         }
     }
-    
-    private void botonMostrarTodosAfiliados(){
+
+    private void botonMostrarTodosAfiliados() {
         cargarTablaVacia();
         cargarTablaAfiliados();
         jTdni.setText("Ingrese un DNI");
         jTdni.setForeground(Color.gray);
         jBMostrarTodosAfiliados.setVisible(false);
     }
-    
+
     private void botonExportar() {
         try {
             exp.exportarExcel(jTAfiliado);
@@ -495,8 +499,8 @@ public class PanelAfiliados extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Error al exportar los datos");
         }
     }
-    
-    private void tipsTextBotones(){
+
+    private void tipsTextBotones() {
         jLAfiliadoBuscar.setToolTipText("Realizar búsqueda");
         jBMostrarTodosAfiliados.setToolTipText("Ver todos los afiliados");
         jBAfiliadoOrden.setToolTipText("Nueva orden para afiliado seleccionado");

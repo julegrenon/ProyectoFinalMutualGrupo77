@@ -449,8 +449,10 @@ public class PanelPrestadores extends javax.swing.JPanel {
             Prestador prestadorModif = new Prestador(id, nombre, apellido, dni, telefono, domicilio, especialidad, estado);
 
             //Llamada a método modificar
-            prestadorData.modificarPrestador(prestadorModif);
-
+            int confirmar = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea modificar los datos del prestador seleccionado?");
+            if (JOptionPane.OK_OPTION == confirmar) {
+                prestadorData.modificarPrestador(prestadorModif);
+            }
             //Refresh de tabla
             cargarTablaVacia();
             cargarTablaPrestadores();
@@ -472,8 +474,10 @@ public class PanelPrestadores extends javax.swing.JPanel {
             int id = (Integer) jTablePrestadores.getValueAt(filaSeleccionada, 0);
 
             //Llamada a método modificar
-            prestadorData.eliminarPrestador(id);
-
+            int confirmar = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar el prestador seleccionado?");
+            if (JOptionPane.OK_OPTION == confirmar) {
+                prestadorData.eliminarPrestador(id);
+            }
             //Refresh de tablas
             cargarTablaVacia();
             cargarTablaPrestadores();
