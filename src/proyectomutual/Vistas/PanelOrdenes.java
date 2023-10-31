@@ -162,7 +162,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
             }
         });
         jPOrden.add(jButtonBuscarXFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 310, 120, 30));
-        jPOrden.add(jDFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, 110, 30));
+        jPOrden.add(jDFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, 130, 30));
 
         jButtonExportar.setBackground(new java.awt.Color(0, 0, 255));
         jButtonExportar.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 11)); // NOI18N
