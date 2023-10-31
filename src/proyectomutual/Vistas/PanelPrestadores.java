@@ -287,7 +287,6 @@ public class PanelPrestadores extends javax.swing.JPanel {
         herramientasAgregarEspecialidadInvisible();
         cargarTablaVacia();
         cargarTablaPrestadores();
-        cargarComboBox();
     }//GEN-LAST:event_jButtonAgregarEspecialidadActionPerformed
 
     private void jPPrestadorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPPrestadorMouseClicked
@@ -492,17 +491,24 @@ public class PanelPrestadores extends javax.swing.JPanel {
 
     private void botonAgregarEspecialidad() {
         try {
-            String especialidadTxt = jTextFieldNuevaEspecialidad.getText();
+            if (jTextFieldNuevaEspecialidad.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Debe ingresar el nombre de una especialidad");
+                jCBEspecialidad.setSelectedIndex(0);
+                limpiarComboBox();
+                cargarComboBox();
+            } else {
+                String especialidadTxt = jTextFieldNuevaEspecialidad.getText();
 
-            Especialidad nuevaEspecialidad = new Especialidad(especialidadTxt);
+                Especialidad nuevaEspecialidad = new Especialidad(especialidadTxt);
 
-            especialidadData.agregarEspecialidad(nuevaEspecialidad);
+                especialidadData.agregarEspecialidad(nuevaEspecialidad);
 
-            herramientasAgregarEspecialidadInvisible();
+                herramientasAgregarEspecialidadInvisible();
 
-            jCBEspecialidad.setSelectedIndex(0);
-            limpiarComboBox();
-            cargarComboBox();
+                jCBEspecialidad.setSelectedIndex(0);
+                limpiarComboBox();
+                cargarComboBox();
+            }
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(null, "Debe ingresar una especialidad para agregar");
         }
