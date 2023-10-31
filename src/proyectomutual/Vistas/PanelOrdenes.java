@@ -18,18 +18,20 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyectomutual.AccesoDatos.AfiliadoData;
+import proyectomutual.AccesoDatos.EspecialidadData;
 import proyectomutual.AccesoDatos.Exportar;
 import proyectomutual.AccesoDatos.OrdenData;
 import proyectomutual.AccesoDatos.PrestadorData;
 import proyectomutual.entidades.Afiliado;
+import proyectomutual.entidades.Especialidad;
 import proyectomutual.entidades.Orden;
 public class PanelOrdenes extends javax.swing.JPanel {
 
     //Setea modelo de tabla
     private DefaultTableModel modelo = new DefaultTableModel() {
-
+        
         public boolean isCellEditable(int f, int c) {
-
+            
             return false;
         }
     };
@@ -38,12 +40,14 @@ public class PanelOrdenes extends javax.swing.JPanel {
     private OrdenData ordenData = new OrdenData();
     private AfiliadoData afiliadoData = new AfiliadoData();
     private PrestadorData prestadorData = new PrestadorData();
+    private EspecialidadData especialidadData = new EspecialidadData();
     private Exportar exp = new Exportar();
-
+    
     public PanelOrdenes() {
         initComponents();
         cargarColumnas();
         cargarTablaOrdenes();
+        cargarComboBox();
         textFieldsInvisibles();
         botonBuscarXFiltroVisible();
         tipsTextBotones();
@@ -74,6 +78,8 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jButtonBuscarXFiltro = new javax.swing.JButton();
         jDFecha = new com.toedter.calendar.JDateChooser();
         jButtonExportar = new javax.swing.JButton();
+        jCheckEspecialidad = new javax.swing.JCheckBox();
+        jCBEspecialidad = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(670, 410));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -104,39 +110,42 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jCheckDNI.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jCheckDNI.setForeground(new java.awt.Color(0, 102, 102));
         jCheckDNI.setText("DNI AFILIADO");
+        jCheckDNI.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCheckDNI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckDNIActionPerformed(evt);
             }
         });
-        jPOrden.add(jCheckDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 110, -1, -1));
+        jPOrden.add(jCheckDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, -1, -1));
 
         jCheckPrestador.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jCheckPrestador.setForeground(new java.awt.Color(0, 102, 102));
         jCheckPrestador.setText("ID PRESTADOR");
+        jCheckPrestador.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCheckPrestador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckPrestadorActionPerformed(evt);
             }
         });
-        jPOrden.add(jCheckPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, -1, -1));
+        jPOrden.add(jCheckPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, -1, -1));
 
         jCheckFecha.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jCheckFecha.setForeground(new java.awt.Color(0, 102, 102));
         jCheckFecha.setText("FECHA");
+        jCheckFecha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jCheckFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckFechaActionPerformed(evt);
             }
         });
-        jPOrden.add(jCheckFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, -1, -1));
+        jPOrden.add(jCheckFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 280, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 102, 102));
         jLabel4.setText("Buscar por..");
         jPOrden.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, -1, -1));
-        jPOrden.add(jTDNIConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 140, 130, -1));
-        jPOrden.add(jTIdPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 200, 130, -1));
+        jPOrden.add(jTDNIConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 130, 130, -1));
+        jPOrden.add(jTIdPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 190, 130, -1));
 
         jBLimpiar.setBackground(new java.awt.Color(0, 153, 153));
         jBLimpiar.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 12)); // NOI18N
@@ -148,7 +157,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
                 jBLimpiarActionPerformed(evt);
             }
         });
-        jPOrden.add(jBLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, -1, -1));
+        jPOrden.add(jBLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 350, -1, -1));
         jPOrden.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 610, 10));
 
         jButtonBuscarXFiltro.setBackground(new java.awt.Color(0, 153, 153));
@@ -161,8 +170,8 @@ public class PanelOrdenes extends javax.swing.JPanel {
                 jButtonBuscarXFiltroActionPerformed(evt);
             }
         });
-        jPOrden.add(jButtonBuscarXFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 310, 120, 30));
-        jPOrden.add(jDFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 260, 130, 30));
+        jPOrden.add(jButtonBuscarXFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, 120, 30));
+        jPOrden.add(jDFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 310, 130, 30));
 
         jButtonExportar.setBackground(new java.awt.Color(0, 0, 255));
         jButtonExportar.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 11)); // NOI18N
@@ -174,7 +183,21 @@ public class PanelOrdenes extends javax.swing.JPanel {
                 jButtonExportarActionPerformed(evt);
             }
         });
-        jPOrden.add(jButtonExportar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, -1, -1));
+        jPOrden.add(jButtonExportar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, -1, -1));
+
+        jCheckEspecialidad.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
+        jCheckEspecialidad.setForeground(new java.awt.Color(0, 102, 102));
+        jCheckEspecialidad.setText("ESPECIALIDAD");
+        jCheckEspecialidad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jCheckEspecialidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckEspecialidadActionPerformed(evt);
+            }
+        });
+        jPOrden.add(jCheckEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, -1, -1));
+
+        jCBEspecialidad.setToolTipText("");
+        jPOrden.add(jCBEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, 130, -1));
 
         add(jPOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 410));
         jPOrden.getAccessibleContext().setAccessibleDescription("");
@@ -193,7 +216,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
             jTDNIConsulta.setVisible(true);
             jTDNIConsulta.setText("");
         }
-
+        
         if (jCheckDNI.isSelected() == false) {
             jTDNIConsulta.setVisible(false);
         }
@@ -205,7 +228,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
             jTIdPrestador.setVisible(true);
             jTIdPrestador.setText("");
         }
-
+        
         if (jCheckPrestador.isSelected() == false) {
             jTIdPrestador.setVisible(false);
         }
@@ -217,7 +240,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
             jDFecha.setVisible(true);
             jDFecha.setDate(null);
         }
-
+        
         if (jCheckFecha.isSelected() == false) {
             jDFecha.setVisible(false);
         }
@@ -229,15 +252,29 @@ public class PanelOrdenes extends javax.swing.JPanel {
     }//GEN-LAST:event_jButtonBuscarXFiltroActionPerformed
 
     private void jButtonExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportarActionPerformed
-       botonExportar();
+        botonExportar();
     }//GEN-LAST:event_jButtonExportarActionPerformed
+
+    private void jCheckEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckEspecialidadActionPerformed
+        if (jCheckEspecialidad.isSelected()) {
+            jCBEspecialidad.setVisible(true);
+            jCBEspecialidad.setSelectedItem(null);
+        }
+        
+        if (jCheckEspecialidad.isSelected() == false) {
+            jCBEspecialidad.setVisible(false);
+        }
+        botonBuscarXFiltroVisible();
+    }//GEN-LAST:event_jCheckEspecialidadActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBLimpiar;
     private javax.swing.JButton jButtonBuscarXFiltro;
     private javax.swing.JButton jButtonExportar;
+    private javax.swing.JComboBox<Especialidad> jCBEspecialidad;
     private javax.swing.JCheckBox jCheckDNI;
+    private javax.swing.JCheckBox jCheckEspecialidad;
     private javax.swing.JCheckBox jCheckFecha;
     private javax.swing.JCheckBox jCheckPrestador;
     private com.toedter.calendar.JDateChooser jDFecha;
@@ -252,11 +289,24 @@ public class PanelOrdenes extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     //MÉTODOS
+    
+        private void cargarComboBox() {
+        jCBEspecialidad.removeAll();
+        jCBEspecialidad.addItem(null);
+        List<Especialidad> especialidadesLista = especialidadData.listarEspecialidades();
+
+        for (Especialidad especialidades : especialidadesLista) {
+
+            jCBEspecialidad.addItem(especialidades);
+        }
+    }
+    
     //setea nombre de columnas
     private void cargarColumnas() {
         modelo.addColumn("Nro de orden");
         modelo.addColumn("Afiliado");
         modelo.addColumn("Prestador");
+        modelo.addColumn("Especialidad");
         modelo.addColumn("Fecha");
         jTConsultaOrden.setModel(modelo);
     }
@@ -271,7 +321,8 @@ public class PanelOrdenes extends javax.swing.JPanel {
 
             modelo.addRow(new Object[]{
                 ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
-                ordenes.getPrestador().toString(), ordenes.getFecha()});
+                ordenes.getPrestador().toString(), ordenes.getPrestador().getEspecialidad().getEspecialidad(),
+                ordenes.getFecha()});
 
         }
     }
@@ -294,8 +345,8 @@ public class PanelOrdenes extends javax.swing.JPanel {
         for (Orden ordenes : listaOrdenesXDNI) {
             modelo.addRow(new Object[]{
                 ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
-                ordenes.getPrestador().toString(), ordenes.getFecha()
-            });
+                ordenes.getPrestador().toString(), ordenes.getPrestador().getEspecialidad(),
+                ordenes.getFecha()});
         }
     }
 
@@ -310,6 +361,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jTDNIConsulta.setVisible(false);
         jTIdPrestador.setVisible(false);
         jDFecha.setVisible(false);
+        jCBEspecialidad.setVisible(false);
     }
 
     //Limpiar campos
@@ -317,14 +369,17 @@ public class PanelOrdenes extends javax.swing.JPanel {
         jTDNIConsulta.setText("");
         jTIdPrestador.setText("");
         jDFecha.setDate(null);
+        jCBEspecialidad.setSelectedItem(null);
 
         jCheckDNI.setSelected(false);
         jCheckPrestador.setSelected(false);
         jCheckFecha.setSelected(false);
+        jCheckEspecialidad.setSelected(false);
 
         jTDNIConsulta.setVisible(false);
         jTIdPrestador.setVisible(false);
         jDFecha.setVisible(false);
+        jCBEspecialidad.setVisible(false);
     }
 
     //Carga tabla según filtro seleccionado
@@ -348,8 +403,8 @@ public class PanelOrdenes extends javax.swing.JPanel {
             for (Orden ordenes : listaOrdenesXDNI) {
                 modelo.addRow(new Object[]{
                     ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
-                    ordenes.getPrestador().toString(), ordenes.getFecha()
-                });
+                ordenes.getPrestador().toString(), ordenes.getPrestador().getEspecialidad().getEspecialidad(),
+                ordenes.getFecha()});
             }
         }
 
@@ -365,8 +420,8 @@ public class PanelOrdenes extends javax.swing.JPanel {
             for (Orden ordenes : listaOrdenesXPrestador) {
                 modelo.addRow(new Object[]{
                     ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
-                    ordenes.getPrestador().toString(), ordenes.getFecha()
-                });
+                ordenes.getPrestador().toString(), ordenes.getPrestador().getEspecialidad().getEspecialidad(),
+                ordenes.getFecha()});
             }
         }
 
@@ -380,14 +435,192 @@ public class PanelOrdenes extends javax.swing.JPanel {
             for (Orden ordenes : listaOrdenesXFecha) {
                 modelo.addRow(new Object[]{
                     ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
-                    ordenes.getPrestador().toString(), ordenes.getFecha()
-                });
+                ordenes.getPrestador().toString(), ordenes.getPrestador().getEspecialidad().getEspecialidad(),
+                ordenes.getFecha()});
             }
 
         }
+        
+        if (jCheckEspecialidad.isSelected()){
+            modelo.setRowCount(0);
+            //guardo captura combobox
+            Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
+            
+            List<Orden> listaOrdenesXEspecialidad = ordenData.buscaOrdenPorEspecialidad(especialidadSelec.getIdEspecialidad());
+            
+            for (Orden ordenes : listaOrdenesXEspecialidad) {
+                modelo.addRow(new Object[]{
+                    ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
+                ordenes.getPrestador().toString(), ordenes.getPrestador().getEspecialidad().getEspecialidad(),
+                ordenes.getFecha()});
+            }
+        }
 
         //Se prueba búsquedas combinadas
-        //Combina las 3
+        //Combina las 4
+        if (jCheckDNI.isSelected() && jCheckPrestador.isSelected() && jCheckFecha.isSelected()
+                && jCheckEspecialidad.isSelected()) {
+
+            //Guarda variables
+            String dniNum = jTDNIConsulta.getText();
+            int dni = Integer.parseInt(dniNum);
+            String idNum = jTIdPrestador.getText();
+            int idPrestador = Integer.parseInt(idNum);
+            LocalDate fecha = fromDateToLocalDate(jDFecha.getDate());
+            Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
+
+            //Llamada a método para buscar el afiliado y obtener el id
+            Afiliado afiliadoEncontrado = afiliadoData.buscarAfiliadoPorDni(dni);
+
+            //Guarda id en variable idAFiliado
+            int idAfiliado = afiliadoEncontrado.getIdAfiliado();
+
+            modelo.setRowCount(0);
+            List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorAfiliadoPrestadorFechaYEspecialidad(idAfiliado, idPrestador, fecha,
+                    especialidadSelec.getIdEspecialidad());
+
+            for (Orden ordenes : listaOrdenesXFecha) {
+                modelo.addRow(new Object[]{
+                    ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
+                ordenes.getPrestador().toString(), ordenes.getPrestador().getEspecialidad().getEspecialidad(),
+                ordenes.getFecha()});
+            }
+        }
+
+        if (jCheckDNI.isSelected() && jCheckPrestador.isSelected() && jCheckEspecialidad.isSelected()) {
+
+            //Guarda variables
+            String dniNum = jTDNIConsulta.getText();
+            int dni = Integer.parseInt(dniNum);
+            String idNum = jTIdPrestador.getText();
+            int idPrestador = Integer.parseInt(idNum);
+            Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
+
+            //Llamada a método para buscar el afiliado y obtener el id
+            Afiliado afiliadoEncontrado = afiliadoData.buscarAfiliadoPorDni(dni);
+
+            //Guarda id en variable idAFiliado
+            int idAfiliado = afiliadoEncontrado.getIdAfiliado();
+
+            modelo.setRowCount(0);
+            List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorAfiliadoPrestadorYEspecialidad(idAfiliado, idPrestador,
+                    especialidadSelec.getIdEspecialidad());
+
+            for (Orden ordenes : listaOrdenesXFecha) {
+                modelo.addRow(new Object[]{
+                   ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
+                ordenes.getPrestador().toString(), ordenes.getPrestador().getEspecialidad().getEspecialidad(),
+                ordenes.getFecha()});
+            }
+        }
+
+        if (jCheckDNI.isSelected() && jCheckFecha.isSelected() && jCheckEspecialidad.isSelected()) {
+
+            //Guarda variables
+            String dniNum = jTDNIConsulta.getText();
+            int dni = Integer.parseInt(dniNum);
+            LocalDate fecha = fromDateToLocalDate(jDFecha.getDate());
+            Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
+
+            //Llamada a método para buscar el afiliado y obtener el id
+            Afiliado afiliadoEncontrado = afiliadoData.buscarAfiliadoPorDni(dni);
+
+            //Guarda id en variable idAFiliado
+            int idAfiliado = afiliadoEncontrado.getIdAfiliado();
+
+            modelo.setRowCount(0);
+            List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorAfiliadoFechaYEspecialidad(idAfiliado, fecha,
+                    especialidadSelec.getIdEspecialidad());
+
+            for (Orden ordenes : listaOrdenesXFecha) {
+                modelo.addRow(new Object[]{
+                    ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
+                ordenes.getPrestador().toString(), ordenes.getPrestador().getEspecialidad().getEspecialidad(),
+                ordenes.getFecha()});
+            }
+        }
+
+        if (jCheckFecha.isSelected() && jCheckPrestador.isSelected() && jCheckEspecialidad.isSelected()) {
+
+            //Guarda variables
+            String idNum = jTIdPrestador.getText();
+            int idPrestador = Integer.parseInt(idNum);
+            LocalDate fecha = fromDateToLocalDate(jDFecha.getDate());
+            Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
+
+            modelo.setRowCount(0);
+            List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorPrestadorFechaYEspecialidad(idPrestador, fecha,
+                    especialidadSelec.getIdEspecialidad());
+
+            for (Orden ordenes : listaOrdenesXFecha) {
+                modelo.addRow(new Object[]{
+                    ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
+                ordenes.getPrestador().toString(), ordenes.getPrestador().getEspecialidad().getEspecialidad(),
+                ordenes.getFecha()});
+            }
+        }
+
+        if (jCheckPrestador.isSelected() && jCheckEspecialidad.isSelected()) {
+
+            //Guarda variables
+            String idNum = jTIdPrestador.getText();
+            int idPrestador = Integer.parseInt(idNum);
+            Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
+
+            modelo.setRowCount(0);
+            List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorPrestador(idPrestador);
+
+            for (Orden ordenes : listaOrdenesXFecha) {
+                modelo.addRow(new Object[]{
+                    ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
+                ordenes.getPrestador().toString(), ordenes.getPrestador().getEspecialidad().getEspecialidad(),
+                ordenes.getFecha()});
+            }
+        }
+
+        //DNI y especialidad
+        if (jCheckDNI.isSelected() && jCheckEspecialidad.isSelected()) {
+
+            //Guarda variables
+            String dniNum = jTDNIConsulta.getText();
+            int dni = Integer.parseInt(dniNum);
+            Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
+
+            //Llamada a método para buscar el afiliado y obtener el id
+            Afiliado afiliadoEncontrado = afiliadoData.buscarAfiliadoPorDni(dni);
+
+            //Guarda id en variable idAFiliado
+            int idAfiliado = afiliadoEncontrado.getIdAfiliado();
+
+            modelo.setRowCount(0);
+            List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorAfiliadoYEspecialidad(idAfiliado, especialidadSelec.getIdEspecialidad());
+
+            for (Orden ordenes : listaOrdenesXFecha) {
+                modelo.addRow(new Object[]{
+                   ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
+                ordenes.getPrestador().toString(), ordenes.getPrestador().getEspecialidad().getEspecialidad(),
+                ordenes.getFecha()});
+            }
+        }
+
+        //Fecha y especialidad
+        if (jCheckFecha.isSelected() && jCheckEspecialidad.isSelected()) {
+
+            //Guarda variables
+            LocalDate fecha = fromDateToLocalDate(jDFecha.getDate());
+            Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
+
+            modelo.setRowCount(0);
+            List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorFechaYEspecialidad(fecha, especialidadSelec.getIdEspecialidad());
+
+            for (Orden ordenes : listaOrdenesXFecha) {
+                modelo.addRow(new Object[]{
+                   ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
+                ordenes.getPrestador().toString(), ordenes.getPrestador().getEspecialidad().getEspecialidad(),
+                ordenes.getFecha()});
+            }
+        }
+
         if (jCheckDNI.isSelected() && jCheckPrestador.isSelected() && jCheckFecha.isSelected()) {
 
             //Guarda variables
@@ -408,9 +641,9 @@ public class PanelOrdenes extends javax.swing.JPanel {
 
             for (Orden ordenes : listaOrdenesXFecha) {
                 modelo.addRow(new Object[]{
-                    ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
-                    ordenes.getPrestador().toString(), ordenes.getFecha()
-                });
+                   ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
+                ordenes.getPrestador().toString(), ordenes.getPrestador().getEspecialidad().getEspecialidad(),
+                ordenes.getFecha()});
             }
 
         }
@@ -435,9 +668,9 @@ public class PanelOrdenes extends javax.swing.JPanel {
 
             for (Orden ordenes : listaOrdenesXFecha) {
                 modelo.addRow(new Object[]{
-                    ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
-                    ordenes.getPrestador().toString(), ordenes.getFecha()
-                });
+                   ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
+                ordenes.getPrestador().toString(), ordenes.getPrestador().getEspecialidad().getEspecialidad(),
+                ordenes.getFecha()});
             }
 
         }
@@ -461,9 +694,9 @@ public class PanelOrdenes extends javax.swing.JPanel {
 
             for (Orden ordenes : listaOrdenesXFecha) {
                 modelo.addRow(new Object[]{
-                    ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
-                    ordenes.getPrestador().toString(), ordenes.getFecha()
-                });
+                   ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
+                ordenes.getPrestador().toString(), ordenes.getPrestador().getEspecialidad().getEspecialidad(),
+                ordenes.getFecha()});
             }
 
         }
@@ -481,13 +714,12 @@ public class PanelOrdenes extends javax.swing.JPanel {
 
             for (Orden ordenes : listaOrdenesXFecha) {
                 modelo.addRow(new Object[]{
-                    ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
-                    ordenes.getPrestador().toString(), ordenes.getFecha()
-                });
+                   ordenes.getIdOrden(), ordenes.getAfiliado().toString(),
+                ordenes.getPrestador().toString(), ordenes.getPrestador().getEspecialidad().getEspecialidad(),
+                ordenes.getFecha()});
             }
 
         }
-
     }
 
     //casteo localDate a date
@@ -499,7 +731,8 @@ public class PanelOrdenes extends javax.swing.JPanel {
 
     private void botonBuscarXFiltroVisible() {
 
-        if (jCheckDNI.isSelected() || jCheckPrestador.isSelected() || jCheckFecha.isSelected()) {
+        if (jCheckDNI.isSelected() || jCheckPrestador.isSelected() || jCheckFecha.isSelected() ||
+                jCheckEspecialidad.isSelected()) {
             jButtonBuscarXFiltro.setVisible(true);
         } else {
             jButtonBuscarXFiltro.setVisible(false);
