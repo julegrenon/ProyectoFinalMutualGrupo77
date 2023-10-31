@@ -32,12 +32,12 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelNombre = new javax.swing.JLabel();
+        jLabelApellido = new javax.swing.JLabel();
+        jLabelDNI = new javax.swing.JLabel();
+        jLabelTelefono = new javax.swing.JLabel();
+        jLabelDomicilio = new javax.swing.JLabel();
+        jLabelTitulo = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jTDNIA = new javax.swing.JTextField();
         jTNombreA = new javax.swing.JTextField();
@@ -51,30 +51,30 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(204, 255, 255));
 
-        jLabel2.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel2.setText("Nombre:");
+        jLabelNombre.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
+        jLabelNombre.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelNombre.setText("Nombre:");
 
-        jLabel3.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel3.setText("Apellido:");
+        jLabelApellido.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
+        jLabelApellido.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelApellido.setText("Apellido:");
 
-        jLabel4.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel4.setText("D.N.I:");
+        jLabelDNI.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
+        jLabelDNI.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelDNI.setText("D.N.I:");
 
-        jLabel5.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel5.setText("Télefono:");
+        jLabelTelefono.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
+        jLabelTelefono.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelTelefono.setText("Teléfono:");
 
-        jLabel6.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel6.setText("Dirección:");
+        jLabelDomicilio.setFont(new java.awt.Font("Courier New", 0, 24)); // NOI18N
+        jLabelDomicilio.setForeground(new java.awt.Color(102, 102, 102));
+        jLabelDomicilio.setText("Dirección:");
 
-        jLabel1.setBackground(new java.awt.Color(153, 255, 204));
-        jLabel1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel1.setText("NUEVO AFILIADO");
+        jLabelTitulo.setBackground(new java.awt.Color(153, 255, 204));
+        jLabelTitulo.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 24)); // NOI18N
+        jLabelTitulo.setForeground(new java.awt.Color(0, 102, 102));
+        jLabelTitulo.setText("NUEVO AFILIADO");
 
         jSeparator1.setForeground(new java.awt.Color(102, 102, 102));
 
@@ -114,14 +114,14 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel2))
+                                            .addComponent(jLabelApellido)
+                                            .addComponent(jLabelNombre))
                                         .addGap(56, 56, 56))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING))
+                                            .addComponent(jLabelDNI, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabelTelefono, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabelDomicilio, javax.swing.GroupLayout.Alignment.LEADING))
                                         .addGap(42, 42, 42)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTApellidoA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -145,7 +145,7 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
                         .addGap(6, 6, 6)
                         .addComponent(jLabelSubTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(jLabelTitulo)
                         .addGap(177, 177, 177)
                         .addComponent(jLabelBotonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
@@ -154,7 +154,7 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabelBotonVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabelTitulo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelSubTitulo)
                 .addGap(21, 21, 21)
@@ -164,15 +164,15 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                                .addComponent(jLabelNombre)
                                 .addGap(15, 15, 15)
-                                .addComponent(jLabel3)
+                                .addComponent(jLabelApellido)
                                 .addGap(23, 23, 23)
-                                .addComponent(jLabel4)
+                                .addComponent(jLabelDNI)
                                 .addGap(9, 9, 9)
-                                .addComponent(jLabel5)
+                                .addComponent(jLabelTelefono)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel6))
+                                .addComponent(jLabelDomicilio))
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jTNombreA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -220,15 +220,15 @@ public class PanelNewAfiliado extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLBotonAgregarAf;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabelApellido;
     private javax.swing.JLabel jLabelBotonVolver;
+    private javax.swing.JLabel jLabelDNI;
+    private javax.swing.JLabel jLabelDomicilio;
+    private javax.swing.JLabel jLabelNombre;
     private javax.swing.JLabel jLabelSubTitulo;
+    private javax.swing.JLabel jLabelTelefono;
+    private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTApellidoA;
     private javax.swing.JTextField jTDNIA;

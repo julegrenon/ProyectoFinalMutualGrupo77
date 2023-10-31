@@ -5,12 +5,14 @@ package proyectomutual.Vistas;
 
 
 import java.awt.BorderLayout;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyectomutual.AccesoDatos.EspecialidadData;
+import proyectomutual.AccesoDatos.Exportar;
 import proyectomutual.AccesoDatos.PrestadorData;
 import static proyectomutual.Vistas.Menu.jPFondo;
 import proyectomutual.entidades.Afiliado;
@@ -33,6 +35,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
     ArrayList<Especialidad> especialidadesLista = new ArrayList();
     ArrayList<Prestador> prestadorLista = new ArrayList<>();
 
+    private Exportar exp = new Exportar();
     private PrestadorData prestadorData = new PrestadorData();
     private Prestador prestadorNuevo = null;
 
@@ -44,8 +47,9 @@ public class PanelPrestadores extends javax.swing.JPanel {
         cargarColumnas();
         cargarComboBox();
         cargarTablaPrestadores();
-        jTextFieldNuevaEspecialidad.setVisible(false);
-        jButtonAgregarEspecialidad.setVisible(false);
+        herramientasAgregarEspecialidadInvisible();
+        tipsTextBotones();
+        jBMostrarTodosLosPrestadores.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -55,26 +59,30 @@ public class PanelPrestadores extends javax.swing.JPanel {
         jPPrestador = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jCBEspecialidad = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelTitulo = new javax.swing.JLabel();
+        jLabelAgregar = new javax.swing.JLabel();
         jLEliminar = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabelEliminar = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLAgregar = new javax.swing.JLabel();
         jBMostrarTodosLosPrestadores = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTablePrestadores = new javax.swing.JTable();
-        jLabel5 = new javax.swing.JLabel();
+        jLabelFiltrar = new javax.swing.JLabel();
         jButtonNuevaEspecialidad = new javax.swing.JButton();
         jTextFieldNuevaEspecialidad = new javax.swing.JTextField();
         jButtonAgregarEspecialidad = new javax.swing.JButton();
         jLPrestadorModificar = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jLabelModificar = new javax.swing.JLabel();
+        jBCancelarNuevaEspecialidad = new javax.swing.JButton();
+        jLabelIngreseEspecialidad = new javax.swing.JLabel();
+        jButtonExportar = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(670, 410));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPPrestador.setBackground(new java.awt.Color(204, 255, 255));
+        jPPrestador.setMinimumSize(new java.awt.Dimension(670, 410));
         jPPrestador.setPreferredSize(new java.awt.Dimension(670, 410));
         jPPrestador.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -91,16 +99,16 @@ public class PanelPrestadores extends javax.swing.JPanel {
         });
         jPPrestador.add(jCBEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, 180, -1));
 
-        jLabel6.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel6.setText("GESTION PRESTADORES");
-        jPPrestador.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
+        jLabelTitulo.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 24)); // NOI18N
+        jLabelTitulo.setForeground(new java.awt.Color(0, 102, 102));
+        jLabelTitulo.setText("GESTIÓN PRESTADORES");
+        jPPrestador.add(jLabelTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Agregar");
-        jPPrestador.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 340, -1, -1));
+        jLabelAgregar.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
+        jLabelAgregar.setForeground(new java.awt.Color(0, 102, 102));
+        jLabelAgregar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelAgregar.setText("CREAR");
+        jPPrestador.add(jLabelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, -1, -1));
 
         jLEliminar.setBackground(new java.awt.Color(0, 0, 0));
         jLEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/EliminarChica.jpg"))); // NOI18N
@@ -111,13 +119,13 @@ public class PanelPrestadores extends javax.swing.JPanel {
                 jLEliminarMouseClicked(evt);
             }
         });
-        jPPrestador.add(jLEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 360, 50, 50));
+        jPPrestador.add(jLEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 350, 50, 50));
 
-        jLabel3.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Eliminar");
-        jPPrestador.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, 70, -1));
+        jLabelEliminar.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
+        jLabelEliminar.setForeground(new java.awt.Color(0, 102, 102));
+        jLabelEliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelEliminar.setText("ELIMINAR");
+        jPPrestador.add(jLabelEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 330, 80, -1));
         jPPrestador.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, -1, -1));
 
         jLAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/MasOrden.png"))); // NOI18N
@@ -127,7 +135,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
                 jLAgregarMouseClicked(evt);
             }
         });
-        jPPrestador.add(jLAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, 50, 50));
+        jPPrestador.add(jLAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 50, 50));
 
         jBMostrarTodosLosPrestadores.setBackground(new java.awt.Color(0, 153, 153));
         jBMostrarTodosLosPrestadores.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -139,7 +147,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
                 jBMostrarTodosLosPrestadoresActionPerformed(evt);
             }
         });
-        jPPrestador.add(jBMostrarTodosLosPrestadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 270, -1, -1));
+        jPPrestador.add(jBMostrarTodosLosPrestadores, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 290, -1, -1));
 
         jTablePrestadores.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -159,12 +167,12 @@ public class PanelPrestadores extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(jTablePrestadores);
 
-        jPPrestador.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, 240));
+        jPPrestador.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 450, 240));
 
-        jLabel5.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 11)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel5.setText("FILTRAR POR ESPECIALIDAD:");
-        jPPrestador.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, -1, -1));
+        jLabelFiltrar.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 11)); // NOI18N
+        jLabelFiltrar.setForeground(new java.awt.Color(0, 102, 102));
+        jLabelFiltrar.setText("FILTRAR POR ESPECIALIDAD:");
+        jPPrestador.add(jLabelFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 70, -1, -1));
 
         jButtonNuevaEspecialidad.setBackground(new java.awt.Color(0, 153, 153));
         jButtonNuevaEspecialidad.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -176,8 +184,8 @@ public class PanelPrestadores extends javax.swing.JPanel {
                 jButtonNuevaEspecialidadActionPerformed(evt);
             }
         });
-        jPPrestador.add(jButtonNuevaEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, -1, -1));
-        jPPrestador.add(jTextFieldNuevaEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 150, 140, -1));
+        jPPrestador.add(jButtonNuevaEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, 180, -1));
+        jPPrestador.add(jTextFieldNuevaEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 150, 180, -1));
 
         jButtonAgregarEspecialidad.setBackground(new java.awt.Color(0, 153, 153));
         jButtonAgregarEspecialidad.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -200,22 +208,49 @@ public class PanelPrestadores extends javax.swing.JPanel {
                 jLPrestadorModificarMouseClicked(evt);
             }
         });
-        jPPrestador.add(jLPrestadorModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 360, 50, 50));
+        jPPrestador.add(jLPrestadorModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 350, -1, 50));
 
-        jLabel1.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Modificar");
-        jPPrestador.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 340, 70, -1));
+        jLabelModificar.setFont(new java.awt.Font("Franklin Gothic Heavy", 1, 14)); // NOI18N
+        jLabelModificar.setForeground(new java.awt.Color(0, 102, 102));
+        jLabelModificar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelModificar.setText("MODIFICAR");
+        jPPrestador.add(jLabelModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 330, 90, -1));
 
-        add(jPPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 683, 415));
+        jBCancelarNuevaEspecialidad.setBackground(new java.awt.Color(0, 153, 153));
+        jBCancelarNuevaEspecialidad.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 11)); // NOI18N
+        jBCancelarNuevaEspecialidad.setForeground(new java.awt.Color(255, 255, 255));
+        jBCancelarNuevaEspecialidad.setText("CANCELAR");
+        jBCancelarNuevaEspecialidad.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jBCancelarNuevaEspecialidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBCancelarNuevaEspecialidadActionPerformed(evt);
+            }
+        });
+        jPPrestador.add(jBCancelarNuevaEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 180, 90, -1));
+
+        jLabelIngreseEspecialidad.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 11)); // NOI18N
+        jLabelIngreseEspecialidad.setForeground(new java.awt.Color(0, 102, 102));
+        jLabelIngreseEspecialidad.setText("INGRESE UNA ESPECIALIDAD:");
+        jPPrestador.add(jLabelIngreseEspecialidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, 160, -1));
+
+        jButtonExportar.setBackground(new java.awt.Color(0, 0, 255));
+        jButtonExportar.setFont(new java.awt.Font("Franklin Gothic Heavy", 0, 11)); // NOI18N
+        jButtonExportar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonExportar.setText("EXPORTAR DATOS");
+        jButtonExportar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jButtonExportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExportarActionPerformed(evt);
+            }
+        });
+        jPPrestador.add(jButtonExportar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 370, 140, -1));
+
+        add(jPPrestador, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 410));
         jPPrestador.getAccessibleContext().setAccessibleDescription("");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBMostrarTodosLosPrestadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBMostrarTodosLosPrestadoresActionPerformed
-        cargarTablaVacia();
-        cargarTablaPrestadores();
-        herramientasAgregarEspecialidadInvisible();
+        botonMostrarTodosLosPrestadores();
     }//GEN-LAST:event_jBMostrarTodosLosPrestadoresActionPerformed
 
     //=====================================================================================
@@ -244,9 +279,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
     }//GEN-LAST:event_jLEliminarMouseClicked
 
     private void jButtonNuevaEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNuevaEspecialidadActionPerformed
-        jTextFieldNuevaEspecialidad.setVisible(true);
-        jButtonAgregarEspecialidad.setVisible(true);
-        jButtonNuevaEspecialidad.setVisible(false);
+        botonNuevaEspecialidad();
     }//GEN-LAST:event_jButtonNuevaEspecialidadActionPerformed
 
     private void jButtonAgregarEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarEspecialidadActionPerformed
@@ -269,20 +302,31 @@ public class PanelPrestadores extends javax.swing.JPanel {
         herramientasAgregarEspecialidadInvisible();
     }//GEN-LAST:event_jTablePrestadoresMouseClicked
 
+    private void jBCancelarNuevaEspecialidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarNuevaEspecialidadActionPerformed
+        herramientasAgregarEspecialidadInvisible();
+    }//GEN-LAST:event_jBCancelarNuevaEspecialidadActionPerformed
+
+    private void jButtonExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExportarActionPerformed
+        botonExportar();
+    }//GEN-LAST:event_jButtonExportarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBCancelarNuevaEspecialidad;
     private javax.swing.JButton jBMostrarTodosLosPrestadores;
     private javax.swing.JButton jButtonAgregarEspecialidad;
+    private javax.swing.JButton jButtonExportar;
     private javax.swing.JButton jButtonNuevaEspecialidad;
     private javax.swing.JComboBox<Especialidad> jCBEspecialidad;
     private javax.swing.JLabel jLAgregar;
     private javax.swing.JLabel jLEliminar;
     private javax.swing.JLabel jLPrestadorModificar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabelAgregar;
+    private javax.swing.JLabel jLabelEliminar;
+    private javax.swing.JLabel jLabelFiltrar;
+    private javax.swing.JLabel jLabelIngreseEspecialidad;
+    private javax.swing.JLabel jLabelModificar;
+    private javax.swing.JLabel jLabelTitulo;
     private javax.swing.JPanel jPPrestador;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
@@ -303,7 +347,7 @@ public class PanelPrestadores extends javax.swing.JPanel {
         jTablePrestadores.setModel(modelo);
     }
 
-//CARGA LISTA PRESTADORES
+//MÉTODOS TABLAS
     public void cargarTablaPrestadores() {
 
         modelo.setRowCount(0);
@@ -320,26 +364,38 @@ public class PanelPrestadores extends javax.swing.JPanel {
     }
 
     public void cargarTablaPrestadoresXEspecialidad() {
+        try {
+            modelo.setRowCount(0);
+            //guardo captura combobox
+            Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
 
-        modelo.setRowCount(0);
-        //guardo captura combobox
-        Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
+            List<Prestador> listaPrestadoresXEspecialidad = prestadorData.listaPrestadorEspecialidad(especialidadSelec.getIdEspecialidad());
 
-        List<Prestador> listaPrestadoresXEspecialidad = prestadorData.listaPrestadorEspecialidad(especialidadSelec.getIdEspecialidad());
+            for (Prestador prestadores : listaPrestadoresXEspecialidad) {
 
-        for (Prestador prestadores : listaPrestadoresXEspecialidad) {
+                modelo.addRow(new Object[]{
+                    prestadores.getIdPrestador(), prestadores.getEspecialidad().getEspecialidad(),
+                    prestadores.getNombre(), prestadores.getApellido(), prestadores.getDni(), prestadores.getTelefono(),
+                    prestadores.getDomicilio()});
 
-            modelo.addRow(new Object[]{
-                prestadores.getIdPrestador(), prestadores.getEspecialidad().getEspecialidad(),
-                prestadores.getNombre(), prestadores.getApellido(), prestadores.getDni(), prestadores.getTelefono(),
-                prestadores.getDomicilio()});
-
+            }
+            jBMostrarTodosLosPrestadores.setVisible(true);
+        } catch (NullPointerException ex) {
+            cargarTablaVacia();
+            cargarTablaPrestadores();
+            jBMostrarTodosLosPrestadores.setVisible(false);
         }
+    }
 
+    //Limpia datos de la tabla
+    private void cargarTablaVacia() {
+        while (modelo.getRowCount() > 0) {
+            modelo.removeRow(0);
+        }
     }
 
 //==================================================================================
-//CARGA COMBOBOX DE ESPECIALIDADES
+//MÉTODOS COMBOBOX
     private void cargarComboBox() {
         jCBEspecialidad.removeAll();
         jCBEspecialidad.addItem(null);
@@ -357,17 +413,12 @@ public class PanelPrestadores extends javax.swing.JPanel {
         }
     }
 
-    //Limpia datos de la tabla
-    private void cargarTablaVacia() {
-        while (modelo.getRowCount() > 0) {
-            modelo.removeRow(0);
-        }
-    }
-
     private void herramientasAgregarEspecialidadInvisible() {
         jTextFieldNuevaEspecialidad.setText("");
         jTextFieldNuevaEspecialidad.setVisible(false);
         jButtonAgregarEspecialidad.setVisible(false);
+        jBCancelarNuevaEspecialidad.setVisible(false);
+        jLabelIngreseEspecialidad.setVisible(false);
         jButtonNuevaEspecialidad.setVisible(true);
     }
 
@@ -398,8 +449,10 @@ public class PanelPrestadores extends javax.swing.JPanel {
             Prestador prestadorModif = new Prestador(id, nombre, apellido, dni, telefono, domicilio, especialidad, estado);
 
             //Llamada a método modificar
-            prestadorData.modificarPrestador(prestadorModif);
-
+            int confirmar = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea modificar los datos del prestador seleccionado?");
+            if (JOptionPane.OK_OPTION == confirmar) {
+                prestadorData.modificarPrestador(prestadorModif);
+            }
             //Refresh de tabla
             cargarTablaVacia();
             cargarTablaPrestadores();
@@ -421,8 +474,10 @@ public class PanelPrestadores extends javax.swing.JPanel {
             int id = (Integer) jTablePrestadores.getValueAt(filaSeleccionada, 0);
 
             //Llamada a método modificar
-            prestadorData.eliminarPrestador(id);
-
+            int confirmar = JOptionPane.showConfirmDialog(null, "¿Está seguro que desea eliminar el prestador seleccionado?");
+            if (JOptionPane.OK_OPTION == confirmar) {
+                prestadorData.eliminarPrestador(id);
+            }
             //Refresh de tablas
             cargarTablaVacia();
             cargarTablaPrestadores();
@@ -451,6 +506,39 @@ public class PanelPrestadores extends javax.swing.JPanel {
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(null, "Debe ingresar una especialidad para agregar");
         }
+    }
+
+    private void botonNuevaEspecialidad() {
+        jTextFieldNuevaEspecialidad.setVisible(true);
+        jButtonAgregarEspecialidad.setVisible(true);
+        jBCancelarNuevaEspecialidad.setVisible(true);
+        jLabelIngreseEspecialidad.setVisible(true);
+        jButtonNuevaEspecialidad.setVisible(false);
+    }
+
+    private void botonMostrarTodosLosPrestadores() {
+        cargarTablaVacia();
+        cargarTablaPrestadores();
+        //herramientasAgregarEspecialidadInvisible();
+        jBMostrarTodosLosPrestadores.setVisible(false);
+        jCBEspecialidad.setSelectedIndex(0);
+    }
+    
+    private void botonExportar() {
+        try {
+            exp.exportarExcel(jTablePrestadores);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Error al exportar los datos");
+        }
+    }
+    
+    private void tipsTextBotones() {
+        jButtonNuevaEspecialidad.setToolTipText("Ingresar una nueva especialidad");
+        jBMostrarTodosLosPrestadores.setToolTipText("Ver todos los prestadores");
+        jButtonExportar.setToolTipText("Exportar datos a excel");
+        jLAgregar.setToolTipText("Crear un nuevo prestador");
+        jLPrestadorModificar.setToolTipText("Modificar datos del prestador seleccionado");
+        jLEliminar.setToolTipText("Eliminar el prestador seleccionado");
     }
 }
    

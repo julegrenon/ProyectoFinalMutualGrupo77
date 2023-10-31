@@ -16,12 +16,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import proyectomutual.entidades.Afiliado;
+import proyectomutual.entidades.Especialidad;
 import proyectomutual.entidades.Orden;
 import proyectomutual.entidades.Prestador;
 
 public class OrdenData {
 
     public Connection conex = null;
+    private EspecialidadData especialidadData = new EspecialidadData();
 
     public OrdenData() {
         conex = Conexion.getConexion();
@@ -327,7 +329,7 @@ public class OrdenData {
         return listaOrdenXAfiliadoPrestadorYFecha;
 
     }
-    
+
     //Buscar orden por afiliado y prestador
     public List<Orden> buscaOrdenPorAfiliadoYPrestador(int idAfiliado, int idPrestador) {
         String sql = "SELECT idOrden, fecha, formaPago, importe, idAfiliado, idPrestador "
@@ -460,6 +462,320 @@ public class OrdenData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Orden");
         }
         return listaOrdenPrestadorYFecha;
+
+    }
+
+    public List<Orden> buscaOrdenPorAfiliadoPrestadorFechaYEspecialidad(int idAfiliado, int idPrestador, LocalDate fecha, int idEspecialidad) {
+        String sql = "SELECT idOrden, fecha, formaPago, importe, idAfiliado, idPrestador "
+                + "FROM orden WHERE idAfiliado=? AND idPrestador=? AND fecha=?";
+
+        ArrayList<Orden> listaOrdenesXTodosLosFiltros = new ArrayList();
+
+        ArrayList<Orden> listaOrdenXAfiliadoPrestadorYFecha = new ArrayList();
+        try {
+            PreparedStatement ps = conex.prepareStatement(sql);
+            ps.setInt(1, idAfiliado);
+            ps.setInt(2, idPrestador);
+            ps.setDate(3, Date.valueOf(fecha));
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Orden orden = new Orden();
+                orden.setIdOrden(rs.getInt("idOrden"));
+                orden.setFecha(fecha);
+                orden.setFormaPago(rs.getString("formaPago"));
+                orden.setImporte(rs.getDouble("importe"));
+
+                //Variables data
+                PrestadorData prestadorData = new PrestadorData();
+                AfiliadoData afiliadoData = new AfiliadoData();
+
+                //Llamada a métodos para instanciar objeto necesario del constructor de orden
+                Afiliado afiliado = afiliadoData.buscarAfiliado(idAfiliado);
+                Prestador prestador = prestadorData.buscarPrestador(idPrestador);
+
+                //Setea afiliado y prestador después de los métodos buscar  
+                orden.setAfiliado(afiliado);
+                orden.setPrestador(prestador);
+
+                listaOrdenXAfiliadoPrestadorYFecha.add(orden);
+
+                for (Orden ordenes : listaOrdenXAfiliadoPrestadorYFecha) {
+                    if (ordenes.getPrestador().getEspecialidad().getIdEspecialidad() == idEspecialidad) {
+                        listaOrdenesXTodosLosFiltros.add(ordenes);
+                    }
+                }
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Orden");
+        }
+        return listaOrdenesXTodosLosFiltros;
+    }
+
+    public List<Orden> buscaOrdenPorAfiliadoPrestadorYEspecialidad(int idAfiliado, int idPrestador, int idEspecialidad) {
+        String sql = "SELECT idOrden, fecha, formaPago, importe, idAfiliado, idPrestador "
+                + "FROM orden WHERE idAfiliado=? AND idPrestador=?";
+
+        ArrayList<Orden> listaOrdenesXTodosLosFiltros = new ArrayList();
+
+        ArrayList<Orden> listaOrdenXAfiliadoPrestadorYEspecialidad = new ArrayList();
+        try {
+            PreparedStatement ps = conex.prepareStatement(sql);
+            ps.setInt(1, idAfiliado);
+            ps.setInt(2, idPrestador);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Orden orden = new Orden();
+                orden.setIdOrden(rs.getInt("idOrden"));
+                orden.setFecha(rs.getDate("fecha").toLocalDate());
+                orden.setFormaPago(rs.getString("formaPago"));
+                orden.setImporte(rs.getDouble("importe"));
+
+                //Variables data
+                PrestadorData prestadorData = new PrestadorData();
+                AfiliadoData afiliadoData = new AfiliadoData();
+
+                //Llamada a métodos para instanciar objeto necesario del constructor de orden
+                Afiliado afiliado = afiliadoData.buscarAfiliado(idAfiliado);
+                Prestador prestador = prestadorData.buscarPrestador(idPrestador);
+
+                //Setea afiliado y prestador después de los métodos buscar  
+                orden.setAfiliado(afiliado);
+                orden.setPrestador(prestador);
+
+                listaOrdenXAfiliadoPrestadorYEspecialidad.add(orden);
+
+                for (Orden ordenes : listaOrdenXAfiliadoPrestadorYEspecialidad) {
+                    if (ordenes.getPrestador().getEspecialidad().getIdEspecialidad() == idEspecialidad) {
+                        listaOrdenesXTodosLosFiltros.add(ordenes);
+                    }
+                }
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Orden");
+        }
+        return listaOrdenesXTodosLosFiltros;
+    }
+
+    public List<Orden> buscaOrdenPorAfiliadoFechaYEspecialidad(int idAfiliado, LocalDate fecha, int idEspecialidad) {
+        String sql = "SELECT idOrden, fecha, formaPago, importe, idAfiliado, idPrestador "
+                + "FROM orden WHERE idAfiliado=? AND fecha=?";
+
+        ArrayList<Orden> listaOrdenesXTodosLosFiltros = new ArrayList();
+
+        ArrayList<Orden> listaOrdenXAfiliadoFechaYEspecialidad = new ArrayList();
+        try {
+            PreparedStatement ps = conex.prepareStatement(sql);
+            ps.setInt(1, idAfiliado);
+            ps.setDate(2, Date.valueOf(fecha));
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Orden orden = new Orden();
+                orden.setIdOrden(rs.getInt("idOrden"));
+                orden.setFecha(fecha);
+                orden.setFormaPago(rs.getString("formaPago"));
+                orden.setImporte(rs.getDouble("importe"));
+
+                int idPrestador = rs.getInt("idPrestador");
+
+                //Variables data
+                PrestadorData prestadorData = new PrestadorData();
+                AfiliadoData afiliadoData = new AfiliadoData();
+
+                //Llamada a métodos para instanciar objeto necesario del constructor de orden
+                Afiliado afiliado = afiliadoData.buscarAfiliado(idAfiliado);
+                Prestador prestador = prestadorData.buscarPrestador(idPrestador);
+
+                //Setea afiliado y prestador después de los métodos buscar  
+                orden.setAfiliado(afiliado);
+                orden.setPrestador(prestador);
+
+                listaOrdenXAfiliadoFechaYEspecialidad.add(orden);
+
+                for (Orden ordenes : listaOrdenXAfiliadoFechaYEspecialidad) {
+                    if (ordenes.getPrestador().getEspecialidad().getIdEspecialidad() == idEspecialidad) {
+                        listaOrdenesXTodosLosFiltros.add(ordenes);
+                    }
+                }
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Orden");
+        }
+        return listaOrdenesXTodosLosFiltros;
+    }
+
+    public List<Orden> buscaOrdenPorAfiliadoYEspecialidad(int idAfiliado, int idEspecialidad) {
+        String sql = "SELECT idOrden, fecha, formaPago, importe, idAfiliado, idPrestador "
+                + "FROM orden WHERE idAfiliado=?";
+
+        ArrayList<Orden> listaOrdenesXTodosLosFiltros = new ArrayList();
+
+        ArrayList<Orden> listaOrdenXAfiliadoYEspecialidad = new ArrayList();
+        try {
+            PreparedStatement ps = conex.prepareStatement(sql);
+            ps.setInt(1, idAfiliado);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Orden orden = new Orden();
+                orden.setIdOrden(rs.getInt("idOrden"));
+                orden.setFecha(rs.getDate("fecha").toLocalDate());
+                orden.setFormaPago(rs.getString("formaPago"));
+                orden.setImporte(rs.getDouble("importe"));
+
+                int idPrestador = rs.getInt("idPrestador");
+
+                //Variables data
+                PrestadorData prestadorData = new PrestadorData();
+                AfiliadoData afiliadoData = new AfiliadoData();
+
+                //Llamada a métodos para instanciar objeto necesario del constructor de orden
+                Afiliado afiliado = afiliadoData.buscarAfiliado(idAfiliado);
+                Prestador prestador = prestadorData.buscarPrestador(idPrestador);
+
+                //Setea afiliado y prestador después de los métodos buscar  
+                orden.setAfiliado(afiliado);
+                orden.setPrestador(prestador);
+
+                listaOrdenXAfiliadoYEspecialidad.add(orden);
+
+                for (Orden ordenes : listaOrdenXAfiliadoYEspecialidad) {
+                    if (ordenes.getPrestador().getEspecialidad().getIdEspecialidad() == idEspecialidad) {
+                        listaOrdenesXTodosLosFiltros.add(ordenes);
+                    }
+                }
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Orden");
+        }
+        return listaOrdenesXTodosLosFiltros;
+    }
+
+    public List<Orden> buscaOrdenPorPrestadorFechaYEspecialidad(int idPrestador, LocalDate fecha, int idEspecialidad) {
+        String sql = "SELECT idOrden, fecha, formaPago, importe, idAfiliado, idPrestador "
+                + "FROM orden WHERE idPrestador=? AND fecha=?";
+
+        ArrayList<Orden> listaOrdenesXTodosLosFiltros = new ArrayList();
+
+        ArrayList<Orden> listaOrdenXPrestadorYFecha = new ArrayList();
+        try {
+            PreparedStatement ps = conex.prepareStatement(sql);
+            ps.setInt(1, idPrestador);
+            ps.setDate(2, Date.valueOf(fecha));
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Orden orden = new Orden();
+                orden.setIdOrden(rs.getInt("idOrden"));
+                orden.setFecha(fecha);
+                orden.setFormaPago(rs.getString("formaPago"));
+                orden.setImporte(rs.getDouble("importe"));
+
+                int idAfiliado = rs.getInt("idAfiliado");
+
+                //Variables data
+                PrestadorData prestadorData = new PrestadorData();
+                AfiliadoData afiliadoData = new AfiliadoData();
+
+                //Llamada a métodos para instanciar objeto necesario del constructor de orden
+                Afiliado afiliado = afiliadoData.buscarAfiliado(idAfiliado);
+                Prestador prestador = prestadorData.buscarPrestador(idPrestador);
+
+                //Setea afiliado y prestador después de los métodos buscar  
+                orden.setAfiliado(afiliado);
+                orden.setPrestador(prestador);
+
+                listaOrdenXPrestadorYFecha.add(orden);
+
+                for (Orden ordenes : listaOrdenXPrestadorYFecha) {
+                    if (ordenes.getPrestador().getEspecialidad().getIdEspecialidad() == idEspecialidad) {
+                        listaOrdenesXTodosLosFiltros.add(ordenes);
+                    }
+                }
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Orden");
+        }
+        return listaOrdenesXTodosLosFiltros;
+    }
+
+    public List<Orden> buscaOrdenPorFechaYEspecialidad(LocalDate fecha, int idEspecialidad) {
+        String sql = "SELECT idOrden, fecha, formaPago, importe, idAfiliado, idPrestador "
+                + "FROM orden WHERE fecha=?";
+
+        ArrayList<Orden> listaOrdenesXTodosLosFiltros = new ArrayList();
+
+        ArrayList<Orden> listaOrdenXFecha = new ArrayList();
+        try {
+            PreparedStatement ps = conex.prepareStatement(sql);
+            ps.setDate(1, Date.valueOf(fecha));
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Orden orden = new Orden();
+                orden.setIdOrden(rs.getInt("idOrden"));
+                orden.setFecha(fecha);
+                orden.setFormaPago(rs.getString("formaPago"));
+                orden.setImporte(rs.getDouble("importe"));
+
+                int idAfiliado = rs.getInt("idAfiliado");
+                int idPrestador = rs.getInt("idPrestador");
+
+                //Variables data
+                PrestadorData prestadorData = new PrestadorData();
+                AfiliadoData afiliadoData = new AfiliadoData();
+
+                //Llamada a métodos para instanciar objeto necesario del constructor de orden
+                Afiliado afiliado = afiliadoData.buscarAfiliado(idAfiliado);
+                Prestador prestador = prestadorData.buscarPrestador(idPrestador);
+
+                //Setea afiliado y prestador después de los métodos buscar  
+                orden.setAfiliado(afiliado);
+                orden.setPrestador(prestador);
+
+                listaOrdenXFecha.add(orden);
+
+                for (Orden ordenes : listaOrdenXFecha) {
+                    if (ordenes.getPrestador().getEspecialidad().getIdEspecialidad() == idEspecialidad) {
+                        listaOrdenesXTodosLosFiltros.add(ordenes);
+                    }
+                }
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Orden");
+        }
+        return listaOrdenesXTodosLosFiltros;
+    }
+
+    public List<Orden> buscaOrdenPorEspecialidad(int idEspecialidad) {
+        List<Orden> listaOrdenes = listarOrdenes();
+
+        List<Orden> listaOrdenesXEspecialidad = new ArrayList();
+        try {
+
+            for (Orden ordenes : listaOrdenes) {
+                if (ordenes.getPrestador().getEspecialidad().getIdEspecialidad() == idEspecialidad) {
+                    listaOrdenesXEspecialidad.add(ordenes);
+                }
+            }
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "No existen ordenes con esa especialidad");
+        }
+        return listaOrdenesXEspecialidad;
 
     }
 
