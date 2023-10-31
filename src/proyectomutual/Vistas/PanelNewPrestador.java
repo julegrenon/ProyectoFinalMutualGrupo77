@@ -61,6 +61,7 @@ public class PanelNewPrestador extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(204, 255, 255));
         setMaximumSize(new java.awt.Dimension(670, 410));
+        setMinimumSize(new java.awt.Dimension(670, 410));
         setPreferredSize(new java.awt.Dimension(670, 410));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
