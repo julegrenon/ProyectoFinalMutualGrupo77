@@ -5,6 +5,7 @@
  */
 package proyectomutual.AccesoDatos;
 
+import Exceptions.GenericException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import proyectomutual.entidades.Afiliado;
+import proyectomutual.entidades.Orden;
 
 /**
 
@@ -29,62 +31,91 @@ public class AfiliadoData {
 
     //Agrega un nuevo afiliado
     public void agregarAfiliado(Afiliado afiliado) {
-
-        // ?=variable comodin
-        String sql = "INSERT INTO afiliado (nombre, apellido, dni, telefono, domicilio, estado)"
-                + "VALUES (?, ?, ?, ?, ?, ?)";
-
         try {
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = null;
+            if (comprobarAfiliadoDNI(afiliado)) {
+                // ?=variable comodin
+                String sql = "INSERT INTO afiliado (nombre, apellido, dni, telefono, domicilio, estado)"
+                        + "VALUES (?, ?, ?, ?, ?, ?)";
 
-            // Setea los comodines
-            ps.setString(1, afiliado.getNombre());
-            ps.setString(2, afiliado.getApellido());
-            ps.setInt(3, afiliado.getDni());
-            ps.setInt(4, afiliado.getTelefono());
-            ps.setString(5, afiliado.getDomicilio());
-            ps.setBoolean(6, afiliado.isEstado());
+                ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-            ps.executeUpdate();
+                // Setea los comodines
+                ps.setString(1, afiliado.getNombre());
+                ps.setString(2, afiliado.getApellido());
+                ps.setInt(3, afiliado.getDni());
+                ps.setInt(4, afiliado.getTelefono());
+                ps.setString(5, afiliado.getDomicilio());
+                ps.setBoolean(6, afiliado.isEstado());
 
-            //Setea id
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
+                ps.executeUpdate();
 
-                afiliado.setIdAfiliado(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Afiliado agregado");
+                //Setea id
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+
+                    afiliado.setIdAfiliado(rs.getInt(1));
+                    JOptionPane.showMessageDialog(null, "Afiliado agregado");
+                }
             }
             ps.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla afiliados");
+        } catch (GenericException ex) {
+            JOptionPane.showMessageDialog(null, "Error al crear el afiliado: " + ex.getMessage());
+        }
+    }
+
+    private boolean comprobarAfiliadoDNI(Afiliado afiliado) throws GenericException, SQLException {
+
+        PreparedStatement preparedStatement = null;
+        boolean resultado = false;
+        String dateQuery = "SELECT * FROM afiliado WHERE dni = ?";
+        preparedStatement = con.prepareStatement(dateQuery);
+        preparedStatement.setInt(1, afiliado.getDni());
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultado = resultSet.next();
+
+        if (resultado) {
+            System.out.println(resultado);
+            throw new GenericException("Ya existe un afiliado con ese DNI");
+        } else {
+            resultado = true;
+            return resultado;
         }
     }
 
     //Modificar datos de afiliado
     public void modificarAfiliado(Afiliado afiliado) {
-        String sql = "UPDATE afiliado SET nombre=?, apellido=?, dni=?, telefono=?, domicilio=?"
-                + "WHERE idAfiliado=?";
-
         try {
-            PreparedStatement ps = con.prepareStatement(sql);
+            PreparedStatement ps = null;
+            if (comprobarAfiliadoDNI(afiliado)) {
+                String sql = "UPDATE afiliado SET nombre=?, apellido=?, dni=?, telefono=?, domicilio=?"
+                        + "WHERE idAfiliado=?";
 
-            // Setea los comodines
-            ps.setString(1, afiliado.getNombre());
-            ps.setString(2, afiliado.getApellido());
-            ps.setInt(3, afiliado.getDni());
-            ps.setInt(4, afiliado.getTelefono());
-            ps.setString(5, afiliado.getDomicilio());
-            ps.setInt(6, afiliado.getIdAfiliado());
+                ps = con.prepareStatement(sql);
 
-            int exito = ps.executeUpdate();
-            if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Afiliado modificado");
+                // Setea los comodines
+                ps.setString(1, afiliado.getNombre());
+                ps.setString(2, afiliado.getApellido());
+                ps.setInt(3, afiliado.getDni());
+                ps.setInt(4, afiliado.getTelefono());
+                ps.setString(5, afiliado.getDomicilio());
+                ps.setInt(6, afiliado.getIdAfiliado());
+
+                int exito = ps.executeUpdate();
+                if (exito == 1) {
+                    JOptionPane.showMessageDialog(null, "Afiliado modificado");
+                }
             }
             ps.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla afiliados");
+        } catch (GenericException ex) {
+            JOptionPane.showMessageDialog(null, "Error al modificar el afiliado: " + ex.getMessage());
         }
     }
 

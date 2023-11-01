@@ -1,5 +1,6 @@
 package proyectomutual.AccesoDatos;
 
+import Exceptions.GenericException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import proyectomutual.entidades.Afiliado;
 import proyectomutual.entidades.Especialidad;
 import proyectomutual.entidades.Prestador;
 
@@ -22,65 +24,93 @@ public class PrestadorData {
       
     }
     
-    public void agregarPrestador(Prestador prestador){
-
-        String sql="INSERT INTO prestador (nombre, apellido, dni, domicilio, telefono, idEspecialidad, estado)"
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-
+    public void agregarPrestador(Prestador prestador) {
         try {
-            PreparedStatement ps=conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            
-            ps.setString(1, prestador.getNombre());
-            ps.setString(2, prestador.getApellido());
-            ps.setInt(3, prestador.getDni());
-            ps.setString(4, prestador.getDomicilio());
-            ps.setInt(5, prestador.getTelefono());
-            ps.setInt(6, prestador.getEspecialidad().getIdEspecialidad());
-            ps.setBoolean(7, prestador.isEstado());
-            
-            ps.executeUpdate();
-            
-            ResultSet rs=ps.getGeneratedKeys();
-            if (rs.next()){
-                
-                prestador.setIdPrestador(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Prestador guardado");
+            PreparedStatement ps = null;
+            if (comprobarPrestadorDNI(prestador)) {
+                String sql = "INSERT INTO prestador (nombre, apellido, dni, domicilio, telefono, idEspecialidad, estado)"
+                        + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+                ps = conexion.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+                ps.setString(1, prestador.getNombre());
+                ps.setString(2, prestador.getApellido());
+                ps.setInt(3, prestador.getDni());
+                ps.setString(4, prestador.getDomicilio());
+                ps.setInt(5, prestador.getTelefono());
+                ps.setInt(6, prestador.getEspecialidad().getIdEspecialidad());
+                ps.setBoolean(7, prestador.isEstado());
+
+                ps.executeUpdate();
+
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+
+                    prestador.setIdPrestador(rs.getInt(1));
+                    JOptionPane.showMessageDialog(null, "Prestador guardado");
+                }
             }
             ps.close();
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla prestadores");
+        } catch (GenericException ex) {
+            JOptionPane.showMessageDialog(null, "Error al crear el prestador: " + ex.getMessage());
         }
     }
-    
+
     public void modificarPrestador(Prestador prestador) {
-        String sql = "UPDATE prestador SET nombre=?, apellido=?, dni=?, domicilio=?, telefono=?, idEspecialidad=?, estado=? WHERE idPrestador=?";
-
         try {
-            PreparedStatement ps = conexion.prepareStatement(sql);
+            PreparedStatement ps = null;
+            if (comprobarPrestadorDNI(prestador)) {
+                String sql = "UPDATE prestador SET nombre=?, apellido=?, dni=?, domicilio=?, telefono=?, idEspecialidad=?, estado=? WHERE idPrestador=?";
 
-            ps.setString(1, prestador.getNombre());
-            ps.setString(2, prestador.getApellido());
-            ps.setInt(3, prestador.getDni());
-            ps.setString(4, prestador.getDomicilio());
-            ps.setInt(5, prestador.getTelefono());
-            ps.setInt(6, prestador.getEspecialidad().getIdEspecialidad());
-            ps.setBoolean(7, prestador.isEstado());
+                ps = conexion.prepareStatement(sql);
 
-            // Establece el valor del ID en la cláusula WHERE
-            ps.setInt(8, prestador.getIdPrestador());
+                ps.setString(1, prestador.getNombre());
+                ps.setString(2, prestador.getApellido());
+                ps.setInt(3, prestador.getDni());
+                ps.setString(4, prestador.getDomicilio());
+                ps.setInt(5, prestador.getTelefono());
+                ps.setInt(6, prestador.getEspecialidad().getIdEspecialidad());
+                ps.setBoolean(7, prestador.isEstado());
 
-            int exito = ps.executeUpdate();
-            if (exito == 1) {
-                JOptionPane.showMessageDialog(null, "Prestador modificado");
-            } else {
-                JOptionPane.showMessageDialog(null, "No se pudo modificar el prestador. El ID no existe.");
+                // Establece el valor del ID en la cláusula WHERE
+                ps.setInt(8, prestador.getIdPrestador());
+
+                int exito = ps.executeUpdate();
+                if (exito == 1) {
+                    JOptionPane.showMessageDialog(null, "Prestador modificado");
+                } else {
+                    JOptionPane.showMessageDialog(null, "No se pudo modificar el prestador. El ID no existe.");
+                }
             }
-
             ps.close();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla prestador");
+        } catch (GenericException ex) {
+            JOptionPane.showMessageDialog(null, "Error al modificar el prestador: " + ex.getMessage());
+        }
+    }
+
+    private boolean comprobarPrestadorDNI(Prestador prestador) throws GenericException, SQLException {
+
+        PreparedStatement preparedStatement = null;
+        boolean resultado = false;
+        String dateQuery = "SELECT * FROM prestador WHERE dni = ?";
+        preparedStatement = conexion.prepareStatement(dateQuery);
+        preparedStatement.setInt(1, prestador.getDni());
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultado = resultSet.next();
+
+        if (resultado) {
+            System.out.println(resultado);
+            throw new GenericException("Ya existe un prestador con ese DNI");
+        } else {
+            resultado = true;
+            return resultado;
         }
     }
     
