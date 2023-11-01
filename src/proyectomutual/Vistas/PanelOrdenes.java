@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -494,7 +495,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
             int idAfiliado = afiliadoEncontrado.getIdAfiliado();
 
             modelo.setRowCount(0);
-            List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorAfiliadoPrestadorFechaYEspecialidad(idAfiliado, idPrestador, fecha,
+            HashSet<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorAfiliadoPrestadorFechaYEspecialidad(idAfiliado, idPrestador, fecha,
                     especialidadSelec.getIdEspecialidad());
 
             for (Orden ordenes : listaOrdenesXFecha) {
@@ -525,7 +526,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
             int idAfiliado = afiliadoEncontrado.getIdAfiliado();
 
             modelo.setRowCount(0);
-            List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorAfiliadoPrestadorYEspecialidad(idAfiliado, idPrestador,
+            HashSet<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorAfiliadoPrestadorYEspecialidad(idAfiliado, idPrestador,
                     especialidadSelec.getIdEspecialidad());
 
             for (Orden ordenes : listaOrdenesXFecha) {
@@ -554,7 +555,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
             int idAfiliado = afiliadoEncontrado.getIdAfiliado();
 
             modelo.setRowCount(0);
-            List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorAfiliadoFechaYEspecialidad(idAfiliado, fecha,
+            HashSet<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorAfiliadoFechaYEspecialidad(idAfiliado, fecha,
                     especialidadSelec.getIdEspecialidad());
 
             for (Orden ordenes : listaOrdenesXFecha) {
@@ -577,7 +578,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
             Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
 
             modelo.setRowCount(0);
-            List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorPrestadorFechaYEspecialidad(idPrestador, fecha,
+            HashSet<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorPrestadorFechaYEspecialidad(idPrestador, fecha,
                     especialidadSelec.getIdEspecialidad());
 
             for (Orden ordenes : listaOrdenesXFecha) {
@@ -737,7 +738,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
             int idAfiliado = afiliadoEncontrado.getIdAfiliado();
 
             modelo.setRowCount(0);
-            List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorAfiliadoYEspecialidad(idAfiliado, especialidadSelec.getIdEspecialidad());
+            HashSet<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorAfiliadoYEspecialidad(idAfiliado, especialidadSelec.getIdEspecialidad());
 
             for (Orden ordenes : listaOrdenesXFecha) {
                 modelo.addRow(new Object[]{
@@ -758,7 +759,7 @@ public class PanelOrdenes extends javax.swing.JPanel {
             Especialidad especialidadSelec = (Especialidad) jCBEspecialidad.getSelectedItem();
 
             modelo.setRowCount(0);
-            List<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorFechaYEspecialidad(fecha, especialidadSelec.getIdEspecialidad());
+            HashSet<Orden> listaOrdenesXFecha = ordenData.buscaOrdenPorFechaYEspecialidad(fecha, especialidadSelec.getIdEspecialidad());
 
             for (Orden ordenes : listaOrdenesXFecha) {
                 modelo.addRow(new Object[]{

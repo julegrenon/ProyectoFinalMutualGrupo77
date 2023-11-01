@@ -10,8 +10,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -465,11 +467,11 @@ public class OrdenData {
 
     }
 
-    public List<Orden> buscaOrdenPorAfiliadoPrestadorFechaYEspecialidad(int idAfiliado, int idPrestador, LocalDate fecha, int idEspecialidad) {
+    public HashSet<Orden> buscaOrdenPorAfiliadoPrestadorFechaYEspecialidad(int idAfiliado, int idPrestador, LocalDate fecha, int idEspecialidad) {
         String sql = "SELECT idOrden, fecha, formaPago, importe, idAfiliado, idPrestador "
                 + "FROM orden WHERE idAfiliado=? AND idPrestador=? AND fecha=?";
 
-        ArrayList<Orden> listaOrdenesXTodosLosFiltros = new ArrayList();
+        HashSet<Orden> listaOrdenesXTodosLosFiltros = new HashSet();
 
         ArrayList<Orden> listaOrdenXAfiliadoPrestadorYFecha = new ArrayList();
         try {
@@ -514,11 +516,11 @@ public class OrdenData {
         return listaOrdenesXTodosLosFiltros;
     }
 
-    public List<Orden> buscaOrdenPorAfiliadoPrestadorYEspecialidad(int idAfiliado, int idPrestador, int idEspecialidad) {
+    public HashSet<Orden> buscaOrdenPorAfiliadoPrestadorYEspecialidad(int idAfiliado, int idPrestador, int idEspecialidad) {
         String sql = "SELECT idOrden, fecha, formaPago, importe, idAfiliado, idPrestador "
                 + "FROM orden WHERE idAfiliado=? AND idPrestador=?";
 
-        ArrayList<Orden> listaOrdenesXTodosLosFiltros = new ArrayList();
+        HashSet<Orden> listaOrdenesXTodosLosFiltros = new HashSet();
 
         ArrayList<Orden> listaOrdenXAfiliadoPrestadorYEspecialidad = new ArrayList();
         try {
@@ -562,11 +564,11 @@ public class OrdenData {
         return listaOrdenesXTodosLosFiltros;
     }
 
-    public List<Orden> buscaOrdenPorAfiliadoFechaYEspecialidad(int idAfiliado, LocalDate fecha, int idEspecialidad) {
+    public HashSet<Orden> buscaOrdenPorAfiliadoFechaYEspecialidad(int idAfiliado, LocalDate fecha, int idEspecialidad) {
         String sql = "SELECT idOrden, fecha, formaPago, importe, idAfiliado, idPrestador "
                 + "FROM orden WHERE idAfiliado=? AND fecha=?";
 
-        ArrayList<Orden> listaOrdenesXTodosLosFiltros = new ArrayList();
+        HashSet<Orden> listaOrdenesXTodosLosFiltros = new HashSet();
 
         ArrayList<Orden> listaOrdenXAfiliadoFechaYEspecialidad = new ArrayList();
         try {
@@ -612,11 +614,13 @@ public class OrdenData {
         return listaOrdenesXTodosLosFiltros;
     }
 
-    public List<Orden> buscaOrdenPorAfiliadoYEspecialidad(int idAfiliado, int idEspecialidad) {
+    public HashSet<Orden> buscaOrdenPorAfiliadoYEspecialidad(int idAfiliado, int idEspecialidad) {
         String sql = "SELECT idOrden, fecha, formaPago, importe, idAfiliado, idPrestador "
                 + "FROM orden WHERE idAfiliado=?";
 
-        ArrayList<Orden> listaOrdenesXTodosLosFiltros = new ArrayList();
+        HashSet<Orden> listaParaFiltrar = new HashSet();
+        
+        List<Orden> listaOrdenesXTodosLosFiltros = new ArrayList();
 
         ArrayList<Orden> listaOrdenXAfiliadoYEspecialidad = new ArrayList();
         try {
@@ -650,7 +654,7 @@ public class OrdenData {
 
                 for (Orden ordenes : listaOrdenXAfiliadoYEspecialidad) {
                     if (ordenes.getPrestador().getEspecialidad().getIdEspecialidad() == idEspecialidad) {
-                        listaOrdenesXTodosLosFiltros.add(ordenes);
+                            listaParaFiltrar.add(ordenes);
                     }
                 }
             }
@@ -658,14 +662,14 @@ public class OrdenData {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Orden");
         }
-        return listaOrdenesXTodosLosFiltros;
+        return listaParaFiltrar;
     }
 
-    public List<Orden> buscaOrdenPorPrestadorFechaYEspecialidad(int idPrestador, LocalDate fecha, int idEspecialidad) {
+    public HashSet<Orden> buscaOrdenPorPrestadorFechaYEspecialidad(int idPrestador, LocalDate fecha, int idEspecialidad) {
         String sql = "SELECT idOrden, fecha, formaPago, importe, idAfiliado, idPrestador "
                 + "FROM orden WHERE idPrestador=? AND fecha=?";
 
-        ArrayList<Orden> listaOrdenesXTodosLosFiltros = new ArrayList();
+        HashSet<Orden> listaOrdenesXTodosLosFiltros = new HashSet();
 
         ArrayList<Orden> listaOrdenXPrestadorYFecha = new ArrayList();
         try {
@@ -711,11 +715,11 @@ public class OrdenData {
         return listaOrdenesXTodosLosFiltros;
     }
 
-    public List<Orden> buscaOrdenPorFechaYEspecialidad(LocalDate fecha, int idEspecialidad) {
+    public HashSet<Orden> buscaOrdenPorFechaYEspecialidad(LocalDate fecha, int idEspecialidad) {
         String sql = "SELECT idOrden, fecha, formaPago, importe, idAfiliado, idPrestador "
                 + "FROM orden WHERE fecha=?";
 
-        ArrayList<Orden> listaOrdenesXTodosLosFiltros = new ArrayList();
+        HashSet<Orden> listaOrdenesXTodosLosFiltros = new HashSet();
 
         ArrayList<Orden> listaOrdenXFecha = new ArrayList();
         try {
